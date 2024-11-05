@@ -1,0 +1,41 @@
+.btn{
+  border-radius: 20px;
+  padding: 20px 32px;
+  width: 235px;
+  height: 56px;
+  background: $dark;
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: $static-white;
+  svg{
+    fill: $static-white;
+  }
+  &:hover{
+    background: #fff;
+    svg{
+      fill: $primary;
+    }
+  }
+  .inactive{
+    cursor: unset;
+    background: $static-white-40;
+    svg{
+      fill: $static-white-40;
+    }
+  }
+}
+
+.arrow{
+  border: 1px solid #fff;
+  border-radius: 20px;
+  width: 56px;
+  height: 56px;
+  &:hover{
+    background: #fff;
+  }
+}

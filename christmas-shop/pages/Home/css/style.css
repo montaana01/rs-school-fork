@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@100..900&display=swap");
+.btn {
+  border-radius: 20px;
+  padding: 20px 32px;
+  width: 235px;
+  height: 56px;
+  background: #181c29;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+}
+.btn svg {
+  fill: #fff;
+}
+.btn:hover {
+  background: #fff;
+}
+.btn:hover svg {
+  fill: #ff4646;
+}
+.btn .inactive {
+  cursor: unset;
+  background: rgba(255, 255, 255, 0.4);
+}
+.btn .inactive svg {
+  fill: rgba(255, 255, 255, 0.4);
+}
+
+.arrow {
+  border: 1px solid #fff;
+  border-radius: 20px;
+  width: 56px;
+  height: 56px;
+}
+.arrow:hover {
+  background: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  color: #181c29;
+}
+* a {
+  text-decoration: none;
+}
+*::before {
+  box-sizing: border-box;
+}
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 82px;
+}
+
+.header_wrapper {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+.header_wrapper-logo {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header_wrapper-logo svg {
+  width: 21px;
+  height: 24px;
+}
+.header_wrapper-logo h1 {
+  padding-left: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+}
+.header_wrapper-nav {
+  display: flex;
+  column-gap: 8px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.header_wrapper-nav p {
+  padding: 0 20px;
+}
+
+.footer_wrapper {
+  margin-top: 60px;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 60px;
+}

@@ -1,0 +1,42 @@
+.header{
+  &_wrapper{
+    height: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    &-logo{
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      svg{
+        width: 21px;
+        height: 24px;
+      }
+      h1{
+        padding-left: 8px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.05em;
+      }
+    }
+    &-nav{
+      display: flex;
+      column-gap: 8px;
+      align-items: center;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 130%;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      p{
+        padding: 0 20px;
+      }
+    }
+  }
+}
