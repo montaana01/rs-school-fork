@@ -57,6 +57,40 @@ p {
   line-height: 148%;
 }
 
+section {
+  position: relative;
+  background: #ff4646;
+  padding: 60px 0;
+}
+section::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background: url("../../../assets/images/bg/bg-snow.png") center/cover no-repeat;
+  z-index: 1;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+}
+
+.subtitle {
+  font-family: "Allura", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+}
+
 .action_large {
   font-weight: 600;
   font-size: 24px;
@@ -71,14 +105,6 @@ p {
   line-height: 130%;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.caption {
-  font-family: "Allura", sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0.05em;
 }
 
 .slider {
@@ -227,20 +253,7 @@ html {
 }
 
 .gift {
-  position: relative;
-  background: #ff4646;
   border-radius: 20px 20px 0 0;
-  padding: 60px 0;
-}
-.gift::before {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  background: url("../../../assets/images/bg/bg-snow.png") center/cover no-repeat;
-  z-index: 1;
 }
 .gift::after {
   content: "";
@@ -273,11 +286,42 @@ html {
   text-align: center;
 }
 .gift__wrapper__subtitle {
-  font-family: "Allura", sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.about {
+  width: 100%;
+}
+.about__wrapper {
+  position: relative;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.about__wrapper__text {
+  width: 50%;
+  margin: 100px 0 100px 60px;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 20px;
+}
+.about__wrapper__text__title, .about__wrapper__text__paragraph {
+  text-align: left;
+  width: 426px;
+  color: #181c29;
+}
+.about__wrapper__text__subtitle {
+  color: #ff4646;
+}
+.about__wrapper__image {
+  border-radius: 20px;
+  height: 100%;
+  width: 50%;
 }
 
 .footer__wrapper {
