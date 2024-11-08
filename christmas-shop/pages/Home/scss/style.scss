@@ -5,21 +5,22 @@
 html {
   scroll-behavior: smooth;
 }
+
 * {
   margin: 0;
   box-sizing: border-box;
   font-family: $font-family;
-  color: $dark;
-  a{
-    text-decoration: none;
-  }
-  &::before{
+  color: $static-white;
+
+  &::before {
     box-sizing: border-box;
   }
-  &::after{
+
+  &::after {
     box-sizing: border-box;
   }
 }
+
 .container {
   margin: 0 auto;
   max-width: 1440px;
@@ -28,6 +29,9 @@ html {
 
 
 @import 'blocks/_header.scss';
+@import 'blocks/_gift.scss';
+@import 'blocks/_about.scss';
 @import 'blocks/_footer.scss';
+
 
 @import 'base/_media.scss';

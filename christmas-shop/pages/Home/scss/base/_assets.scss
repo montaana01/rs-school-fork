@@ -1,6 +1,76 @@
-.btn{
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  letter-spacing: 0.18em;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 152%;
+  letter-spacing: 0.08em;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+}
+
+p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 148%;
+}
+
+.action_large {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 152%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.action_small {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 130%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.caption {
+  font-family: $second-family;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+}
+
+.slider {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 80px;
+  text-transform: uppercase;
+}
+
+.btn {
+  border: none;
   border-radius: 20px;
-  padding: 20px 32px;
+  padding: 20px 30px;
   width: 235px;
   height: 56px;
   background: $dark;
@@ -12,30 +82,38 @@
   text-transform: uppercase;
   text-align: center;
   color: $static-white;
-  svg{
+  transition: all .8s;
+
+  svg {
     fill: $static-white;
   }
-  &:hover{
+
+  &:hover {
     background: #fff;
-    svg{
+    color: $dark;
+
+    svg {
       fill: $primary;
     }
   }
-  .inactive{
+
+  .inactive {
     cursor: unset;
     background: $static-white-40;
-    svg{
+
+    svg {
       fill: $static-white-40;
     }
   }
 }
 
-.arrow{
+.arrow {
   border: 1px solid #fff;
   border-radius: 20px;
   width: 56px;
   height: 56px;
-  &:hover{
+
+  &:hover {
     background: #fff;
   }
 }

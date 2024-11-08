@@ -1,0 +1,56 @@
+.gift {
+  position: relative;
+  background: $primary;
+  border-radius: 20px 20px 0 0;
+  padding: 60px 0;;
+
+  &::before {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background: url('../../../assets/images/bg/bg-snow.png') center / cover no-repeat;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: url('../../../assets/images/bg/bg-ball.png')  center / cover no-repeat;
+    z-index: 2;
+  }
+
+  &__wrapper {
+    position: relative;
+    width: 429px;
+    margin: 0 auto;
+    padding: 60px 0;;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 12px;
+    z-index: 3;
+    &__title{
+      font-size: 32px;
+      line-height: 150%;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    &__subtitle{
+      font-family: $second-family;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 100%;
+      letter-spacing: 0.05em;
+    }
+  }
+}
