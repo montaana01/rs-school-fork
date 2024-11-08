@@ -111,7 +111,6 @@ section::before {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 80px;
-  text-transform: uppercase;
 }
 
 .btn {
@@ -168,6 +167,7 @@ html {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
   color: #fff;
+  transition: all 0.5s;
 }
 *::before {
   box-sizing: border-box;
@@ -324,13 +324,89 @@ html {
   width: 50%;
 }
 
+.slider__wrapper {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 20px;
+  z-index: 10;
+}
+.slider__wrapper__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 12px;
+}
+.slider__wrapper__images {
+  display: flex;
+  text-transform: uppercase;
+  column-gap: 20px;
+}
+.slider__wrapper__controls {
+  display: flex;
+}
+
 .footer__wrapper {
-  margin-top: 60px;
-  height: 80px;
-  width: 100%;
+  padding: 60px 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   row-gap: 60px;
+}
+.footer__buttons__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 12px;
+}
+.footer__buttons__wrapper-item {
+  border-radius: 20px;
+  padding: 20px;
+  background: #ecf3f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 12px;
+  text-transform: uppercase;
+}
+.footer__buttons__wrapper-item img {
+  height: 80px;
+}
+.footer__buttons__wrapper-item p, .footer__buttons__wrapper-item h3 {
+  color: #181c29;
+}
+.footer__buttons__wrapper-item:hover p, .footer__buttons__wrapper-item:hover h3 {
+  color: #ff4646;
+}
+.footer__bottom__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 12px;
+}
+.footer__social__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+}
+.footer__social__wrapper-item {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.footer__social__wrapper-item svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.footer__copyright > a > p, .footer__logo > a {
+  color: #181c29;
 }

@@ -11,6 +11,7 @@ html {
   box-sizing: border-box;
   font-family: $font-family;
   color: $static-white;
+  transition: all .5s;
 
   &::before {
     box-sizing: border-box;
@@ -31,6 +32,7 @@ html {
 @import 'blocks/_header.scss';
 @import 'blocks/_gift.scss';
 @import 'blocks/_about.scss';
+@import 'blocks/_slider.scss';
 @import 'blocks/_footer.scss';
 
 
