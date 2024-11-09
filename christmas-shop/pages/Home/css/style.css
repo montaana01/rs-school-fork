@@ -350,6 +350,72 @@ html {
   display: flex;
 }
 
+.journey {
+  border-radius: 0 0 20px 20px;
+}
+.journey::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: url("../../../assets/images/bg/bg-forest.png") center/cover no-repeat, url("../../../assets/images/bg/bg-snow.png") center/cover no-repeat;
+  z-index: 2;
+}
+.journey__wrapper {
+  position: relative;
+  padding: 120px 0;
+  margin: 0 auto;
+  width: 426px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 20px;
+  z-index: 10;
+}
+.journey__wrapper__timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 8px;
+}
+.journey__wrapper__timer__subtitle {
+  text-align: center;
+}
+.journey__wrapper__timer__wrapper {
+  border-radius: 20px;
+  padding: 8px 12px 12px 12px;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.journey__wrapper__timer__wrapper-item {
+  position: relative;
+  width: 80px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.journey__wrapper__timer__wrapper-item::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 1px;
+  height: 20px;
+}
+.journey__wrapper__timer__wrapper-item:last-child::before {
+  display: none;
+}
+
 .footer__wrapper {
   padding: 60px 0;
   display: flex;
