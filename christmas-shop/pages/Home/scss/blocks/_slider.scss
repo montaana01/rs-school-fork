@@ -1,0 +1,30 @@
+.slider {
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+    z-index: 10;
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 12px;
+    }
+
+    &__images {
+      display: flex;
+      text-transform: uppercase;
+      column-gap: 20px;
+    }
+
+    &__controls {
+      display: flex;
+    }
+  }
+}

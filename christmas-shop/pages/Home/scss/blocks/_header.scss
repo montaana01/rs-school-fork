@@ -1,0 +1,75 @@
+.header {
+  &__wrapper {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+
+    &-logo {
+      height: 40px;
+      width: 141px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      svg {
+        width: 21px;
+        height: 24px;
+      }
+
+      h1 {
+        padding-left: 8px;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.05em;
+        color: $dark;
+        text-transform: uppercase;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      ul{
+        display: flex;
+        column-gap: 8px;
+        align-items: center;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        list-style-type: none;
+      }
+      &-item{
+        padding: 12px 20px;
+        transition: .7s all;
+        a{
+          transition: .7s all;
+          color: $dark;
+        }
+        &:hover{
+          border-radius: 5px;
+          background-color: $dark;
+          a{
+            color: $static-white;
+          }
+        }
+      }
+    }
+    &-hamburger{
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 8px;
+      span{
+        width: 22px;
+        height: 1px;
+        background: $dark;
+      }
+    }
+  }
+}
