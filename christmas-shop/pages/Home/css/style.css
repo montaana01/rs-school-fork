@@ -149,13 +149,34 @@ section::before {
 }
 
 .arrow {
+  position: relative;
   border: 1px solid #fff;
   border-radius: 20px;
   width: 56px;
   height: 56px;
 }
+.arrow svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .arrow:hover {
   background: #fff;
+}
+.arrow:hover svg path {
+  stroke: #ff4646;
+}
+
+.inactive {
+  cursor: unset;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.inactive svg {
+  stroke: rgba(255, 255, 255, 0.4);
+}
+.inactive:hover {
+  background: none;
 }
 
 html {
@@ -330,7 +351,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   row-gap: 20px;
   z-index: 10;
 }
@@ -346,10 +366,22 @@ html {
   text-transform: uppercase;
   column-gap: 20px;
 }
+.slider__wrapper__images-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}
+.slider__wrapper__images-item .slider_image {
+  border-radius: 20px;
+  width: 200px;
+  height: 200px;
+}
 .slider__wrapper__controls {
   display: flex;
+  justify-content: flex-end;
+  column-gap: 20px;
 }
-
 .journey {
   border-radius: 0 0 20px 20px;
 }

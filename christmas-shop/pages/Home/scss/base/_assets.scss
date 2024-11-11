@@ -134,12 +134,39 @@ section {
 }
 
 .arrow {
+  position: relative;
   border: 1px solid #fff;
   border-radius: 20px;
   width: 56px;
   height: 56px;
 
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   &:hover {
     background: #fff;
+
+    svg {
+      path {
+        stroke: $primary;
+      }
+    }
+  }
+}
+
+.inactive {
+  cursor: unset;
+  border: 1px solid $static-white-40;
+
+  svg {
+    stroke: $static-white-40;
+  }
+
+  &:hover {
+    background: none;
   }
 }
