@@ -37,6 +37,8 @@ p {
 }
 
 section {
+  margin: 0 auto;
+  max-width: 1440px;
   position: relative;
   background: $primary;
   padding: 60px 0;;

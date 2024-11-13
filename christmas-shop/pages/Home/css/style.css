@@ -58,6 +58,8 @@ p {
 }
 
 section {
+  margin: 0 auto;
+  max-width: 1440px;
   position: relative;
   background: #ff4646;
   padding: 60px 0;
@@ -201,6 +203,7 @@ html {
   margin: 0 auto;
   max-width: 1440px;
   padding: 0 82px;
+  overflow: hidden;
 }
 
 .header__wrapper {
@@ -347,7 +350,6 @@ html {
 
 .slider__wrapper {
   position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -382,6 +384,70 @@ html {
   justify-content: flex-end;
   column-gap: 20px;
 }
+.best__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 20px;
+  position: relative;
+  z-index: 10;
+}
+.best__wrapper__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 12px;
+}
+.best__wrapper__gifts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+}
+.best__wrapper__gifts-item {
+  position: relative;
+  border-radius: 20px;
+  width: 310px;
+  height: 342px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background: #ecf3f8;
+}
+.best__wrapper__gifts-item .health {
+  color: #4361ff;
+}
+.best__wrapper__gifts-item .harmony {
+  color: #ff43f7;
+}
+.best__wrapper__gifts-item .work {
+  color: #06a44f;
+}
+.best__wrapper__gifts-item__img {
+  height: 230px;
+}
+.best__wrapper__gifts-item__text {
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  row-gap: 8px;
+  background: #fff;
+}
+.best__wrapper__gifts-item__text h3 {
+  text-transform: uppercase;
+  color: #181c29;
+}
+.best__wrapper__gifts-item__text h4 {
+  text-transform: uppercase;
+}
+
 .journey {
   border-radius: 0 0 20px 20px;
 }
