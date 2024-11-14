@@ -1,0 +1,38 @@
+@import 'base/_fonts.scss';
+@import 'base/_variables.scss';
+@import 'base/_assets.scss';
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+  color: $static-white;
+  transition: all .5s;
+
+  &::before {
+    box-sizing: border-box;
+  }
+
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 82px;
+  overflow: hidden;
+}
+
+
+@import 'blocks/_header.scss';
+@import 'blocks/_gift.scss';
+@import 'blocks/_footer.scss';
+
+
+@import 'base/_media.scss';
