@@ -130,6 +130,7 @@ section::before {
   text-transform: uppercase;
   text-align: center;
   color: #fff;
+  cursor: pointer;
   transition: all 0.8s;
 }
 .btn svg {
