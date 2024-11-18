@@ -46,6 +46,11 @@
           background: $static-white-20;
           border-radius: 12px;
         }
+
+        &:hover {
+          background: $static-white-20;
+          border-radius: 12px;
+        }
       }
     }
 
@@ -101,6 +106,14 @@
 
           h4 {
             text-transform: uppercase;
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          h3 {
+            color: $primary;
           }
         }
 

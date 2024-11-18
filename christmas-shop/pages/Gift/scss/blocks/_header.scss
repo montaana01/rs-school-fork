@@ -51,10 +51,10 @@
           color: $dark;
         }
         &:hover{
-          border-radius: 5px;
-          background-color: $dark;
+          background-color: $primary-10;
+          border-radius: 12px;
           a{
-            color: $static-white;
+            color: $primary;
           }
         }
         &__active{
