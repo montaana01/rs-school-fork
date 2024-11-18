@@ -221,6 +221,7 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .header__wrapper-logo svg {
   width: 21px;
@@ -248,19 +249,15 @@ html {
   text-transform: uppercase;
   list-style-type: none;
 }
-.header__wrapper__nav-item {
-  padding: 12px 20px;
-  transition: 0.7s all;
-}
 .header__wrapper__nav-item a {
+  cursor: pointer;
+  padding: 12px 20px;
   transition: 0.7s all;
   color: #181c29;
 }
-.header__wrapper__nav-item:hover {
+.header__wrapper__nav-item a:hover {
   background-color: rgba(255, 70, 70, 0.1);
   border-radius: 12px;
-}
-.header__wrapper__nav-item:hover a {
   color: #ff4646;
 }
 .header__wrapper-hamburger {
@@ -406,6 +403,7 @@ html {
   column-gap: 12px;
 }
 .best__wrapper__gifts-item {
+  cursor: pointer;
   position: relative;
   border-radius: 20px;
   width: 310px;
@@ -446,6 +444,9 @@ html {
 }
 .best__wrapper__gifts-item__text h4 {
   text-transform: uppercase;
+}
+.best__wrapper__gifts-item:hover h3 {
+  color: #ff4646;
 }
 
 .journey {
@@ -531,6 +532,7 @@ html {
 }
 .footer__buttons__wrapper-item {
   border-radius: 20px;
+  cursor: pointer;
   padding: 20px;
   background: #ecf3f8;
   display: flex;
@@ -545,6 +547,12 @@ html {
 }
 .footer__buttons__wrapper-item p, .footer__buttons__wrapper-item h3 {
   color: #181c29;
+}
+.footer__buttons__wrapper-item p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 152%;
+  letter-spacing: 0.08em;
 }
 .footer__buttons__wrapper-item:hover p, .footer__buttons__wrapper-item:hover h3 {
   color: #ff4646;
