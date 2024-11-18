@@ -67,11 +67,24 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
+
+      &:hover svg {
+        path {
+          stroke: $primary;
+        }
+      }
     }
   }
 
-  &__copyright > a > p, &__logo > a {
+  &__copyright > p, &__logo > a {
     color: $dark;
   }
+
+  &__logo > a {
+    &:hover {
+      color: $primary;
+    }
+  }
+
 
 }

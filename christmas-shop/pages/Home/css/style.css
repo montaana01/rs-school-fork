@@ -257,11 +257,11 @@ html {
   color: #181c29;
 }
 .header__wrapper__nav-item:hover {
-  border-radius: 5px;
-  background-color: #181c29;
+  background-color: rgba(255, 70, 70, 0.1);
+  border-radius: 12px;
 }
 .header__wrapper__nav-item:hover a {
-  color: #fff;
+  color: #ff4646;
 }
 .header__wrapper-hamburger {
   display: none;
@@ -573,6 +573,12 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.footer__copyright > a > p, .footer__logo > a {
+.footer__social__wrapper-item:hover svg path {
+  stroke: #ff4646;
+}
+.footer__copyright > p, .footer__logo > a {
   color: #181c29;
+}
+.footer__logo > a:hover {
+  color: #ff4646;
 }

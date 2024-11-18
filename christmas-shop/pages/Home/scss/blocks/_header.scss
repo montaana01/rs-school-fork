@@ -32,7 +32,8 @@
 
     &__nav {
       display: flex;
-      ul{
+
+      ul {
         display: flex;
         column-gap: 8px;
         align-items: center;
@@ -43,29 +44,35 @@
         text-transform: uppercase;
         list-style-type: none;
       }
-      &-item{
+
+      &-item {
         padding: 12px 20px;
         transition: .7s all;
-        a{
+
+        a {
           transition: .7s all;
           color: $dark;
         }
-        &:hover{
-          border-radius: 5px;
-          background-color: $dark;
-          a{
-            color: $static-white;
+
+        &:hover {
+          background-color: $primary-10;
+          border-radius: 12px;
+
+          a {
+            color: $primary;
           }
         }
       }
     }
-    &-hamburger{
+
+    &-hamburger {
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       row-gap: 8px;
-      span{
+
+      span {
         width: 22px;
         height: 1px;
         background: $dark;
