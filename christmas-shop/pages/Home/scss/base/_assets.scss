@@ -110,6 +110,7 @@ section {
   text-transform: uppercase;
   text-align: center;
   color: $static-white;
+  cursor: pointer;
   transition: all .8s;
 
   svg {
@@ -141,6 +142,7 @@ section {
   border-radius: 20px;
   width: 56px;
   height: 56px;
+  cursor: pointer;
 
   svg {
     position: absolute;

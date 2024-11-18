@@ -130,6 +130,7 @@ section::before {
   text-transform: uppercase;
   text-align: center;
   color: #fff;
+  cursor: pointer;
   transition: all 0.8s;
 }
 .btn svg {
@@ -156,6 +157,7 @@ section::before {
   border-radius: 20px;
   width: 56px;
   height: 56px;
+  cursor: pointer;
 }
 .arrow svg {
   position: absolute;
