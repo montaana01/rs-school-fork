@@ -17,6 +17,7 @@
 
     &-item {
       border-radius: 20px;
+      cursor: pointer;
       padding: 20px;
       background: $content-background;
       display: flex;
@@ -32,6 +33,13 @@
 
       p, h3 {
         color: $dark;
+      }
+
+      p {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 152%;
+        letter-spacing: 0.08em;
       }
 
       &:hover {

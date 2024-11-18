@@ -14,6 +14,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      cursor: pointer;
 
       svg {
         width: 21px;
@@ -32,7 +33,8 @@
 
     &__nav {
       display: flex;
-      ul{
+
+      ul {
         display: flex;
         column-gap: 8px;
         align-items: center;
@@ -43,31 +45,36 @@
         text-transform: uppercase;
         list-style-type: none;
       }
-      &-item{
-        padding: 12px 20px;
-        transition: .7s all;
-        a{
+
+      &-item {
+        a {
+          cursor: pointer;
+          padding: 12px 20px;
           transition: .7s all;
           color: $dark;
-        }
-        &:hover{
-          background-color: $primary-10;
-          border-radius: 12px;
-          a{
+
+          &:hover {
+            background-color: $primary-10;
+            border-radius: 12px;
             color: $primary;
           }
         }
-        &__active{
+
+        &__active {
           cursor: unset;
           border-radius: 12px;
           padding: 12px 20px;
           background: $primary-10;
-          a{
+          color: $primary;
+
+          a {
             color: $primary;
           }
-          &:hover{
+
+          &:hover {
             background-color: $primary-10;
-            a{
+
+            a {
               cursor: unset;
               color: $primary;
             }
@@ -75,13 +82,15 @@
         }
       }
     }
-    &-hamburger{
+
+    &-hamburger {
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       row-gap: 8px;
-      span{
+
+      span {
         width: 22px;
         height: 1px;
         background: $dark;
