@@ -264,6 +264,7 @@ html {
 }
 .header__wrapper-hamburger {
   display: none;
+  padding: 0 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -326,8 +327,7 @@ html {
 }
 .about__wrapper__text {
   width: 50%;
-  margin: 100px 0 100px 60px;
-  padding: 60px 0;
+  padding: 100px 0 100px 60px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -342,9 +342,15 @@ html {
   color: #ff4646;
 }
 .about__wrapper__image {
+  display: flex;
+  justify-content: center;
   border-radius: 20px;
+  overflow: hidden;
   height: 100%;
   width: 50%;
+}
+.about__wrapper__image img {
+  display: block;
 }
 
 .slider__wrapper {
@@ -400,9 +406,10 @@ html {
 }
 .best__wrapper__gifts {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
   align-items: center;
-  column-gap: 12px;
 }
 .best__wrapper__gifts-item {
   cursor: pointer;
@@ -591,4 +598,65 @@ html {
 }
 .footer__logo > a:hover {
   color: #ff4646;
+}
+
+@media (max-width: 1190px) {
+  .footer__buttons__wrapper {
+    grid-template-columns: unset;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 12px;
+  }
+  .about__wrapper__text__title, .about__wrapper__text__paragraph {
+    width: 100%;
+  }
+}
+@media (max-width: 1190px) and (max-width: 768px) {
+  .container {
+    padding: 0 8px;
+  }
+  .header__wrapper__nav ul {
+    display: none;
+  }
+  .header__wrapper-hamburger {
+    display: flex;
+  }
+  .about__wrapper {
+    overflow: hidden;
+  }
+  .about__wrapper__text {
+    width: 50%;
+    margin: 0;
+    padding: 100px 60px 100px 60px;
+  }
+  .about__wrapper__image {
+    width: 50%;
+  }
+}
+@media (max-width: 1190px) and (max-width: 640px) {
+  .about__wrapper {
+    flex-direction: column;
+  }
+  .about__wrapper__text {
+    width: 100%;
+    margin: 0;
+    padding: 60px 20px;
+  }
+  .about__wrapper__text__title, .about__wrapper__text__paragraph {
+    width: 100%;
+  }
+  .about__wrapper__image {
+    width: 100%;
+  }
+  .gift__wrapper {
+    width: 100%;
+  }
+}
+@media (max-width: 1190px) and (max-width: 380px) {
+  .best__wrapper__gifts {
+    flex-direction: column;
+    row-gap: 12px;
+  }
+  .journey__wrapper {
+    width: 100%;
+  }
 }
