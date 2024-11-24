@@ -469,22 +469,3 @@ html {
 .footer__logo > a:hover {
   color: #ff4646;
 }
-
-@media (max-width: 1190px) {
-  .footer__buttons__wrapper {
-    grid-template-columns: unset;
-    grid-template-rows: 1fr 1fr 1fr;
-    row-gap: 12px;
-  }
-}
-@media (max-width: 768px) {
-  .container {
-    padding: 0 8px;
-  }
-  .header__wrapper__nav ul {
-    display: none;
-  }
-  .header__wrapper-hamburger {
-    display: flex;
-  }
-}
