@@ -610,7 +610,7 @@ html {
     width: 100%;
   }
 }
-@media (max-width: 1190px) and (max-width: 768px) {
+@media (max-width: 768px) {
   .container {
     padding: 0 8px;
   }
@@ -632,7 +632,7 @@ html {
     width: 50%;
   }
 }
-@media (max-width: 1190px) and (max-width: 640px) {
+@media (max-width: 640px) {
   .about__wrapper {
     flex-direction: column;
   }
@@ -651,7 +651,7 @@ html {
     width: 100%;
   }
 }
-@media (max-width: 1190px) and (max-width: 380px) {
+@media (max-width: 380px) {
   .best__wrapper__gifts {
     flex-direction: column;
     row-gap: 12px;
