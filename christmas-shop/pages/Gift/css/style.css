@@ -280,6 +280,7 @@ html {
 }
 .header__wrapper-hamburger {
   display: none;
+  padding: 0 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -486,5 +487,22 @@ html {
   }
   .header__wrapper-hamburger {
     display: flex;
+  }
+}
+@media (max-width: 380px) {
+  .gift {
+    border-radius: 20px;
+  }
+  .gift::before {
+    background: url("../../../assets/images/bg/bg-garland.png") top/contain no-repeat;
+  }
+  .gift__wrapper__selector {
+    column-gap: unset;
+    align-content: center;
+    align-items: center;
+  }
+  .gift__wrapper__selector-item {
+    text-transform: uppercase;
+    padding: 12px 8px;
   }
 }
