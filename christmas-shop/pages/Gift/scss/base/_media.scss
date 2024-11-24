@@ -28,3 +28,26 @@
     }
   }
 }
+
+@media (max-width: 380px) {
+  .gift {
+    border-radius: 20px;
+
+    &::before {
+      background: url('../../../assets/images/bg/bg-garland.png') top / contain no-repeat;
+    }
+
+    &__wrapper {
+      &__selector {
+        column-gap: unset;
+        align-content: center;
+        align-items: center;
+
+        &-item {
+          text-transform: uppercase;
+          padding: 12px 8px;
+        }
+      }
+    }
+  }
+}
