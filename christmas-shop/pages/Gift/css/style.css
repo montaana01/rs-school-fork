@@ -430,10 +430,12 @@ body.active {
   text-transform: uppercase;
   padding: 12px 20px;
   border-radius: 12px;
+  cursor: pointer;
 }
 .gift__wrapper__selector-item__active {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 12px;
+  cursor: unset;
 }
 @media (hover: hover) {
   .gift__wrapper__selector-item:hover {
@@ -595,6 +597,16 @@ body.active {
   }
   .header__wrapper-hamburger {
     display: flex;
+  }
+}
+@media (max-width: 490px) {
+  .gift__wrapper__selector-item {
+    padding: 12px 8px;
+  }
+}
+@media (max-width: 460px) {
+  .gift__wrapper__selector {
+    column-gap: 3px;
   }
 }
 @media (max-width: 380px) {
