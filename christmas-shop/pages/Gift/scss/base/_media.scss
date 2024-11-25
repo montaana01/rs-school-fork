@@ -28,7 +28,25 @@
     }
   }
 }
-
+@media (max-width: 490px) {
+  .gift {
+    &__wrapper {
+      &__selector {
+        &-item {
+          padding: 12px 8px;
+        }
+      }
+    }
+  }
+}@media (max-width: 460px) {
+  .gift {
+    &__wrapper {
+      &__selector {
+        column-gap: 3px;
+      }
+    }
+  }
+}
 @media (max-width: 380px) {
   .gift {
     border-radius: 20px;
