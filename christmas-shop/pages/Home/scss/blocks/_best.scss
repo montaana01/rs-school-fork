@@ -71,9 +71,11 @@
           }
         }
 
-        &:hover {
-          h3 {
-            color: $primary;
+        @media (hover: hover) {
+          &:hover {
+            h3 {
+              color: $primary;
+            }
           }
         }
 
