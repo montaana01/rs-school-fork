@@ -116,13 +116,14 @@ section {
   svg {
     fill: $static-white;
   }
+  @media (hover: hover) {
+    &:hover {
+      background: #fff;
+      color: $dark;
 
-  &:hover {
-    background: #fff;
-    color: $dark;
-
-    svg {
-      fill: $primary;
+      svg {
+        fill: $primary;
+      }
     }
   }
 
@@ -151,12 +152,14 @@ section {
     transform: translate(-50%, -50%);
   }
 
-  &:hover {
-    background: #fff;
+  @media (hover: hover) {
+    &:hover {
+      background: #fff;
 
-    svg {
-      path {
-        stroke: $primary;
+      svg {
+        path {
+          stroke: $primary;
+        }
       }
     }
   }
@@ -169,8 +172,9 @@ section {
   svg {
     stroke: $static-white-40;
   }
-
-  &:hover {
-    background: none;
+  @media (hover: hover) {
+    &:hover {
+      background: none;
+    }
   }
 }
