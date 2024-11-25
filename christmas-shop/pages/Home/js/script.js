@@ -1,11 +1,22 @@
 const EXPLORE = document.querySelectorAll('button.explore');
-console.log(EXPLORE);
+const HAMBURGER = document.getElementById('hamburger');
+const NAVIGATION = document.getElementById('navigation');
+const BODY = document.body;
+
+HAMBURGER.addEventListener('click', () => {
+    NAVIGATION.classList.toggle('header__wrapper__nav-active');
+    HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
+    NAVIGATION.classList.toggle('xxx', false);
+    BODY.classList.toggle('active');
+})
 
 EXPLORE.forEach(function (item) {
     item.addEventListener("click", function () {
         window.location = './../Gift/';
     });
 });
+
+
 
 console.log('CrossCheck Criteria (110 points)\n' +
     'Checking validation of pages: +18\n' +
