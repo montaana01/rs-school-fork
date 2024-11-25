@@ -8,6 +8,7 @@
     margin: 0 auto;
 
     &-logo {
+      position: relative;
       height: 40px;
       width: 141px;
       padding: 0 20px;
@@ -15,6 +16,7 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
+      z-index: 30;
 
       svg {
         width: 21px;
@@ -34,6 +36,10 @@
     &__nav {
       display: flex;
 
+      nav {
+        transition: background-color 0.5s ease;
+        background-color: rgba($static-white , 0);
+      }
       ul {
         display: flex;
         column-gap: 8px;
@@ -44,6 +50,7 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         list-style-type: none;
+        padding: 0;
       }
 
       &-item {
@@ -60,10 +67,46 @@
           }
         }
       }
+
+      &-active{
+        position: absolute;
+        top: 33px;
+        left: 0;
+        z-index: 25;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: unset;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        transition: background-color 0.5s ease;
+        background-color: $static-white !important;
+        & > ul{
+          display: flex !important;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          row-gap: 8px;
+          padding: 0;
+          & > li {
+            padding: 12px 20px;
+            a{
+              font-size: 24px;
+              line-height: 152%;
+              letter-spacing: 0.16em;
+            }
+          }
+        }
+
+      }
     }
 
     &-hamburger {
+      position: relative;
       display: none;
+      height: 40px;
+      width: 40px;
       padding: 0 10px;
       flex-direction: column;
       justify-content: center;
@@ -74,6 +117,38 @@
         width: 22px;
         height: 1px;
         background: $dark;
+        &:nth-child(1) {
+          position: absolute;
+          top: calc(50% - 4px);
+        }
+        &:nth-child(2) {
+          position: absolute;
+          top: calc(50% + 4px);
+        }
+      }
+      &:hover{
+        cursor: pointer;
+      }
+
+      &-active{
+        width: 40px;
+        height: 40px;
+        position: relative;
+        z-index: 30;
+        padding: 0 15px 0 0;
+        &:hover{
+          cursor: pointer;
+        }
+        span:nth-child(1) {
+          position: absolute;
+          top: 69%;
+          transform: rotate(-45deg) translateX(50%);
+        }
+        span:nth-child(2) {
+          position: absolute;
+          top: 30%;
+          transform: rotate(45deg) translateX(50%) ;
+        }
       }
     }
   }
