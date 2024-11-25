@@ -42,9 +42,11 @@
         letter-spacing: 0.08em;
       }
 
-      &:hover {
-        p, h3 {
-          color: $primary;
+      @media (hover: hover) {
+        &:hover {
+          p, h3 {
+            color: $primary;
+          }
         }
       }
     }
@@ -76,9 +78,11 @@
         transform: translate(-50%, -50%);
       }
 
-      &:hover svg {
-        path {
-          stroke: $primary;
+      @media (hover: hover) {
+        &:hover svg {
+          path {
+            stroke: $primary;
+          }
         }
       }
     }
@@ -90,8 +94,10 @@
   }
 
   &__logo > a {
-    &:hover {
-      color: $primary;
+    @media (hover: hover) {
+      &:hover {
+        color: $primary;
+      }
     }
   }
 

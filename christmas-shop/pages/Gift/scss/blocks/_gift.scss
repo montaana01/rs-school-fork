@@ -46,10 +46,11 @@
           background: $static-white-20;
           border-radius: 12px;
         }
-
-        &:hover {
-          background: $static-white-20;
-          border-radius: 12px;
+        @media (hover: hover) {
+          &:hover {
+            background: $static-white-20;
+            border-radius: 12px;
+          }
         }
       }
     }
@@ -110,9 +111,11 @@
           }
         }
 
-        &:hover {
-          h3 {
-            color: $primary;
+        @media (hover: hover) {
+          &:hover {
+            h3 {
+              color: $primary;
+            }
           }
         }
 
