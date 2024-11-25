@@ -41,10 +41,11 @@
         text-transform: uppercase;
         padding: 12px 20px;
         border-radius: 12px;
-
+        cursor: pointer;
         &__active {
           background: $static-white-20;
           border-radius: 12px;
+          cursor: unset;
         }
         @media (hover: hover) {
           &:hover {
