@@ -135,7 +135,7 @@
         height: 40px;
         position: relative;
         z-index: 30;
-        padding: unset;
+        padding: 0 15px 0 0;
         &:hover{
           cursor: pointer;
         }
@@ -151,6 +151,5 @@
         }
       }
     }
-
   }
 }

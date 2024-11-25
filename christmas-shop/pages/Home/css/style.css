@@ -339,7 +339,7 @@ body.active {
   height: 40px;
   position: relative;
   z-index: 30;
-  padding: unset;
+  padding: 0 15px 0 0;
 }
 .header__wrapper-hamburger-active:hover {
   cursor: pointer;
