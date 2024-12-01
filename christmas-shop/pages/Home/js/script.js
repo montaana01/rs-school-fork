@@ -4,8 +4,8 @@ const HAMBURGER = document.getElementById('hamburger');
 const NAVIGATION = document.getElementById('navigation');
 const BODY = document.body;
 
-const DAYS = document.getElementsByClassName('days');
-const HOURS = document.getElementsByClassName('hours');
+const DAYS = document.getElementById('days');
+const HOURS = document.getElementById('hours');
 const MINUTES = document.getElementById('minutes');
 const SECONDS = document.getElementById('seconds');
 
@@ -29,13 +29,9 @@ function christmasTimer(){
 
     const timer = setInterval(function () {
         const NOW = new Date();
-        console.log(NOW);
-
         const DIFF =  NEW_YEAR - NOW;
 
-        console.log(DIFF)
-
-        DAYS.testContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
+        DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
         HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60 )) / (1000 * 60));
         SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
