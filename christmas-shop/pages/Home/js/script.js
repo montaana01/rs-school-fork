@@ -1,7 +1,13 @@
 const EXPLORE = document.querySelectorAll('button.explore');
+
 const HAMBURGER = document.getElementById('hamburger');
 const NAVIGATION = document.getElementById('navigation');
 const BODY = document.body;
+
+const DAYS = document.getElementsByClassName('days');
+const HOURS = document.getElementsByClassName('hours');
+const MINUTES = document.getElementById('minutes');
+const SECONDS = document.getElementById('seconds');
 
 HAMBURGER.addEventListener('click', () => {
     NAVIGATION.classList.toggle('header__wrapper__nav-active');
@@ -15,6 +21,20 @@ EXPLORE.forEach(function (item) {
         window.location = './../Gift/';
     });
 });
+
+
+function christmasTimer(){
+    const NEW_YEAR = new Date(2025, 0, 1);
+
+    const timer = setInterval(function () {
+        const NOW = new Date();
+
+        const DIFF =  NEW_YEAR - NOW;
+        SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
+    }, 1000)
+}
+
+christmasTimer();
 
 
 
