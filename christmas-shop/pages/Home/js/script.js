@@ -25,11 +25,19 @@ EXPLORE.forEach(function (item) {
 
 function christmasTimer(){
     const NEW_YEAR = new Date(2025, 0, 1);
+    console.log(NEW_YEAR);
 
     const timer = setInterval(function () {
         const NOW = new Date();
+        console.log(NOW);
 
         const DIFF =  NEW_YEAR - NOW;
+
+        console.log(DIFF)
+
+        DAYS.testContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
+        HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60 )) / (1000 * 60));
         SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
     }, 1000)
 }
