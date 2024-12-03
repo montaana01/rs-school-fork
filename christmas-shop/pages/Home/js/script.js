@@ -66,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayRandomGifts() {
         getGiftsFromJson().then(gifts => {
-            const randomGifts = gifts.sort(() => 0.5 - Math.random()).slice(0, 4);
-            BEST_GIFTS.innerHTML = randomGifts.map(gift => `
+            const RANDOM = gifts.sort(() => 0.5 - Math.random()).slice(0, 4);
+            BEST_GIFTS.innerHTML = RANDOM.map(gift => `
             <div class="best__wrapper__gifts-item ${gift.category.toLowerCase().replace('for ', '')}">
                 <img src="./../../assets/images/gifts/gift-${gift.category.toLowerCase().replace(' ', '-')}.png" 
                      class="best__wrapper__gifts-item__img"
