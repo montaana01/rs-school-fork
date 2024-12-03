@@ -1,45 +1,73 @@
-const EXPLORE = document.querySelectorAll('button.explore');
+document.addEventListener('DOMContentLoaded', () => {
+    const EXPLORE = document.querySelectorAll('button.explore');
 
-const HAMBURGER = document.getElementById('hamburger');
-const NAVIGATION = document.getElementById('navigation');
-const BODY = document.body;
+    const HAMBURGER = document.getElementById('hamburger');
+    const NAVIGATION = document.getElementById('navigation');
+    const BODY = document.body;
 
-const DAYS = document.getElementById('days');
-const HOURS = document.getElementById('hours');
-const MINUTES = document.getElementById('minutes');
-const SECONDS = document.getElementById('seconds');
+    const DAYS = document.getElementById('days');
+    const HOURS = document.getElementById('hours');
+    const MINUTES = document.getElementById('minutes');
+    const SECONDS = document.getElementById('seconds');
 
-HAMBURGER.addEventListener('click', () => {
-    NAVIGATION.classList.toggle('header__wrapper__nav-active');
-    HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
-    NAVIGATION.classList.toggle('xxx', false);
-    BODY.classList.toggle('active');
-})
+    const SCROLL_UP = document.getElementById('up');
 
-EXPLORE.forEach(function (item) {
-    item.addEventListener("click", function () {
-        window.location = './../Gift/';
+    HAMBURGER.addEventListener('click', () => {
+        NAVIGATION.classList.toggle('header__wrapper__nav-active');
+        HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
+        NAVIGATION.classList.toggle('xxx', false);
+        BODY.classList.toggle('active');
+    })
+
+    EXPLORE.forEach(function (item) {
+        item.addEventListener("click", function () {
+            window.location = './../Gift/';
+        });
     });
+
+    function christmasTimer() {
+        const NEW_YEAR = new Date(2025, 0, 1);
+        console.log(NEW_YEAR);
+
+        const timer = setInterval(function () {
+            const NOW = new Date();
+            const DIFF = NEW_YEAR - NOW;
+
+            DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
+            HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60)) / (1000 * 60));
+            SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
+        }, 1000)
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768 && window.scrollY > 588) {
+            SCROLL_UP.classList.add('show');
+            console.log('h');
+        } else {
+            SCROLL_UP.classList.remove('show');
+        }
+    });
+
+    SCROLL_UP.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    function getGiftsFromJson(){
+        fetch('./../../assets/json/gifts.json')
+            .then(response => response.json())
+            .then(data => {
+                const GIFTS = data;
+                console.log(GIFTS);
+            })
+            .catch(error => console.error('Error while getting data from JSON:',error));
+    }
+    getGiftsFromJson();
+    christmasTimer();
 });
-
-
-function christmasTimer(){
-    const NEW_YEAR = new Date(2025, 0, 1);
-    console.log(NEW_YEAR);
-
-    const timer = setInterval(function () {
-        const NOW = new Date();
-        const DIFF =  NEW_YEAR - NOW;
-
-        DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
-        HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60 )) / (1000 * 60));
-        SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
-    }, 1000)
-}
-
-christmasTimer();
-
 
 
 console.log('CrossCheck Criteria (110 points)\n' +
