@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const SCROLL_UP = document.getElementById('up');
 
+    const BEST_GIFTS = document.getElementById('best_gifts');
+
     HAMBURGER.addEventListener('click', () => {
         NAVIGATION.classList.toggle('header__wrapper__nav-active');
         HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
@@ -57,15 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function getGiftsFromJson(){
-        fetch('./../../assets/json/gifts.json')
+        return fetch('./../../assets/json/gifts.json')
             .then(response => response.json())
-            .then(data => {
-                const GIFTS = data;
-                console.log(GIFTS);
-            })
-            .catch(error => console.error('Error while getting data from JSON:',error));
+            .catch(error => {console.error('Error while getting data from JSON:',error)});
     }
-    getGiftsFromJson();
+
+    function displayRandomGifts() {
+        getGiftsFromJson().then(gifts => {
+            const randomGifts = gifts.sort(() => 0.5 - Math.random()).slice(0, 4);
+            BEST_GIFTS.innerHTML = randomGifts.map(gift => `
+            <div class="best__wrapper__gifts-item ${gift.category.toLowerCase().replace('for ', '')}">
+                <img src="./../../assets/images/gifts/gift-${gift.category.toLowerCase().replace(' ', '-')}.png" 
+                     class="best__wrapper__gifts-item__img"
+                     alt="${gift.name}">
+                <div class="best__wrapper__gifts-item__text">
+                    <h4 class="${gift.category.toLowerCase().replace('for ', '')}">${gift.category}</h4>
+                    <h3>${gift.name}</h3>
+                </div>
+            </div>
+        `).join('');
+        });
+    }
+
+    displayRandomGifts();
+
     christmasTimer();
 });
 
