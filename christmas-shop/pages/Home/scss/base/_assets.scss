@@ -163,18 +163,24 @@ section {
       }
     }
   }
-}
-
-.inactive {
-  cursor: unset;
-  border: 1px solid $static-white-40;
-
-  svg {
-    stroke: $static-white-40;
-  }
-  @media (hover: hover) {
-    &:hover {
-      background: none;
+  &.inactive {
+    cursor: unset;
+    border: 1px solid $static-white-40;
+    svg {
+      stroke: $static-white-40;
+      path {
+        stroke: $static-white-40;
+        @media (hover: hover) {
+          &:hover {
+            stroke: $static-white-40 !important;
+          }
+        }
+      }
+    }
+    @media (hover: hover) {
+      &:hover {
+        background: none;
+      }
     }
   }
 }

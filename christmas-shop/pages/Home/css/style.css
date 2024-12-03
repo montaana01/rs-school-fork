@@ -175,16 +175,23 @@ section::before {
     stroke: #ff4646;
   }
 }
-
-.inactive {
+.arrow.inactive {
   cursor: unset;
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
-.inactive svg {
+.arrow.inactive svg {
+  stroke: rgba(255, 255, 255, 0.4);
+}
+.arrow.inactive svg path {
   stroke: rgba(255, 255, 255, 0.4);
 }
 @media (hover: hover) {
-  .inactive:hover {
+  .arrow.inactive svg path:hover {
+    stroke: rgba(255, 255, 255, 0.4) !important;
+  }
+}
+@media (hover: hover) {
+  .arrow.inactive:hover {
     background: none;
   }
 }
@@ -490,6 +497,7 @@ body.active {
   display: flex;
   text-transform: uppercase;
   column-gap: 20px;
+  transition: all 0.5s;
 }
 .slider__wrapper__images-item {
   display: flex;
