@@ -91,7 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => {
         updateClickCount();
+        currentPosition = 0;
         initSlider();
+        moveSlider(0);
     });
 
     SLIDER_LEFT.addEventListener('click', () => moveSlider('left'));
@@ -129,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (direction === 'left') {
             currentPosition -= 1;
         }
+        if (direction === 0) {
+            SLIDER.style.transform = `translateX(0px)`;
+        }
 
         currentPosition = Math.max(0, Math.min(currentPosition, clicksToMove));
 
@@ -141,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initSlider() {
         updateClickCount();
         slideWidth = (1993 - SLIDER.offsetWidth) / clicksToMove;
+        currentPosition = 0;
         updateButtonState();
     }
 
