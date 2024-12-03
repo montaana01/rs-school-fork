@@ -73,12 +73,12 @@
     </section>
     <section class="slider">
         <div class="container">
-            <div class="slider__wrapper">
+            <div class="slider__wrapper" id="slider_visible">
                 <div class="slider__wrapper__text">
                     <h2 class="slider__subtitle subtitle">Become Happier!</h2>
                     <div class="slider__title title">in the new 2025</div>
                 </div>
-                <div class="slider__wrapper__images">
+                <div class="slider__wrapper__images" id="slider_wrapper">
                     <div class="slider__wrapper__images-item">
                         <div class="slider">live</div>
                         <img src="./../../assets/images/slider/snowman.png" alt="Snowman" class="slider_image">
@@ -100,13 +100,13 @@
                     </div>
                 </div>
                 <div class="slider__wrapper__controls">
-                    <div class="slider__wrapper__controls-item arrow inactive">
+                    <div class="slider__wrapper__controls-item arrow inactive" id="left">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="white" stroke-opacity="0.4"
+                            <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="white"
                                   stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <div class="slider__wrapper__controls-item arrow">
+                    <div class="slider__wrapper__controls-item arrow" id="right">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="white" stroke-linecap="round"
                                   stroke-linejoin="round"/>
@@ -127,43 +127,7 @@
                         especially for you
                     </div>
                 </div>
-                <div class="best__wrapper__gifts">
-                    <div class="best__wrapper__gifts-item work">
-                        <img src="./../../assets/images/gifts/gift-for-work.png"
-                             class="best__wrapper__gifts-item__img" alt="Console.log Guru Gift">
-                        <div class="best__wrapper__gifts-item__text">
-                            <h4 class="work">
-                                For work
-                            </h4>
-                            <h3>
-                                Console.log Guru
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="best__wrapper__gifts-item health">
-                        <img src="./../../assets/images/gifts/gift-for-health.png"
-                             class="best__wrapper__gifts-item__img" alt="Console.log Guru Gift">
-                        <div class="best__wrapper__gifts-item__text">
-                            <h4 class="health">
-                                For health
-                            </h4>
-                            <h3>
-                                Hydration Bot
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="best__wrapper__gifts-item work">
-                        <img src="./../../assets/images/gifts/gift-for-work.png"
-                             class="best__wrapper__gifts-item__img" alt="Console.log Guru Gift">
-                        <div class="best__wrapper__gifts-item__text">
-                            <h4 class="work">
-                                For work
-                            </h4>
-                            <h3>
-                                Merge Master
-                            </h3>
-                        </div>
-                    </div>
+                <div class="best__wrapper__gifts" id="best_gifts">
                     <div class="best__wrapper__gifts-item harmony">
                         <img src="./../../assets/images/gifts/gift-for-harmony.png"
                              class="best__wrapper__gifts-item__img" alt="Console.log Guru Gift">
@@ -277,6 +241,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="up" class="btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 5V19" stroke="#FF4646" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M18 11L12 5" stroke="#FF4646" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M6 11L12 5" stroke="#FF4646" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
     </div>
 </footer>
 <script src="./js/script.js"></script>

@@ -1,45 +1,154 @@
-const EXPLORE = document.querySelectorAll('button.explore');
+document.addEventListener('DOMContentLoaded', () => {
+    const EXPLORE = document.querySelectorAll('button.explore');
 
-const HAMBURGER = document.getElementById('hamburger');
-const NAVIGATION = document.getElementById('navigation');
-const BODY = document.body;
+    const HAMBURGER = document.getElementById('hamburger');
+    const NAVIGATION = document.getElementById('navigation');
+    const BODY = document.body;
 
-const DAYS = document.getElementById('days');
-const HOURS = document.getElementById('hours');
-const MINUTES = document.getElementById('minutes');
-const SECONDS = document.getElementById('seconds');
+    const DAYS = document.getElementById('days');
+    const HOURS = document.getElementById('hours');
+    const MINUTES = document.getElementById('minutes');
+    const SECONDS = document.getElementById('seconds');
 
-HAMBURGER.addEventListener('click', () => {
-    NAVIGATION.classList.toggle('header__wrapper__nav-active');
-    HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
-    NAVIGATION.classList.toggle('xxx', false);
-    BODY.classList.toggle('active');
-})
+    const SCROLL_UP = document.getElementById('up');
 
-EXPLORE.forEach(function (item) {
-    item.addEventListener("click", function () {
-        window.location = './../Gift/';
+    const BEST_GIFTS = document.getElementById('best_gifts');
+
+    HAMBURGER.addEventListener('click', () => {
+        NAVIGATION.classList.toggle('header__wrapper__nav-active');
+        HAMBURGER.classList.toggle('header__wrapper-hamburger-active');
+        NAVIGATION.classList.toggle('xxx', false);
+        BODY.classList.toggle('active');
+    })
+
+    EXPLORE.forEach(function (item) {
+        item.addEventListener("click", function () {
+            window.location = './../Gift/';
+        });
     });
+
+    function christmasTimer() {
+        const NEW_YEAR = new Date(2025, 0, 1);
+        console.log(NEW_YEAR);
+
+        const timer = setInterval(function () {
+            const NOW = new Date();
+            const DIFF = NEW_YEAR - NOW;
+
+            DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
+            HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60)) / (1000 * 60));
+            SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
+        }, 1000)
+    }
+
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768 && window.scrollY > 588) {
+            SCROLL_UP.classList.add('show');
+            console.log('h');
+        } else {
+            SCROLL_UP.classList.remove('show');
+        }
+    });
+
+    SCROLL_UP.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    function getGiftsFromJson(){
+        return fetch('./../../assets/json/gifts.json')
+            .then(response => response.json())
+            .catch(error => {console.error('Error while getting data from JSON:',error)});
+    }
+
+    function displayRandomGifts() {
+        getGiftsFromJson().then(gifts => {
+            const RANDOM = gifts.sort(() => 0.5 - Math.random()).slice(0, 4);
+            BEST_GIFTS.innerHTML = RANDOM.map(gift => `
+            <div class="best__wrapper__gifts-item ${gift.category.toLowerCase().replace('for ', '')}">
+                <img src="./../../assets/images/gifts/gift-${gift.category.toLowerCase().replace(' ', '-')}.png" 
+                     class="best__wrapper__gifts-item__img"
+                     alt="${gift.name}">
+                <div class="best__wrapper__gifts-item__text">
+                    <h4 class="${gift.category.toLowerCase().replace('for ', '')}">${gift.category}</h4>
+                    <h3>${gift.name}</h3>
+                </div>
+            </div>
+        `).join('');
+        });
+    }
+
+    const SLIDER = document.getElementById('slider_wrapper');
+    const SLIDER_LEFT = document.getElementById('left');
+    const SLIDER_RIGHT = document.getElementById('right');
+
+    let currentPosition = 0;
+    let slideWidth =  0;
+    let clicksToMove = 3;
+
+    window.addEventListener('resize', () => {
+        updateClickCount();
+        initSlider();
+    });
+
+    SLIDER_LEFT.addEventListener('click', () => moveSlider('left'));
+    SLIDER_RIGHT.addEventListener('click', () => moveSlider('right'));
+
+    function updateClickCount() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth >= 768) {
+            clicksToMove = 3;
+        } else if (screenWidth >= 380) {
+            clicksToMove = 6;
+        } else {
+            clicksToMove = 3;
+        }
+    }
+
+    function updateButtonState() {
+        if (currentPosition === 0) {
+            SLIDER_LEFT.classList.add('inactive');
+        } else {
+            SLIDER_LEFT.classList.remove('inactive');
+        }
+
+        if (currentPosition === clicksToMove) {
+            SLIDER_RIGHT.classList.add('inactive');
+        } else {
+            SLIDER_RIGHT.classList.remove('inactive');
+        }
+    }
+
+    function moveSlider(direction) {
+        if (direction === 'right') {
+            currentPosition += 1;
+        } else if (direction === 'left') {
+            currentPosition -= 1;
+        }
+
+        currentPosition = Math.max(0, Math.min(currentPosition, clicksToMove));
+
+        const OFFSET = -currentPosition * slideWidth;
+        SLIDER.style.transform = `translateX(${OFFSET}px)`;
+
+        updateButtonState();
+    }
+
+    function initSlider() {
+        updateClickCount();
+        slideWidth = (1993 - SLIDER.offsetWidth) / clicksToMove;
+        updateButtonState();
+    }
+
+
+    displayRandomGifts();
+    christmasTimer();
+    initSlider();
 });
-
-
-function christmasTimer(){
-    const NEW_YEAR = new Date(2025, 0, 1);
-    console.log(NEW_YEAR);
-
-    const timer = setInterval(function () {
-        const NOW = new Date();
-        const DIFF =  NEW_YEAR - NOW;
-
-        DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
-        HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60 )) / (1000 * 60));
-        SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
-    }, 1000)
-}
-
-christmasTimer();
-
 
 
 console.log('CrossCheck Criteria (110 points)\n' +
