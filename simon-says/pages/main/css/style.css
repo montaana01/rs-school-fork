@@ -1,0 +1,44 @@
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+a span {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #272e54;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  transition: all 0.5s;
+}
+*::before {
+  box-sizing: border-box;
+}
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+body.active {
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 40px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 8px;
+  }
+}
