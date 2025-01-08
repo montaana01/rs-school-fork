@@ -12,6 +12,7 @@ html {
   box-sizing: border-box;
   color: $color;
   transition: all .5s;
+  text-align: center;
 
   &::before {
     box-sizing: border-box;
@@ -21,12 +22,15 @@ html {
     box-sizing: border-box;
   }
 }
-body{
+
+body {
   position: relative;
-  &.active{
+
+  &.active {
     overflow: hidden;
   }
 }
+
 .container {
   margin: 0 auto;
   max-width: 1280px;

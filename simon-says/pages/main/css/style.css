@@ -16,6 +16,7 @@ html {
   box-sizing: border-box;
   color: #ffffff;
   transition: all 0.5s;
+  text-align: center;
 }
 *::before {
   box-sizing: border-box;
@@ -35,6 +36,19 @@ body.active {
   margin: 0 auto;
   max-width: 1280px;
   padding: 0 40px;
+}
+
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__wrapper-item {
+  display: block;
+}
+
+footer {
+  margin-top: 60px;
 }
 
 @media (max-width: 768px) {
