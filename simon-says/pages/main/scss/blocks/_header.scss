@@ -27,17 +27,27 @@
           height: 30px;
           border-radius: 30px;
           outline: 2px solid $color;
+        }
 
-          &::after {
-            position: absolute;
-            content: '';
-            width: 30px;
-            height: 30px;
-            left: 0;
-            border-radius: 100%;
-            background-color: $green;
-            box-shadow: 0 2px 5px rgba($black, 0.2);
-            cursor: pointer;
+        &__point {
+          position: absolute;
+          content: '';
+          width: 30px;
+          height: 30px;
+          left: 0;
+          border-radius: 100%;
+          background-color: $green;
+          box-shadow: 0 2px 5px rgba($black, 0.2);
+          cursor: pointer;
+
+          &.pos1 {
+            left: 30px;
+            background-color: $yellow;
+          }
+
+          &.pos2 {
+            left: 60px;
+            background-color: $red;
           }
         }
 
