@@ -1,6 +1,16 @@
 const GAME_NAME = "Simon says";
 
 /*
+* FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
+*/
+let isElementsLocked = false;
+
+function lockElement(element, lock = true) {
+  isElementsLocked = lock;
+  element.style.cursor = lock ? 'not-allowed' : 'pointer';
+}
+
+/*
 * Creating html markup for page
 * Sections like header main and footer
 */
@@ -49,17 +59,41 @@ headerTitle.childNodes[0].textContent = GAME_NAME;
 
 
 // difficult switcher
+let difficult = "easy";
+
 let switcher = document.createElement("div");
 switcher.className = "header__wrapper-item__switcher";
 
 let switcherArea = document.createElement("div");
 switcherArea.className = "header__wrapper-item__switcher__area";
+let switcherPoint = document.createElement("div");
+switcherPoint.className = "header__wrapper-item__switcher__point";
+switcherArea.appendChild(switcherPoint);
 let switcherText = document.createElement("div");
 switcherText.className = "header__wrapper-item__switcher__text";
-switcherText.textContent = "easy"; // future - variable with level of difficult
 
 switcher.appendChild(switcherArea);
 switcher.appendChild(switcherText);
+
+const levels = ['easy', 'medium', 'hard'];
+let currentLevel = 0;
+
+function updateSwitcher() {
+  switcherPoint.classList.remove(`pos${currentLevel + 2}`);
+  switcherPoint.classList.remove(`pos${currentLevel + 1}`);
+  switcherPoint.classList.remove(`pos${currentLevel - 1}`);
+  switcherPoint.classList.add(`pos${currentLevel}`);
+  difficult = levels[currentLevel];
+  switcherText.textContent = difficult;
+}
+
+switcherPoint.addEventListener('click', () => {
+  if (isElementsLocked) return;
+  currentLevel = (currentLevel + 1) % levels.length;
+  updateSwitcher();
+});
+
+updateSwitcher();
 
 headerSwitcher.appendChild(switcher);
 
