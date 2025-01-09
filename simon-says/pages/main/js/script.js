@@ -36,7 +36,7 @@ logoImage.onclick = function () {
   window.location = "./";
 }
 Object.assign(logoImage, {
-  className: "header__wrapper-item__logo",
+  className: "header__wrapper-item__logo link",
   src: "./../../assets/images/simon-says-logo.png",
   alt: GAME_NAME,
 })
@@ -69,11 +69,12 @@ headerSwitcher.appendChild(switcher);
 const mainSection = MAIN.appendChild(document.createElement("section"));
 mainSection.classList.add("main");
 const mainContainer = mainSection.appendChild(document.createElement("div"));
-headerContainer.classList.add("container");
+mainContainer.classList.add("container");
 const mainWrapper = mainContainer.appendChild(document.createElement("div"));
 mainWrapper.classList.add("main__wrapper");
 
-mainWrapper.innerHTML = `<h2>The Game...</h2>`;
+let mainTitle = mainWrapper.appendChild(document.createElement("h2"));
+mainTitle.textContent = "The Game...";
 
 /*
 * Fill up footer section
@@ -83,17 +84,33 @@ footerContainer.classList.add("container");
 const footerWrapper = footerContainer.appendChild(document.createElement("div"));
 footerWrapper.classList.add("footer__wrapper");
 
-footerWrapper.innerHTML = `
-  <a href="https://github.com/montaana01" class="footer__social__wrapper-item">
-      <span>&nbsp;</span>
-      <svg height="40" aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="40" data-view-component="true">
-        <path
-          d="M12.5.75C6.146.75 1 5.896 1 12.25c0 5.089 3.292 9.387 7.863 10.91.575.101.79-.244.79-.546 0-.273-.014-1.178-.014-2.142-2.889.532-3.636-.704-3.866-1.35-.13-.331-.69-1.352-1.18-1.625-.402-.216-.977-.748-.014-.762.906-.014 1.553.834 1.769 1.179 1.035 1.74 2.688 1.25 3.349.948.1-.747.402-1.25.733-1.538-2.559-.287-5.232-1.279-5.232-5.678 0-1.25.445-2.285 1.178-3.09-.115-.288-.517-1.467.115-3.048 0 0 .963-.302 3.163 1.179.92-.259 1.897-.388 2.875-.388.977 0 1.955.13 2.875.388 2.2-1.495 3.162-1.179 3.162-1.179.633 1.581.23 2.76.115 3.048.733.805 1.179 1.825 1.179 3.09 0 4.413-2.688 5.39-5.247 5.678.417.36.776 1.05.776 2.128 0 1.538-.014 2.774-.014 3.162 0 .302.216.662.79.547C20.709 21.637 24 17.324 24 12.25 24 5.896 18.854.75 12.5.75Z"></path>
-      </svg>
-    </a>
-    <a href="https://rs.school" target="_blank" class="subtitle">Made in Rolling Scopes School</a>
-`;
+let footerGitLogo = document.createElement("img");
+footerGitLogo.onclick = function () {
+  window.open("https://github.com/montaana01", "_blank");
+}
+Object.assign(footerGitLogo, {
+  className: "footer__wrapper-item link",
+  src: "./../../assets/icons/github.svg",
+  alt: "Github icon",
+})
 
+let footerCopyright = document.createElement("p");
+footerCopyright.className = "footer__wrapper-item";
+footerCopyright.textContent = `YakovlevDev © ${new Date().getFullYear()}`;
+
+let footerRSSchool = document.createElement("img");
+footerRSSchool.onclick = function () {
+  window.open("https://rs.school", "_blank");
+}
+Object.assign(footerRSSchool, {
+  className: "footer__wrapper-item link",
+  src: "./../../assets/icons/rss-logo.svg",
+  alt: "Made in Rolling Scopes School",
+})
+
+footerWrapper.appendChild(footerGitLogo);
+footerWrapper.appendChild(footerCopyright);
+footerWrapper.appendChild(footerRSSchool)
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +
