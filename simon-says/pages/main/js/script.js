@@ -127,8 +127,32 @@ mainContainer.classList.add("container");
 const mainWrapper = mainContainer.appendChild(document.createElement("div"));
 mainWrapper.classList.add("main__wrapper");
 
-let mainTitle = mainWrapper.appendChild(document.createElement("h2"));
-mainTitle.textContent = "The Game...";
+let startButton = mainWrapper.appendChild(document.createElement("button"));
+startButton.textContent = "Start";
+
+let restartButton = mainWrapper.appendChild(document.createElement("button"));
+restartButton.textContent = "Restart";
+
+restartButton.addEventListener("click", () => {
+  if (isGameStarted) {
+    round = 0;
+    isGameStarted = false;
+    getRoundTable(isGameStarted);
+    updateRoundTable(round);
+  }
+});
+
+startButton.addEventListener("click", () => {
+  if (!isGameStarted) {
+    isGameStarted = true;
+    getRoundTable(isGameStarted);
+    lockElement(startButton);
+    lockElement(switcher);
+    lockElement(switcherPoint);
+    round < 5 ? round += 1 : round = 0;
+    updateRoundTable(round);
+  }
+})
 
 /*
 * Fill up footer section
@@ -165,6 +189,11 @@ Object.assign(footerRSSchool, {
 footerWrapper.appendChild(footerGitLogo);
 footerWrapper.appendChild(footerCopyright);
 footerWrapper.appendChild(footerRSSchool)
+
+
+/*
+* Logic of game
+* */
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +
