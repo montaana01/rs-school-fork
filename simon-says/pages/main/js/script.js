@@ -138,6 +138,9 @@ restartButton.addEventListener("click", () => {
     round = 0;
     isGameStarted = false;
     getRoundTable(isGameStarted);
+    lockElement(startButton, false);
+    lockElement(switcher, false);
+    lockElement(switcherPoint,false);
     updateRoundTable(round);
   }
 });
