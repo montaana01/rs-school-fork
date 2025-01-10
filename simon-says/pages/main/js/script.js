@@ -54,7 +54,9 @@ Object.assign(logoImage, {
   src: "./../../assets/images/simon-says-logo.png",
   alt: GAME_NAME,
 })
-
+let h1 = document.createElement("h1");
+h1.textContent = GAME_NAME;
+logoImage.appendChild(h1);
 headerLogo.appendChild(logoImage);
 
 // central part
