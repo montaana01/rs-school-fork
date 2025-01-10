@@ -10,7 +10,7 @@ let isElementsLocked = false;
 
 function lockElement(element, lock = true) {
   isElementsLocked = lock;
-  element.style.cursor = lock ? 'not-allowed' : 'pointer';
+  lock ? element.classList.add('locked') : element.classList.remove('locked');
 }
 
 /*
@@ -26,6 +26,7 @@ const SCRIPT = document.querySelector("script");
 if (SCRIPT) {
   BODY.appendChild(SCRIPT);
 }
+
 /*
 * Fill up header section
 */
