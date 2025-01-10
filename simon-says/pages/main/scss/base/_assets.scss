@@ -14,3 +14,19 @@ a {
     scale: 1.1;
   }
 }
+
+.locked {
+  cursor: default;
+
+  &:hover {
+    cursor: default;
+  }
+
+  &:active {
+    border-style: unset;
+  }
+
+  &:focus-visible {
+    outline: unset;
+  }
+}

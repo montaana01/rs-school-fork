@@ -1,5 +1,8 @@
 const GAME_NAME = "Simon says";
 
+let round = 0;
+let isGameStarted = false;
+
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
 */
@@ -54,9 +57,23 @@ Object.assign(logoImage, {
 headerLogo.appendChild(logoImage);
 
 // central part
-headerTitle.appendChild(document.createElement("h1"));
-headerTitle.childNodes[0].textContent = GAME_NAME;
+let centralHeader = document.createElement("div");
+centralHeader.classList.add("header__wrapper-item__central");
+centralHeader.appendChild(document.createElement("h3"));
+centralHeader.querySelector('h3').textContent = "round";
+centralHeader.appendChild(document.createElement("h4"));
+centralHeader.querySelector('h4').textContent = "1\n2\n3\n4\n5";
 
+function getRoundTable(isGameStarted) {
+  return isGameStarted ? centralHeader.classList.toggle("pos-start") : centralHeader.classList.toggle("pos-start");
+}
+
+function updateRoundTable(round) {
+  centralHeader.querySelector('h4').className = '';
+  centralHeader.querySelector('h4').classList.add(`num${round}`)
+}
+
+headerTitle.appendChild(centralHeader);
 
 // difficult switcher
 let difficult = "easy";
