@@ -193,6 +193,7 @@ restartButton.addEventListener("click", () => {
     lockElement(startButton, false);
     lockElement(switcher, false);
     lockElement(switcherPoint, false);
+    lockElement(repeatButton, false)
     updateRoundTable(round);
     mainKeyboard.classList.add("hidden");
     mainKeyboard.innerHTML = "";
@@ -214,6 +215,7 @@ repeatButton.addEventListener("click", () => {
 startButton.addEventListener("click", () => {
   if (!isGameStarted) {
     isGameStarted = true;
+    isRepeatUsed = false;
     getRoundTable(isGameStarted);
     lockElement(startButton);
     lockElement(switcher);
