@@ -18,3 +18,10 @@
   font-style: normal;
   src: local('Arial Black'), local('Arial-Black'), url('./../../../assets/fonts/Arial-Black.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Mono';
+  font-weight: 900;
+  font-style: normal;
+  src: local('Mono'), local('Mono Bold'), url('./../../../assets/fonts/MonospaceBold.ttf') format('truetype');
+}
