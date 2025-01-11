@@ -1,5 +1,14 @@
 const GAME_NAME = "Simon says";
 
+const EASY_LEVEL = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+];
+const MEDIUM_LEVEL = [
+  "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+  "A", "S", "D", "F", "G", "H", "J", "K", "L",
+  "Z", "X", "C", "V", "B", "N", "M"
+];
+
 let round = 0;
 let isGameStarted = false;
 
@@ -127,11 +136,47 @@ mainContainer.classList.add("container");
 const mainWrapper = mainContainer.appendChild(document.createElement("div"));
 mainWrapper.classList.add("main__wrapper");
 
+let mainKeyboard = document.createElement("div");
+mainKeyboard.classList.add("main__wrapper__keyboard");
+
+let numbersKeyboard = document.createElement("div");
+numbersKeyboard.classList.add("main__wrapper__keyboard__numbers");
+
+let charsKeyboard = document.createElement("div");
+charsKeyboard.classList.add("main__wrapper__keyboard__chars");
+
+EASY_LEVEL.map((char) => {
+  let key = document.createElement("button");
+  key.classList.add("main__wrapper__keyboard-key");
+  key.id = char;
+  key.textContent = char;
+  numbersKeyboard.appendChild(key);
+})
+
+MEDIUM_LEVEL.map((char) => {
+  if (char === "A" || char === "Z") {
+    charsKeyboard.appendChild(document.createElement("br"));
+  }
+  let key = document.createElement("button");
+  key.classList.add("main__wrapper__keyboard-key");
+  key.id = char;
+  key.textContent = char;
+  charsKeyboard.appendChild(key);
+})
+
+mainWrapper.appendChild(mainKeyboard);
+mainKeyboard.classList.add("hidden");
+
+
 let startButton = mainWrapper.appendChild(document.createElement("button"));
 startButton.textContent = "Start";
+startButton.classList.add("main__wrapper__start");
 
 let restartButton = mainWrapper.appendChild(document.createElement("button"));
 restartButton.textContent = "Restart";
+restartButton.classList.add("main__wrapper__restart");
+restartButton.classList.add("hidden");
+
 
 restartButton.addEventListener("click", () => {
   if (isGameStarted) {
@@ -140,8 +185,12 @@ restartButton.addEventListener("click", () => {
     getRoundTable(isGameStarted);
     lockElement(startButton, false);
     lockElement(switcher, false);
-    lockElement(switcherPoint,false);
+    lockElement(switcherPoint, false);
     updateRoundTable(round);
+    mainKeyboard.classList.add("hidden");
+    mainKeyboard.innerHTML = "";
+    restartButton.classList.add("hidden");
+    startButton.classList.remove("hidden");
   }
 });
 
@@ -152,8 +201,35 @@ startButton.addEventListener("click", () => {
     lockElement(startButton);
     lockElement(switcher);
     lockElement(switcherPoint);
+
     round < 5 ? round += 1 : round = 0;
     updateRoundTable(round);
+
+    mainKeyboard.innerHTML = "";
+    mainKeyboard.classList.add("hidden");
+
+    switch (difficult) {
+      case "easy":
+        mainKeyboard.classList.remove("hidden");
+        mainKeyboard.appendChild(numbersKeyboard);
+        break;
+      case "medium":
+        mainKeyboard.classList.remove("hidden");
+        mainKeyboard.appendChild(charsKeyboard);
+        break;
+      case "hard":
+        mainKeyboard.classList.remove("hidden");
+        mainKeyboard.appendChild(numbersKeyboard);
+        mainKeyboard.appendChild(charsKeyboard);
+        break;
+      default:
+        mainKeyboard.classList.remove("hidden");
+        mainKeyboard.appendChild(numbersKeyboard);
+        break;
+    }
+
+    startButton.classList.add("hidden");
+    restartButton.classList.remove("hidden");
   }
 })
 
