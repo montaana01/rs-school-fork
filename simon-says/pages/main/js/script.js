@@ -11,6 +11,7 @@ const MEDIUM_LEVEL = [
 
 let round = 0;
 let isGameStarted = false;
+let isRepeatUsed = false;
 
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
@@ -173,6 +174,11 @@ let startButton = mainWrapper.appendChild(document.createElement("button"));
 startButton.textContent = "Start";
 startButton.classList.add("main__wrapper__start");
 
+let repeatButton = mainWrapper.appendChild(document.createElement("button"));
+repeatButton.textContent = "Repeat";
+repeatButton.classList.add("main__wrapper__repeat");
+repeatButton.classList.add("hidden");
+
 let restartButton = mainWrapper.appendChild(document.createElement("button"));
 restartButton.textContent = "Restart";
 restartButton.classList.add("main__wrapper__restart");
@@ -190,10 +196,20 @@ restartButton.addEventListener("click", () => {
     updateRoundTable(round);
     mainKeyboard.classList.add("hidden");
     mainKeyboard.innerHTML = "";
+    repeatButton.classList.add("hidden");
     restartButton.classList.add("hidden");
     startButton.classList.remove("hidden");
   }
 });
+
+repeatButton.addEventListener("click", () => {
+  if (!isRepeatUsed) {
+    //repeat sequence call here
+    isRepeatUsed = true;
+    lockElement(repeatButton);
+    console.log(`isRepeatUsed = ${isRepeatUsed}`);
+  }
+})
 
 startButton.addEventListener("click", () => {
   if (!isGameStarted) {
@@ -231,6 +247,7 @@ startButton.addEventListener("click", () => {
 
     startButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
+    repeatButton.classList.remove("hidden");
   }
 })
 
