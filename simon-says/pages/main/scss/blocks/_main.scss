@@ -1,7 +1,7 @@
 .main {
   &__wrapper {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     row-gap: 30px;
     justify-content: center;
     column-gap: 30px;
@@ -11,8 +11,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      width: 520px;
-      margin: 0 auto;
+      width: $keyboard-width;
+      margin: 0 calc(($container-width - $keyboard-width) * 0.5);
       row-gap: 5px;
       border: 3px solid $color;
       border-radius: 10px;
