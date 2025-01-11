@@ -20,6 +20,7 @@ let isElementsLocked = false;
 function lockElement(element, lock = true) {
   isElementsLocked = lock;
   lock ? element.classList.add('locked') : element.classList.remove('locked');
+  lock ? element.disabled : element.enable();
 }
 
 /*
