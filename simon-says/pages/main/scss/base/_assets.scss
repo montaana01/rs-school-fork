@@ -30,3 +30,9 @@ a {
     outline: unset;
   }
 }
+
+.hidden {
+  transition: display 1s;
+  display: none !important;
+  visibility: hidden;
+}
