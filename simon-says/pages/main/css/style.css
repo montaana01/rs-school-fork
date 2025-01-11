@@ -193,6 +193,9 @@ main {
   left: 60px;
   background-color: #da2424;
 }
+.header__wrapper-item__switcher__point:hover {
+  scale: 1.1;
+}
 .header__wrapper-item__switcher__text {
   text-transform: uppercase;
   font-size: 20px;
@@ -242,6 +245,9 @@ main {
   font-size: 30px;
   font-weight: 900;
   cursor: pointer;
+}
+.main__wrapper__start:hover, .main__wrapper__restart:hover, .main__wrapper__repeat:hover {
+  scale: 1.1;
 }
 
 footer {

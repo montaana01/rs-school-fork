@@ -110,6 +110,10 @@
             left: 60px;
             background-color: $red;
           }
+
+          &:hover {
+            scale: 1.1;
+          }
         }
 
         &__text {
