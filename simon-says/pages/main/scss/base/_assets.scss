@@ -20,6 +20,7 @@ a {
 
   &:hover {
     cursor: default;
+    scale: none !important;
   }
 
   &:active {
@@ -29,6 +30,10 @@ a {
   &:focus-visible {
     outline: unset;
   }
+}
+
+button.locked {
+    opacity: 0.5;
 }
 
 .hidden {

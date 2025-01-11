@@ -36,12 +36,17 @@ a span {
 }
 .locked:hover {
   cursor: default;
+  scale: none !important;
 }
 .locked:active {
   border-style: unset;
 }
 .locked:focus-visible {
   outline: unset;
+}
+
+button.locked {
+  opacity: 0.5;
 }
 
 .hidden {
