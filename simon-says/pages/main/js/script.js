@@ -138,6 +138,41 @@ mainContainer.classList.add("container");
 const mainWrapper = mainContainer.appendChild(document.createElement("div"));
 mainWrapper.classList.add("main__wrapper");
 
+/*
+* main sequence at main section
+*/
+let mainSequence = document.createElement("div");
+mainSequence.classList.add("main__wrapper__sequence");
+
+let sequenceBox = document.createElement("div");
+sequenceBox.classList.add("main__wrapper__sequence-task");
+
+let h2 = document.createElement("h2");
+h2.textContent = 'Sequence to repeat:';
+sequenceBox.appendChild(h2);
+
+const SEQUENCE = "dsx";
+let task = document.createElement("p");
+task.textContent = SEQUENCE;
+sequenceBox.appendChild(task);
+
+let inputBox = document.createElement("div");
+inputBox.classList.add("main__wrapper__sequence-input");
+
+let input = document.createElement("input");
+inputBox.appendChild(input);
+
+mainSequence.appendChild(sequenceBox);
+mainSequence.appendChild(inputBox);
+mainWrapper.appendChild(mainSequence);
+
+function getMainSequence(isGameStarted) {
+  return isGameStarted ? mainSequence.classList.toggle("pos-start") : mainSequence.classList.toggle("pos-start");
+}
+
+/*
+* keyboard at main section
+*/
 let mainKeyboard = document.createElement("div");
 mainKeyboard.classList.add("main__wrapper__keyboard");
 
@@ -169,7 +204,9 @@ MEDIUM_LEVEL.map((char) => {
 mainWrapper.appendChild(mainKeyboard);
 mainKeyboard.classList.add("hidden");
 
-
+/*
+* buttons at main section
+*/
 let startButton = mainWrapper.appendChild(document.createElement("button"));
 startButton.textContent = "Start";
 startButton.classList.add("main__wrapper__start");
@@ -184,12 +221,12 @@ restartButton.textContent = "Restart";
 restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
 
-
 restartButton.addEventListener("click", () => {
   if (isGameStarted) {
     round = 0;
     isGameStarted = false;
     getRoundTable(isGameStarted);
+    getMainSequence(isGameStarted);
     lockElement(startButton, false);
     lockElement(switcher, false);
     lockElement(switcherPoint, false);
@@ -217,6 +254,7 @@ startButton.addEventListener("click", () => {
     isGameStarted = true;
     isRepeatUsed = false;
     getRoundTable(isGameStarted);
+    getMainSequence(isGameStarted);
     lockElement(startButton);
     lockElement(switcher);
     lockElement(switcherPoint);
