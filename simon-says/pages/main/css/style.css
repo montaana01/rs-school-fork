@@ -16,6 +16,12 @@
   font-style: normal;
   src: local("Arial Black"), local("Arial-Black"), url("./../../../assets/fonts/Arial-Black.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Mono";
+  font-weight: 900;
+  font-style: normal;
+  src: local("Mono"), local("Mono Bold"), url("./../../../assets/fonts/MonospaceBold.ttf") format("truetype");
+}
 a {
   text-decoration: none;
   color: #ffffff;
@@ -132,7 +138,7 @@ main {
   top: 0;
   height: 100%;
   width: 30px;
-  background: lightslategrey;
+  background: lightslategray;
 }
 .header__wrapper-item__central h3, .header__wrapper-item__central h4 {
   font-size: 30px;
@@ -205,9 +211,72 @@ main {
 .main__wrapper {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 30px;
+  row-gap: 60px;
   justify-content: center;
   column-gap: 30px;
+}
+.main__wrapper__sequence {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 520px;
+  padding: 10px;
+  margin: 0 340px;
+  border: 3px solid rgba(116, 171, 255, 0.5);
+  background-color: #74abff;
+  border-radius: 10px;
+  box-shadow: 0 16px rgba(116, 171, 255, 0.5), -8px 8px 24px rgba(0, 0, 0, 0.75);
+  position: relative;
+  row-gap: 15px;
+  transform: translateY(calc(-100% - 160px));
+}
+.main__wrapper__sequence-task {
+  overflow: hidden;
+  border: 2px solid;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main__wrapper__sequence-task h2 {
+  padding: 10px;
+  width: 50%;
+  height: 100%;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 52px;
+  text-transform: uppercase;
+  backdrop-filter: brightness(0.5);
+}
+.main__wrapper__sequence-task p {
+  padding: 10px;
+  width: 50%;
+  height: 100%;
+  font-family: Mono, sans-serif;
+  line-height: 48px;
+  text-align: start;
+  background-color: lightslategray;
+  font-size: 30px;
+}
+.main__wrapper__sequence-input {
+  margin: 0 auto;
+  width: 50%;
+}
+.main__wrapper__sequence-input input {
+  border: 3px double #74abff;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  color: #74abff;
+  font-weight: bold;
+  font-size: 30px;
+}
+.main__wrapper__sequence-input input:active {
+  border: 3px solid #272e54;
+}
+.main__wrapper__sequence.pos-start {
+  transform: translateY(0);
 }
 .main__wrapper__keyboard {
   flex-basis: 100%;
@@ -220,7 +289,7 @@ main {
   border: 3px solid #ffffff;
   border-radius: 10px;
   background: #74abff;
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px rgba(255, 255, 255, 0.9), -8px 8px 24px rgba(0, 0, 0, 0.75);
 }
 .main__wrapper__keyboard-key {
   height: 45px;
@@ -237,7 +306,7 @@ main {
 .main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat {
   display: block;
   background: #74abff;
-  height: 60px;
+  height: 50px;
   border-radius: 10px;
   border: none;
   outline: 2px solid #ffffff;

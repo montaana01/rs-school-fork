@@ -2,9 +2,81 @@
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 30px;
+    row-gap: 60px;
     justify-content: center;
     column-gap: 30px;
+
+    &__sequence {
+      flex-basis: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: $keyboard-width;
+      padding: 10px;
+      margin: 0 calc(($container-width - $keyboard-width) * 0.5);
+      border: 3px solid rgba($main-color, 0.5);
+      background-color: $main-color;
+      border-radius: 10px;
+      box-shadow: 0 16px rgba($main-color, 0.5), -8px 8px 24px rgba($black, 0.75);
+      position: relative;
+      row-gap: 15px;
+      transform: translateY(calc(-100% - 160px));
+
+      &-task {
+        overflow: hidden;
+        border: 2px solid;
+        border-radius: 10px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        h2 {
+          padding: 10px;
+          width: 50%;
+          height: 100%;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 52px;
+          text-transform: uppercase;
+          backdrop-filter: brightness(0.5);
+        }
+
+        p {
+          padding: 10px;
+          width: 50%;
+          height: 100%;
+          font-family: Mono, sans-serif;
+          line-height: 48px;
+          text-align: start;
+          background-color: $gray;
+          font-size: 30px;
+        }
+      }
+
+      &-input {
+        margin: 0 auto;
+        width: 50%;
+
+        input {
+          border: 3px double $main-color;
+          border-radius: 10px;
+          width: 100%;
+          padding: 10px;
+          color: $main-color;
+          font-weight: bold;
+          font-size: 30px;
+
+          &:active {
+            border: 3px solid $main-background-color;
+          }
+        }
+      }
+
+      &.pos-start {
+        transform: translateY(0);
+
+      }
+    }
 
     &__keyboard {
       flex-basis: 100%;
@@ -17,7 +89,7 @@
       border: 3px solid $color;
       border-radius: 10px;
       background: $main-color;
-      box-shadow: 0 0 100px rgba($black, 0.5);
+      box-shadow: 0 16px rgba($color, 0.9), -8px 8px 24px rgba($black, 0.75);
 
       &-key {
         height: 45px;
@@ -37,7 +109,7 @@
     &__start, &__restart, &__repeat {
       display: block;
       background: $main-color;
-      height: 60px;
+      height: 50px;
       border-radius: 10px;
       border: none;
       outline: 2px solid $color;
