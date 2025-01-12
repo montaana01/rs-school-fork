@@ -1,0 +1,53 @@
+@import 'base/_fonts.scss';
+@import 'base/_variables.scss';
+@import 'base/_assets.scss';
+
+html {
+  scroll-behavior: smooth;
+  background-color: $main-background-color;
+}
+
+* {
+  font-family: 'Arial', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  box-sizing: border-box;
+  color: $color;
+  transition: all .5s;
+  text-align: center;
+
+  &::before {
+    box-sizing: border-box;
+  }
+
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  position: relative;
+
+  &.active {
+    overflow: hidden;
+  }
+}
+
+main {
+  min-height: calc(100vh - 180px);
+  padding: 30px 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 40px;
+}
+
+
+@import 'blocks/_header.scss';
+@import "blocks/_main.scss";
+@import 'blocks/_footer.scss';
+
+
+@import 'base/_media.scss';
