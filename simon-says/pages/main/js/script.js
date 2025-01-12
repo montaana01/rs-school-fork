@@ -12,6 +12,7 @@ const MEDIUM_LEVEL = [
 let round = 0;
 let isGameStarted = false;
 let isRepeatUsed = false;
+let isInputAllowed = false;
 
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
@@ -264,6 +265,7 @@ startButton.addEventListener("click", () => {
     updateRoundTable(round);
     const sequence = generateSequence(difficult, round * 2);
     task.textContent = sequence;
+    simulateTyping(sequence);
 
     getMainSequence(isGameStarted);
     getKeyboard(isGameStarted);
@@ -348,6 +350,36 @@ function generateSequence(level, length = 2) {
     sequence.push(CHARS[RANDOM]);
   }
   return sequence.join('');
+}
+
+/*
+* Typing simulation
+*/
+function simulateTyping(sequence, interval = 300) {
+  isInputAllowed = false;
+  const keys = sequence.split('');
+  let index = 0;
+
+  const typingChar = () => {
+    if (index >= keys.length) {
+      clearInterval(typingTimer);
+      isInputAllowed = true;
+      return;
+    }
+
+    const CHAR = keys[index];
+    const ELEMENT = document.getElementById(`id-${CHAR}`);
+    if (ELEMENT) {
+      ELEMENT.classList.add('pressed');
+      setTimeout(() => {
+        ELEMENT.classList.remove('pressed');
+      }, interval);
+    }
+
+    index += 1;
+  };
+
+  const typingTimer = setInterval(typingChar, interval);
 }
 
 
