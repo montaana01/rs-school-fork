@@ -1,7 +1,7 @@
 const GAME_NAME = "Simon says";
 
 const EASY_LEVEL = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 ];
 const MEDIUM_LEVEL = [
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -185,7 +185,7 @@ charsKeyboard.classList.add("main__wrapper__keyboard__chars");
 EASY_LEVEL.map((char) => {
   let key = document.createElement("button");
   key.classList.add("main__wrapper__keyboard-key");
-  key.id = char;
+  key.id = `id-${char}`;
   key.textContent = char;
   numbersKeyboard.appendChild(key);
 })
@@ -196,7 +196,7 @@ MEDIUM_LEVEL.map((char) => {
   }
   let key = document.createElement("button");
   key.classList.add("main__wrapper__keyboard-key");
-  key.id = char;
+  key.id = `id-${char}`;
   key.textContent = char;
   charsKeyboard.appendChild(key);
 })
