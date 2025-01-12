@@ -267,10 +267,10 @@ main {
   border: 3px double #74abff;
   border-radius: 10px;
   width: 100%;
-  padding: 10px;
+  padding: 5px;
   color: #74abff;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
 }
 .main__wrapper__sequence-input input:active {
   border: 3px solid #272e54;
@@ -290,6 +290,7 @@ main {
   border-radius: 10px;
   background: #74abff;
   box-shadow: 0 16px rgba(255, 255, 255, 0.9), -8px 8px 24px rgba(0, 0, 0, 0.75);
+  transform: translateY(calc(-100% - 400px));
 }
 .main__wrapper__keyboard-key {
   height: 45px;
@@ -302,6 +303,9 @@ main {
 }
 .main__wrapper__keyboard-key:active {
   background: rgba(255, 255, 255, 0.3);
+}
+.main__wrapper__keyboard.pos-start {
+  transform: translateY(0);
 }
 .main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat {
   display: block;
