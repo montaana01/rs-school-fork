@@ -204,6 +204,10 @@ MEDIUM_LEVEL.map((char) => {
 mainWrapper.appendChild(mainKeyboard);
 mainKeyboard.classList.add("hidden");
 
+function getKeyboard(isGameStarted) {
+  return isGameStarted ? mainKeyboard.classList.toggle("pos-start") : mainKeyboard.classList.toggle("pos-start");
+}
+
 /*
 * buttons at main section
 */
@@ -227,12 +231,12 @@ restartButton.addEventListener("click", () => {
     isGameStarted = false;
     getRoundTable(isGameStarted);
     getMainSequence(isGameStarted);
+    getKeyboard(isGameStarted);
     lockElement(startButton, false);
     lockElement(switcher, false);
     lockElement(switcherPoint, false);
     lockElement(repeatButton, false)
     updateRoundTable(round);
-    mainKeyboard.classList.add("hidden");
     mainKeyboard.innerHTML = "";
     repeatButton.classList.add("hidden");
     restartButton.classList.add("hidden");
@@ -261,9 +265,9 @@ startButton.addEventListener("click", () => {
 
     round < 5 ? round += 1 : round = 0;
     updateRoundTable(round);
+    getKeyboard(isGameStarted);
 
     mainKeyboard.innerHTML = "";
-    mainKeyboard.classList.add("hidden");
 
     switch (difficult) {
       case "easy":
