@@ -225,7 +225,7 @@ restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
 
 restartButton.addEventListener("click", () => {
-  if (isGameStarted) {
+  if (isGameStarted && isInputAllowed) {
     round = 0;
     isGameStarted = false;
     getRoundTable(isGameStarted);
@@ -244,7 +244,7 @@ restartButton.addEventListener("click", () => {
 });
 
 repeatButton.addEventListener("click", () => {
-  if (!isRepeatUsed) {
+  if (!isRepeatUsed && isInputAllowed) {
     //repeat sequence call here
     isRepeatUsed = true;
     lockElement(repeatButton);
@@ -257,14 +257,15 @@ startButton.addEventListener("click", () => {
     isGameStarted = true;
     isRepeatUsed = false;
     getRoundTable(isGameStarted);
-    lockElement(startButton);
-    lockElement(switcher);
-    lockElement(switcherPoint);
 
     round < 5 ? round += 1 : round = 0;
     updateRoundTable(round);
     const sequence = generateSequence(difficult, round * 2);
     task.textContent = sequence;
+    isElementsLocked = true;
+    lockElement(startButton);
+    lockElement(switcher);
+    lockElement(switcherPoint);
     simulateTyping(sequence);
 
     getMainSequence(isGameStarted);
@@ -380,6 +381,43 @@ function simulateTyping(sequence, interval = 300) {
   };
 
   const typingTimer = setInterval(typingChar, interval);
+}
+
+/*
+* listening typed keys on keyboard and highlighting keys
+*/
+mainKeyboard.addEventListener("click", (event) => {
+  if (!isInputAllowed) return;
+
+  const ELEMENT = event.target.closest('.main__wrapper__keyboard-key');
+  if (!ELEMENT) return;
+
+  highlightAndTypeKey(ELEMENT);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!isInputAllowed) return;
+
+  const key = event.key.toUpperCase();
+  const ELEMENT = document.getElementById(`id-${key}`);
+  if (ELEMENT) {
+    highlightAndTypeKey(ELEMENT);
+  }
+});
+
+/*
+* Highlight char
+*/
+function highlightAndTypeKey(keyElement) {
+  document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
+    item.classList.remove('pressed');
+  });
+
+  keyElement.classList.add('pressed');
+  setTimeout(() => {
+    keyElement.classList.remove('pressed');
+    //here we call function that add typed char to input
+  }, 300);
 }
 
 
