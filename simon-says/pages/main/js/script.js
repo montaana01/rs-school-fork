@@ -151,9 +151,7 @@ let h2 = document.createElement("h2");
 h2.textContent = 'Sequence to repeat:';
 sequenceBox.appendChild(h2);
 
-const SEQUENCE = "dsx";
 let task = document.createElement("p");
-task.textContent = SEQUENCE;
 sequenceBox.appendChild(task);
 
 let inputBox = document.createElement("div");
@@ -258,13 +256,16 @@ startButton.addEventListener("click", () => {
     isGameStarted = true;
     isRepeatUsed = false;
     getRoundTable(isGameStarted);
-    getMainSequence(isGameStarted);
     lockElement(startButton);
     lockElement(switcher);
     lockElement(switcherPoint);
 
     round < 5 ? round += 1 : round = 0;
     updateRoundTable(round);
+    const sequence = generateSequence(difficult, round * 2);
+    task.textContent = sequence;
+
+    getMainSequence(isGameStarted);
     getKeyboard(isGameStarted);
 
     mainKeyboard.innerHTML = "";
@@ -334,7 +335,21 @@ footerWrapper.appendChild(footerRSSchool)
 
 /*
 * Logic of game
-* */
+*/
+
+/*
+* Generate sequence with needed params
+*/
+function generateSequence(level, length = 2) {
+  const CHARS = level === 'easy' ? EASY_LEVEL : level === 'medium' ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
+  let sequence = [];
+  for (let i = 0; i < length; i += 1) {
+    const RANDOM = Math.floor(Math.random() * CHARS.length);
+    sequence.push(CHARS[RANDOM]);
+  }
+  return sequence.join('');
+}
+
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +
