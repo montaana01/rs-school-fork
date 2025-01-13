@@ -220,15 +220,15 @@ let startButton = mainWrapper.appendChild(document.createElement("button"));
 startButton.textContent = "Start";
 startButton.classList.add("main__wrapper__start");
 
-let repeatButton = mainWrapper.appendChild(document.createElement("button"));
-repeatButton.textContent = "Repeat";
-repeatButton.classList.add("main__wrapper__repeat");
-repeatButton.classList.add("hidden");
-
 let restartButton = mainWrapper.appendChild(document.createElement("button"));
 restartButton.textContent = "New Game";
 restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
+
+let repeatButton = mainWrapper.appendChild(document.createElement("button"));
+repeatButton.textContent = "Repeat";
+repeatButton.classList.add("main__wrapper__repeat");
+repeatButton.classList.add("hidden");
 
 let nextButton = mainWrapper.appendChild(document.createElement("button"));
 nextButton.textContent = "Next";
@@ -254,9 +254,10 @@ restartButton.addEventListener("click", () => {
     updateRoundTable(round);
     mainKeyboard.innerHTML = "";
     input.classList.remove('wrong');
+    startButton.classList.remove("hidden");
     repeatButton.classList.add("hidden");
     restartButton.classList.add("hidden");
-    startButton.classList.remove("hidden");
+    nextButton.classList.add("hidden");
   }
 });
 
@@ -332,6 +333,7 @@ nextButton.addEventListener("click", () => {
     currentCharIndex = 0;
     generatedSequence = generateSequence(difficult, round * 2);
     updateRoundTable(round);
+    repeatButton.classList.remove("hidden");
     nextButton.classList.add("hidden");
   }
 });
@@ -503,6 +505,7 @@ function checkUserInput(key) {
   if (userInput === generatedSequence) {
     isRoundComplete = true;
     isInputAllowed = false;
+    repeatButton.classList.add("hidden");
     nextButton.classList.remove("hidden");
     input.classList.add('right');
     nextButton.classList.add("active");
