@@ -393,7 +393,8 @@ mainKeyboard.addEventListener("click", (event) => {
   const ELEMENT = event.target.closest('.main__wrapper__keyboard-key');
   if (!ELEMENT) return;
 
-  highlightAndTypeKey(ELEMENT);
+  const key = ELEMENT.textContent.trim();
+  highlightAndTypeKey(ELEMENT, key);
 });
 
 document.addEventListener("keydown", (event) => {
@@ -402,14 +403,14 @@ document.addEventListener("keydown", (event) => {
   const key = event.key.toUpperCase();
   const ELEMENT = document.getElementById(`id-${key}`);
   if (ELEMENT) {
-    highlightAndTypeKey(ELEMENT);
+    highlightAndTypeKey(ELEMENT, event.key);
   }
 });
 
 /*
 * Highlight char
 */
-function highlightAndTypeKey(keyElement) {
+function highlightAndTypeKey(keyElement, key) {
   document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
     item.classList.remove('pressed');
   });
@@ -417,7 +418,9 @@ function highlightAndTypeKey(keyElement) {
   keyElement.classList.add('pressed');
   setTimeout(() => {
     keyElement.classList.remove('pressed');
-    //here we call function that add typed char to input
+    if (key.length === 1) {
+      input.value += key;
+    }
   }, 300);
 }
 
