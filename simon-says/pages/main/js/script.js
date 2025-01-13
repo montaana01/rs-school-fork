@@ -159,6 +159,7 @@ let inputBox = document.createElement("div");
 inputBox.classList.add("main__wrapper__sequence-input");
 
 let input = document.createElement("input");
+input.setAttribute("readonly", "true");
 inputBox.appendChild(input);
 
 mainSequence.appendChild(sequenceBox);
