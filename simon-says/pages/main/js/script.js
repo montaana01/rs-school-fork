@@ -1,7 +1,7 @@
 const GAME_NAME = "Simon says";
 
 const EASY_LEVEL = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 0
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 ];
 const MEDIUM_LEVEL = [
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
@@ -12,6 +12,11 @@ const MEDIUM_LEVEL = [
 let round = 0;
 let isGameStarted = false;
 let isRepeatUsed = false;
+let isInputAllowed = false;
+let generatedSequence = '';
+let userInput = '';
+let currentCharIndex = 0;
+let isRoundComplete = false;
 
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
@@ -151,15 +156,14 @@ let h2 = document.createElement("h2");
 h2.textContent = 'Sequence to repeat:';
 sequenceBox.appendChild(h2);
 
-const SEQUENCE = "dsx";
 let task = document.createElement("p");
-task.textContent = SEQUENCE;
 sequenceBox.appendChild(task);
 
 let inputBox = document.createElement("div");
 inputBox.classList.add("main__wrapper__sequence-input");
 
 let input = document.createElement("input");
+input.setAttribute("readonly", "true");
 inputBox.appendChild(input);
 
 mainSequence.appendChild(sequenceBox);
@@ -185,7 +189,7 @@ charsKeyboard.classList.add("main__wrapper__keyboard__chars");
 EASY_LEVEL.map((char) => {
   let key = document.createElement("button");
   key.classList.add("main__wrapper__keyboard-key");
-  key.id = char;
+  key.id = `id-${char}`;
   key.textContent = char;
   numbersKeyboard.appendChild(key);
 })
@@ -196,13 +200,17 @@ MEDIUM_LEVEL.map((char) => {
   }
   let key = document.createElement("button");
   key.classList.add("main__wrapper__keyboard-key");
-  key.id = char;
+  key.id = `id-${char}`;
   key.textContent = char;
   charsKeyboard.appendChild(key);
 })
 
 mainWrapper.appendChild(mainKeyboard);
 mainKeyboard.classList.add("hidden");
+
+function getKeyboard(isGameStarted) {
+  return isGameStarted ? mainKeyboard.classList.toggle("pos-start") : mainKeyboard.classList.toggle("pos-start");
+}
 
 /*
 * buttons at main section
@@ -221,18 +229,27 @@ restartButton.textContent = "Restart";
 restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
 
+let nextButton = mainWrapper.appendChild(document.createElement("button"));
+nextButton.textContent = "Next";
+nextButton.classList.add("main__wrapper__next");
+nextButton.classList.add("hidden");
+
 restartButton.addEventListener("click", () => {
-  if (isGameStarted) {
+  if (isGameStarted && isInputAllowed) {
     round = 0;
     isGameStarted = false;
+    isInputAllowed = false;
+
     getRoundTable(isGameStarted);
     getMainSequence(isGameStarted);
+    getKeyboard(isGameStarted);
+
     lockElement(startButton, false);
     lockElement(switcher, false);
     lockElement(switcherPoint, false);
-    lockElement(repeatButton, false)
+    lockElement(repeatButton, false);
+
     updateRoundTable(round);
-    mainKeyboard.classList.add("hidden");
     mainKeyboard.innerHTML = "";
     repeatButton.classList.add("hidden");
     restartButton.classList.add("hidden");
@@ -241,29 +258,37 @@ restartButton.addEventListener("click", () => {
 });
 
 repeatButton.addEventListener("click", () => {
-  if (!isRepeatUsed) {
-    //repeat sequence call here
+  if (!isRepeatUsed && isInputAllowed) {
     isRepeatUsed = true;
+    currentCharIndex = 0;
+    userInput = '';
+
     lockElement(repeatButton);
-    console.log(`isRepeatUsed = ${isRepeatUsed}`);
+    simulateTyping(generatedSequence);
   }
-})
+});
 
 startButton.addEventListener("click", () => {
   if (!isGameStarted) {
+    round = 1;
     isGameStarted = true;
     isRepeatUsed = false;
+    userInput = '';
+    currentCharIndex = 0;
+    generatedSequence = '';
+
     getRoundTable(isGameStarted);
-    getMainSequence(isGameStarted);
+    updateRoundTable(round);
+    generatedSequence = generateSequence(difficult, round * 2);
+    isElementsLocked = true;
     lockElement(startButton);
     lockElement(switcher);
     lockElement(switcherPoint);
 
-    round < 5 ? round += 1 : round = 0;
-    updateRoundTable(round);
+    getMainSequence(isGameStarted);
+    getKeyboard(isGameStarted);
 
     mainKeyboard.innerHTML = "";
-    mainKeyboard.classList.add("hidden");
 
     switch (difficult) {
       case "easy":
@@ -288,8 +313,22 @@ startButton.addEventListener("click", () => {
     startButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
     repeatButton.classList.remove("hidden");
+    nextButton.classList.add("hidden");
   }
-})
+});
+
+nextButton.addEventListener("click", () => {
+  if (isRoundComplete) {
+    round < 5 ? round += 1 : round = 0;
+    lockElement(repeatButton, false);
+    isRepeatUsed = false
+    userInput = '';
+    currentCharIndex = 0;
+    generatedSequence = generateSequence(difficult, round * 2);
+    updateRoundTable(round);
+    nextButton.classList.add("hidden");
+  }
+});
 
 /*
 * Fill up footer section
@@ -330,7 +369,127 @@ footerWrapper.appendChild(footerRSSchool)
 
 /*
 * Logic of game
-* */
+*/
+
+/*
+* Generate sequence with needed params
+*/
+function generateSequence(level, length = 2) {
+  const CHARS = level === 'easy' ? EASY_LEVEL : level === 'medium' ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
+  let sequence = [];
+  for (let i = 0; i < length; i += 1) {
+    const RANDOM = Math.floor(Math.random() * CHARS.length);
+    sequence.push(CHARS[RANDOM]);
+  }
+  simulateTyping(sequence.join(''))
+  return sequence.join('');
+}
+
+/*
+* Typing simulation
+*/
+function simulateTyping(sequence, interval = 300) {
+  isInputAllowed = false;
+  input.value = '';
+  const keys = sequence.split('');
+  let index = 0;
+
+  const typingChar = () => {
+    if (index >= keys.length) {
+      clearInterval(typingTimer);
+      isInputAllowed = true;
+      return;
+    }
+
+    const CHAR = keys[index];
+    const ELEMENT = document.getElementById(`id-${CHAR}`);
+    if (ELEMENT) {
+      ELEMENT.classList.add('pressed');
+      task.textContent += CHAR;
+      setTimeout(() => {
+        ELEMENT.classList.remove('pressed');
+      }, interval);
+    }
+
+    index += 1;
+  };
+
+  const typingTimer = setInterval(() => {
+    if (index >= keys.length) {
+      clearInterval(typingTimer);
+      setTimeout(() => {
+        task.textContent = '';
+        isInputAllowed = true;
+      }, interval * 2);
+    } else {
+      typingChar();
+    }
+  }, interval);
+}
+
+/*
+* listening typed keys on keyboard and highlighting keys
+*/
+mainKeyboard.addEventListener("click", (event) => {
+  if (!isInputAllowed) return;
+
+  const ELEMENT = event.target.closest('.main__wrapper__keyboard-key');
+  if (!ELEMENT) return;
+
+  const key = ELEMENT.textContent.trim();
+  highlightAndTypeKey(ELEMENT, key);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!isInputAllowed) return;
+
+  const key = event.key.toUpperCase();
+  const ELEMENT = document.getElementById(`id-${key}`);
+  if (ELEMENT) {
+    highlightAndTypeKey(ELEMENT, event.key);
+  }
+});
+
+/*
+* Highlight char
+*/
+function highlightAndTypeKey(keyElement, key) {
+  document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
+    item.classList.remove('pressed');
+  });
+
+  keyElement.classList.add('pressed');
+  setTimeout(() => {
+    keyElement.classList.remove('pressed');
+    if (key.length === 1) {
+      input.value += key;
+      checkUserInput(key);
+    }
+  }, 300);
+}
+
+
+function checkUserInput(key) {
+  if (key !== generatedSequence[currentCharIndex]) {
+    console.log("You lose!")
+    //implement here call to get popup
+    return;
+  }
+
+  userInput += key;
+  currentCharIndex += 1;
+
+  if (userInput === generatedSequence) {
+    isRoundComplete = true;
+    nextButton.classList.remove("hidden");
+    console.log('Right!');
+    // add message of succeed typed word
+    if (round === 5) {
+      // finishGame(); - todo
+    }
+  }
+}
+
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +

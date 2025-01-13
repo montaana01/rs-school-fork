@@ -61,10 +61,10 @@
           border: 3px double $main-color;
           border-radius: 10px;
           width: 100%;
-          padding: 10px;
+          padding: 5px;
           color: $main-color;
           font-weight: bold;
-          font-size: 30px;
+          font-size: 25px;
 
           &:active {
             border: 3px solid $main-background-color;
@@ -90,6 +90,7 @@
       border-radius: 10px;
       background: $main-color;
       box-shadow: 0 16px rgba($color, 0.9), -8px 8px 24px rgba($black, 0.75);
+      transform: translateY(calc(-100% - 400px));
 
       &-key {
         height: 45px;
@@ -98,15 +99,25 @@
         border-radius: 4px;
         border: none;
         background: rgba($color, 0.5);
+        font-size: 25px;
         cursor: pointer;
 
         &:active {
           background: rgba($color, 0.3);
         }
+        &.pressed {
+          background-color: $main-background-color; /* Цвет подсветки */
+          border: 2px solid $color; /* Рамка */
+          transition: background-color 0.3s ease, border 0.3s ease;
+        }
+      }
+
+      &.pos-start {
+        transform: translateY(0);
       }
     }
 
-    &__start, &__restart, &__repeat {
+    &__start, &__restart, &__repeat, &__next {
       display: block;
       background: $main-color;
       height: 50px;
