@@ -13,6 +13,7 @@ let round = 0;
 let isGameStarted = false;
 let isRepeatUsed = false;
 let isInputAllowed = false;
+let isButtonsAllowed = false;
 let generatedSequence = '';
 let userInput = '';
 let currentCharIndex = 0;
@@ -225,7 +226,7 @@ repeatButton.classList.add("main__wrapper__repeat");
 repeatButton.classList.add("hidden");
 
 let restartButton = mainWrapper.appendChild(document.createElement("button"));
-restartButton.textContent = "Restart";
+restartButton.textContent = "New Game";
 restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
 
@@ -235,10 +236,11 @@ nextButton.classList.add("main__wrapper__next");
 nextButton.classList.add("hidden");
 
 restartButton.addEventListener("click", () => {
-  if (isGameStarted && isInputAllowed) {
+  if (isGameStarted && isButtonsAllowed) {
     round = 0;
     isGameStarted = false;
     isInputAllowed = false;
+    isButtonsAllowed = false;
 
     getRoundTable(isGameStarted);
     getMainSequence(isGameStarted);
@@ -251,6 +253,7 @@ restartButton.addEventListener("click", () => {
 
     updateRoundTable(round);
     mainKeyboard.innerHTML = "";
+    input.classList.remove('wrong');
     repeatButton.classList.add("hidden");
     restartButton.classList.add("hidden");
     startButton.classList.remove("hidden");
@@ -258,10 +261,11 @@ restartButton.addEventListener("click", () => {
 });
 
 repeatButton.addEventListener("click", () => {
-  if (!isRepeatUsed && isInputAllowed) {
+  if (!isRepeatUsed && isButtonsAllowed) {
     isRepeatUsed = true;
     currentCharIndex = 0;
     userInput = '';
+    input.classList.remove('wrong');
 
     lockElement(repeatButton);
     simulateTyping(generatedSequence);
@@ -272,10 +276,12 @@ startButton.addEventListener("click", () => {
   if (!isGameStarted) {
     round = 1;
     isGameStarted = true;
+    isButtonsAllowed = true;
     isRepeatUsed = false;
     userInput = '';
     currentCharIndex = 0;
     generatedSequence = '';
+    input.classList.remove('wrong');
 
     getRoundTable(isGameStarted);
     updateRoundTable(round);
@@ -393,6 +399,8 @@ function simulateTyping(sequence, interval = 300) {
   input.value = '';
   const keys = sequence.split('');
   let index = 0;
+  lockElement(repeatButton);
+  lockElement(restartButton);
 
   const typingChar = () => {
     if (index >= keys.length) {
@@ -420,6 +428,9 @@ function simulateTyping(sequence, interval = 300) {
       setTimeout(() => {
         task.textContent = '';
         isInputAllowed = true;
+        lockElement(repeatButton, false);
+        lockElement(restartButton, false);
+        isElementsLocked = true;
       }, interval * 2);
     } else {
       typingChar();
