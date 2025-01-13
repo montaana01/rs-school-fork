@@ -365,7 +365,6 @@ footerWrapper.appendChild(footerRSSchool)
 * Generate sequence with needed params
 */
 function generateSequence(level, length = 2) {
-  input.value = '';
   const CHARS = level === 'easy' ? EASY_LEVEL : level === 'medium' ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
   let sequence = [];
   for (let i = 0; i < length; i += 1) {
@@ -381,6 +380,7 @@ function generateSequence(level, length = 2) {
 */
 function simulateTyping(sequence, interval = 300) {
   isInputAllowed = false;
+  input.value = '';
   const keys = sequence.split('');
   let index = 0;
 
