@@ -13,7 +13,7 @@ let round = 0;
 let isGameStarted = false;
 let isRepeatUsed = false;
 let isInputAllowed = false;
-
+let generatedSequence = '';
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
 */
@@ -246,10 +246,9 @@ restartButton.addEventListener("click", () => {
 
 repeatButton.addEventListener("click", () => {
   if (!isRepeatUsed && isInputAllowed) {
-    //repeat sequence call here
     isRepeatUsed = true;
     lockElement(repeatButton);
-    console.log(`isRepeatUsed = ${isRepeatUsed}`);
+    simulateTyping(generatedSequence);
   }
 })
 
@@ -261,8 +260,7 @@ startButton.addEventListener("click", () => {
 
     round < 5 ? round += 1 : round = 0;
     updateRoundTable(round);
-    const sequence = generateSequence(difficult, round * 2);
-    task.textContent = sequence;
+    generatedSequence = generateSequence(difficult, round * 2);
     isElementsLocked = true;
     lockElement(startButton);
     lockElement(switcher);
