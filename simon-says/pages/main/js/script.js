@@ -468,18 +468,16 @@ document.addEventListener("keydown", (event) => {
 */
 function highlightAndTypeKey(keyElement, key) {
   document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
-    item.classList.remove('pressed');
-  });
-  document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
-    item.classList.remove('disabled');
+    item.classList.remove('pressed', 'disable');
   });
 
   keyElement.classList.add('pressed');
+
+  checkUserInput(key);
   setTimeout(() => {
     keyElement.classList.remove('pressed');
     if (key.length === 1) {
       input.value += key.toUpperCase();
-      checkUserInput(key);
     }
   }, 300);
 }
