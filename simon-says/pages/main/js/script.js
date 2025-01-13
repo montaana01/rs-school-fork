@@ -14,6 +14,10 @@ let isGameStarted = false;
 let isRepeatUsed = false;
 let isInputAllowed = false;
 let generatedSequence = '';
+let userInput = '';
+let currentCharIndex = 0;
+let isRoundComplete = false;
+
 /*
 * FOR LOCK ELEMENTS WHILE TYPING SEQUENCE
 */
@@ -225,6 +229,11 @@ restartButton.textContent = "Restart";
 restartButton.classList.add("main__wrapper__restart");
 restartButton.classList.add("hidden");
 
+let nextButton = mainWrapper.appendChild(document.createElement("button"));
+nextButton.textContent = "Next";
+nextButton.classList.add("main__wrapper__next");
+nextButton.classList.add("hidden");
+
 restartButton.addEventListener("click", () => {
   if (isGameStarted && isInputAllowed) {
     round = 0;
@@ -254,11 +263,11 @@ repeatButton.addEventListener("click", () => {
 
 startButton.addEventListener("click", () => {
   if (!isGameStarted) {
+    round = 1;
     isGameStarted = true;
     isRepeatUsed = false;
-    getRoundTable(isGameStarted);
 
-    round < 5 ? round += 1 : round = 0;
+    getRoundTable(isGameStarted);
     updateRoundTable(round);
     generatedSequence = generateSequence(difficult, round * 2);
     isElementsLocked = true;
@@ -294,8 +303,22 @@ startButton.addEventListener("click", () => {
     startButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
     repeatButton.classList.remove("hidden");
+    nextButton.classList.add("hidden");
   }
-})
+});
+
+nextButton.addEventListener("click", () => {
+  if (isRoundComplete) {
+    round < 5 ? round += 1 : round = 0;
+    lockElement(repeatButton);
+    isRepeatUsed = false
+    userInput = '';
+    currentCharIndex = 0;
+    generatedSequence = generateSequence(difficult, round * 2);
+    updateRoundTable(round);
+    nextButton.classList.add("hidden");
+  }
+});
 
 /*
 * Fill up footer section
