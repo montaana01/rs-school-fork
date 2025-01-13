@@ -56,6 +56,7 @@
       &-input {
         margin: 0 auto;
         width: 50%;
+        transition: 0.3s all;
 
         input {
           border: 3px double $main-color;
@@ -68,6 +69,16 @@
 
           &:active {
             border: 3px solid $main-background-color;
+          }
+
+          &.right {
+            outline: 1px solid $green;
+            background-color: $green;
+          }
+
+          &.wrong {
+            outline: 1px solid $red;
+            background-color: $red;
           }
         }
       }
@@ -128,9 +139,15 @@
       font-size: 30px;
       font-weight: 900;
       cursor: pointer;
+      transition: 0.3s all;
 
       &:hover {
         scale: 1.1;
+      }
+
+      &.active {
+        scale: 1.1;
+        background: $green;
       }
     }
   }

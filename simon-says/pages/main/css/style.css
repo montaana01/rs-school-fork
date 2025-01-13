@@ -263,6 +263,7 @@ main {
 .main__wrapper__sequence-input {
   margin: 0 auto;
   width: 50%;
+  transition: 0.3s all;
 }
 .main__wrapper__sequence-input input {
   border: 3px double #74abff;
@@ -275,6 +276,14 @@ main {
 }
 .main__wrapper__sequence-input input:active {
   border: 3px solid #272e54;
+}
+.main__wrapper__sequence-input input.right {
+  outline: 1px solid lightgreen;
+  background-color: lightgreen;
+}
+.main__wrapper__sequence-input input.wrong {
+  outline: 1px solid #da2424;
+  background-color: #da2424;
 }
 .main__wrapper__sequence.pos-start {
   transform: translateY(0);
@@ -325,9 +334,14 @@ main {
   font-size: 30px;
   font-weight: 900;
   cursor: pointer;
+  transition: 0.3s all;
 }
 .main__wrapper__start:hover, .main__wrapper__restart:hover, .main__wrapper__repeat:hover, .main__wrapper__next:hover {
   scale: 1.1;
+}
+.main__wrapper__start.active, .main__wrapper__restart.active, .main__wrapper__repeat.active, .main__wrapper__next.active {
+  scale: 1.1;
+  background: lightgreen;
 }
 
 footer {
