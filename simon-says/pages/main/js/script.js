@@ -463,8 +463,31 @@ function highlightAndTypeKey(keyElement, key) {
     keyElement.classList.remove('pressed');
     if (key.length === 1) {
       input.value += key;
+      checkUserInput(key);
     }
   }, 300);
+}
+
+
+function checkUserInput(key) {
+  if (key !== generatedSequence[currentCharIndex]) {
+    console.log("You lose!")
+    //implement here call to get popup
+    return;
+  }
+
+  userInput += key;
+  currentCharIndex += 1;
+
+  if (userInput === generatedSequence) {
+    isRoundComplete = true;
+    nextButton.classList.remove("hidden");
+    console.log('Right!');
+    // add message of succeed typed word
+    if (round === 5) {
+      // finishGame(); - todo
+    }
+  }
 }
 
 
