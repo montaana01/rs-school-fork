@@ -476,7 +476,7 @@ function highlightAndTypeKey(keyElement, key) {
   setTimeout(() => {
     keyElement.classList.remove('pressed');
     if (key.length === 1) {
-      input.value += key;
+      input.value += key.toUpperCase();
       checkUserInput(key);
     }
   }, 300);
@@ -484,8 +484,10 @@ function highlightAndTypeKey(keyElement, key) {
 
 
 function checkUserInput(key) {
-  if (key !== generatedSequence[currentCharIndex]) {
-    lockElement(repeatButton,true);
+  if (key.toUpperCase() !== generatedSequence[currentCharIndex]) {
+    if (isRepeatUsed) {
+      lockElement(repeatButton,true);
+    }
     input.classList.add('wrong');
     isInputAllowed = false;
     document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
@@ -495,7 +497,7 @@ function checkUserInput(key) {
     return;
   }
 
-  userInput += key;
+  userInput += key.toUpperCase();
   currentCharIndex += 1;
 
   if (userInput === generatedSequence) {
