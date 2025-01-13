@@ -471,7 +471,8 @@ function highlightAndTypeKey(keyElement, key) {
 
 function checkUserInput(key) {
   if (key !== generatedSequence[currentCharIndex]) {
-    console.log("You lose!")
+    lockElement(repeatButton,true);
+    input.classList.add('wrong');
     //implement here call to get popup
     return;
   }
@@ -482,7 +483,13 @@ function checkUserInput(key) {
   if (userInput === generatedSequence) {
     isRoundComplete = true;
     nextButton.classList.remove("hidden");
-    console.log('Right!');
+    input.classList.add('right');
+    nextButton.classList.add("active");
+    setTimeout( () => {
+      input.classList.remove('right');
+      nextButton.classList.remove("active");
+    }, 1500);
+    lockElement(repeatButton);
     // add message of succeed typed word
     if (round === 5) {
       // finishGame(); - todo
