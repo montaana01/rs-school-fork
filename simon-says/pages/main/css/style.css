@@ -320,6 +320,9 @@ main {
   border: 2px solid #ffffff; /* Рамка */
   transition: background-color 0.3s ease, border 0.3s ease;
 }
+.main__wrapper__keyboard-key.disabled:active {
+  background: rgba(255, 255, 255, 0.5);
+}
 .main__wrapper__keyboard.pos-start {
   transform: translateY(0);
 }

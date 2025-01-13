@@ -457,6 +457,9 @@ function highlightAndTypeKey(keyElement, key) {
   document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
     item.classList.remove('pressed');
   });
+  document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
+    item.classList.remove('disabled');
+  });
 
   keyElement.classList.add('pressed');
   setTimeout(() => {
@@ -473,7 +476,11 @@ function checkUserInput(key) {
   if (key !== generatedSequence[currentCharIndex]) {
     lockElement(repeatButton,true);
     input.classList.add('wrong');
-    //implement here call to get popup
+    isInputAllowed = false;
+    document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
+      item.classList.add('disabled');
+    });
+    //implement here call to get popup todo
     return;
   }
 
@@ -482,6 +489,7 @@ function checkUserInput(key) {
 
   if (userInput === generatedSequence) {
     isRoundComplete = true;
+    isInputAllowed = false;
     nextButton.classList.remove("hidden");
     input.classList.add('right');
     nextButton.classList.add("active");
