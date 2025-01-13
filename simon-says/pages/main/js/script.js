@@ -238,13 +238,17 @@ restartButton.addEventListener("click", () => {
   if (isGameStarted && isInputAllowed) {
     round = 0;
     isGameStarted = false;
+    isInputAllowed = false;
+
     getRoundTable(isGameStarted);
     getMainSequence(isGameStarted);
     getKeyboard(isGameStarted);
+
     lockElement(startButton, false);
     lockElement(switcher, false);
     lockElement(switcherPoint, false);
-    lockElement(repeatButton, false)
+    lockElement(repeatButton, false);
+
     updateRoundTable(round);
     mainKeyboard.innerHTML = "";
     repeatButton.classList.add("hidden");
@@ -256,16 +260,22 @@ restartButton.addEventListener("click", () => {
 repeatButton.addEventListener("click", () => {
   if (!isRepeatUsed && isInputAllowed) {
     isRepeatUsed = true;
+    currentCharIndex = 0;
+    userInput = '';
+
     lockElement(repeatButton);
     simulateTyping(generatedSequence);
   }
-})
+});
 
 startButton.addEventListener("click", () => {
   if (!isGameStarted) {
     round = 1;
     isGameStarted = true;
     isRepeatUsed = false;
+    userInput = '';
+    currentCharIndex = 0;
+    generatedSequence = '';
 
     getRoundTable(isGameStarted);
     updateRoundTable(round);
@@ -310,7 +320,7 @@ startButton.addEventListener("click", () => {
 nextButton.addEventListener("click", () => {
   if (isRoundComplete) {
     round < 5 ? round += 1 : round = 0;
-    lockElement(repeatButton);
+    lockElement(repeatButton, false);
     isRepeatUsed = false
     userInput = '';
     currentCharIndex = 0;
