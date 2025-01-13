@@ -314,7 +314,7 @@ main {
 .main__wrapper__keyboard.pos-start {
   transform: translateY(0);
 }
-.main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat {
+.main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat, .main__wrapper__next {
   display: block;
   background: #74abff;
   height: 50px;
@@ -326,7 +326,7 @@ main {
   font-weight: 900;
   cursor: pointer;
 }
-.main__wrapper__start:hover, .main__wrapper__restart:hover, .main__wrapper__repeat:hover {
+.main__wrapper__start:hover, .main__wrapper__restart:hover, .main__wrapper__repeat:hover, .main__wrapper__next:hover {
   scale: 1.1;
 }
 
