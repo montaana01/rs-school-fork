@@ -374,6 +374,7 @@ function simulateTyping(sequence, interval = 300) {
     const ELEMENT = document.getElementById(`id-${CHAR}`);
     if (ELEMENT) {
       ELEMENT.classList.add('pressed');
+      task.textContent += CHAR;
       setTimeout(() => {
         ELEMENT.classList.remove('pressed');
       }, interval);
@@ -382,7 +383,17 @@ function simulateTyping(sequence, interval = 300) {
     index += 1;
   };
 
-  const typingTimer = setInterval(typingChar, interval);
+  const typingTimer = setInterval(() => {
+    if (index >= keys.length) {
+      clearInterval(typingTimer);
+      setTimeout(() => {
+        task.textContent = '';
+        isInputAllowed = true;
+      }, interval * 2);
+    } else {
+      typingChar();
+    }
+  }, interval);
 }
 
 /*
