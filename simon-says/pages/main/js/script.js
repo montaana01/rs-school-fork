@@ -267,7 +267,6 @@ startButton.addEventListener("click", () => {
     lockElement(startButton);
     lockElement(switcher);
     lockElement(switcherPoint);
-    simulateTyping(sequence);
 
     getMainSequence(isGameStarted);
     getKeyboard(isGameStarted);
@@ -345,12 +344,14 @@ footerWrapper.appendChild(footerRSSchool)
 * Generate sequence with needed params
 */
 function generateSequence(level, length = 2) {
+  input.value = '';
   const CHARS = level === 'easy' ? EASY_LEVEL : level === 'medium' ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
   let sequence = [];
   for (let i = 0; i < length; i += 1) {
     const RANDOM = Math.floor(Math.random() * CHARS.length);
     sequence.push(CHARS[RANDOM]);
   }
+  simulateTyping(sequence.join(''))
   return sequence.join('');
 }
 
