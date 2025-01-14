@@ -271,7 +271,7 @@ startButton.addEventListener("click", () => {
     getMainSequence(isGameStarted);
     getKeyboard(isGameStarted);
 
-    mainKeyboard.innerHTML = "";
+    mainKeyboard.textContent = "";
 
     switch (difficult) {
       case "easy":
@@ -525,7 +525,7 @@ function handleRestart() {
     document.querySelectorAll(".popup").forEach((element) => {
       element.remove();
     })
-    mainKeyboard.innerHTML = "";
+    mainKeyboard.textContent = "";
     input.classList.remove("wrong");
     input.classList.remove("right");
     nextButton.classList.remove("right");
