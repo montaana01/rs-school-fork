@@ -239,6 +239,7 @@ restartButton.addEventListener("click", handleRestart);
 
 repeatButton.addEventListener("click", () => {
   if (!isRepeatUsed && isButtonsAllowed) {
+    console.log(`isButtonsAllowed: ${isButtonsAllowed}`);
     isRepeatUsed = true;
     currentCharIndex = 0;
     userInput = "";
@@ -413,7 +414,9 @@ function simulateTyping(sequence, interval = 300) {
       setTimeout(() => {
         task.textContent = "";
         isInputAllowed = true;
-        lockElement(repeatButton, false);
+        if (!isRepeatUsed) {
+          lockElement(repeatButton, false);
+        }
         lockElement(restartButton, false);
         isElementsLocked = true;
         isButtonsAllowed = true;
@@ -577,7 +580,7 @@ function createPopUp(message) {
   popUpCross.addEventListener("click", () => {
     popUp.classList.add("hidden");
     mainWrapper.appendChild(restartButton);
-    lockElement(repeatButton, true);
+    lockElement(repeatButton, false);
   })
 
   popUp.appendChild(popUpWrapper);
