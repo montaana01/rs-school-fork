@@ -579,7 +579,7 @@ function createPopUp(message) {
   popUpCross.addEventListener("click", () => {
     popUp.classList.add("hidden");
     mainWrapper.appendChild(restartButton);
-    lockElement(repeatButton, false);
+    lockElement(repeatButton);
   })
 
   popUp.appendChild(popUpWrapper);
