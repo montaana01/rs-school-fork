@@ -239,7 +239,6 @@ restartButton.addEventListener("click", handleRestart);
 
 repeatButton.addEventListener("click", () => {
   if (!isRepeatUsed && isButtonsAllowed) {
-    console.log(`isButtonsAllowed: ${isButtonsAllowed}`);
     isRepeatUsed = true;
     currentCharIndex = 0;
     userInput = "";
@@ -580,7 +579,7 @@ function createPopUp(message) {
   popUpCross.addEventListener("click", () => {
     popUp.classList.add("hidden");
     mainWrapper.appendChild(restartButton);
-    lockElement(repeatButton, false);
+    lockElement(repeatButton);
   })
 
   popUp.appendChild(popUpWrapper);
