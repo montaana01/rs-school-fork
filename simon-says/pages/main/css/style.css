@@ -456,34 +456,114 @@ footer {
   padding-top: 40px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1360px) {
   main {
-    min-height: calc(100vh - 100px);
-    padding: 0 0 10px 0;
+    min-height: calc(100vh - 160px);
   }
   .container {
-    max-width: 100%;
-    padding: 0 10px;
+    max-width: 1080px;
+    padding: 0 40px;
   }
   .header__wrapper {
-    height: 60px;
+    height: 80px;
   }
   .header__wrapper-item {
-    width: 100px;
+    width: 150px;
   }
   .header__wrapper-item img {
-    height: 50px;
+    height: 80px;
     float: left;
   }
-  .header__wrapper-item__central {
-    height: 30px;
-    line-height: 30px;
-  }
   .header__wrapper-item__central h3, .header__wrapper-item__central h4 {
-    font-size: 18px;
+    font-size: 26px;
   }
   .header__wrapper-item__switcher {
     margin-top: 10px;
+  }
+  .header__wrapper-item__switcher__area {
+    width: 75px;
+    height: 25px;
+    border-radius: 25px;
+  }
+  .header__wrapper-item__switcher__point {
+    width: 25px;
+    height: 25px;
+  }
+  .header__wrapper-item__switcher__point.pos1 {
+    left: 25px;
+  }
+  .header__wrapper-item__switcher__point.pos2 {
+    left: 50px;
+  }
+  .main__wrapper {
+    row-gap: 40px;
+    column-gap: 40px;
+  }
+  .main__wrapper__sequence {
+    margin: 0 200px;
+  }
+  .main__wrapper__sequence-task h2 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .main__wrapper__sequence-task p {
+    line-height: 30px;
+  }
+  .main__wrapper__sequence-input {
+    width: 70%;
+  }
+  .main__wrapper__sequence-input input {
+    padding: 2px;
+  }
+  .main__wrapper__keyboard {
+    width: 600px;
+    margin: 0 200px;
+  }
+  .main__wrapper__keyboard__chars, .main__wrapper__keyboard__numbers {
+    width: 100%;
+  }
+  .main__wrapper__keyboard-key {
+    width: 53px;
+  }
+  .main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat, .main__wrapper__next {
+    height: 40px;
+    font-size: 28px;
+    line-height: 33px;
+  }
+  .footer__wrapper {
+    height: 70px;
+    padding: 0 50px;
+  }
+  .footer__wrapper-item {
+    height: 50px;
+    font-size: 22px;
+  }
+  .footer__wrapper p {
+    padding-top: 25px;
+  }
+}
+@media (max-width: 1080px) {
+  main {
+    min-height: calc(100vh - 120px);
+  }
+  .container {
+    max-width: 750px;
+    padding: 0 40px;
+  }
+  .header__wrapper {
+    height: 70px;
+  }
+  .header__wrapper-item {
+    width: 150px;
+  }
+  .header__wrapper-item img {
+    height: 70px;
+    float: left;
+  }
+  .header__wrapper-item__central h3, .header__wrapper-item__central h4 {
+    font-size: 22px;
+  }
+  .header__wrapper-item__switcher {
     row-gap: 5px;
   }
   .header__wrapper-item__switcher__area {
@@ -502,8 +582,8 @@ footer {
     left: 40px;
   }
   .header__wrapper-item__switcher__text {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 22px;
   }
   .main__wrapper {
     row-gap: 30px;
@@ -523,10 +603,6 @@ footer {
   .main__wrapper__sequence-input {
     width: 100%;
   }
-  .main__wrapper__sequence-input input {
-    font-size: 25px;
-    padding: 2px;
-  }
   .main__wrapper__keyboard {
     width: 100%;
     margin: 0;
@@ -536,16 +612,53 @@ footer {
   }
   .main__wrapper__keyboard-key {
     width: calc(10% - 7px);
-    font-size: 25px;
   }
   .main__wrapper__start, .main__wrapper__restart, .main__wrapper__repeat, .main__wrapper__next {
     height: 35px;
-    font-size: 28px;
-    line-height: 33px;
+  }
+  .footer__wrapper {
+    height: 50px;
+    padding: 0 30px;
+  }
+  .footer__wrapper-item {
+    height: 35px;
+    font-size: 18px;
+  }
+  .footer__wrapper p {
+    padding-top: 15px;
+  }
+}
+@media (max-width: 768px) {
+  main {
+    min-height: calc(100vh - 100px);
+    padding: 0 0 10px 0;
+  }
+  .container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  .header__wrapper {
+    height: 60px;
+  }
+  .header__wrapper-item {
+    width: 100px;
+  }
+  .header__wrapper-item img {
+    height: 50px;
+  }
+  .header__wrapper-item__central {
+    height: 30px;
+    line-height: 30px;
+  }
+  .header__wrapper-item__central h3, .header__wrapper-item__central h4 {
+    font-size: 18px;
+  }
+  .header__wrapper-item__switcher__text {
+    font-size: 16px;
+    line-height: 20px;
   }
   .footer__wrapper {
     height: 40px;
-    padding: 0 30px;
   }
   .footer__wrapper-item {
     height: 30px;
