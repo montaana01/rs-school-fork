@@ -239,7 +239,6 @@ restartButton.addEventListener("click", handleRestart);
 
 repeatButton.addEventListener("click", () => {
   if (!isRepeatUsed && isButtonsAllowed) {
-    console.log(`isButtonsAllowed: ${isButtonsAllowed}`);
     isRepeatUsed = true;
     currentCharIndex = 0;
     userInput = "";
