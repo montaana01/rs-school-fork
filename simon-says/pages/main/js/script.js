@@ -1,20 +1,21 @@
 const GAME_NAME = "Simon says";
 
 const EASY_LEVEL = [
-  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
+  "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
 ];
 const MEDIUM_LEVEL = [
   "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
   "A", "S", "D", "F", "G", "H", "J", "K", "L",
-  "Z", "X", "C", "V", "B", "N", "M"
+  "Z", "X", "C", "V", "B", "N", "M",
 ];
 
 let round = 0;
 let isGameStarted = false;
 let isRepeatUsed = false;
 let isInputAllowed = false;
-let generatedSequence = '';
-let userInput = '';
+let isButtonsAllowed = false;
+let generatedSequence = "";
+let userInput = "";
 let currentCharIndex = 0;
 let isRoundComplete = false;
 
@@ -25,7 +26,7 @@ let isElementsLocked = false;
 
 function lockElement(element, lock = true) {
   isElementsLocked = lock;
-  lock ? element.classList.add('locked') : element.classList.remove('locked');
+  lock ? element.classList.add("locked") : element.classList.remove("locked");
   lock ? element.disabled : element.enable;
 }
 
@@ -57,7 +58,7 @@ const headerTitle = headerWrapper.appendChild(document.createElement("div"));
 const headerSwitcher = headerWrapper.appendChild(document.createElement("div"));
 
 headerWrapper.childNodes.forEach((item) => {
-  item.classList.add("header__wrapper-item")
+  item.classList.add("header__wrapper-item");
 })
 
 // logo part
@@ -79,17 +80,17 @@ headerLogo.appendChild(logoImage);
 let centralHeader = document.createElement("div");
 centralHeader.classList.add("header__wrapper-item__central");
 centralHeader.appendChild(document.createElement("h3"));
-centralHeader.querySelector('h3').textContent = "round";
+centralHeader.querySelector("h3").textContent = "round";
 centralHeader.appendChild(document.createElement("h4"));
-centralHeader.querySelector('h4').textContent = "1\n2\n3\n4\n5";
+centralHeader.querySelector("h4").textContent = "1\n2\n3\n4\n5";
 
 function getRoundTable(isGameStarted) {
   return isGameStarted ? centralHeader.classList.toggle("pos-start") : centralHeader.classList.toggle("pos-start");
 }
 
 function updateRoundTable(round) {
-  centralHeader.querySelector('h4').className = '';
-  centralHeader.querySelector('h4').classList.add(`num${round}`)
+  centralHeader.querySelector("h4").className = "";
+  centralHeader.querySelector("h4").classList.add(`num${round}`);
 }
 
 headerTitle.appendChild(centralHeader);
@@ -111,7 +112,7 @@ switcherText.className = "header__wrapper-item__switcher__text";
 switcher.appendChild(switcherArea);
 switcher.appendChild(switcherText);
 
-const levels = ['easy', 'medium', 'hard'];
+const levels = ["easy", "medium", "hard"];
 let currentLevel = 0;
 
 function updateSwitcher() {
@@ -123,7 +124,7 @@ function updateSwitcher() {
   switcherText.textContent = difficult;
 }
 
-switcherPoint.addEventListener('click', () => {
+switcherPoint.addEventListener("click", () => {
   if (isElementsLocked) return;
   currentLevel = (currentLevel + 1) % levels.length;
   updateSwitcher();
@@ -153,7 +154,7 @@ let sequenceBox = document.createElement("div");
 sequenceBox.classList.add("main__wrapper__sequence-task");
 
 let h2 = document.createElement("h2");
-h2.textContent = 'Sequence to repeat:';
+h2.textContent = "Sequence to repeat:";
 sequenceBox.appendChild(h2);
 
 let task = document.createElement("p");
@@ -219,49 +220,29 @@ let startButton = mainWrapper.appendChild(document.createElement("button"));
 startButton.textContent = "Start";
 startButton.classList.add("main__wrapper__start");
 
+let restartButton = mainWrapper.appendChild(document.createElement("button"));
+restartButton.textContent = "New Game";
+restartButton.classList.add("main__wrapper__restart");
+restartButton.classList.add("hidden");
+
 let repeatButton = mainWrapper.appendChild(document.createElement("button"));
 repeatButton.textContent = "Repeat";
 repeatButton.classList.add("main__wrapper__repeat");
 repeatButton.classList.add("hidden");
-
-let restartButton = mainWrapper.appendChild(document.createElement("button"));
-restartButton.textContent = "Restart";
-restartButton.classList.add("main__wrapper__restart");
-restartButton.classList.add("hidden");
 
 let nextButton = mainWrapper.appendChild(document.createElement("button"));
 nextButton.textContent = "Next";
 nextButton.classList.add("main__wrapper__next");
 nextButton.classList.add("hidden");
 
-restartButton.addEventListener("click", () => {
-  if (isGameStarted && isInputAllowed) {
-    round = 0;
-    isGameStarted = false;
-    isInputAllowed = false;
-
-    getRoundTable(isGameStarted);
-    getMainSequence(isGameStarted);
-    getKeyboard(isGameStarted);
-
-    lockElement(startButton, false);
-    lockElement(switcher, false);
-    lockElement(switcherPoint, false);
-    lockElement(repeatButton, false);
-
-    updateRoundTable(round);
-    mainKeyboard.innerHTML = "";
-    repeatButton.classList.add("hidden");
-    restartButton.classList.add("hidden");
-    startButton.classList.remove("hidden");
-  }
-});
+restartButton.addEventListener("click", handleRestart);
 
 repeatButton.addEventListener("click", () => {
-  if (!isRepeatUsed && isInputAllowed) {
+  if (!isRepeatUsed && isButtonsAllowed) {
     isRepeatUsed = true;
     currentCharIndex = 0;
-    userInput = '';
+    userInput = "";
+    input.classList.remove("wrong");
 
     lockElement(repeatButton);
     simulateTyping(generatedSequence);
@@ -272,10 +253,12 @@ startButton.addEventListener("click", () => {
   if (!isGameStarted) {
     round = 1;
     isGameStarted = true;
+    isButtonsAllowed = true;
     isRepeatUsed = false;
-    userInput = '';
+    userInput = "";
     currentCharIndex = 0;
-    generatedSequence = '';
+    generatedSequence = "";
+    input.classList.remove("wrong");
 
     getRoundTable(isGameStarted);
     updateRoundTable(round);
@@ -314,6 +297,9 @@ startButton.addEventListener("click", () => {
     restartButton.classList.remove("hidden");
     repeatButton.classList.remove("hidden");
     nextButton.classList.add("hidden");
+    document.querySelectorAll(".popup").forEach((element) => {
+      element.remove();
+    })
   }
 });
 
@@ -321,11 +307,12 @@ nextButton.addEventListener("click", () => {
   if (isRoundComplete) {
     round < 5 ? round += 1 : round = 0;
     lockElement(repeatButton, false);
-    isRepeatUsed = false
-    userInput = '';
+    isRepeatUsed = false;
+    userInput = "";
     currentCharIndex = 0;
     generatedSequence = generateSequence(difficult, round * 2);
     updateRoundTable(round);
+    repeatButton.classList.remove("hidden");
     nextButton.classList.add("hidden");
   }
 });
@@ -375,14 +362,14 @@ footerWrapper.appendChild(footerRSSchool)
 * Generate sequence with needed params
 */
 function generateSequence(level, length = 2) {
-  const CHARS = level === 'easy' ? EASY_LEVEL : level === 'medium' ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
+  const CHARS = level === "easy" ? EASY_LEVEL : level === "medium" ? MEDIUM_LEVEL : EASY_LEVEL.concat(MEDIUM_LEVEL);
   let sequence = [];
   for (let i = 0; i < length; i += 1) {
     const RANDOM = Math.floor(Math.random() * CHARS.length);
     sequence.push(CHARS[RANDOM]);
   }
-  simulateTyping(sequence.join(''))
-  return sequence.join('');
+  simulateTyping(sequence.join(""));
+  return sequence.join("");
 }
 
 /*
@@ -390,24 +377,30 @@ function generateSequence(level, length = 2) {
 */
 function simulateTyping(sequence, interval = 300) {
   isInputAllowed = false;
-  input.value = '';
-  const keys = sequence.split('');
+  isButtonsAllowed = false;
+
+  input.value = "";
+  const keys = sequence.split("");
   let index = 0;
+  lockElement(repeatButton);
+  lockElement(restartButton);
 
   const typingChar = () => {
     if (index >= keys.length) {
       clearInterval(typingTimer);
       isInputAllowed = true;
+      isButtonsAllowed = true;
+
       return;
     }
 
     const CHAR = keys[index];
     const ELEMENT = document.getElementById(`id-${CHAR}`);
     if (ELEMENT) {
-      ELEMENT.classList.add('pressed');
+      ELEMENT.classList.add("pressed");
       task.textContent += CHAR;
       setTimeout(() => {
-        ELEMENT.classList.remove('pressed');
+        ELEMENT.classList.remove("pressed");
       }, interval);
     }
 
@@ -418,8 +411,12 @@ function simulateTyping(sequence, interval = 300) {
     if (index >= keys.length) {
       clearInterval(typingTimer);
       setTimeout(() => {
-        task.textContent = '';
+        task.textContent = "";
         isInputAllowed = true;
+        lockElement(repeatButton, false);
+        lockElement(restartButton, false);
+        isElementsLocked = true;
+        isButtonsAllowed = true;
       }, interval * 2);
     } else {
       typingChar();
@@ -433,7 +430,7 @@ function simulateTyping(sequence, interval = 300) {
 mainKeyboard.addEventListener("click", (event) => {
   if (!isInputAllowed) return;
 
-  const ELEMENT = event.target.closest('.main__wrapper__keyboard-key');
+  const ELEMENT = event.target.closest(".main__wrapper__keyboard-key");
   if (!ELEMENT) return;
 
   const key = ELEMENT.textContent.trim();
@@ -454,42 +451,138 @@ document.addEventListener("keydown", (event) => {
 * Highlight char
 */
 function highlightAndTypeKey(keyElement, key) {
-  document.querySelectorAll('.main__wrapper__keyboard-key').forEach((item) => {
-    item.classList.remove('pressed');
+  document.querySelectorAll(".main__wrapper__keyboard-key").forEach((item) => {
+    item.classList.remove("pressed", "disable");
   });
 
-  keyElement.classList.add('pressed');
+  keyElement.classList.add("pressed");
+
+  checkUserInput(key);
   setTimeout(() => {
-    keyElement.classList.remove('pressed');
+    keyElement.classList.remove("pressed");
     if (key.length === 1) {
-      input.value += key;
-      checkUserInput(key);
+      input.value += key.toUpperCase();
     }
   }, 300);
 }
 
 
 function checkUserInput(key) {
-  if (key !== generatedSequence[currentCharIndex]) {
-    console.log("You lose!")
-    //implement here call to get popup
+  if (key.toUpperCase() !== generatedSequence[currentCharIndex]) {
+    if (isRepeatUsed) {
+      lockElement(repeatButton, true);
+    }
+    input.classList.add("wrong");
+    isInputAllowed = false;
+    document.querySelectorAll(".main__wrapper__keyboard-key").forEach((item) => {
+      item.classList.add("disabled");
+    });
     return;
   }
 
-  userInput += key;
+  userInput += key.toUpperCase();
   currentCharIndex += 1;
 
   if (userInput === generatedSequence) {
     isRoundComplete = true;
-    nextButton.classList.remove("hidden");
-    console.log('Right!');
-    // add message of succeed typed word
+    isInputAllowed = false;
+    input.classList.add("right");
     if (round === 5) {
-      // finishGame(); - todo
+      finishGame();
+    } else {
+      repeatButton.classList.add("hidden");
+      nextButton.classList.remove("hidden");
+      nextButton.classList.add("active");
+      setTimeout(() => {
+        input.classList.remove("right");
+        nextButton.classList.remove("active");
+      }, 1500);
+      lockElement(repeatButton);
     }
   }
 }
 
+function handleRestart() {
+  if (isGameStarted && isButtonsAllowed) {
+    round = 0;
+    isGameStarted = false;
+    isInputAllowed = false;
+    isButtonsAllowed = false;
+
+    getRoundTable(isGameStarted);
+    getMainSequence(isGameStarted);
+    getKeyboard(isGameStarted);
+
+    lockElement(startButton, false);
+    lockElement(switcher, false);
+    lockElement(switcherPoint, false);
+    lockElement(repeatButton, false);
+    lockElement(nextButton, false);
+
+    updateRoundTable(round);
+    document.querySelectorAll(".popup").forEach((element) => {
+      element.remove();
+    })
+    mainKeyboard.innerHTML = "";
+    input.classList.remove("wrong");
+    input.classList.remove("right");
+    nextButton.classList.remove("right");
+    startButton.classList.remove("hidden");
+    repeatButton.classList.add("hidden");
+    restartButton.classList.add("hidden");
+    nextButton.classList.add("hidden");
+  }
+}
+
+function finishGame() {
+  isRepeatUsed = true;
+  isInputAllowed = false;
+  lockElement(switcher);
+  lockElement(switcherPoint);
+  lockElement(repeatButton);
+  lockElement(nextButton);
+
+  createPopUp(`Congratulations! You win! Do you want play one more time?`);
+}
+
+function createPopUp(message) {
+  let popUp = document.createElement("div");
+  popUp.className = "popup";
+  let popUpWrapper = document.createElement("div");
+  popUpWrapper.className = "popup__wrapper";
+  let popUpMessage = document.createElement("div");
+  popUpMessage.className = "popup__wrapper__message";
+
+  let popUpCross = document.createElement("div");
+  popUpCross.className = "popup__wrapper__cross";
+  for (let i = 0; i < 2; i++) {
+    popUpCross.appendChild(document.createElement("span"));
+  }
+  popUpWrapper.appendChild(popUpCross);
+
+  popUpMessage.textContent = message;
+  popUpWrapper.appendChild(popUpMessage);
+
+  isButtonsAllowed = true;
+
+  let popUpRestartButton = document.createElement("button");
+  popUpWrapper.appendChild(popUpRestartButton);
+  popUpRestartButton.textContent = "New Game";
+  popUpRestartButton.classList.add("popup__wrapper__new-game");
+
+  popUpRestartButton.addEventListener("click", handleRestart);
+
+  popUpWrapper.appendChild(popUpRestartButton);
+
+  popUpCross.addEventListener("click", () => {
+    popUp.classList.add("hidden");
+    mainWrapper.appendChild(restartButton);
+    lockElement(repeatButton, false);
+  })
+
+  popUp.appendChild(popUpWrapper);
+  BODY.appendChild(popUp);
+}
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +
