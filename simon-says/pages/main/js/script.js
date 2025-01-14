@@ -321,6 +321,9 @@ startButton.addEventListener("click", () => {
     restartButton.classList.remove("hidden");
     repeatButton.classList.remove("hidden");
     nextButton.classList.add("hidden");
+    document.querySelectorAll('.popup').forEach((element) => {
+      element.remove()
+    })
   }
 });
 
@@ -486,7 +489,7 @@ function highlightAndTypeKey(keyElement, key) {
 function checkUserInput(key) {
   if (key.toUpperCase() !== generatedSequence[currentCharIndex]) {
     if (isRepeatUsed) {
-      lockElement(repeatButton,true);
+      lockElement(repeatButton, true);
     }
     input.classList.add('wrong');
     isInputAllowed = false;
@@ -503,22 +506,103 @@ function checkUserInput(key) {
   if (userInput === generatedSequence) {
     isRoundComplete = true;
     isInputAllowed = false;
-    repeatButton.classList.add("hidden");
-    nextButton.classList.remove("hidden");
     input.classList.add('right');
-    nextButton.classList.add("active");
-    setTimeout( () => {
-      input.classList.remove('right');
-      nextButton.classList.remove("active");
-    }, 1500);
-    lockElement(repeatButton);
-    // add message of succeed typed word
     if (round === 5) {
-      // finishGame(); - todo
+      finishGame();
+    } else {
+      repeatButton.classList.add("hidden");
+      nextButton.classList.remove("hidden");
+      nextButton.classList.add("active");
+      setTimeout(() => {
+        input.classList.remove('right');
+        nextButton.classList.remove("active");
+      }, 1500);
+      lockElement(repeatButton);
     }
   }
 }
 
+function handleRestart() {
+  if (isGameStarted && isButtonsAllowed) {
+    round = 0;
+    isGameStarted = false;
+    isInputAllowed = false;
+    isButtonsAllowed = false;
+
+    getRoundTable(isGameStarted);
+    getMainSequence(isGameStarted);
+    getKeyboard(isGameStarted);
+
+    lockElement(startButton, false);
+    lockElement(switcher, false);
+    lockElement(switcherPoint, false);
+    lockElement(repeatButton, false);
+    lockElement(nextButton, false);
+
+    updateRoundTable(round);
+    document.querySelectorAll('.popup').forEach((element) => {
+      element.remove()
+    })
+    mainKeyboard.innerHTML = "";
+    input.classList.remove('wrong');
+    input.classList.remove('right');
+    nextButton.classList.remove('right');
+    startButton.classList.remove("hidden");
+    repeatButton.classList.add("hidden");
+    restartButton.classList.add("hidden");
+    nextButton.classList.add("hidden");
+  }
+}
+
+function finishGame() {
+  isRepeatUsed = true;
+  isInputAllowed = false;
+  lockElement(switcher);
+  lockElement(switcherPoint);
+  lockElement(repeatButton);
+  lockElement(nextButton);
+
+  createPopUp(`Congratulations! You win! Do you want play one more time?`);
+}
+
+function createPopUp(message) {
+  let popUp = document.createElement("div");
+  popUp.className = "popup";
+  let popUpWrapper = document.createElement("div");
+  popUpWrapper.className = "popup__wrapper";
+  let popUpMessage = document.createElement("div");
+  popUpMessage.className = "popup__wrapper__message";
+
+  let popUpCross = document.createElement("div");
+  popUpCross.className = "popup__wrapper__cross";
+  for (let i = 0; i < 2; i++) {
+    popUpCross.appendChild(document.createElement("span"))
+  }
+  popUpWrapper.appendChild(popUpCross);
+
+  popUpMessage.textContent = message;
+  popUpWrapper.appendChild(popUpMessage);
+
+  isButtonsAllowed = true;
+
+  let popUpRestartButton = document.createElement("button");
+  popUpWrapper.appendChild(popUpRestartButton);
+  popUpRestartButton.textContent = "New Game";
+  popUpRestartButton.classList.add("popup__wrapper__new-game");
+
+  popUpRestartButton.addEventListener("click", handleRestart);
+
+  popUpWrapper.appendChild(popUpRestartButton);
+
+  popUpCross.addEventListener("click", () => {
+    popUp.classList.add("hidden");
+    mainWrapper.appendChild(restartButton);
+    lockElement(repeatButton, false);
+  })
+
+  popUp.appendChild(popUpWrapper);
+  BODY.appendChild(popUp);
+}
 
 console.log("CrossCheck Criteria (150 points)\n" +
   "It is recommended to print the right answer for each round in the browser's console to facilitate the cross-check process.\n" +
