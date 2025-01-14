@@ -40,8 +40,8 @@ main {
 
 .container {
   margin: 0 auto;
-  max-width: 1280px;
-  padding: 0 40px;
+  max-width: $container-width;
+  padding: 0 $container-padding;
 }
 
 
@@ -49,6 +49,5 @@ main {
 @import "blocks/_main.scss";
 @import "blocks/_popup.scss";
 @import 'blocks/_footer.scss';
-
 
 @import 'base/_media.scss';

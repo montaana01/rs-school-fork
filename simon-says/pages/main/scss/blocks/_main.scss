@@ -13,7 +13,7 @@
       justify-content: flex-start;
       width: $keyboard-width;
       padding: 10px;
-      margin: 0 calc(($container-width - $keyboard-width) * 0.5);
+      margin: 0 calc(($container-width - $keyboard-width) * 0.5 - $container-padding);
       border: 3px solid rgba($main-color, 0.5);
       background-color: $main-color;
       border-radius: 10px;
@@ -95,7 +95,7 @@
       flex-wrap: wrap;
       justify-content: center;
       width: $keyboard-width;
-      margin: 0 calc(($container-width - $keyboard-width) * 0.5);
+      margin: 0 calc(($container-width - $keyboard-width) * 0.5 - $container-padding);
       row-gap: 5px;
       border: 3px solid $color;
       border-radius: 10px;
@@ -116,6 +116,7 @@
         &:active {
           background: rgba($color, 0.3);
         }
+
         &.pressed {
           background-color: $main-background-color; /* Цвет подсветки */
           border: 2px solid $color; /* Рамка */

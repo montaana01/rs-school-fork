@@ -1,11 +1,181 @@
-@media (max-width: 1190px) {
+@media (max-width: 1440px) {
 }
 
 @media (max-width: 768px) {
+  main {
+    min-height: calc(100vh - 100px);
+    padding: 0 0 10px 0;
+  }
+  $container-width: 100%;
+  $container-padding: 10px;
+  $keyboard-width: 100%;
+
   .container {
-    padding: 0 8px;
+    max-width: $container-width;
+    padding: 0 $container-padding;
+  }
+
+  .header {
+    &__wrapper {
+      height: 60px;
+
+      &-item {
+        width: 100px;
+
+        img {
+          height: 50px;
+          float: left;
+        }
+
+        &__central {
+          height: 30px;
+          line-height: 30px;
+
+          h3, h4 {
+            font-size: 18px;
+          }
+        }
+
+        &__switcher {
+          margin-top: 10px;
+          row-gap: 5px;
+
+          &__area {
+            width: 60px;
+            height: 20px;
+            border-radius: 20px;
+          }
+
+          &__point {
+            width: 20px;
+            height: 20px;
+
+            &.pos1 {
+              left: 20px;
+            }
+
+            &.pos2 {
+              left: 40px;
+            }
+          }
+
+          &__text {
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    &__wrapper {
+      row-gap: 30px;
+      column-gap: 30px;
+
+      &__sequence {
+        margin: 0;
+
+        &-task {
+
+          h2 {
+            font-size: 23px;
+            line-height: 26px;
+          }
+
+          p {
+            line-height: 26px;
+            font-size: 32px;
+          }
+        }
+
+        &-input {
+          width: 100%;
+
+          input {
+            font-size: 25px;
+            padding: 2px;
+          }
+        }
+      }
+
+      &__keyboard {
+        width: $keyboard-width;
+        margin: 0;
+
+        &__chars, &__numbers {
+          width: 100%;
+        }
+
+        &-key {
+          width: calc(($keyboard-width) / 10 - 7px);
+          font-size: 25px;
+        }
+      }
+
+      &__start, &__restart, &__repeat, &__next {
+        height: 35px;
+        font-size: 28px;
+        line-height: 33px;
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 40px;
+      padding: 0 30px;
+
+      &-item {
+        height: 30px;
+        font-size: 14px;
+      }
+
+      p {
+        padding-top: 10px;
+      }
+    }
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 460px) {
+  .main {
+    &__wrapper {
+      &__sequence {
+        &-task {
+          h2 {
+            font-size: 14px;
+            line-height: 20px;
+          }
+
+          p {
+            line-height: 20px;
+            font-size: 22px;
+          }
+        }
+
+        &-input {
+          width: 100%;
+
+          input {
+            font-size: 20px;
+          }
+        }
+      }
+
+      &__keyboard {
+        &-key {
+          height: 30px;
+          font-size: 18px;
+        }
+
+      }
+
+      &__start, &__restart, &__repeat, &__next {
+        height: 35px;
+        font-size: 24px;
+        line-height: 33px;
+      }
+    }
+  }
 }
