@@ -1,3 +1,15 @@
+import { Nonograms } from "./components/Nonograms.js";
+
+let difficult = "easy";
+
+const game = new Nonograms(difficult);
+
+game.start();
+
+game.pause();
+
+game.finish();
+
 console.log('Maximum score for the task: 250 points\n' +
   '\n' +
   'Basic scope +80 points\n' +
