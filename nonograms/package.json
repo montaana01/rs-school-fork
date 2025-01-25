@@ -1,0 +1,41 @@
+{
+  "name": "nonograms",
+  "version": "0.1.0",
+  "description": "Task of RSSchool FE 2024/2025",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "fix:all": "npm run lint:fix && npm run format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/montaana01-JSFE2024Q4.git"
+  },
+  "keywords": [
+    "Nonograms",
+    "javascript",
+    "OOP",
+    "Game",
+    "Alghorythm",
+    "JS",
+    "ES6"
+  ],
+  "author": "yakovlevdev",
+  "license": "ISC",
+  "homepage": "https://github.com/rolling-scopes-school/montaana01-JSFE2024Q4/nonograms/pages/main/",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-html": "^8.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2"
+  }
+}
