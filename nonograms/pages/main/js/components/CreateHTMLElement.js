@@ -1,7 +1,5 @@
-export class CreateHTMLElement extends HTMLElement {
+export class CreateHTMLElement {
   constructor(tag, options = {}) {
-    super();
-
     this.element = document.createElement(tag);
 
     if (options.attributes) {
