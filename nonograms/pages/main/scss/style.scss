@@ -1,6 +1,6 @@
-@import 'base/_fonts.scss';
-@import 'base/_variables.scss';
-@import 'base/_assets.scss';
+@import "base/_fonts.scss";
+@import "base/_variables.scss";
+@import "base/_assets.scss";
 
 html {
   scroll-behavior: smooth;
@@ -29,6 +29,6 @@ html {
   padding: 0 40px;
 }
 
-@import 'blocks/_header.scss';
-@import 'blocks/_footer.scss';
-@import 'base/_media.scss';
+@import "blocks/_header.scss";
+@import "blocks/_footer.scss";
+@import "base/_media.scss";
