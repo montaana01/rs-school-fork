@@ -1,3 +1,5 @@
+import { Header } from "./html/Header.js";
+
 export class Nonograms {
   constructor(difficult) {
     this.difficult = difficult;
@@ -5,16 +7,15 @@ export class Nonograms {
 
   start() {
     //here some code for starting game
-    console.log(`Starting nonograms with difficult "${this.difficult}"`);
+    const header = new Header();
+    document.body.appendChild(header.getElement());
   }
 
   pause() {
     //here code for pause
-    console.log("Paused nonograms");
   }
 
   finish() {
     //here call to finish screen with stats
-    console.log("Finished nonograms");
   }
 }
