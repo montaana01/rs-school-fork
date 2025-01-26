@@ -1,4 +1,5 @@
 import { Header } from "./html/Header.js";
+import { Footer } from "./html/Footer.js";
 
 export class Nonograms {
   constructor(difficult) {
@@ -7,8 +8,11 @@ export class Nonograms {
 
   start() {
     //here some code for starting game
+    const SCRIPT = document.body.querySelector("script");
     const header = new Header();
-    document.body.appendChild(header.getElement());
+    const footer = new Footer();
+    SCRIPT.before(header.getElement());
+    SCRIPT.before(footer.getElement());
   }
 
   pause() {
