@@ -1,3 +1,21 @@
+footer {
+  background-color: var(--footer-bg-color);
+}
+
 .footer {
-  //
+  &__wrapper {
+    height: 70px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-item {
+      height: 60px;
+      font-size: 18px;
+    }
+    p {
+      padding-top: 50px;
+    }
+  }
 }
