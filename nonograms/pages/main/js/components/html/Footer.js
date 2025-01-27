@@ -21,7 +21,7 @@ export class Footer {
       },
     });
     FOOTER_GITHUB.updateClass("footer__wrapper-item link");
-    FOOTER_GITHUB.onclick = function () {
+    FOOTER_GITHUB.element.onclick = () => {
       window.open("https://github.com/montaana01", "_blank");
     };
 
@@ -39,7 +39,7 @@ export class Footer {
       },
     });
     FOOTER_RSS.updateClass("footer__wrapper-item link");
-    FOOTER_RSS.onclick = function () {
+    FOOTER_RSS.element.onclick = () => {
       window.open("https://rs.school", "_blank");
     };
 
