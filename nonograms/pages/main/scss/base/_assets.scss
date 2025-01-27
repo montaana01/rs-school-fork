@@ -1,1 +1,28 @@
-//
+body.light {
+  --bg-color: #e9f1ff;
+  --footer-bg-color: #67d7ff;
+  --text-color: #000000;
+}
+
+body.dark {
+  --bg-color: #1d2727;
+  --footer-bg-color: #00d8d8;
+  --text-color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+
+  span {
+    display: none;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}

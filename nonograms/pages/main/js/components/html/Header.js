@@ -52,9 +52,22 @@ export class Header {
     });
 
     DIFFICULT.appendChildTo(HEADER_WRAPPER.element);
+
+    this.THEME = new CreateHTMLElement("button", {
+      className: "header__wrapper__difficulty-selector",
+      content: "Theme",
+      attributes: {
+        id: "theme-switcher",
+      },
+    });
+    this.THEME.appendChildTo(HEADER_WRAPPER.element);
   }
 
   getElement() {
     return this.headerElement.element;
+  }
+
+  getThemeSwitcher() {
+    return this.THEME.element;
   }
 }

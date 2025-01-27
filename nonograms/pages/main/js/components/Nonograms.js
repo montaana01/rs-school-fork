@@ -1,5 +1,6 @@
 import { Header } from "./html/Header.js";
 import { Footer } from "./html/Footer.js";
+import { Theme } from "./Theme.js";
 
 export class Nonograms {
   constructor(difficult) {
@@ -13,6 +14,8 @@ export class Nonograms {
     const footer = new Footer();
     SCRIPT.before(header.getElement());
     SCRIPT.before(footer.getElement());
+    const THEME = new Theme(header.getThemeSwitcher());
+    THEME.init();
   }
 
   pause() {
