@@ -5,7 +5,7 @@ export class Footer {
     this.footerElement = new CreateHTMLElement("footer", options);
 
     const FOOTER_CONTAINER = new CreateHTMLElement("div", {
-      className: "footer__container",
+      className: "container",
     });
     FOOTER_CONTAINER.appendChildTo(this.footerElement.element);
 
@@ -14,9 +14,11 @@ export class Footer {
     });
     FOOTER_WRAPPER.appendChildTo(FOOTER_CONTAINER.element);
 
-    const FOOTER_GITHUB = new CreateHTMLElement("div", {
-      src: "./../../assets/icons/github.svg",
-      alt: "Github icon",
+    const FOOTER_GITHUB = new CreateHTMLElement("img", {
+      attributes: {
+        src: "./../../assets/icons/github.svg",
+        alt: "Github icon",
+      },
     });
     FOOTER_GITHUB.updateClass("footer__wrapper-item link");
     FOOTER_GITHUB.onclick = function () {
@@ -31,8 +33,10 @@ export class Footer {
     );
 
     const FOOTER_RSS = new CreateHTMLElement("img", {
-      src: "./../../assets/icons/rss-logo.svg",
-      alt: "Made in Rolling Scopes School",
+      attributes: {
+        src: "./../../assets/icons/rss-logo.svg",
+        alt: "Made in Rolling Scopes School",
+      },
     });
     FOOTER_RSS.updateClass("footer__wrapper-item link");
     FOOTER_RSS.onclick = function () {
