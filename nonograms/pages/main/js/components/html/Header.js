@@ -18,12 +18,12 @@ export class Header {
       className: "header__wrapper__logo",
     });
     const LOGO_IMG = new CreateHTMLElement("img", {
+      className: "header__wrapper__logo-img",
       attributes: {
         src: "./../../assets/icons/rss-logo.svg",
         alt: "Logo",
       },
     });
-    LOGO_IMG.updateClass("header__wrapper__logo-img");
     LOGO_IMG.appendChildTo(LOGO.element);
     LOGO.appendChildTo(HEADER_WRAPPER.element);
 

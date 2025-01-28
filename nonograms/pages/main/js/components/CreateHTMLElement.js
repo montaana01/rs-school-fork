@@ -31,7 +31,7 @@ export class CreateHTMLElement {
     this.element.textContent = newContent;
   }
 
-  updateClass(newClassName) {
-    this.element.className = newClassName;
+  updateClass(ClassName) {
+    this.element.className += ` ${ClassName}`;
   }
 }

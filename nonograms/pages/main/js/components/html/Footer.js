@@ -15,12 +15,13 @@ export class Footer {
     FOOTER_WRAPPER.appendChildTo(FOOTER_CONTAINER.element);
 
     const FOOTER_GITHUB = new CreateHTMLElement("img", {
+      className: "footer__wrapper-item",
       attributes: {
         src: "./../../assets/icons/github.svg",
         alt: "Github icon",
       },
     });
-    FOOTER_GITHUB.updateClass("footer__wrapper-item link");
+    FOOTER_GITHUB.updateClass("link");
     FOOTER_GITHUB.element.onclick = () => {
       window.open("https://github.com/montaana01", "_blank");
     };
@@ -33,12 +34,13 @@ export class Footer {
     );
 
     const FOOTER_RSS = new CreateHTMLElement("img", {
+      className: "footer__wrapper-item",
       attributes: {
         src: "./../../assets/icons/rss-logo.svg",
         alt: "Made in Rolling Scopes School",
       },
     });
-    FOOTER_RSS.updateClass("footer__wrapper-item link");
+    FOOTER_RSS.updateClass("link");
     FOOTER_RSS.element.onclick = () => {
       window.open("https://rs.school", "_blank");
     };
