@@ -31,7 +31,11 @@ export class CreateHTMLElement {
     this.element.textContent = newContent;
   }
 
-  updateClass(ClassName) {
-    this.element.className += ` ${ClassName}`;
+  updateClass(className) {
+    this.element.className += ` ${className}`;
+  }
+
+  toggleClass(className) {
+    this.element.classList.toggle(className);
   }
 }
