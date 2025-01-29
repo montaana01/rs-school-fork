@@ -1,3 +1,50 @@
+body.light {
+  --bg-color: #e9f1ff;
+  --footer-bg-color: #67d7ff;
+  --text-color: #000000;
+  --border-color: #000000;
+  --inverted-border-color: #ffffff;
+  --game-background: rgba(255, 255, 255, 0.5);
+  --cell-color: #000000;
+  --switcher-background: #000000;
+  --switcher-point: #ffd3d3;
+}
+
+body.dark {
+  --bg-color: #273434;
+  --footer-bg-color: #00d8d8;
+  --text-color: #ffffff;
+  --border-color: #ffffff;
+  --inverted-border-color: #000000;
+  --game-background: rgba(255, 255, 255, 0.01);
+  --cell-color: #ffffff;
+  --switcher-background: #ffffff;
+  --switcher-point: #fff9d3;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+a span {
+  display: none;
+}
+
+.link {
+  cursor: pointer;
+}
+.link:hover {
+  scale: 1.1;
+}
+
+.border-right {
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -5,6 +52,8 @@ html {
 * {
   margin: 0;
   box-sizing: border-box;
+  transition: background-color 0.6s ease-out, color 0.1s ease-out;
+  text-align: center;
 }
 * a {
   text-decoration: none;
@@ -16,8 +65,141 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+main {
+  min-height: calc(100vh - 170px);
+  padding: 30px 0;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1280px;
   padding: 0 40px;
+}
+
+.header__wrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__wrapper-item {
+  display: block;
+}
+.header__wrapper-item img {
+  display: block;
+  height: 80px;
+}
+.header__wrapper-item__switcher {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.header__wrapper-item__switcher__area {
+  position: relative;
+  width: 90px;
+  height: 30px;
+  border-radius: 30px;
+}
+.header__wrapper-item__switcher__icon {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 30px;
+  left: 0;
+  border-radius: 100%;
+  background-color: var(--switcher-background);
+  box-shadow: 0 2px 5px rgba(var(--switcher-background), 0.2);
+  cursor: pointer;
+}
+.header__wrapper-item__switcher__icon.light {
+  left: 30px;
+  background-color: var(--switcher-point);
+}
+.header__wrapper-item__switcher__icon.dark {
+  left: 60px;
+  background-color: var(--switcher-point);
+}
+.header__wrapper-item__switcher__icon:hover {
+  scale: 1.1;
+}
+
+.game__wrapper {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+}
+.game__wrapper__info {
+  background: #b1b1b1;
+}
+.game__wrapper__answers {
+  display: flex;
+  background: var(--game-background);
+  border: 2px solid var(--border-color);
+}
+.game__wrapper__answers-collection-column {
+  display: flex;
+  flex-direction: column;
+}
+.game__wrapper__answers-collection-row {
+  display: flex;
+}
+.game__wrapper__answers-row {
+  flex-direction: column;
+}
+.game__wrapper__answers-cell {
+  width: 30px;
+  height: 30px;
+  border: 0.5px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.game__wrapper__field {
+  border: 2px solid var(--border-color);
+  background: var(--game-background);
+}
+.game__wrapper__field-row {
+  display: flex;
+}
+.game__wrapper__field-cell {
+  width: 30px;
+  height: 30px;
+  border: 0.5px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.game__wrapper__field-cell.black {
+  border: 0.5px solid var(--inverted-border-color);
+  background-color: var(--cell-color);
+}
+
+footer {
+  background-color: var(--footer-bg-color);
+}
+
+.footer__wrapper {
+  height: 70px;
+  padding: 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__wrapper-item {
+  height: 60px;
+  font-size: 18px;
+}
+.footer__wrapper p {
+  padding-top: 40px;
 }

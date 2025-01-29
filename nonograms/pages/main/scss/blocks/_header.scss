@@ -1,3 +1,60 @@
 .header {
-  //
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-item {
+      display: block;
+
+      img {
+        display: block;
+        height: 80px;
+      }
+
+      &__switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 10px;
+
+        &__area {
+          position: relative;
+          width: 90px;
+          height: 30px;
+          border-radius: 30px;
+        }
+
+        &__icon {
+          position: absolute;
+          content: "";
+          width: 30px;
+          height: 30px;
+          left: 0;
+          border-radius: 100%;
+          background-color: var(--switcher-background);
+          box-shadow: 0 2px 5px rgba(var(--switcher-background), 0.2);
+          cursor: pointer;
+
+          &.light {
+            left: 30px;
+            background-color: var(--switcher-point);
+          }
+
+          &.dark {
+            left: 60px;
+            background-color: var(--switcher-point);
+          }
+
+          &:hover {
+            scale: 1.1;
+          }
+        }
+      }
+    }
+  }
 }

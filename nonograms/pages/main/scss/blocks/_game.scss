@@ -1,0 +1,59 @@
+.game {
+  &__wrapper {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+
+    &__info {
+      background: #b1b1b1;
+    }
+    &__answers {
+      display: flex;
+      background: var(--game-background);
+      border: 2px solid var(--border-color);
+      &-collection {
+        &-column {
+          display: flex;
+          flex-direction: column;
+        }
+        &-row {
+          display: flex;
+        }
+      }
+      &-row {
+        flex-direction: column;
+      }
+      &-cell {
+        width: 30px;
+        height: 30px;
+        border: 0.5px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    &__field {
+      border: 2px solid var(--border-color);
+      background: var(--game-background);
+
+      &-row {
+        display: flex;
+      }
+
+      &-cell {
+        width: 30px;
+        height: 30px;
+        border: 0.5px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &.black {
+          border: 0.5px solid var(--inverted-border-color);
+          background-color: var(--cell-color);
+        }
+      }
+    }
+  }
+}

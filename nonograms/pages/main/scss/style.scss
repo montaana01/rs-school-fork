@@ -9,6 +9,10 @@ html {
 * {
   margin: 0;
   box-sizing: border-box;
+  transition:
+    background-color 0.6s ease-out,
+    color 0.1s ease-out;
+  text-align: center;
 
   a {
     text-decoration: none;
@@ -23,6 +27,16 @@ html {
   }
 }
 
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+main {
+  min-height: calc(100vh - 170px);
+  padding: 30px 0;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1280px;
@@ -30,5 +44,6 @@ html {
 }
 
 @import "blocks/_header.scss";
+@import "blocks/_game.scss";
 @import "blocks/_footer.scss";
 @import "base/_media.scss";
