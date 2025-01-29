@@ -5,7 +5,7 @@ export class Header {
     this.headerElement = new CreateHTMLElement("header", options);
 
     const HEADER_CONTAINER = new CreateHTMLElement("div", {
-      className: "header__container",
+      className: "container",
     });
     HEADER_CONTAINER.appendChildTo(this.headerElement.element);
 
@@ -15,12 +15,12 @@ export class Header {
     HEADER_WRAPPER.appendChildTo(HEADER_CONTAINER.element);
 
     const LOGO = new CreateHTMLElement("div", {
-      className: "header__wrapper__logo",
+      className: "header__wrapper-item",
     });
     const LOGO_IMG = new CreateHTMLElement("img", {
       className: "header__wrapper__logo-img",
       attributes: {
-        src: "./../../assets/icons/rss-logo.svg",
+        src: "./../../assets/icons/nonograms-logo.svg",
         alt: "Logo",
       },
     });
@@ -28,7 +28,7 @@ export class Header {
     LOGO.appendChildTo(HEADER_WRAPPER.element);
 
     const RATING = new CreateHTMLElement("div", {
-      className: "header__wrapper__rating",
+      className: "header__wrapper-item",
     });
     const RATING_VALUE = new CreateHTMLElement("p", {
       id: "header__wrapper__rating-value",
@@ -38,7 +38,7 @@ export class Header {
     RATING.appendChildTo(HEADER_WRAPPER.element);
 
     const DIFFICULT = new CreateHTMLElement("div", {
-      className: "header__wrapper__difficult",
+      className: "header__wrapper-item",
     });
     const LEVELS = ["easy (5х5)", "medium (10х10)", "hard (15х15)"];
 
