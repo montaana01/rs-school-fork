@@ -2,12 +2,24 @@ body.light {
   --bg-color: #e9f1ff;
   --footer-bg-color: #67d7ff;
   --text-color: #000000;
+  --border-color: #000000;
+  --inverted-border-color: #ffffff;
+  --game-background: rgba(255, 255, 255, 0.5);
+  --cell-color: #000000;
+  --switcher-background: #000000;
+  --switcher-point: #ffd3d3;
 }
 
 body.dark {
-  --bg-color: #1d2727;
+  --bg-color: #273434;
   --footer-bg-color: #00d8d8;
   --text-color: #ffffff;
+  --border-color: #ffffff;
+  --inverted-border-color: #000000;
+  --game-background: rgba(255, 255, 255, 0.01);
+  --cell-color: #ffffff;
+  --switcher-background: #ffffff;
+  --switcher-point: #fff9d3;
 }
 
 a {
@@ -25,4 +37,12 @@ a {
   &:hover {
     scale: 1.1;
   }
+}
+
+.border-right {
+  border-right: 1px solid var(--border-color) !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-color) !important;
 }
