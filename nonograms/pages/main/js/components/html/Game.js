@@ -135,8 +135,20 @@ export class Game {
         if ((row + 1) % 5 === 0 && row !== this.size - 1) {
           cell.updateClass("border-bottom");
         }
+        cell.element.addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+        });
+        cell.element.addEventListener("mousedown", (e) => {
+          //todo maybe add checking solution?
+          if (e.button === 2) {
+            e.preventDefault();
+            cell.element.classList.remove("black");
+            cell.toggleClass("crossed");
+          }
+        });
         cell.element.addEventListener("click", () => {
           this.checkSolution();
+          cell.element.classList.remove("crossed");
           cell.toggleClass("black");
         });
         cell.appendChildTo(rowDiv.element);
@@ -181,6 +193,7 @@ export class Game {
 
   //todo write method that check your answer!!
   checkSolution() {
+    //todo add sound effect to advanced level
     // here some code
   }
 }

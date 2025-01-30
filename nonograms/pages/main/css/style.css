@@ -38,11 +38,11 @@ a span {
 }
 
 .border-right {
-  border-right: 1px solid var(--border-color) !important;
+  border-right: 1.5px solid var(--border-color) !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid var(--border-color) !important;
+  border-bottom: 1.5px solid var(--border-color) !important;
 }
 
 html {
@@ -183,6 +183,30 @@ main {
 .game__wrapper__field-cell.black {
   border: 0.5px solid var(--inverted-border-color);
   background-color: var(--cell-color);
+}
+.game__wrapper__field-cell.crossed {
+  transition: 0.6s all;
+  position: relative;
+}
+.game__wrapper__field-cell.crossed::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  height: 2px;
+  width: 100%;
+  background-color: var(--border-color);
+}
+.game__wrapper__field-cell.crossed::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  height: 2px;
+  width: 100%;
+  background-color: var(--border-color);
 }
 
 footer {
