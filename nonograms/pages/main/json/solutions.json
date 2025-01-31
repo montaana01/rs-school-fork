@@ -78,7 +78,6 @@
         "url": "umbrella-10.png"
       },
       {
-        //todo: check image!
         "name": "Carrot",
         "data": [
           [0, 0, 1, 0, 0, 0, 0, 1, 0, 0],

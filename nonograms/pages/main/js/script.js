@@ -3,7 +3,7 @@ import { Nonograms } from "./components/Nonograms.js";
 let solutions = null;
 //todo: create selector carousel for levels to remove this constants!
 const selectedDifficulty = "easy";
-const selectedTemplate = "House";
+const selectedTemplate = "Chessboard";
 
 fetch("./json/solutions.json")
   .then((response) => response.json())
