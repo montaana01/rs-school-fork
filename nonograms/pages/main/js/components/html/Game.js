@@ -6,6 +6,7 @@ export class Game {
     this.solution = solution;
     this.answersArray = [];
     this.answersCount = 0;
+    this.cellsArray = [];
     this.MAIN = new CreateHTMLElement("main");
     this.GRID = new CreateHTMLElement("section", { className: "game" });
     this.GRID.appendChildTo(this.MAIN.element);
@@ -121,14 +122,17 @@ export class Game {
   }
 
   renderField() {
+    this.cellsArray = [];
     for (let row = 0; row < this.size; row += 1) {
       const rowDiv = new CreateHTMLElement("div", {
         className: "game__wrapper__field-row",
       });
+      this.cellsArray[row] = [];
       for (let col = 0; col < this.size; col += 1) {
         const cell = new CreateHTMLElement("span", {
           className: "game__wrapper__field-cell",
         });
+        this.cellsArray[row][col] = cell.element;
         if ((col + 1) % 5 === 0 && col !== this.size - 1) {
           cell.updateClass("border-right");
         }
@@ -139,17 +143,17 @@ export class Game {
           e.preventDefault();
         });
         cell.element.addEventListener("mousedown", (e) => {
-          //todo maybe add checking solution?
           if (e.button === 2) {
             e.preventDefault();
             cell.element.classList.remove("black");
             cell.toggleClass("crossed");
+            this.checkSolution();
           }
         });
         cell.element.addEventListener("click", () => {
-          this.checkSolution();
           cell.element.classList.remove("crossed");
           cell.toggleClass("black");
+          this.checkSolution();
         });
         cell.appendChildTo(rowDiv.element);
       }
@@ -193,7 +197,26 @@ export class Game {
 
   //todo write method that check your answer!!
   checkSolution() {
-    //todo add sound effect to advanced level
-    // here some code
+    let isCorrect = true;
+
+    for (let row = 0; row < this.size; row++) {
+      for (let col = 0; col < this.size; col++) {
+        const cell = this.cellsArray[row][col];
+        const isBlack = cell.classList.contains("black");
+        const shouldBeBlack = this.solution[row][col] === 1;
+
+        if (isBlack !== shouldBeBlack) {
+          isCorrect = false;
+          //todo: add bad sound if all right answers get and solution doesn't done!
+        }
+      }
+    }
+
+    if (isCorrect) {
+      //todo add sound effect to advanced level
+      alert("You win!");
+    }
+
+    return isCorrect;
   }
 }
