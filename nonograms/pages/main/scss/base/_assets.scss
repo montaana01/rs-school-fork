@@ -6,8 +6,9 @@ body.light {
   --inverted-border-color: #ffffff;
   --game-background: rgba(255, 255, 255, 0.5);
   --cell-color: #000000;
-  --switcher-background: #000000;
+  --switcher-background: #868686;
   --switcher-point: #ffd3d3;
+  --switcher-active: #2196f3;
 }
 
 body.dark {
@@ -18,8 +19,9 @@ body.dark {
   --inverted-border-color: #000000;
   --game-background: rgba(255, 255, 255, 0.01);
   --cell-color: #ffffff;
-  --switcher-background: #ffffff;
+  --switcher-background: #e8e8e8;
   --switcher-point: #fff9d3;
+  --switcher-active: #2196f3;
 }
 
 a {
@@ -45,4 +47,18 @@ a {
 
 .border-bottom {
   border-bottom: 1.5px solid var(--border-color) !important;
+}
+
+.btn {
+  display: block;
+  height: 50px;
+  width: 90px;
+  color: var(--text-color);
+  background: var(--footer-bg-color);
+  border-radius: 10px;
+  border: 3px solid var(--text-color);
+  text-transform: uppercase;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s all;
 }
