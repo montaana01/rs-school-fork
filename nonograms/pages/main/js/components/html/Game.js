@@ -1,5 +1,6 @@
 import { CreateHTMLElement } from "./../CreateHTMLElement.js";
 import { Carousel } from "./Carousel.js";
+import { Popup } from "./Popup.js";
 
 export class Game {
   constructor(size = 5, solution = {}) {
@@ -220,7 +221,7 @@ export class Game {
 
     if (isCorrect) {
       //todo add sound effect to advanced level
-      alert("You win!");
+      this.showFinalMessage();
     }
 
     return isCorrect;
@@ -236,5 +237,13 @@ export class Game {
     this.carousel = new Carousel(solutions);
     this.carousel.getElement().appendChildTo(this.CAROUSEL_CONTAINER.element);
     return this.carousel;
+  }
+
+  showFinalMessage() {
+    const finalPopUp = new Popup(
+      "popup",
+      "Great! You have solved the nonogram!"
+    );
+    finalPopUp.getPopup().appendChildTo(this.MAIN.element);
   }
 }
