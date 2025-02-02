@@ -1,7 +1,8 @@
 import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { Carousel } from "./Carousel.js";
 
 export class Game {
-  constructor(size = 5, solution = []) {
+  constructor(size = 5, solution = {}) {
     this.size = size;
     this.solution = solution;
     this.answersArray = [];
@@ -15,6 +16,11 @@ export class Game {
       className: "container",
     });
     this.GRID_CONTAINER.appendChildTo(this.GRID.element);
+
+    this.CAROUSEL_CONTAINER = new CreateHTMLElement("div", {
+      className: "game__carousel",
+    });
+    this.CAROUSEL_CONTAINER.appendChildTo(this.GRID_CONTAINER.element);
 
     this.GRID_WRAPPER = new CreateHTMLElement("div", {
       className: "game__wrapper",
@@ -218,5 +224,17 @@ export class Game {
     }
 
     return isCorrect;
+  }
+
+  showCarousel(solutions) {
+    if (this.carousel) {
+      window.removeEventListener(
+        "difficultyUpdated",
+        this.carousel.updateCarousel
+      );
+    }
+    this.carousel = new Carousel(solutions);
+    this.carousel.getElement().appendChildTo(this.CAROUSEL_CONTAINER.element);
+    return this.carousel;
   }
 }

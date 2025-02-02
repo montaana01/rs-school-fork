@@ -33,8 +33,7 @@ export class Nonograms {
 
   initSolutions(solutions) {
     this.solutions = solutions;
-    //todo: implement carousel to game class
-    //this.currentGame.showCarousel(this.solutions);
+    this.currentGame.showCarousel(this.solutions);
   }
 
   start(difficult, levelName) {
