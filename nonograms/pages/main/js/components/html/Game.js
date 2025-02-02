@@ -236,6 +236,7 @@ export class Game {
   }
 
   startTimer() {
+    document.getElementById("restart-header").classList.remove("hidden");
     this.startTime = Date.now();
     this.isTimerRunning = true;
     this.timerInterval = setInterval(() => {

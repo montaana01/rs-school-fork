@@ -51,12 +51,15 @@ export class Popup {
 
     this.message.appendChildTo(this.content.element);
 
-    this.button = new CreateHTMLElement("button", {
+    this.restartButton = new CreateHTMLElement("button", {
       className: this.className + "__wrapper__content-button",
-      content: "repeat",
+      content: "restart",
+    });
+    this.restartButton.element.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("gameRestart"));
     });
 
-    this.button.appendChildTo(this.content.element);
+    this.restartButton.appendChildTo(this.content.element);
   }
 
   getPopup() {

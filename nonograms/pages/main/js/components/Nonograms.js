@@ -23,12 +23,14 @@ export class Nonograms {
     this.SCRIPT.before(this.footer.getElement());
     const THEME = new Theme(this.header.getThemeSwitcher());
     THEME.init();
-    window.addEventListener("gameStart", () =>
+    this.header.hideRestartButton();
+    window.addEventListener("gameStart", () => {
       this.start(
         localStorage.getItem("difficulty"),
         localStorage.getItem("currentLevel")
-      )
-    );
+      );
+    });
+    window.addEventListener("gameRestart", () => this.restart());
   }
 
   initSolutions(solutions) {
@@ -48,7 +50,13 @@ export class Nonograms {
     this.FOOTER.before(this.currentGame.render());
   }
 
-  finish() {
-    //here call to finish screen with stats
+  restart() {
+    if (this.currentGame) {
+      this.currentGame.stopTimer();
+      this.start(
+        localStorage.getItem("difficulty"),
+        localStorage.getItem("currentLevel")
+      );
+    }
   }
 }
