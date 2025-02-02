@@ -1,7 +1,13 @@
+body{
+  --popup-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  --close: #ff5f57;
+  --minimize: #febc2e;
+  --popup-button: #0071e3;
+}
 body.light {
   --bg-color: #e9f1ff;
   --footer-bg-color: #67d7ff;
-  --text-color: #000000;
+  --text-color: #1d1d1f;
   --border-color: #000000;
   --inverted-border-color: #ffffff;
   --game-background: rgba(255, 255, 255, 0.5);
@@ -9,13 +15,14 @@ body.light {
   --switcher-background: #868686;
   --switcher-point: #ffd3d3;
   --switcher-active: #2196f3;
-  --start-button: #4ce852;
+  --start-button: #28c940;
+  --popup-background: #ffffff;
 }
 
 body.dark {
   --bg-color: #273434;
   --footer-bg-color: #00d8d8;
-  --text-color: #ffffff;
+  --text-color: #f5f5f7;
   --border-color: #ffffff;
   --inverted-border-color: #000000;
   --game-background: rgba(255, 255, 255, 0.01);
@@ -23,7 +30,8 @@ body.dark {
   --switcher-background: #e8e8e8;
   --switcher-point: #fff9d3;
   --switcher-active: #2196f3;
-  --start-button: #1b591e;
+  --start-button: #219d31;
+  --popup-background: #242426ff;
 }
 
 a {
