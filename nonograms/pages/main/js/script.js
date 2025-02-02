@@ -1,23 +1,17 @@
 import { Nonograms } from "./components/Nonograms.js";
 
-let solutions = null;
-//todo: create selector carousel for levels to remove this constants!
-const selectedDifficulty = "easy";
-const selectedTemplate = "Chessboard";
+const GAME = new Nonograms();
+GAME.initUi();
 
 fetch("./json/solutions.json")
   .then((response) => response.json())
   .then((data) => {
-    solutions = data;
-    initGame();
+    GAME.initSolutions(data);
+    //todo: when app load show user message for 5 sec about game
+    //game.currentGame.showStartMessage(300);
   })
   // eslint-disable-next-line no-console
   .catch((error) => console.log(`Something went wrong: ${error}`));
-
-function initGame() {
-  const game = new Nonograms(solutions);
-  game.start(selectedDifficulty, selectedTemplate);
-}
 
 // eslint-disable-next-line no-console
 console.log(

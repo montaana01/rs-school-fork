@@ -4,31 +4,48 @@ import { Game } from "./html/Game.js";
 import { Theme } from "./Theme.js";
 
 export class Nonograms {
-  constructor(solutions) {
-    this.solutions = solutions;
+  constructor() {
+    this.solutions = null;
+    this.header = null;
+    this.footer = null;
     this.currentGame = null;
+    this.SCRIPT = document.body.querySelector("script");
+  }
+
+  initUi() {
+    localStorage.setItem("difficulty", "easy");
+    this.header = new Header();
+    this.footer = new Footer();
+    this.currentGame = new Game();
+
+    this.SCRIPT.before(this.header.getElement());
+    this.SCRIPT.before(this.currentGame.render());
+    this.SCRIPT.before(this.footer.getElement());
+    const THEME = new Theme(this.header.getThemeSwitcher());
+    THEME.init();
+    window.addEventListener("gameStart", () =>
+      this.start(
+        localStorage.getItem("difficulty"),
+        localStorage.getItem("currentLevel")
+      )
+    );
+  }
+
+  initSolutions(solutions) {
+    this.solutions = solutions;
+    this.currentGame.showCarousel(this.solutions);
   }
 
   start(difficult, levelName) {
+    if (this.currentGame && this.currentGame.MAIN.element.parentNode) {
+      this.currentGame.MAIN.element.remove();
+    }
     const template = this.solutions[difficult].templates.find(
       (template) => template.name === levelName
     );
     this.currentGame = new Game(this.solutions[difficult].size, template.data);
-
-    //here some code for starting game
-    const SCRIPT = document.body.querySelector("script");
-    const header = new Header();
-    const footer = new Footer();
-
-    SCRIPT.before(header.getElement());
-    SCRIPT.before(this.currentGame.render());
-    SCRIPT.before(footer.getElement());
-    const THEME = new Theme(header.getThemeSwitcher());
-    THEME.init();
-  }
-
-  pause() {
-    //here code for pause
+    this.FOOTER = document.body.querySelector("footer");
+    this.FOOTER.before(this.currentGame.render());
   }
 
   finish() {
