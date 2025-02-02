@@ -1,4 +1,4 @@
-body{
+body {
   --popup-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
   --close: #ff5f57;
   --minimize: #febc2e;
@@ -61,12 +61,12 @@ a {
 
 .btn {
   display: block;
-  height: 50px;
+  height: 30px;
   width: 90px;
   color: var(--text-color);
   background: var(--footer-bg-color);
-  border-radius: 10px;
-  border: 3px solid var(--text-color);
+  border-radius: 5px;
+  border: none;
   text-transform: uppercase;
   font-size: 20px;
   cursor: pointer;
@@ -74,5 +74,5 @@ a {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }

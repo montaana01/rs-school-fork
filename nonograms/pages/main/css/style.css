@@ -60,12 +60,12 @@ a span {
 
 .btn {
   display: block;
-  height: 50px;
+  height: 30px;
   width: 90px;
   color: var(--text-color);
   background: var(--footer-bg-color);
-  border-radius: 10px;
-  border: 3px solid var(--text-color);
+  border-radius: 5px;
+  border: none;
   text-transform: uppercase;
   font-size: 20px;
   cursor: pointer;
@@ -73,7 +73,7 @@ a span {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 html {
@@ -83,7 +83,9 @@ html {
 * {
   margin: 0;
   box-sizing: border-box;
-  transition: background-color 0.6s ease-out, color 0.1s ease-out;
+  transition:
+    background-color 0.6s ease-out,
+    color 0.1s ease-out;
   text-align: center;
   font-family: Arial, sans-serif;
 }
@@ -179,8 +181,17 @@ main {
   color: var(--switcher-active);
   font-weight: bold;
 }
+.header__wrapper-item__buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  column-gap: 8px;
+}
 .header__wrapper-item__theme {
-  margin: 0 auto;
+  width: 80px;
+}
+.header__wrapper-item__restart {
+  width: 35px;
 }
 
 .game__wrapper {
@@ -191,6 +202,10 @@ main {
 }
 .game__wrapper__info {
   background: #b1b1b1;
+}
+.game__wrapper__info-timer {
+  font-size: 12px;
+  line-height: 40px;
 }
 .game__wrapper__answers {
   display: flex;
@@ -208,8 +223,8 @@ main {
   flex-direction: column;
 }
 .game__wrapper__answers-cell {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: 0.5px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -223,8 +238,8 @@ main {
   display: flex;
 }
 .game__wrapper__field-cell {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: 0.5px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -391,9 +406,10 @@ main {
   cursor: pointer;
   transition: all 0.2s;
   background: var(--popup-button);
-  color: var(--text-color);
+  color: #f5f5f7;
 }
 .popup__wrapper__content-button:hover {
+  color: var(--text-color);
   background: rgba(0, 0, 0, 0.08);
 }
 
