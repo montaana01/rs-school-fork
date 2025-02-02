@@ -74,6 +74,7 @@ export class Carousel {
       className: "game__carousel__wrapper__button-start",
       content: "START",
     });
+    this.startButton.updateClass("btn");
     this.startButton.appendChildTo(this.carouselElement.element);
     this.startButton.element.addEventListener("click", () => {
       const difficulty = localStorage.getItem("difficulty") || "easy";
