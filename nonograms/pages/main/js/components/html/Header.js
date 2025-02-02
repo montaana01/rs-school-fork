@@ -58,7 +58,10 @@ export class Header {
       className: "header__wrapper-item__switcher__text",
     });
 
+    const savedDifficulty = localStorage.getItem("difficulty") || "easy";
     hardness.forEach((level, index) => {
+      const isActive = level === savedDifficulty;
+
       const marker = new CreateHTMLElement("div", {
         className: "header__wrapper-item__switcher__point-marker",
         attributes: {
@@ -66,16 +69,17 @@ export class Header {
           "data-difficulty": level,
         },
       });
-      marker.updateClass(`${index === 0 ? "active" : ""}`);
+      marker.updateClass(`${isActive ? "active" : ""}`);
 
       const label = new CreateHTMLElement("p", {
         className: "header__wrapper-item__switcher__text-label",
         content: level.charAt(0).toUpperCase() + level.slice(1),
       });
-      label.updateClass(` ${index === 0 ? "active" : ""}`);
+      label.updateClass(` ${isActive ? "active" : ""}`);
 
       marker.element.addEventListener("click", () => {
         localStorage.setItem("difficulty", level);
+        window.dispatchEvent(new CustomEvent("difficultyUpdated"));
 
         SWITCHER_POINT.element
           .querySelectorAll(".header__wrapper-item__switcher__point-marker")
