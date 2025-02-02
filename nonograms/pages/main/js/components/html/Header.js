@@ -28,19 +28,6 @@ export class Header {
     LOGO_IMG.appendChildTo(LOGO.element);
     LOGO.appendChildTo(HEADER_WRAPPER.element);
 
-    // todo:
-    // if game started we introduce timer numbers
-    //
-    // const RATING = new CreateHTMLElement("div", {
-    //   className: "header__wrapper-item",
-    // });
-    // const RATING_VALUE = new CreateHTMLElement("p", {
-    //   id: "header__wrapper__rating-value",
-    //   content: "0",
-    // });
-    // RATING_VALUE.appendChildTo(RATING.element);
-    // RATING.appendChildTo(HEADER_WRAPPER.element);
-
     const DIFFICULTY_SWITCHER = new CreateHTMLElement("div", {
       className: "header__wrapper-item",
     });
@@ -103,6 +90,12 @@ export class Header {
     SWITCHER_TEXT.appendChildTo(DIFFICULTY_SWITCHER.element);
     DIFFICULTY_SWITCHER.appendChildTo(HEADER_WRAPPER.element);
 
+    this.BUTTONS = new CreateHTMLElement("div", {
+      className: "header__wrapper-item",
+    });
+    this.BUTTONS.updateClass("header__wrapper-item__buttons");
+    this.BUTTONS.appendChildTo(HEADER_WRAPPER.element);
+
     this.THEME = new CreateHTMLElement("button", {
       className: "header__wrapper-item",
       content: "Theme",
@@ -112,7 +105,31 @@ export class Header {
     });
     this.THEME.updateClass("header__wrapper-item__theme");
     this.THEME.updateClass("btn");
-    this.THEME.appendChildTo(HEADER_WRAPPER.element);
+    this.THEME.appendChildTo(this.BUTTONS.element);
+
+    this.RESTART = new CreateHTMLElement("button", {
+      className: "header__wrapper-item",
+      content: "↻",
+      attributes: {
+        id: "restart-header",
+      },
+    });
+    this.RESTART.updateClass("header__wrapper-item__restart");
+    this.RESTART.updateClass("btn");
+    this.RESTART.updateClass("hidden");
+    this.RESTART.element.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("gameRestart"));
+    });
+    this.RESTART.appendChildTo(this.BUTTONS.element);
+  }
+
+  showRestartButton() {
+    this.RESTART.element.classList.contains("hidden");
+    this.RESTART.element.classList.remove("hidden");
+  }
+
+  hideRestartButton() {
+    this.RESTART.updateClass("hidden");
   }
 
   getElement() {

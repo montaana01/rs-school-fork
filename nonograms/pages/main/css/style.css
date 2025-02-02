@@ -1,7 +1,14 @@
+body {
+  --popup-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  --close: #ff5f57;
+  --minimize: #febc2e;
+  --popup-button: #0071e3;
+}
+
 body.light {
   --bg-color: #e9f1ff;
   --footer-bg-color: #67d7ff;
-  --text-color: #000000;
+  --text-color: #1d1d1f;
   --border-color: #000000;
   --inverted-border-color: #ffffff;
   --game-background: rgba(255, 255, 255, 0.5);
@@ -9,13 +16,14 @@ body.light {
   --switcher-background: #868686;
   --switcher-point: #ffd3d3;
   --switcher-active: #2196f3;
-  --start-button: #4ce852;
+  --start-button: #28c940;
+  --popup-background: #ffffff;
 }
 
 body.dark {
   --bg-color: #273434;
   --footer-bg-color: #00d8d8;
-  --text-color: #ffffff;
+  --text-color: #f5f5f7;
   --border-color: #ffffff;
   --inverted-border-color: #000000;
   --game-background: rgba(255, 255, 255, 0.01);
@@ -23,7 +31,8 @@ body.dark {
   --switcher-background: #e8e8e8;
   --switcher-point: #fff9d3;
   --switcher-active: #2196f3;
-  --start-button: #1b591e;
+  --start-button: #219d31;
+  --popup-background: #242426ff;
 }
 
 a {
@@ -51,12 +60,12 @@ a span {
 
 .btn {
   display: block;
-  height: 50px;
+  height: 30px;
   width: 90px;
   color: var(--text-color);
   background: var(--footer-bg-color);
-  border-radius: 10px;
-  border: 3px solid var(--text-color);
+  border-radius: 5px;
+  border: none;
   text-transform: uppercase;
   font-size: 20px;
   cursor: pointer;
@@ -64,7 +73,7 @@ a span {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 html {
@@ -74,7 +83,9 @@ html {
 * {
   margin: 0;
   box-sizing: border-box;
-  transition: background-color 0.6s ease-out, color 0.1s ease-out;
+  transition:
+    background-color 0.6s ease-out,
+    color 0.1s ease-out;
   text-align: center;
   font-family: Arial, sans-serif;
 }
@@ -170,8 +181,17 @@ main {
   color: var(--switcher-active);
   font-weight: bold;
 }
+.header__wrapper-item__buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  column-gap: 8px;
+}
 .header__wrapper-item__theme {
-  margin: 0 auto;
+  width: 80px;
+}
+.header__wrapper-item__restart {
+  width: 35px;
 }
 
 .game__wrapper {
@@ -182,6 +202,10 @@ main {
 }
 .game__wrapper__info {
   background: #b1b1b1;
+}
+.game__wrapper__info-timer {
+  font-size: 12px;
+  line-height: 40px;
 }
 .game__wrapper__answers {
   display: flex;
@@ -199,8 +223,8 @@ main {
   flex-direction: column;
 }
 .game__wrapper__answers-cell {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: 0.5px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -214,8 +238,8 @@ main {
   display: flex;
 }
 .game__wrapper__field-cell {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border: 0.5px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -307,6 +331,86 @@ main {
   border: none;
   border-radius: 5px;
   background: var(--start-button);
+}
+
+.popup {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--game-background);
+  width: 100dvw;
+  height: 100dvh;
+}
+.popup__wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  max-width: 90%;
+  background: var(--popup-background);
+  border-radius: 12px;
+  box-shadow: var(--popup-shadow);
+  border: 1px solid var(--game-background);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.popup__wrapper.minimize {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.99;
+}
+.popup__wrapper__header {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.popup__wrapper__header-close {
+  background: var(--close);
+}
+.popup__wrapper__header-minimize {
+  background: var(--minimize);
+}
+.popup__wrapper__header-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.popup__wrapper__header-button:hover {
+  scale: 1.1;
+}
+.popup__wrapper__content {
+  padding: 24px;
+}
+.popup__wrapper__content-message {
+  color: var(--text-color);
+  margin: 0 0 20px;
+  font-size: 20px;
+  line-height: 30px;
+}
+.popup__wrapper__content-button {
+  padding: 6px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--popup-button);
+  color: #f5f5f7;
+}
+.popup__wrapper__content-button:hover {
+  color: var(--text-color);
+  background: rgba(0, 0, 0, 0.08);
 }
 
 footer {

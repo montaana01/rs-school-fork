@@ -7,6 +7,10 @@
 
     &__info {
       background: #b1b1b1;
+      &-timer {
+        font-size: 12px;
+        line-height: 40px;
+      }
     }
     &__answers {
       display: flex;
@@ -25,8 +29,8 @@
         flex-direction: column;
       }
       &-cell {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         border: 0.5px solid var(--border-color);
         display: flex;
         align-items: center;
@@ -42,8 +46,8 @@
       }
 
       &-cell {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         border: 0.5px solid var(--border-color);
         display: flex;
         align-items: center;
