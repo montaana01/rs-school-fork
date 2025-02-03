@@ -25,6 +25,9 @@ export class Header {
         alt: "Logo",
       },
     });
+    LOGO_IMG.element.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("initHome"));
+    });
     LOGO_IMG.appendChildTo(LOGO.element);
     LOGO.appendChildTo(HEADER_WRAPPER.element);
 
@@ -107,6 +110,17 @@ export class Header {
     this.THEME.updateClass("btn");
     this.THEME.appendChildTo(this.BUTTONS.element);
 
+    this.HOME = new CreateHTMLElement("button", {
+      className: "header__wrapper-item",
+      content: "Home",
+    });
+    this.HOME.updateClass("header__wrapper-item__home");
+    this.HOME.updateClass("btn");
+    this.HOME.element.addEventListener("click", () => {
+      window.dispatchEvent(new CustomEvent("initHome"));
+    });
+    this.HOME.appendChildTo(this.BUTTONS.element);
+
     this.RESTART = new CreateHTMLElement("button", {
       className: "header__wrapper-item",
       content: "↻",
@@ -129,7 +143,9 @@ export class Header {
   }
 
   hideRestartButton() {
-    this.RESTART.updateClass("hidden");
+    if (!this.RESTART.element.classList.contains("hidden")) {
+      this.RESTART.updateClass("hidden");
+    }
   }
 
   getElement() {

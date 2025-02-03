@@ -19,6 +19,38 @@ export class Carousel {
   }
 
   createDOM() {
+    this.randomButton = new CreateHTMLElement("button", {
+      className: "game__carousel__wrapper__button-random",
+      content: "Random Template",
+    });
+    this.randomButton.updateClass("btn");
+    this.randomButton.element.addEventListener("click", () => {
+      const difficulties = Object.keys(this.carouselData);
+      const randomDifficulty =
+        difficulties[Math.floor(Math.random() * difficulties.length)];
+      const templates = this.carouselData[randomDifficulty].templates;
+
+      const randomTemplate =
+        templates[Math.floor(Math.random() * templates.length)];
+
+      localStorage.setItem("difficulty", randomDifficulty);
+      localStorage.setItem("currentLevel", randomTemplate.name);
+      this.currentDifficulty = randomDifficulty;
+
+      this.updateCarousel();
+
+      window.dispatchEvent(
+        new CustomEvent("gameStart", {
+          detail: {
+            difficulty: randomDifficulty,
+            levelName: randomTemplate.name,
+          },
+        })
+      );
+    });
+
+    this.randomButton.appendChildTo(this.carouselElement.element);
+
     this.caption = new CreateHTMLElement("div", {
       className: "game__carousel__wrapper__text",
     });

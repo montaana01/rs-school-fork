@@ -10,6 +10,7 @@ export class Nonograms {
     this.footer = null;
     this.currentGame = null;
     this.SCRIPT = document.body.querySelector("script");
+    window.addEventListener("initHome", () => this.initHome(this.solutions));
   }
 
   initUi() {
@@ -48,6 +49,26 @@ export class Nonograms {
     this.currentGame = new Game(this.solutions[difficult].size, template.data);
     this.FOOTER = document.body.querySelector("footer");
     this.FOOTER.before(this.currentGame.render());
+  }
+
+  initHome(solutions) {
+    if (this.currentGame) {
+      this.currentGame.stopTimer();
+      this.currentGame.MAIN.element.remove();
+      this.currentGame = null;
+    }
+
+    this.header.hideRestartButton();
+
+    if (!this.currentGame) {
+      this.currentGame = new Game();
+      this.FOOTER = document.body.querySelector("footer");
+      this.FOOTER.before(this.currentGame.render());
+    }
+
+    if (solutions && typeof this.currentGame.showCarousel === "function") {
+      this.currentGame.showCarousel(solutions);
+    }
   }
 
   restart() {
