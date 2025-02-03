@@ -129,6 +129,11 @@ main {
 .header__wrapper-item img {
   display: block;
   height: 80px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.header__wrapper-item img:hover {
+  scale: 1.1;
 }
 .header__wrapper-item__switcher {
   display: flex;
