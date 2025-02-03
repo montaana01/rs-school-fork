@@ -54,6 +54,19 @@ export class Game {
       className: "game__wrapper__field",
     });
 
+    this.SOLUTION = new CreateHTMLElement("button", {
+      className: "game__wrapper__solution",
+      content: "Show Solution",
+    });
+    this.SOLUTION.updateClass("btn");
+    this.SOLUTION.element.addEventListener("click", () =>
+      //todo: replace console.log with code!
+      //this.showSolution()
+      // eslint-disable-next-line no-console
+      console.log("solution")
+    );
+    this.SOLUTION.appendChildTo(this.GRID_CONTAINER.element);
+
     this.INFO.appendChildTo(this.GRID_WRAPPER.element);
     this.ANSWERS_COLUMN.appendChildTo(this.GRID_WRAPPER.element);
     this.ANSWERS_ROW.appendChildTo(this.GRID_WRAPPER.element);
@@ -212,7 +225,6 @@ export class Game {
     return answers.length > 0 ? answers : [0];
   }
 
-  //todo write method that check your answer!!
   checkSolution() {
     let isCorrect = true;
 
@@ -263,6 +275,8 @@ export class Game {
         this.carousel.updateCarousel
       );
     }
+    this.GRID_WRAPPER.element.remove();
+    this.SOLUTION.element.remove();
     this.carousel = new Carousel(solutions);
     this.carousel.getElement().appendChildTo(this.CAROUSEL_CONTAINER.element);
     return this.carousel;

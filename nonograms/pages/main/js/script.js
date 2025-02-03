@@ -7,8 +7,6 @@ fetch("./json/solutions.json")
   .then((response) => response.json())
   .then((data) => {
     GAME.initSolutions(data);
-    //todo: when app load show user message for 5 sec about game
-    //game.currentGame.showStartMessage(300);
   })
   // eslint-disable-next-line no-console
   .catch((error) => console.log(`Something went wrong: ${error}`));
