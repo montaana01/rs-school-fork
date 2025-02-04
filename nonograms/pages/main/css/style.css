@@ -51,11 +51,11 @@ a span {
 }
 
 .border-right {
-  border-right: 1.5px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
 }
 
 .border-bottom {
-  border-bottom: 1.5px solid var(--border-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
 }
 
 .btn {
