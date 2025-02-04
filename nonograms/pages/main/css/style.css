@@ -3,6 +3,7 @@ body {
   --close: #ff5f57;
   --minimize: #febc2e;
   --popup-button: #0071e3;
+  --hamburger-shadow: rgba(0, 0, 0, 0.5) ;
 }
 
 body.light {
@@ -61,7 +62,6 @@ a span {
 .btn {
   display: block;
   height: 30px;
-  width: 90px;
   color: var(--text-color);
   background: var(--footer-bg-color);
   border-radius: 5px;
@@ -190,26 +190,29 @@ main {
 .header__wrapper-item__hamburger {
   position: relative;
   display: none;
-  height: 40px;
-  width: 40px;
-  padding: 0 10px;
   flex-direction: column;
+  align-items: flex-end;
   justify-content: center;
-  align-items: center;
-  row-gap: 8px;
+  row-gap: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+.header__wrapper-item__hamburger:hover span {
+  width: 30px;
 }
 .header__wrapper-item__hamburger span {
-  width: 22px;
-  height: 1px;
+  width: 26px;
+  height: 2px;
   background: var(--footer-bg-color);
 }
-.header__wrapper-item__hamburger span:nth-child(1) {
-  position: absolute;
-  top: calc(50% - 5px);
+.header__wrapper-item__hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
-.header__wrapper-item__hamburger span:nth-child(1) {
-  position: absolute;
-  top: calc(50% + 5px);
+.header__wrapper-item__hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+.header__wrapper-item__hamburger.active span:nth-child(2) {
+  opacity: 0;
 }
 .header__wrapper-item__buttons {
   display: flex;
@@ -312,7 +315,6 @@ main {
   position: relative;
   margin: 0 auto;
   max-width: 700px;
-  padding: 30px 0;
 }
 .game__carousel__wrapper {
   display: flex;
@@ -489,6 +491,9 @@ footer {
   .header__wrapper-item__home {
     width: unset;
   }
+  .header__wrapper-item__restart {
+    width: unset;
+  }
   .game__wrapper__answers-cell {
     width: 30px;
     height: 30px;
@@ -498,12 +503,44 @@ footer {
     height: 30px;
   }
 }
+@media (max-width: 840px) {
+  .header__wrapper-item__buttons button {
+    font-size: 12px !important;
+  }
+}
 @media (max-width: 768px) {
-  .header__wrapper-item__hamburger {
-    display: flex;
-    cursor: pointer;
+  main {
+    min-height: calc(100vh - 120px);
+    padding: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    float: right;
+    height: 100%;
+    background: var(--hamburger-shadow);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 999;
+    pointer-events: none;
+  }
+  body.hamburger {
+    overflow: hidden;
+  }
+  body.hamburger::after {
+    opacity: 1;
+  }
+  .header__wrapper {
+    height: 60px;
+  }
+  .header__wrapper-item img {
+    height: 70px;
+  }
+  .header__wrapper-item__hamburger {
+    display: flex !important;
+    z-index: 1001;
   }
   .header__wrapper-item__buttons {
     position: fixed;
@@ -511,20 +548,43 @@ footer {
     right: -100%;
     width: 200px;
     height: 100vh;
-    background: #fff;
+    background: var(--bg-color);
     transition: right 0.3s ease-in-out;
     z-index: 1000;
-    padding: 20px;
+    padding: 100px 20px;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
     flex-direction: column;
     display: flex;
     gap: 10px;
   }
+  .header__wrapper-item__buttons.active {
+    right: 0;
+    overflow: hidden;
+  }
+  .header__slides {
+    height: 300px;
+  }
   .footer__wrapper {
+    height: 60px;
     padding: 0;
+  }
+  .footer__wrapper-item {
+    height: 40px;
+  }
+  .footer__wrapper p {
+    padding-top: 20px;
   }
   .header__wrapper-item__buttons.active {
     right: 0;
+  }
+  .game__carousel {
+    padding: 15px 0;
+  }
+  .game__carousel__wrapper {
+    row-gap: 10px;
+  }
+  .game__carousel__wrapper__text {
+    font-size: 20px;
   }
   .game__wrapper__answers-cell {
     width: 25px;
@@ -536,6 +596,9 @@ footer {
   }
 }
 @media (max-width: 560px) {
+  .container {
+    padding: 0 10px;
+  }
   .game__wrapper__answers-cell {
     width: 20px;
     height: 20px;
