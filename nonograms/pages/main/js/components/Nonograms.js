@@ -32,6 +32,7 @@ export class Nonograms {
       );
     });
     window.addEventListener("gameRestart", () => this.restart());
+    window.addEventListener("loadSavedGame", () => this.loadSavedGame());
     const SOUND = document.getElementById("sound");
     SOUND.addEventListener("click", () => {
       this.currentGame.sound.toggleSound();
@@ -73,6 +74,12 @@ export class Nonograms {
     if (solutions && typeof this.currentGame.showCarousel === "function") {
       this.currentGame.showCarousel(solutions);
     }
+  }
+
+  loadSavedGame() {
+    const game = JSON.parse(localStorage.getItem("game"));
+    this.start(game.difficult, game.levelName);
+    this.currentGame.loadSavedGame();
   }
 
   restart() {

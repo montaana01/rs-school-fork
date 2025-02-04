@@ -19,12 +19,24 @@ export class Carousel {
   }
 
   createDOM() {
-    this.randomButton = new CreateHTMLElement("button", {
+    if (localStorage.getItem("game") !== null) {
+      this.LOAD = new CreateHTMLElement("button", {
+        className: "game__carousel__wrapper__button-load",
+        content: " Load saved game",
+      });
+      this.LOAD.updateClass("btn");
+      this.LOAD.appendChildTo(this.carouselElement.element);
+      this.LOAD.element.addEventListener("click", () =>
+        window.dispatchEvent(new CustomEvent("loadSavedGame"))
+      );
+    }
+
+    this.RANDOM = new CreateHTMLElement("button", {
       className: "game__carousel__wrapper__button-random",
       content: "Random Template",
     });
-    this.randomButton.updateClass("btn");
-    this.randomButton.element.addEventListener("click", () => {
+    this.RANDOM.updateClass("btn");
+    this.RANDOM.element.addEventListener("click", () => {
       const difficulties = Object.keys(this.carouselData);
       const randomDifficulty =
         difficulties[Math.floor(Math.random() * difficulties.length)];
@@ -49,7 +61,7 @@ export class Carousel {
       );
     });
 
-    this.randomButton.appendChildTo(this.carouselElement.element);
+    this.RANDOM.appendChildTo(this.carouselElement.element);
 
     this.caption = new CreateHTMLElement("div", {
       className: "game__carousel__wrapper__text",

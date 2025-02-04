@@ -51,6 +51,19 @@ export class Popup {
 
     this.message.appendChildTo(this.content.element);
 
+    this.rating = new CreateHTMLElement("div", {
+      className: this.className + "__wrapper__content-rating",
+      content: "TOP-5 RATING ▼",
+    });
+    this.rating.element.addEventListener("click", () => this.toggleRating());
+    this.rating.appendChildTo(this.content.element);
+
+    this.table = new CreateHTMLElement("div", {
+      className: this.className + "__wrapper__content-table",
+    });
+    this.table.updateClass("hidden");
+    this.table.appendChildTo(this.content.element);
+
     this.restartButton = new CreateHTMLElement("button", {
       className: this.className + "__wrapper__content-button",
       content: "restart",
@@ -60,6 +73,55 @@ export class Popup {
     });
 
     this.restartButton.appendChildTo(this.content.element);
+    this.loadRating();
+  }
+
+  toggleRating() {
+    this.table.toggleClass("hidden");
+    this.rating.element.textContent = this.table.element.classList.contains(
+      "hidden"
+    )
+      ? "TOP-5 RATING ▼"
+      : "TOP-5 RATING ▲";
+  }
+
+  loadRating() {
+    const results = JSON.parse(localStorage.getItem("results") || "[]");
+
+    const table = new CreateHTMLElement("table");
+    const headerRow = new CreateHTMLElement("tr");
+    ["#", "Level Name", "Difficulty", "Time"].forEach((text) => {
+      const th = new CreateHTMLElement("th", { content: text });
+      th.appendChildTo(headerRow.element);
+    });
+    headerRow.appendChildTo(table.element);
+
+    results.forEach((result, index) => {
+      const row = new CreateHTMLElement("tr");
+      const numberCell = new CreateHTMLElement("td", {
+        content: index + 1,
+      });
+      numberCell.appendChildTo(row.element);
+      const nameCell = new CreateHTMLElement("td", {
+        content: result.name,
+      });
+      nameCell.appendChildTo(row.element);
+
+      const difficultyCell = new CreateHTMLElement("td", {
+        content: result.difficulty,
+      });
+      difficultyCell.appendChildTo(row.element);
+
+      const timeCell = new CreateHTMLElement("td", {
+        content: result.time,
+      });
+      timeCell.appendChildTo(row.element);
+
+      row.appendChildTo(table.element);
+    });
+
+    this.table.element.textContent = "";
+    table.appendChildTo(this.table.element);
   }
 
   getPopup() {
