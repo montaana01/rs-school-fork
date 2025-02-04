@@ -93,6 +93,17 @@ export class Header {
     SWITCHER_TEXT.appendChildTo(DIFFICULTY_SWITCHER.element);
     DIFFICULTY_SWITCHER.appendChildTo(HEADER_WRAPPER.element);
 
+    this.HAMBURGER = new CreateHTMLElement("div", {
+      className: "header__wrapper-item",
+    });
+    this.spanTop = new CreateHTMLElement("span", {});
+    this.spanBottom = new CreateHTMLElement("span", {});
+    this.spanTop.appendChildTo(this.HAMBURGER.element);
+    this.spanBottom.appendChildTo(this.HAMBURGER.element);
+
+    this.HAMBURGER.updateClass("header__wrapper-item__hamburger");
+    this.HAMBURGER.appendChildTo(HEADER_WRAPPER.element);
+
     this.BUTTONS = new CreateHTMLElement("div", {
       className: "header__wrapper-item",
     });
