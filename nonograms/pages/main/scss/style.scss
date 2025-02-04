@@ -11,7 +11,8 @@ html {
   box-sizing: border-box;
   transition:
     background-color 0.6s ease-out,
-    color 0.1s ease-out;
+    color 0.1s ease-out,
+    all 0.5s ease;
   text-align: center;
   font-family: Arial, sans-serif;
 
@@ -48,4 +49,5 @@ main {
 @import "blocks/_game.scss";
 @import "blocks/_popup.scss";
 @import "blocks/_footer.scss";
+
 @import "base/_media.scss";

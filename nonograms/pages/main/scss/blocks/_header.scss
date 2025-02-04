@@ -75,6 +75,31 @@
         }
       }
 
+      &__hamburger {
+        position: relative;
+        display: none;
+        height: 40px;
+        width: 40px;
+        padding: 0 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 8px;
+
+        span {
+          width: 22px;
+          height: 1px;
+          background: var(--footer-bg-color);
+          &:nth-child(1) {
+            position: absolute;
+            top: calc(50% - 5px);
+          }
+          &:nth-child(1) {
+            position: absolute;
+            top: calc(50% + 5px);
+          }
+        }
+      }
       &__buttons {
         display: flex;
         flex-direction: row-reverse;
