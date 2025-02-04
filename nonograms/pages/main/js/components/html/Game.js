@@ -58,6 +58,10 @@ export class Game {
       className: "game__wrapper__field",
     });
 
+    this.GAME_BUTTONS = new CreateHTMLElement("div", {
+      className: "game__wrapper__buttons",
+    });
+
     this.SOLUTION = new CreateHTMLElement("button", {
       className: "game__wrapper__solution",
       content: "Show Solution",
@@ -68,6 +72,18 @@ export class Game {
       localStorage.setItem(`cheated`, "true");
       this.isSolutionShown = true;
     });
+
+    this.SAVE = new CreateHTMLElement("button", {
+      className: "game__wrapper__save",
+      content: "Save game",
+    });
+    this.SAVE.updateClass("btn");
+    this.SAVE.element.addEventListener("click", () => {
+      this.saveGame();
+    });
+
+    this.SOLUTION.appendChildTo(this.GAME_BUTTONS.element);
+    this.SAVE.appendChildTo(this.GAME_BUTTONS.element);
 
     this.INFO.appendChildTo(this.GRID_WRAPPER.element);
     this.ANSWERS_COLUMN.appendChildTo(this.GRID_WRAPPER.element);
@@ -184,9 +200,10 @@ export class Game {
           }
         });
         cell.element.addEventListener("click", () => {
-          if (!this.isTimerRunning && !this.isSolutionShown)
-            this.SOLUTION.appendChildTo(this.GRID_CONTAINER.element);
-          if (!this.isTimerRunning && !this.isSolutionShown) this.startTimer();
+          if (!this.isTimerRunning && !this.isSolutionShown) {
+            this.GAME_BUTTONS.appendChildTo(this.GRID_CONTAINER.element);
+            this.startTimer();
+          }
           cell.element.classList.contains("black")
             ? this.sound.play("remove")
             : this.sound.play("click");
@@ -246,7 +263,6 @@ export class Game {
 
         if (isBlack !== shouldBeBlack) {
           isCorrect = false;
-          this.sound.play("remove");
         }
       }
     }
@@ -256,10 +272,11 @@ export class Game {
     }
   }
 
-  startTimer() {
+  startTimer(initialTime = 0) {
     document.getElementById("restart-header").classList.remove("hidden");
-    this.startTime = Date.now();
+    this.startTime = Date.now() - initialTime;
     this.isTimerRunning = true;
+    this.updateTimer();
     this.timerInterval = setInterval(() => {
       this.updateTimer();
     }, 1000);
@@ -314,6 +331,20 @@ export class Game {
     finalPopUp.getPopup().appendChildTo(this.MAIN.element);
   }
 
+  showMessage(message) {
+    const solveTime = Math.floor((Date.now() - this.startTime) / 1000);
+    this.stopTimer();
+    this.sound.play("click");
+    const minutes = Math.floor(solveTime / 60);
+    const seconds = solveTime % 60;
+    const solveTimeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    this.messagePopup = new Popup(
+      "popup",
+      `${message}\nSaved time is ${solveTimeString}!`
+    );
+    this.messagePopup.getPopup().appendChildTo(this.MAIN.element);
+  }
+
   showSolution() {
     this.solution.forEach((row, i) => {
       row.forEach((cell, j) => {
@@ -323,5 +354,44 @@ export class Game {
     this.isSolutionShown = true;
     this.stopTimer();
     this.SOLUTION.element.remove();
+    this.SAVE.element.remove();
+  }
+
+  saveGame() {
+    const state = {
+      cells: this.cellsArray.map((row) =>
+        row.map((cell) => ({
+          B: cell.classList.contains("black"),
+          X: cell.classList.contains("crossed"),
+        }))
+      ),
+      difficult: localStorage.getItem("difficulty"),
+      levelName: localStorage.getItem("currentLevel"),
+      solution: this.solution,
+      timer: Date.now() - this.startTime,
+    };
+    localStorage.setItem("game", JSON.stringify(state));
+    this.showMessage("Great! You have been saved this game!");
+  }
+
+  loadSavedGame() {
+    const state = JSON.parse(localStorage.getItem("game"));
+    this.solution = state.solution;
+    this.GAME_BUTTONS.appendChildTo(this.GRID_CONTAINER.element);
+
+    state.cells.forEach((row, i) => {
+      row.forEach((cellState, j) => {
+        const cell = this.cellsArray[i][j];
+        if (cellState.B) cell.classList.add("black");
+        else cell.classList.remove("black");
+        if (cellState.X) cell.classList.add("crossed");
+        else cell.classList.remove("crossed");
+      });
+    });
+
+    this.startTimer(state.timer);
+
+    this.isSolutionShown = state.isSolutionShown;
+    if (this.isSolutionShown) this.showSolution();
   }
 }

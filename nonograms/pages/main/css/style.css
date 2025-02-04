@@ -310,9 +310,14 @@ main {
   width: 100%;
   background-color: var(--border-color);
 }
-.game__wrapper__solution {
-  margin: 30px auto;
-  width: 190px;
+.game__wrapper__buttons {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  row-gap: 8px;
+  column-gap: 8px;
+  flex-wrap: wrap;
 }
 .game__carousel {
   position: relative;
@@ -371,12 +376,8 @@ main {
   border-radius: 5px;
   background: var(--start-button);
 }
-.game__carousel__wrapper__button-random {
+.game__carousel__wrapper__button-random, .game__carousel__wrapper__button-load {
   margin: 0 auto;
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  width: 230px;
 }
 
 .popup {
@@ -497,6 +498,9 @@ footer {
   .header__wrapper-item__restart {
     width: unset;
   }
+  .game__wrapper__buttons button {
+    font-size: 14px;
+  }
   .game__wrapper__answers-cell {
     width: 30px;
     height: 30px;
@@ -589,6 +593,9 @@ footer {
   .game__carousel__wrapper__text {
     font-size: 20px;
   }
+  .game__wrapper__buttons button {
+    font-size: 12px;
+  }
   .game__wrapper__answers-cell {
     width: 25px;
     height: 25px;
@@ -601,6 +608,9 @@ footer {
 @media (max-width: 560px) {
   .container {
     padding: 0 10px;
+  }
+  .game__wrapper__buttons button {
+    font-size: 10px;
   }
   .game__wrapper__answers-cell {
     width: 20px;
@@ -617,6 +627,11 @@ footer {
   }
 }
 @media (max-width: 430px) {
+  .game__wrapper__buttons {
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+  }
   .game__wrapper__answers-cell {
     width: 15px;
     height: 15px;
