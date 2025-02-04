@@ -12,6 +12,7 @@ export class Game {
     this.cellsArray = [];
     this.isTimerRunning = false;
     this.startTime = null;
+    this.isSolutionShown = false;
 
     this.sound = new Sound();
 
@@ -62,13 +63,11 @@ export class Game {
       content: "Show Solution",
     });
     this.SOLUTION.updateClass("btn");
-    this.SOLUTION.element.addEventListener("click", () =>
-      //todo: replace console.log with code!
-      //this.showSolution()
-      // eslint-disable-next-line no-console
-      console.log("solution")
-    );
-    this.SOLUTION.appendChildTo(this.GRID_CONTAINER.element);
+    this.SOLUTION.element.addEventListener("click", () => {
+      this.showSolution();
+      localStorage.setItem(`cheated`, "true");
+      this.isSolutionShown = true;
+    });
 
     this.INFO.appendChildTo(this.GRID_WRAPPER.element);
     this.ANSWERS_COLUMN.appendChildTo(this.GRID_WRAPPER.element);
@@ -77,6 +76,7 @@ export class Game {
   }
 
   render() {
+    this.isSolutionShown = false;
     if (this.solution.length > 0) {
       this.renderAnswersColumn();
       this.renderAnswersRow();
@@ -184,11 +184,14 @@ export class Game {
           }
         });
         cell.element.addEventListener("click", () => {
-          if (!this.isTimerRunning) this.startTimer();
+          if (!this.isTimerRunning && !this.isSolutionShown)
+            this.SOLUTION.appendChildTo(this.GRID_CONTAINER.element);
+          if (!this.isTimerRunning && !this.isSolutionShown) this.startTimer();
           cell.element.classList.contains("black")
             ? this.sound.play("remove")
             : this.sound.play("click");
           cell.element.classList.remove("crossed");
+          cell.element.classList.remove("solution");
           cell.toggleClass("black");
           this.checkSolution();
         });
@@ -243,13 +246,12 @@ export class Game {
 
         if (isBlack !== shouldBeBlack) {
           isCorrect = false;
-          //todo: add bad sound if all right answers get and solution doesn't done!
+          this.sound.play("remove");
         }
       }
     }
 
     if (isCorrect) {
-      //todo add sound effect to advanced level
       this.showFinalMessage();
     }
   }
@@ -296,12 +298,30 @@ export class Game {
     const minutes = Math.floor(solveTime / 60);
     const seconds = solveTime % 60;
     const solveTimeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-
-    const finalPopUp = new Popup(
-      "popup",
-      `Great! You solved it in ${solveTimeString}!`
-    );
+    let finalPopUp;
+    if (this.isSolutionShown) {
+      finalPopUp = new Popup(
+        "popup",
+        `You use solution button! You solved it, but this result is off the charts!`
+      );
+    } else {
+      finalPopUp = new Popup(
+        "popup",
+        `Great! You solved it in ${solveTimeString}!`
+      );
+    }
     localStorage.setItem("solveTime", solveTimeString);
     finalPopUp.getPopup().appendChildTo(this.MAIN.element);
+  }
+
+  showSolution() {
+    this.solution.forEach((row, i) => {
+      row.forEach((cell, j) => {
+        if (cell === 1) this.cellsArray[i][j].classList.add("solution");
+      });
+    });
+    this.isSolutionShown = true;
+    this.stopTimer();
+    this.SOLUTION.element.remove();
   }
 }
