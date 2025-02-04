@@ -97,9 +97,25 @@ export class Header {
       className: "header__wrapper-item",
     });
     this.spanTop = new CreateHTMLElement("span", {});
+    this.spanMiddle = new CreateHTMLElement("span", {});
     this.spanBottom = new CreateHTMLElement("span", {});
     this.spanTop.appendChildTo(this.HAMBURGER.element);
+    this.spanMiddle.appendChildTo(this.HAMBURGER.element);
     this.spanBottom.appendChildTo(this.HAMBURGER.element);
+
+    this.HAMBURGER.element.addEventListener("click", () => {
+      this.HAMBURGER.toggleClass("active");
+      this.BUTTONS.toggleClass("active");
+      document.body.classList.toggle("hamburger");
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        this.HAMBURGER.element.classList.remove("active");
+        this.BUTTONS.element.classList.remove("active");
+        document.body.classList.remove("hamburger");
+      }
+    });
 
     this.HAMBURGER.updateClass("header__wrapper-item__hamburger");
     this.HAMBURGER.appendChildTo(HEADER_WRAPPER.element);
@@ -146,6 +162,17 @@ export class Header {
       window.dispatchEvent(new CustomEvent("gameRestart"));
     });
     this.RESTART.appendChildTo(this.BUTTONS.element);
+
+    this.SOUND = new CreateHTMLElement("button", {
+      className: "header__wrapper-item__sound",
+      content: "Sound: ON",
+      attributes: { id: "sound" },
+    });
+    this.SOUND.updateClass("btn");
+    this.SOUND.element.addEventListener("click", () => {
+      console.log("sound on/off");
+    });
+    this.SOUND.appendChildTo(this.BUTTONS.element);
   }
 
   showRestartButton() {
