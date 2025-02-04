@@ -32,6 +32,10 @@ export class Nonograms {
       );
     });
     window.addEventListener("gameRestart", () => this.restart());
+    const SOUND = document.getElementById("sound");
+    SOUND.addEventListener("click", () => {
+      this.currentGame.sound.toggleSound();
+    });
   }
 
   initSolutions(solutions) {

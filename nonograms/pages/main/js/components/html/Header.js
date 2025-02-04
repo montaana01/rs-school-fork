@@ -148,6 +148,15 @@ export class Header {
     });
     this.HOME.appendChildTo(this.BUTTONS.element);
 
+    this.SOUND = new CreateHTMLElement("button", {
+      className: "header__wrapper-item__sound",
+      content: "🔊",
+      attributes: { id: "sound" },
+    });
+    this.SOUND.updateClass("btn");
+    localStorage.setItem("sound", "true");
+    this.SOUND.appendChildTo(this.BUTTONS.element);
+
     this.RESTART = new CreateHTMLElement("button", {
       className: "header__wrapper-item",
       content: "↻",
@@ -162,17 +171,6 @@ export class Header {
       window.dispatchEvent(new CustomEvent("gameRestart"));
     });
     this.RESTART.appendChildTo(this.BUTTONS.element);
-
-    this.SOUND = new CreateHTMLElement("button", {
-      className: "header__wrapper-item__sound",
-      content: "Sound: ON",
-      attributes: { id: "sound" },
-    });
-    this.SOUND.updateClass("btn");
-    this.SOUND.element.addEventListener("click", () => {
-      console.log("sound on/off");
-    });
-    this.SOUND.appendChildTo(this.BUTTONS.element);
   }
 
   showRestartButton() {

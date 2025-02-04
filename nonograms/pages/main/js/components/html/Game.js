@@ -1,6 +1,7 @@
 import { CreateHTMLElement } from "./../CreateHTMLElement.js";
 import { Carousel } from "./Carousel.js";
 import { Popup } from "./Popup.js";
+import { Sound } from "./../Sound.js";
 
 export class Game {
   constructor(size = 5, solution = {}) {
@@ -11,6 +12,8 @@ export class Game {
     this.cellsArray = [];
     this.isTimerRunning = false;
     this.startTime = null;
+
+    this.sound = new Sound();
 
     this.MAIN = new CreateHTMLElement("main");
     this.GRID = new CreateHTMLElement("section", { className: "game" });
@@ -173,6 +176,7 @@ export class Game {
         cell.element.addEventListener("mousedown", (e) => {
           if (e.button === 2) {
             e.preventDefault();
+            this.sound.play("cross");
             if (!this.isTimerRunning) this.startTimer();
             cell.element.classList.remove("black");
             cell.toggleClass("crossed");
@@ -181,6 +185,9 @@ export class Game {
         });
         cell.element.addEventListener("click", () => {
           if (!this.isTimerRunning) this.startTimer();
+          cell.element.classList.contains("black")
+            ? this.sound.play("remove")
+            : this.sound.play("click");
           cell.element.classList.remove("crossed");
           cell.toggleClass("black");
           this.checkSolution();
@@ -285,6 +292,7 @@ export class Game {
   showFinalMessage() {
     const solveTime = Math.floor((Date.now() - this.startTime) / 1000);
     this.stopTimer();
+    this.sound.play("win");
     const minutes = Math.floor(solveTime / 60);
     const seconds = solveTime % 60;
     const solveTimeString = `${minutes}:${seconds.toString().padStart(2, "0")}`;
