@@ -268,6 +268,7 @@ export class Game {
     }
 
     if (isCorrect) {
+      this.saveResult();
       this.showFinalMessage();
     }
   }
@@ -393,5 +394,31 @@ export class Game {
 
     this.isSolutionShown = state.isSolutionShown;
     if (this.isSolutionShown) this.showSolution();
+  }
+
+  saveResult() {
+    const results = JSON.parse(localStorage.getItem("results") || "[]");
+    const solveTime = Math.floor((Date.now() - this.startTime) / 1000);
+    const minutes = Math.floor(solveTime / 60);
+    const seconds = solveTime % 60;
+    const solveTimeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+    const newResult = {
+      name: localStorage.getItem("currentLevel"),
+      difficulty: localStorage.getItem("difficulty"),
+      time: solveTimeString,
+      timestamp: Date.now(),
+    };
+
+    results.push(newResult);
+
+    results.sort((a, b) => {
+      const [minutesA, secondsA] = a.time.split(":").map(Number);
+      const [minutesB, secondsB] = b.time.split(":").map(Number);
+      return minutesA * 60 + secondsA - (minutesB * 60 + secondsB);
+    });
+
+    const topResults = results.slice(0, 5);
+    localStorage.setItem("results", JSON.stringify(topResults));
   }
 }
