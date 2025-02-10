@@ -1,7 +1,7 @@
-# [Video of self-introduction](https://youtu.be/MJq5zcMSHFo)
+# [Video of self-introduction](https://www.youtube.com/watch?v=bYR8-2lsB20)
 
-![ALexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
-# ALexey Yakovlev
+![Alexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
+# Alexey Yakovlev
 
 ## Transcription of self-introduction:
 ### Hi everyone! and today I introduce myself! <br> I'm a front-end developer from belarus.
@@ -11,7 +11,7 @@
 
 > Main language is Russian, but I understand Belorussian language and can speak a little bit on them.
 >
-> English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all of the time.
+> English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all the time.
 
 
 ### Goals:
@@ -60,7 +60,7 @@
 ## Programming skills:
 > At the end of summer 2024 my main skills - is php. I understand functions, variables, cycles, etc. I have basic
 > understanding of OOP, and I write module for sync 1c-system to WEB-site of company were I worked, in which clients can
-> select types of measuring instruments and generate documentation for work on them (such a e-commerce product).
+> select types of measuring instruments and generate documentation for work on them (such an e-commerce product).
 >
 > To the ending of stage 1, in my opinion, I can write some application on Javascript!
 > And finally, if you have a basic understanding of any programming language, it won't be difficult for you to
@@ -126,8 +126,8 @@
 ## Contacts:
 ### Tel: [+375336687779](tel:375336687779)
 ### Discord rs school nickname: Alexey (@montaana01).
-### Email: [info@yakovlevdev.com](mailto:info@yakovlevdev.com) or [yakovlevworkby@gmail.com](mailto:).
-### Telegram: [@yakovlevdeveloper](https://t.me/borisbrejha).
+### Email: [info@yakovlevdev.com](mailto:info@yakovlevdev.com) or [yakovlevworkby@gmail.com](mailto:yakovlevworkby@gmail.com).
+### Telegram: [@yakovlevdeveloper](https://t.me/yakovlevdeveloper).
 ### LinkedIn: [Алексей Яковлев](https://linkedin.com/in/yakovlevdeveloper).
 
 ## Long text about me:
