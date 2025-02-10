@@ -11,7 +11,7 @@
 
 > Main language is Russian, but I understand Belorussian language and can speak a little bit on them.
 >
-> English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all of the time.
+> English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all the time.
 
 
 ### Goals:
@@ -60,7 +60,7 @@
 ## Programming skills:
 > At the end of summer 2024 my main skills - is php. I understand functions, variables, cycles, etc. I have basic
 > understanding of OOP, and I write module for sync 1c-system to WEB-site of company were I worked, in which clients can
-> select types of measuring instruments and generate documentation for work on them (such a e-commerce product).
+> select types of measuring instruments and generate documentation for work on them (such an e-commerce product).
 >
 > To the ending of stage 1, in my opinion, I can write some application on Javascript!
 > And finally, if you have a basic understanding of any programming language, it won't be difficult for you to
