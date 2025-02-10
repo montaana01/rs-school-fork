@@ -126,8 +126,8 @@
 ## Contacts:
 ### Tel: [+375336687779](tel:375336687779)
 ### Discord rs school nickname: Alexey (@montaana01).
-### Email: [info@yakovlevdev.com](mailto:info@yakovlevdev.com) or [yakovlevworkby@gmail.com](mailto:).
-### Telegram: [@yakovlevdeveloper](https://t.me/borisbrejha).
+### Email: [info@yakovlevdev.com](mailto:info@yakovlevdev.com) or [yakovlevworkby@gmail.com](mailto:yakovlevworkby@gmail.com).
+### Telegram: [@yakovlevdeveloper](https://t.me/yakovlevdeveloper).
 ### LinkedIn: [Алексей Яковлев](https://linkedin.com/in/yakovlevdeveloper).
 
 ## Long text about me:
