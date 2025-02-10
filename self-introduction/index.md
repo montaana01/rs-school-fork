@@ -1,7 +1,7 @@
 # [Video of self-introduction](https://www.youtube.com/watch?v=bYR8-2lsB20)
 
-![ALexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
-# ALexey Yakovlev
+![Alexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
+# Alexey Yakovlev
 
 ## Transcription of self-introduction:
 ### Hi everyone! and today I introduce myself! <br> I'm a front-end developer from belarus.
