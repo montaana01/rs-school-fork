@@ -1,4 +1,4 @@
-# [Video of self-introduction](https://youtu.be/MJq5zcMSHFo)
+# [Video of self-introduction](https://www.youtube.com/watch?v=bYR8-2lsB20)
 
 ![ALexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
 # ALexey Yakovlev
