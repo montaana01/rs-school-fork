@@ -7,8 +7,8 @@
 ### Hi everyone! and today I introduce myself! <br> I'm a front-end developer from belarus.
 ## Education:
 >In 2023 Belarusian State University of Informatics and Radio electronics / Faculty of radio engineering and electronics with a degree in radio engineering
-## Languages:
 
+## Languages:
 > Main language is Russian, but I understand Belorussian language and can speak a little bit on them.
 >
 > English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all the time.
@@ -20,6 +20,7 @@
 > with knowledge of Javascript, React and node!
 > <br> Or an IOS developer!
 > Improve english!
+
 ### Soft and hard skills:
 >#### Soft:
 > 1. I am teachable and that's good!
@@ -57,6 +58,7 @@
 > In 2020, I started making website for my parents on tilda - It's bad experience.
 >
 > In the summer of 2023, thanks to a friend, I find a course about WEB, learn to do markup, learn HTML, CSS, use JS minimally, make simple sites, at the same time I find a job, and after half a year I move to the IT department in the same company. In a new department for me, I try to support a certain number of projects in PHP.
+
 ## Programming skills:
 > At the end of summer 2024 my main skills - is php. I understand functions, variables, cycles, etc. I have basic
 > understanding of OOP, and I write module for sync 1c-system to WEB-site of company were I worked, in which clients can
