@@ -1,0 +1,124 @@
+.header {
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    &-item {
+      display: block;
+
+      img {
+        display: block;
+        height: 80px;
+        cursor: pointer;
+        transition: 0.3s all;
+        &:hover {
+          scale: 1.1;
+        }
+      }
+
+      &__switcher {
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 20px;
+
+        &__area {
+          position: relative;
+          height: 4px;
+          background-color: var(--switcher-background);
+          width: 120px;
+        }
+
+        &__point {
+          position: absolute;
+          top: -200%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 140px;
+          display: flex;
+          justify-content: space-between;
+          height: 100%;
+          &-marker {
+            width: 20px;
+            height: 20px;
+            background: var(--text-color);
+            border: 3px solid var(--switcher-background);
+            border-radius: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &.active {
+              border-color: var(--switcher-active);
+            }
+          }
+        }
+
+        &__text {
+          display: flex;
+          justify-content: space-between;
+          width: 140px;
+          &-label {
+            color: var(--text-color);
+            font-size: 14px;
+            &.active {
+              color: var(--switcher-active);
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      &__hamburger {
+        position: relative;
+        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        row-gap: 5px;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          span {
+            width: 30px;
+          }
+        }
+        span {
+          width: 26px;
+          height: 2px;
+          background: var(--footer-bg-color);
+        }
+        &.active {
+          span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+          }
+          span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+          }
+          span:nth-child(2) {
+            opacity: 0;
+          }
+        }
+      }
+      &__buttons {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        column-gap: 8px;
+      }
+      &__theme {
+        width: 80px;
+      }
+      &__restart {
+        width: 35px;
+      }
+    }
+  }
+}

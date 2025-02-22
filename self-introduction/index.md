@@ -1,0 +1,137 @@
+# [Video of self-introduction](https://www.youtube.com/watch?v=bYR8-2lsB20)
+
+![Alexey Yakovlev](https://avatars.githubusercontent.com/u/75353637?v=4)
+# Alexey Yakovlev
+
+## Transcription of self-introduction:
+### Hi everyone! and today I introduce myself! <br> I'm a front-end developer from belarus.
+## Education:
+>In 2023 Belarusian State University of Informatics and Radio electronics / Faculty of radio engineering and electronics with a degree in radio engineering
+
+## Languages:
+> Main language is Russian, but I understand Belorussian language and can speak a little bit on them.
+>
+> English: Current level of English is A2 (at EPAM education platform). but I'm trying to improve all the time.
+
+
+### Goals:
+> Main goal is grown up as front-end developer.  
+> In future I want to be a full-stack (or only front-end) developer 
+> with knowledge of Javascript, React and node!
+> <br> Or an IOS developer!
+> Improve english!
+
+### Soft and hard skills:
+>#### Soft:
+> 1. I am teachable and that's good!
+> 2. I can work in a team.
+> 3. I know how to find a common language.
+> 4. Accurate.
+> 5. Hardworking. (If the task is interesting, I will work until the morning)
+> 6. Every minute I think how to improve my code or project when I get to the computer.
+> 7. Wherever I am, I try to be useful and try to improve, to refine something.
+> 8. I have experience working with a major client (at the time when I'm filming of advertisements on TV).
+> 9. I have driver license: B category (cars under 3 500 kg wight in my country).
+
+>#### Hard:
+> 1. HTML and CSS: These languages are the foundation of front-end development.
+> 2. JS, PHP - basic level of understanding, OOP, data-structure - same. 
+> 3. As for layout: I know flexbox and grid, use SCSS preprocessor. 
+> 4. I understand responsive design and know how to apply it. 
+> 5. I have experience using the Git version control system. 
+> 6. I have experience in different OS: macOS, Linux, Windows. 
+> 7. I use the following software in my work:
+>  - Sublime
+>  - PhpStorm
+>  - WebStorm
+>  - VS Code
+>  - Postman
+>  - TablePlus (for databases)
+>  - XAMPP or MAMP - my local servers
+>  - Figma
+>  - Photoshop
+>  - Virtualbox
+> 8. I can set up server on nginx very basically.
+
+
+### Experience:
+> In 2020, I started making website for my parents on tilda - It's bad experience.
+>
+> In the summer of 2023, thanks to a friend, I find a course about WEB, learn to do markup, learn HTML, CSS, use JS minimally, make simple sites, at the same time I find a job, and after half a year I move to the IT department in the same company. In a new department for me, I try to support a certain number of projects in PHP.
+
+## Programming skills:
+> At the end of summer 2024 my main skills - is php. I understand functions, variables, cycles, etc. I have basic
+> understanding of OOP, and I write module for sync 1c-system to WEB-site of company were I worked, in which clients can
+> select types of measuring instruments and generate documentation for work on them (such an e-commerce product).
+>
+> To the ending of stage 1, in my opinion, I can write some application on Javascript!
+> And finally, if you have a basic understanding of any programming language, it won't be difficult for you to
+> understand another language.
+
+### Courses:
+
+> [WEB-developer [2022] - Ivan Petrichenko](https://www.udemy.com/course/webdeveloper/?couponCode=2021PM25)
+>
+> [RS School JavaScript Pre-school - 91 position](https://rs.school/courses/javascript-preschool-ru)
+>
+> [Git mini course - Egor Wexler](https://wexler.io/course/git/landing)
+
+### Projects:
+
+#### First site created on tilda in 2021 for my parents
+>
+> >#### Old site on tilda [Website](https://montaana01.github.io/orsha_shar/page16831385) | [GitHub](https://github.com/montaana01/orsha_shar/tree/tilda-2021-project)
+>
+> > #### On html + css (in progress) [Website](https://orsha-shar.yakovlevdev.com) | [GitHub](https://github.com/montaana01/Orsha_shar)
+
+#### My first project at webdev course:
+> When I had deployed this project Uber send me sent me a notice that I was violating copyright and I decided to rewrite the project in React without knowledge; in the future I plan to rewrite it again more correctly!
+>> #### On course in 2023: [Website](https://montaana01.github.io/Uber/) | [GitHub:main](https://github.com/montaana01/Uber/tree/main)
+>
+>> #### Update after notice: [Website](https://babble.yakovlevdev.com/) | [GitHub:react-bubble](https://github.com/montaana01/Uber/tree/react-bubble)
+
+#### My second project at webdev course
+> #### E-commerce landing shop [Website](https://pulse.yakovlevdev.com/) | [GitHub](https://github.com/montaana01/Pulse_show)
+
+#### Last project at webdev course
+> #### Webdev-course final part - portfolio (information not finished yet)  [Website](https://yakovlevdev.com/) | [GitHub](https://github.com/montaana01/Portfolio)
+
+#### Stage-0 projects
+>> #### CSS-slider [Website](https://montaana01.github.io/cssMemeSlider/cssMemeSlider/) | [GitHub](https://github.com/montaana01/cssMemeSlider/tree/gh-pages)
+>
+>> #### Shelter dual page landing [Website](https://rolling-scopes-school.github.io/montaana01-JSFEPRESCHOOL2024Q2/shelter/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFEPRESCHOOL2024Q2)
+>
+>> #### Js Audio-player [Website](https://rolling-scopes-school.github.io/montaana01-JSFEPRESCHOOL2024Q2/audio-player/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFEPRESCHOOL2024Q2)
+>
+>> #### Js Image Search [Website](https://rolling-scopes-school.github.io/montaana01-JSFEPRESCHOOL2024Q2/image-gallery/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFEPRESCHOOL2024Q2)
+>
+>> #### Js 2048 Game [Website](https://rolling-scopes-school.github.io/montaana01-JSFEPRESCHOOL2024Q2/random-game/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFEPRESCHOOL2024Q2)
+
+#### Stage-1 projects
+>> #### Christmas-shop [Website](https://rolling-scopes-school.github.io/montaana01-JSFE2024Q4/christmas-shop/pages/Home/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFE2024Q4)
+>
+>> #### Simon-says [Website](https://rolling-scopes-school.github.io/montaana01-JSFE2024Q4/simon-says/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFE2024Q4)
+>
+>> #### Nonograms [Website](https://rolling-scopes-school.github.io/montaana01-JSFE2024Q4/nonograms/pages/main/) | [GitHub](https://github.com/rolling-scopes-school/montaana01-JSFE2024Q4)
+>
+
+#### Pets-project
+> #### Site for company with site-panel in Telegram (Not finished yet)
+>> #### Website that get information from site API [Website](https://sdu.yakovlevdev.com) | [GitHub](https://github.com/montaana01/SDU)
+>
+>> #### API on PHP but in future planned replace php to node.js [GitHub](https://github.com/montaana01/api.sdu)
+>
+>> #### Telegram-bot on PHP SDK but in future planned replace php sdk to js sdk [GitHub](https://github.com/montaana01/bot.sdu)
+
+> Service for your document templates and storage for they...(in progress)
+
+## Contacts:
+### Tel: [+375336687779](tel:375336687779)
+### Discord rs school nickname: Alexey (@montaana01).
+### Email: [info@yakovlevdev.com](mailto:info@yakovlevdev.com) or [yakovlevworkby@gmail.com](mailto:yakovlevworkby@gmail.com).
+### Telegram: [@yakovlevdeveloper](https://t.me/yakovlevdeveloper).
+### LinkedIn: [Алексей Яковлев](https://linkedin.com/in/yakovlevdeveloper).
+
+## Long text about me:
+
+> Когда я поступил в БГУИР, программирование и алгоритмизация меня не особо интересовала, я любил снимать и монтировать видео. За время учебы я пытался найти какой-нибудь проект для съемок, взять у друзей камеру и на своем, заработанном ручным трудом на стройках, маке смонтировать и отдать ролик клиенту. К концу обучения я успел побывать как ассистентом, так и "продюсером" на рекламных съемках самого крупного ритейлера страны, но не всё сложилось так круто, как выглядело. Поняв что это не совсем то, к чему хочется стремиться я решил сменить направление. Летом 2023 года получив диплом, понимая что нужно что-то делать, благодаря товарищу, нахожу курс по web-у, учусь делать разметку, учу HTML, CSS, минимально использую JS, делаю простые сайты, в это же время нахожу работу, и через пол года перехожу в отдел информационных технологий в той же компании. В новом для себя отделе, пытался поддерживать какое-то количество проектов на PHP. В основном занимался решением багов и проблем на веб-ресурсах, также начал делать модуль синхронизации с 1с для новго личного кабинета на базе Joomla, но в сентябре, к сожалению пришлось уволиться на год. Вместе с увольнением через какое-то время успешно закончил курс Front-end JavaScript pre-school и продолжаю полноценный курс Front-end JavaScript в The Rolling Scopes!
