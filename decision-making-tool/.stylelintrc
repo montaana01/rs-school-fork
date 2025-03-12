@@ -1,4 +1,7 @@
 {
   "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
-  "rules": {}
+  "rules": {
+    "color-named": "never",
+    "no-duplicate-selectors": true
+  }
 }
