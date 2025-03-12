@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
-import sassDts from 'vite-plugin-sass-dts';
 
 export default defineConfig({
-  plugins: [sassDts()],
+  plugins: [],
   server: {
     port: 8080,
     open: true,
   },
   build: {
+    target: 'ESNext',
     outDir: 'dist',
     sourcemap: true,
   },

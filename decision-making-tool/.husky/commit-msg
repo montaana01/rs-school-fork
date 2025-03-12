@@ -1,0 +1,3 @@
+#!/bin/sh
+cd decision-making-tool || exit
+npx commitlint --edit "$1"
