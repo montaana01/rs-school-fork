@@ -15,6 +15,12 @@ export default class HtmlElementCreator implements ElementCreatorType {
     });
   }
 
+  public removeClassNames(classNames: string[]): void {
+    classNames.forEach((className: string): void => {
+      this.element.classList.remove(className);
+    });
+  }
+
   public setTextContent(textContent: string): void {
     this.element.textContent = textContent;
   }
