@@ -22,6 +22,7 @@ export default [
       reportUnusedDisableDirectives: 'error',
     },
     rules: {
+      'no-alert': 'error',
       'max-lines-per-function': ['error', 40],
       'no-console': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
