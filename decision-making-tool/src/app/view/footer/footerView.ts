@@ -47,7 +47,7 @@ export default class FooterView extends View {
       tagName: 'div',
       classNames: ['container'],
     };
-    const container = new HtmlElementCreator(containerSettings);
+    const container: HtmlElementCreator = new HtmlElementCreator(containerSettings);
     this.elementCreator.addInnerHtmlCreatorElement(container);
 
     const wrapperSettings: SettingsType = {
@@ -55,14 +55,14 @@ export default class FooterView extends View {
       classNames: ['footer', 'footer__wrapper'],
     };
 
-    const wrapper = new HtmlElementCreator(wrapperSettings);
+    const wrapper: HtmlElementCreator = new HtmlElementCreator(wrapperSettings);
     container.addInnerHtmlCreatorElement(wrapper);
 
-    const github = this.getFooterGithubElement();
+    const github: HtmlElementCreator = this.getFooterGithubElement();
     wrapper.addInnerHtmlCreatorElement(github);
-    const copyright = this.getFooterCopyrightElement();
+    const copyright: HtmlElementCreator = this.getFooterCopyrightElement();
     wrapper.addInnerHtmlCreatorElement(copyright);
-    const rss = this.getFooterRssElement();
+    const rss: HtmlElementCreator = this.getFooterRssElement();
     wrapper.addInnerHtmlCreatorElement(rss);
   }
 
