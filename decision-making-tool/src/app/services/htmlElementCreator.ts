@@ -38,7 +38,7 @@ export default class HtmlElementCreator implements ElementCreatorType {
     if (settings.callback) this.setCallback(settings.callback);
   }
 
-  public getElement(): HTMLElement {
+  public getCreatedElement(): HTMLElement {
     return this.element;
   }
 
@@ -47,6 +47,6 @@ export default class HtmlElementCreator implements ElementCreatorType {
   }
 
   public addInnerHtmlCreatorElement(element: ElementCreatorType): void {
-    this.element.append(element.getElement());
+    this.element.append(element.getCreatedElement());
   }
 }

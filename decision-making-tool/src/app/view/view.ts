@@ -11,7 +11,7 @@ export default class View {
   }
 
   public getHTMLElement(): HTMLElement {
-    return this.elementCreator.getElement();
+    return this.elementCreator.getCreatedElement();
   }
 
   public createView(): HtmlElementCreator {
