@@ -34,11 +34,19 @@ export default class HtmlElementCreator implements ElementCreatorType {
   public createHtmlElement(settings: SettingsType): void {
     this.element = document.createElement(settings.tagName);
     this.setClassNames(settings.classNames);
-    this.setTextContent(settings.textContent);
-    this.setCallback(settings.callback);
+    if (settings.textContent) this.setTextContent(settings.textContent);
+    if (settings.callback) this.setCallback(settings.callback);
   }
 
   public getElement(): HTMLElement {
     return this.element;
+  }
+
+  public addInnerHtmlElement(element: HTMLElement): void {
+    this.element.append(element);
+  }
+
+  public addInnerHtmlCreatorElement(element: ElementCreatorType): void {
+    this.element.append(element.getElement());
   }
 }
