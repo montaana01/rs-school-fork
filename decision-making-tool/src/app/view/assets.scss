@@ -40,3 +40,25 @@ a {
 .hidden {
   display: none !important;
 }
+
+.button {
+  cursor: pointer;
+
+  display: block;
+
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+
+  font-size: 20px;
+  color: var(--text-color);
+  text-transform: uppercase;
+
+  background: var(--footer-color);
+
+  transition: 0.6s all;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
