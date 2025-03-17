@@ -1,7 +1,7 @@
 import type View from './view/view';
 import type { OptionsListItemsType } from './types/OptionsListItemsType.ts';
 
-import ListMainStateView from './view/main/main-states/list-items/listMainState';
+import ListMainStateView from './view/main/main-states/listMainState';
 import DecisionMainStateView from './view/main/main-states/decisionMainState';
 import ErrorMainStateView from './view/main/main-states/errorMainState.ts';
 import ModalWindow from './view/main/modal/modalView.ts';
