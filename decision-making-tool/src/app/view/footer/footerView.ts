@@ -5,9 +5,9 @@ import HtmlElementCreator from '../../services/htmlElementCreator.ts';
 import { HtmlImgElementCreator } from '../../services/htmlImgElementCreator.ts';
 
 export default class FooterView extends View {
-  private readonly githubSettings: SettingsType;
-  private readonly copyrightSettings: SettingsType;
-  private readonly rssSettings: SettingsType;
+  public readonly githubSettings: SettingsType;
+  public readonly copyrightSettings: SettingsType;
+  public readonly rssSettings: SettingsType;
 
   constructor() {
     const footerSettings: SettingsType = {
@@ -42,7 +42,7 @@ export default class FooterView extends View {
     this.configureView();
   }
 
-  public configureView(): void {
+  private configureView(): void {
     const containerSettings: SettingsType = {
       tagName: 'div',
       classNames: ['container'],
@@ -66,7 +66,7 @@ export default class FooterView extends View {
     wrapper.addInnerHtmlCreatorElement(rss);
   }
 
-  public getFooterGithubElement(): HtmlElementCreator {
+  private getFooterGithubElement(): HtmlElementCreator {
     return new HtmlImgElementCreator(this.githubSettings);
   }
 
