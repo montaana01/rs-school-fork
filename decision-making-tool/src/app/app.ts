@@ -13,15 +13,16 @@ export default class App {
   private headerView: HeaderView;
   private mainView: MainView;
   private footerView: FooterView;
+  private readonly router: Router;
 
   constructor() {
     this.BODY = document.body;
 
-    this.headerView = new HeaderView();
     this.mainView = new MainView();
+    this.router = new Router(this.mainView.getRouterContainer());
+    this.headerView = new HeaderView(this.router);
     this.footerView = new FooterView();
     new Theme();
-    new Router(this.mainView.getRouterContainer());
   }
 
   public createView(): void {

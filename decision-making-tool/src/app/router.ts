@@ -11,14 +11,15 @@ export default class Router {
   private readonly routes: Record<string, () => View>;
   private dataString: string | null;
   private optionsListItems: OptionsListItemsType[] | undefined;
+  private path: string;
 
   constructor(container: HTMLElement) {
     this.container = container;
-
+    this.path = '';
     this.routes = {
-      '#': (): ListMainStateView => new ListMainStateView(),
-      '#list': (): ListMainStateView => new ListMainStateView(),
-      '#decision': (): DecisionMainStateView => new DecisionMainStateView(),
+      '#/': (): ListMainStateView => new ListMainStateView(),
+      '#/list': (): ListMainStateView => new ListMainStateView(),
+      '#/decision': (): DecisionMainStateView => new DecisionMainStateView(),
     };
     this.dataString = localStorage.getItem('options');
     window.addEventListener('hashchange', this.handleRouteChange.bind(this));
@@ -41,6 +42,11 @@ export default class Router {
     } catch (error) {
       return [];
     }
+  }
+
+  public navigate(path: string): void {
+    this.path = path;
+    window.location.hash = this.path;
   }
 
   private handleRouteChange(): void {

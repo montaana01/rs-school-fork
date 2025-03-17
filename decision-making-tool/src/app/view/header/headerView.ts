@@ -5,11 +5,11 @@ import HtmlElementCreator from '../../services/htmlElementCreator.ts';
 import { HtmlImgElementCreator } from '../../services/htmlImgElementCreator.ts';
 import ButtonView from '../basicElements/buttonView.ts';
 import Theme from '../theme.ts';
+import type Router from '../../router.ts';
 
 export default class HeaderView extends View {
   private readonly headerLogoSettings: SettingsType;
-
-  constructor() {
+  constructor(router: Router) {
     const headerSettings: SettingsType = {
       tagName: 'header',
       classNames: ['header'],
@@ -20,7 +20,7 @@ export default class HeaderView extends View {
     this.headerLogoSettings = {
       tagName: 'img',
       classNames: ['header__wrapper-item'],
-      callback: (): Window | null => window.open('./'),
+      callback: (): void => router.navigate('#/list'),
       src: './icons/decision-making-tool.png',
       alt: 'Decision Making Tool',
     };
