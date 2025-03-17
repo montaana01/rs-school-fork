@@ -50,7 +50,7 @@ export default class Router {
     }
 
     if (window.location.hash === '#decision' && !this.canWeMoveToDecisionWheel()) {
-      ModalWindow.show('Add at least 2 valid options before choosing a solution!');
+      new ModalWindow('Add at least 2 valid options before choosing a solution!');
       window.location.hash = '#list';
       return;
     }
