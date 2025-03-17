@@ -6,6 +6,7 @@ import HeaderView from './view/header/headerView.ts';
 import MainView from './view/main/mainView.ts';
 import FooterView from './view/footer/footerView.ts';
 import Router from './router';
+import Theme from './view/theme.ts';
 
 export default class App {
   private BODY: HTMLElement;
@@ -19,12 +20,11 @@ export default class App {
     this.headerView = new HeaderView();
     this.mainView = new MainView();
     this.footerView = new FooterView();
+    new Theme();
     new Router(this.mainView.getRouterContainer());
   }
 
   public createView(): void {
-    //todo: use theme switcher class for remove hardcode
-    this.BODY.classList.add('light');
     this.BODY.append(
       this.headerView.getHTMLElement(),
       this.mainView.getHTMLElement(),
