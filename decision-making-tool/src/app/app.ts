@@ -19,13 +19,10 @@ export default class App {
     this.headerView = new HeaderView();
     this.mainView = new MainView();
     this.footerView = new FooterView();
-
-    this.createView();
-
     new Router(this.mainView.getRouterContainer());
   }
 
-  private createView(): void {
+  public createView(): void {
     //todo: use theme switcher class for remove hardcode
     this.BODY.classList.add('light');
     this.BODY.append(
