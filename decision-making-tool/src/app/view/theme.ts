@@ -14,9 +14,10 @@ export default class Theme {
     this.storageManager = StorageManager.getInstance();
 
     const savedTheme: string | null = this.storageManager.load<string>(this.THEME_KEY);
+    const isValidTheme = savedTheme === ThemeEnum.Dark || savedTheme === ThemeEnum.Light;
     const systemPrefersLight: boolean = window.matchMedia('(prefers-color-scheme: light)').matches;
 
-    const initialTheme: string = savedTheme || (systemPrefersLight ? ThemeEnum.Light : ThemeEnum.Dark);
+    const initialTheme: string = isValidTheme ? savedTheme : systemPrefersLight ? ThemeEnum.Light : ThemeEnum.Dark;
     this.applyTheme(initialTheme);
   }
 
