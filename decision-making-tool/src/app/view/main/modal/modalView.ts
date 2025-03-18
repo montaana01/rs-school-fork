@@ -1,8 +1,8 @@
 import './modal.scss';
-import type { SettingsType } from '../../../types/SettingsType.ts';
-import View from '../../view.ts';
-import HtmlElementCreator from '../../../services/htmlElementCreator.ts';
-
+import type { SettingsType } from '../../../types/SettingsType';
+import View from '../../view';
+import HtmlElementCreator from '../../../services/htmlElementCreator';
+//todo: replace div with dialog tag
 export default class ModalWindow extends View {
   private readonly modalSettings: SettingsType;
   private readonly closeButtonSettings: SettingsType;

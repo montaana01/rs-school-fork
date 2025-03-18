@@ -1,8 +1,11 @@
 import View from './../../view';
 import HtmlElementCreator from './../../../services/htmlElementCreator';
 import type { SettingsType } from '../../../types/SettingsType.ts';
+import StorageManager from '../../../services/storageManager';
 
 export default class DecisionMainStateView extends View {
+  private storageManager: StorageManager;
+
   constructor() {
     const mainWrapperSettings: SettingsType = {
       tagName: 'div',
@@ -11,6 +14,7 @@ export default class DecisionMainStateView extends View {
 
     super(mainWrapperSettings);
     this.configureView();
+    this.storageManager = StorageManager.getInstance();
   }
 
   private configureView(): void {
@@ -20,6 +24,7 @@ export default class DecisionMainStateView extends View {
       classNames: ['main__wrapper-item', 'main__wrapper-item__title'],
       textContent: 'Decision Picker Page',
     };
+    this.storageManager.save('page', 'decision');
     this.elementCreator.addInnerHtmlCreatorElement(new HtmlElementCreator(errorTitleSettings));
 
     const backToListButton: SettingsType = {

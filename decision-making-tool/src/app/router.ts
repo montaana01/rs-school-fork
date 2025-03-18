@@ -1,10 +1,10 @@
 import type View from './view/view';
-import type { OptionsListItemsType } from './types/OptionsListItemsType.ts';
+import type { OptionsListItemsType } from './types/OptionsListItemsType';
 
-import ListMainStateView from './view/main/main-states/listMainState';
+import ListMainStateView from './view/main/main-states/listMainStateView';
 import DecisionMainStateView from './view/main/main-states/decisionMainState';
-import ErrorMainStateView from './view/main/main-states/errorMainState.ts';
-import ModalWindow from './view/main/modal/modalView.ts';
+import ErrorMainStateView from './view/main/main-states/errorMainState';
+import ModalWindow from './view/main/modal/modalView';
 
 export default class Router {
   private container: HTMLElement;
@@ -34,10 +34,11 @@ export default class Router {
         return [];
       }
 
-      return parsed.map((item) => {
-        const title = typeof item.title === 'string' ? item.title : '';
-        const weight = typeof item.weight === 'number' ? item.weight : 0;
-        return { title, weight };
+      return parsed.map((item: OptionsListItemsType, index: number) => {
+        const title: string = item.title;
+        const weight: number = item.weight;
+        const id = item.id !== undefined ? item.id : index + 1;
+        return { id, title, weight };
       });
     } catch (error) {
       return [];
