@@ -24,9 +24,10 @@
         border-radius: 8px;
 
         font-size: 16px;
+        color: var(--text-color-inverted);
         text-align: center;
 
-        background: #fff;
+        background: var(--footer-color);
       }
 
       &-close {
