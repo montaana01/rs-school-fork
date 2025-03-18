@@ -23,8 +23,8 @@ export default class Router {
     };
     this.dataString = localStorage.getItem('options');
 
-    if (window.location.pathname === '/' && window.location.hash === '') {
-      window.location.replace('#/list');
+    if (!window.location.hash || window.location.hash === '#/') {
+      this.navigate('#/list');
     }
 
     window.addEventListener('hashchange', this.handleRouteChange.bind(this));
