@@ -46,12 +46,12 @@ a {
 
   display: block;
 
-  height: 30px;
+  padding: 5px;
   border: none;
   border-radius: 5px;
 
   font-size: 20px;
-  color: var(--text-color);
+  color: var(--text-color-inverted);
   text-transform: uppercase;
 
   background: var(--footer-color);
