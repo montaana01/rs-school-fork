@@ -27,7 +27,7 @@ export default class ErrorMainStateView extends View {
       classNames: ['main__wrapper-item', 'main__wrapper-item__button', 'button'],
       textContent: 'Go to decision list page',
       callback: (): void => {
-        window.location.hash = 'list';
+        window.location.hash = '#/list';
       },
     };
 
