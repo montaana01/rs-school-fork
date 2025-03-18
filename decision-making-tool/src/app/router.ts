@@ -22,6 +22,11 @@ export default class Router {
       '#/decision': (): DecisionMainStateView => new DecisionMainStateView(),
     };
     this.dataString = localStorage.getItem('options');
+
+    if (window.location.pathname === '/' && window.location.hash === '') {
+      window.location.replace('#/list');
+    }
+
     window.addEventListener('hashchange', this.handleRouteChange.bind(this));
     window.addEventListener('load', this.handleRouteChange.bind(this));
   }
