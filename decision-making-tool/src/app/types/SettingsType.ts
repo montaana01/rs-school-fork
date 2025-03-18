@@ -5,4 +5,7 @@ export type SettingsType = {
   callback?: ((event: Event) => void) | null;
   src?: string;
   alt?: string;
+  value?: string;
+  placeholder?: string;
+  type?: string;
 };
