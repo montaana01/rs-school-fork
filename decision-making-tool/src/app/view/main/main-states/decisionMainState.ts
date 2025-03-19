@@ -67,6 +67,22 @@ export default class DecisionMainStateView extends View {
     this.elementCreator.addInnerHtmlCreatorElement(this.getCanvasElementView());
   }
 
+  private toggleControls(disabled: boolean): void {
+    const controls: HTMLElement[] = [
+      this.backButtonView,
+      this.soundButtonView,
+      this.durationInputView.element,
+      this.pickButtonView,
+    ];
+
+    controls.forEach((control) => {
+      if (control) {
+        control.tabIndex = disabled ? -1 : 0;
+        control.classList.toggle('disabled', disabled);
+      }
+    });
+  }
+
   private getControlPanelView(): HtmlElementCreator {
     const controlPanelSettings: SettingsType = {
       tagName: 'div',
@@ -111,7 +127,7 @@ export default class DecisionMainStateView extends View {
   private startPickingProcess(): void {
     this.decisionState = 'picking';
     this.storageManager.save('pageState', this.decisionState);
-    // todo: get duration from input
+    this.toggleControls(true);
 
     // todo: write disable and enable controls function
     //this.disableControls();
