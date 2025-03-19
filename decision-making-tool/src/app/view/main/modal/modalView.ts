@@ -44,7 +44,10 @@ export default class ModalWindow extends View {
     modal.addInnerHtmlCreatorElement(messageElement);
     this.elementCreator.addInnerHtmlCreatorElement(modal);
 
-    const overlay: HTMLDialogElement = this.elementCreator.getCreatedElement();
+    const overlay = this.elementCreator.getCreatedElement();
+    if (!(overlay instanceof HTMLDialogElement)) {
+      throw new Error('Overlay element is not a dialog');
+    }
     document.body.appendChild(overlay);
 
     overlay.showModal();
