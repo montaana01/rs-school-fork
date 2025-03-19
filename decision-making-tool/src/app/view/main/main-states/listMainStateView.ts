@@ -110,20 +110,10 @@ export default class ListMainStateView extends View {
     // const pasteListButtonView: ButtonView = new ButtonView('Paste List', () => this.pasteList());
     buttonsPanelView.addInnerHtmlElement(pasteListButtonView.getHTMLElement());
 
-    const saveJSONButtonView: ButtonView = new ButtonView(
-      'Save to JSON',
-      () => new ModalWindow('This part is not realised'),
-    );
-    //todo: implement this function
-    // const saveJSONButtonView: ButtonView = new ButtonView('Save to JSON', () => this.saveListToJSON());
+    const saveJSONButtonView: ButtonView = new ButtonView('Save to JSON', () => this.saveListToJSON());
     buttonsPanelView.addInnerHtmlElement(saveJSONButtonView.getHTMLElement());
 
-    const loadJSONButtonView: ButtonView = new ButtonView(
-      'Load from JSON',
-      () => new ModalWindow('This part is not realised'),
-    );
-    //todo: implement this function
-    //const loadJSONButtonView: ButtonView = new ButtonView('Load List JSON', () => this.loadListFromJSON());
+    const loadJSONButtonView: ButtonView = new ButtonView('Load List JSON', () => this.loadListFromJSON());
     buttonsPanelView.addInnerHtmlElement(loadJSONButtonView.getHTMLElement());
 
     this.elementCreator.addInnerHtmlCreatorElement(buttonsPanelView);
@@ -176,9 +166,6 @@ export default class ListMainStateView extends View {
     this.configureView();
   }
 
-  //todo: implement this function
-  //private pasteList(): void{}
-
   private clearList(): void {
     this.options = [];
     this.idCounter = 1;
@@ -186,11 +173,54 @@ export default class ListMainStateView extends View {
     this.configureView();
   }
 
-  //todo: implement this function
-  //private saveListToJSON(): void {}
+  private saveListToJSON(): void {
+    const dataString: string = JSON.stringify(this.options, null, 2);
+    const blob: Blob = new Blob([dataString], { type: 'application/json' });
+    const url: string = URL.createObjectURL(blob);
+    const a: HTMLAnchorElement = document.createElement('a');
+    a.href = url;
+    a.download = 'options.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
-  //todo: implement this function
-  //private loadListFromJSON(): void {}
+  private loadListFromJSON(): void {
+    const savedOptions: OptionsListItemsType[] = this.storageManager.load(this.storageKey) || [];
+    const input: HTMLInputElement = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.addEventListener('change', (event: Event) => {
+      const target: EventTarget | null = event.target;
+      if (target instanceof HTMLInputElement && target.files && target.files.length > 0) {
+        const file: File = target.files[0];
+        const reader: FileReader = new FileReader();
+        reader.onload = (event: ProgressEvent<FileReader>): void => {
+          if (event.target && typeof event.target.result === 'string') {
+            try {
+              this.options = JSON.parse(event.target.result);
+              if (this.options.length > 0) {
+                const maxId: number = Math.max(...this.options.map((o) => o.id));
+                this.idCounter = maxId + 1;
+              } else {
+                this.idCounter = 1;
+              }
+              this.saveOptions();
+              this.configureView();
+            } catch (error) {
+              new ModalWindow('Problem with your json file!');
+              this.options = savedOptions;
+              this.saveOptions();
+              this.configureView();
+            }
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+    input.click();
+  }
 
   private startDecision(): void {
     const validOptions: OptionsListItemsType[] = this.options.filter(
