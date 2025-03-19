@@ -38,7 +38,15 @@ export default class DecisionMainStateView extends View {
     this.decisionState = 'initial';
     this.storageManager.save('pageState', this.decisionState);
 
+    this.checkValidOptions();
     this.configureView();
+  }
+
+  private checkValidOptions(): void {
+    const decisionData: OptionsListItemsType[] = this.storageManager.load(this.storageKey) || [];
+    if (decisionData.length < 2) {
+      window.location.hash = '#/list';
+    }
   }
 
   private configureView(): void {
