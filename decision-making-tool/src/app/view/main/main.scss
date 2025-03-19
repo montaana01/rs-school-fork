@@ -95,7 +95,7 @@
           transition: border-color 0.3s;
 
           &:focus {
-            border-color: var(--green);
+            border-color: var(--add);
           }
 
           &.disabled {
@@ -108,18 +108,14 @@
 
         &-subtitle {
           grid-column: 1 / -1;
+          height: 25px;
+          font-size: 16px;
           font-weight: 500;
 
-          &::after {
-            content: ' *';
+          &.highlight {
+            font-size: 20px;
           }
         }
-      }
-
-      &__canvas {
-        width: 100%;
-        border: 2px solid var(--options-bg-color);
-        border-radius: 16px;
       }
     }
   }
