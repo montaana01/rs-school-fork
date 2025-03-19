@@ -12,11 +12,12 @@ export default class DecisionMainStateView extends View {
   private storageManager: StorageManager = StorageManager.getInstance();
   private soundManager: SoundManager = SoundManager.getInstance();
   private soundButtonView: HTMLElement = HTMLElement;
+  private backButtonView: HTMLElement = HTMLElement;
+  private pickButtonView: HTMLElement = HTMLElement;
   private readonly durationSettings: SettingsType;
   private readonly durationInputView: HtmlInputElementCreator;
   private canvasElement: HTMLElement = HTMLElement;
   private storageKey: string = 'options';
-  private duration: number = 0;
   private decisionState: string;
 
   constructor() {
@@ -89,16 +90,15 @@ export default class DecisionMainStateView extends View {
       classNames: ['main__wrapper-item', 'main__wrapper-item__controls'],
     };
     const controlPanel: HtmlElementCreator = new HtmlElementCreator(controlPanelSettings);
-
-    const backButtonView: ButtonView = new ButtonView(
+    const backButton: ButtonView = new ButtonView(
       'Back',
       (): void => {
         window.location.hash = '#/list';
       },
       ['main__wrapper-item__controls-back'],
     );
-    controlPanel.addInnerHtmlElement(backButtonView.getHTMLElement());
-
+    this.backButtonView = backButton.getHTMLElement();
+    controlPanel.addInnerHtmlElement(this.backButtonView);
     const soundButtonView: ButtonView = new ButtonView('🔊', () => {}, ['main__wrapper-item__controls-sound']);
     this.soundButtonView = soundButtonView.getHTMLElement();
     controlPanel.addInnerHtmlElement(this.soundButtonView);
@@ -113,7 +113,8 @@ export default class DecisionMainStateView extends View {
       },
       ['main__wrapper-item__controls-pick'],
     );
-    controlPanel.addInnerHtmlElement(pickButtonView.getHTMLElement());
+    this.pickButtonView = pickButton.getHTMLElement();
+    controlPanel.addInnerHtmlElement(this.pickButtonView);
 
     const pickedOptionSettings: SettingsType = {
       tagName: 'div',
