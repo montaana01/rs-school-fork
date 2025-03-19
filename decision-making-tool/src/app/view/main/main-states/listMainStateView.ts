@@ -135,7 +135,7 @@ export default class ListMainStateView extends View {
     const idElementSettings: SettingsType = {
       tagName: 'span',
       classNames: ['main__wrapper-item__options-row-id'],
-      textContent: option.id.toString(),
+      textContent: `#${option.id.toString()}`,
     };
     row.addInnerHtmlCreatorElement(new HtmlElementCreator(idElementSettings));
 
