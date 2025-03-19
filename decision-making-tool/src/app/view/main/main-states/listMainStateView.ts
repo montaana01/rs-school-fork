@@ -8,10 +8,10 @@ import StorageManager from './../../../services/storageManager';
 import ModalWindow from '../modal/modalView';
 
 export default class ListMainStateView extends View {
-  private options: OptionsListItemsType[];
+  private options: OptionsListItemsType[] = [];
   private readonly optionsContainer: HtmlElementCreator;
-  private elementToClear: HTMLElement;
-  private idCounter: number;
+  private elementToClear: HTMLElement = HTMLElement;
+  private idCounter: number = 0;
   private storageManager: StorageManager = StorageManager.getInstance();
   private readonly storageKey: string = 'options';
   private readonly buttonsContainerSettings: SettingsType;
@@ -24,10 +24,6 @@ export default class ListMainStateView extends View {
     };
 
     super(mainWrapperSettings);
-
-    this.options = [];
-    this.idCounter = 0;
-    this.elementToClear = HTMLElement;
 
     const optionsContainerSettings: SettingsType = {
       tagName: 'div',
@@ -164,14 +160,15 @@ export default class ListMainStateView extends View {
     this.options.splice(index, 1);
     if (this.options.length === 0) {
       this.idCounter = 1;
-      this.options.push({ id: 1, title: '', weight: 0 });
-      this.idCounter = 2;
     }
     this.saveOptions();
     this.configureView();
   }
 
   private addOption(): void {
+    if (this.options.length === 0) {
+      this.idCounter = 1;
+    }
     const newOption: OptionsListItemsType = { id: this.idCounter, title: '', weight: 0 };
     this.options.push(newOption);
     this.idCounter += 1;
@@ -185,8 +182,6 @@ export default class ListMainStateView extends View {
   private clearList(): void {
     this.options = [];
     this.idCounter = 1;
-    this.options.push({ id: 1, title: '', weight: 0 });
-    this.idCounter = 2;
     this.saveOptions();
     this.configureView();
   }
