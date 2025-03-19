@@ -12,12 +12,12 @@ import { WheelManager } from '../../../services/wheelManager.ts';
 export default class DecisionMainStateView extends View {
   private storageManager: StorageManager = StorageManager.getInstance();
   private soundManager: SoundManager = SoundManager.getInstance();
-  private soundButtonView: HTMLElement = HTMLElement;
-  private backButtonView: HTMLElement = HTMLElement;
-  private pickButtonView: HTMLElement = HTMLElement;
+  private soundButtonView!: HTMLElement;
+  private backButtonView!: HTMLElement;
+  private pickButtonView!: HTMLElement;
   private readonly durationSettings: SettingsType;
   private readonly durationInputView: HtmlInputElementCreator;
-  private canvasElement: HTMLCanvasElement;
+  private canvasElement!: HTMLCanvasElement;
   private storageKey: string = 'options';
   private decisionState: string;
   private wheelManager: WheelManager | null = null;
