@@ -2,15 +2,15 @@ import './modal.scss';
 import type { SettingsType } from '../../../types/SettingsType';
 import View from '../../view';
 import HtmlElementCreator from '../../../services/htmlElementCreator';
-//todo: replace div with dialog tag
+
 export default class ModalWindow extends View {
-  private readonly modalSettings: SettingsType;
-  private readonly closeButtonSettings: SettingsType;
-  private readonly messageSettings: SettingsType;
+  protected readonly modalSettings: SettingsType;
+  protected readonly closeButtonSettings: SettingsType;
+  protected readonly messageSettings: SettingsType;
 
   constructor(message: string) {
     const overlaySettings: SettingsType = {
-      tagName: 'div',
+      tagName: 'dialog',
       classNames: ['main__wrapper-modal-overlay'],
     };
     super(overlaySettings);
@@ -33,7 +33,8 @@ export default class ModalWindow extends View {
     this.configureView();
   }
 
-  private configureView(): void {
+  protected configureView(): void {
+    document.body.classList.add('fixed');
     const modal: HtmlElementCreator = new HtmlElementCreator(this.modalSettings);
     const closeButton: HtmlElementCreator = new HtmlElementCreator(this.closeButtonSettings);
     const messageElement: HtmlElementCreator = new HtmlElementCreator(this.messageSettings);
@@ -43,11 +44,31 @@ export default class ModalWindow extends View {
     modal.addInnerHtmlCreatorElement(messageElement);
     this.elementCreator.addInnerHtmlCreatorElement(modal);
 
-    document.body.appendChild(this.elementCreator.getCreatedElement());
+    const overlay: HTMLDialogElement = this.elementCreator.getCreatedElement();
+    document.body.appendChild(overlay);
+
+    overlay.showModal();
+
+    document.addEventListener('keydown', this.handleEscape);
+    overlay.addEventListener('click', this.handleOutsideClick);
+
     setTimeout(() => this.close(), 10000);
   }
 
-  private close(): void {
+  protected handleEscape = (event: KeyboardEvent): void => {
+    if (event.key === 'Escape') {
+      this.close();
+    }
+  };
+
+  protected handleOutsideClick = (event: MouseEvent): void => {
+    if (event.target === this.elementCreator.getCreatedElement()) {
+      this.close();
+    }
+  };
+
+  protected close(): void {
+    document.body.classList.remove('fixed');
     const overlay: HTMLElement = this.elementCreator.getCreatedElement();
     if (document.body.contains(overlay)) {
       document.body.removeChild(overlay);
