@@ -4,21 +4,30 @@
       &-overlay {
         position: absolute;
         z-index: 1000;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         display: flex;
         align-items: center;
         justify-content: center;
 
-        width: 100dvw;
-        height: 100dvh;
+        padding: 0;
+        border: 0;
 
-        background: rgb(0 0 0 / 50%);
+        &::backdrop {
+          background: rgb(0 0 0 / 50%);
+        }
       }
 
       &-window {
         position: relative;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
 
         padding: 20px 30px 20px 20px;
         border-radius: 8px;
@@ -39,6 +48,21 @@
 
         font-size: 24px;
         font-weight: bold;
+      }
+
+      &-textarea {
+        width: 100%;
+        padding: 10px;
+      }
+
+      &-button {
+        &.confirm {
+          background: var(--add);
+        }
+
+        &.cancel {
+          background: var(--cancel);
+        }
       }
     }
   }
