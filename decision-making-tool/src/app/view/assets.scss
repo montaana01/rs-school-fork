@@ -4,22 +4,26 @@ body {
   --add: #219d31;
   --bg-color: #273434;
   --text-color: #f5f5f7;
-}
 
-body.light {
-  --bg-color: #e9f1ff;
-  --text-color: #1d1d1f;
-  --text-color-inverted: #f5f5f7;
-  --footer-color: #43b2b2;
-  --options-bg-color: #e3e9f2;
-}
+  &.light {
+    --bg-color: #e9f1ff;
+    --text-color: #1d1d1f;
+    --text-color-inverted: #f5f5f7;
+    --footer-color: #43b2b2;
+    --options-bg-color: #e3e9f2;
+  }
 
-body.dark {
-  --bg-color: #273434;
-  --text-color: #f5f5f7;
-  --text-color-inverted: #1d1d1f;
-  --footer-color: #faebd7ff;
-  --options-bg-color: #638484;
+  &.dark {
+    --bg-color: #273434;
+    --text-color: #f5f5f7;
+    --text-color-inverted: #1d1d1f;
+    --footer-color: #faebd7ff;
+    --options-bg-color: #638484;
+  }
+
+  &.fixed {
+    overflow: hidden;
+  }
 }
 
 a {

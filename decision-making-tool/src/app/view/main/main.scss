@@ -48,6 +48,13 @@
 
           width: 100%;
 
+          &-id {
+            border-radius: 2px;
+            line-height: 20px;
+            color: var(--text-color-inverted);
+            background: var(--footer-color);
+          }
+
           .delete {
             background: var(--delete);
           }
