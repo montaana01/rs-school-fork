@@ -2,7 +2,7 @@ import type { ElementCreatorType } from '../types/ElementCreatorType.ts';
 import type { SettingsType } from '../types/SettingsType.ts';
 
 export default class HtmlElementCreator implements ElementCreatorType {
-  public element: HTMLElement;
+  public element: HTMLElement | HTMLDialogElement;
 
   constructor(settings: SettingsType) {
     this.element = HTMLElement;
@@ -40,6 +40,12 @@ export default class HtmlElementCreator implements ElementCreatorType {
 
   public getCreatedElement(): HTMLElement {
     return this.element;
+  }
+
+  public removeInnerElements(): void {
+    while (this.element.firstChild) {
+      this.element.removeChild(this.element.firstChild);
+    }
   }
 
   public addInnerHtmlElement(element: HTMLElement): void {
