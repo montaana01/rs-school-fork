@@ -7,6 +7,7 @@ import StorageManager from '../../../services/storageManager';
 import ModalWindow from '../modal/modalView';
 import SoundManager from '../../../services/soundManager.ts';
 import type { OptionsListItemsType } from '../../../types/OptionsListItemsType';
+import { WheelManager } from '../../../services/wheelManager.ts';
 
 export default class DecisionMainStateView extends View {
   private storageManager: StorageManager = StorageManager.getInstance();
@@ -16,9 +17,12 @@ export default class DecisionMainStateView extends View {
   private pickButtonView: HTMLElement = HTMLElement;
   private readonly durationSettings: SettingsType;
   private readonly durationInputView: HtmlInputElementCreator;
-  private canvasElement: HTMLElement = HTMLElement;
+  private canvasElement: HTMLCanvasElement;
   private storageKey: string = 'options';
   private decisionState: string;
+  private wheelManager: WheelManager | null = null;
+  private pickedWheelElement: HTMLElement | null = null;
+  private currentOption: OptionsListItemsType | null = null;
 
   constructor() {
     const mainWrapperSettings: SettingsType = {
@@ -76,7 +80,7 @@ export default class DecisionMainStateView extends View {
       this.pickButtonView,
     ];
 
-    controls.forEach((control) => {
+    controls.forEach((control: HTMLElement) => {
       if (control) {
         control.tabIndex = disabled ? -1 : 0;
         control.classList.toggle('disabled', disabled);
@@ -106,7 +110,7 @@ export default class DecisionMainStateView extends View {
 
     controlPanel.addInnerHtmlElement(this.durationInputView.getCreatedElement());
 
-    const pickButtonView: ButtonView = new ButtonView(
+    const pickButton: ButtonView = new ButtonView(
       'Pick',
       (): void => {
         this.startPickingProcess();
@@ -116,38 +120,38 @@ export default class DecisionMainStateView extends View {
     this.pickButtonView = pickButton.getHTMLElement();
     controlPanel.addInnerHtmlElement(this.pickButtonView);
 
-    const pickedOptionSettings: SettingsType = {
-      tagName: 'div',
-      classNames: ['main__wrapper-item__controls-subtitle'],
-      textContent: 'Please set up the picking process.',
-    };
-    controlPanel.addInnerHtmlCreatorElement(new HtmlElementCreator(pickedOptionSettings));
+    controlPanel.addInnerHtmlCreatorElement(this.getPickedWheelOptionView());
     return controlPanel;
   }
 
+  private getPickedWheelOptionView(): HtmlElementCreator {
+    const settings: SettingsType = {
+      tagName: 'div',
+      classNames: ['main__wrapper-item__controls-subtitle'],
+    };
+    const element: HtmlElementCreator = new HtmlElementCreator(settings);
+    this.pickedWheelElement = element.getCreatedElement();
+    this.updatePickedDisplay();
+    return element;
+  }
+
   private startPickingProcess(): void {
+    if (this.decisionState !== 'initial' && this.decisionState !== 'picked') return;
+
+    const duration: number = Number(this.durationInputView.element.value);
+    if (duration < 5) {
+      new ModalWindow('Duration must be at least 5 seconds!');
+      return;
+    }
+
     this.decisionState = 'picking';
     this.storageManager.save('pageState', this.decisionState);
     this.toggleControls(true);
+    this.updatePickedDisplay();
 
-    // todo: write disable and enable controls function
-    //this.disableControls();
-
-    this.duration = Number(this.durationInputView.element.value);
-    if (!this.duration || this.duration < 5) new ModalWindow('Please enter duration >5 secs!');
-    // todo: write choosing process
-    const decisionData: OptionsListItemsType[] | null = this.storageManager.load(this.storageKey);
-    if (!Array.isArray(decisionData) || decisionData.length === 0) {
-      new ModalWindow("We don't have any information in localStorage");
-      return;
+    if (this.wheelManager) {
+      this.wheelManager.spin(duration);
     }
-    const dataText: string = decisionData
-      .map((item: OptionsListItemsType) => `ID: ${item.id}, Title: "${item.title}", Weight: ${item.weight}`)
-      .join('');
-
-    new ModalWindow(`This part of task is not realised! Duration ${this.duration} s 
-      And ${this.storageKey} = ${dataText}
-    `);
   }
 
   private getCanvasElementView(): HtmlElementCreator {
@@ -157,9 +161,60 @@ export default class DecisionMainStateView extends View {
     };
     const canvasElementView: HtmlElementCreator = new HtmlElementCreator(canvasSettings);
 
-    // todo: implement creating canvas element that consist of stored data from list of options view
-    this.canvasElement = canvasElementView.getCreatedElement();
-    this.canvasElement.setAttribute('height', '100');
+    const element = canvasElementView.getCreatedElement();
+    if (element instanceof HTMLCanvasElement) {
+      this.canvasElement = element;
+    } else {
+      throw new Error('Canvas element was not created correctly');
+    }
+
+    this.canvasElement.setAttribute('height', '400');
+    this.canvasElement.setAttribute('width', '400');
+    this.initializeWheel();
+
     return canvasElementView;
+  }
+
+  private updatePickedDisplay(): void {
+    if (!this.pickedWheelElement) return;
+    switch (this.decisionState) {
+      case 'initial':
+        this.pickedWheelElement.textContent = 'Please set up the picking process!';
+        this.pickedWheelElement.classList.remove('highlight');
+        break;
+      case 'picking':
+        this.pickedWheelElement.textContent = this.currentOption?.title || 'Spinning...';
+        this.pickedWheelElement.classList.remove('highlight');
+        break;
+      case 'picked':
+        this.pickedWheelElement.textContent = this.currentOption?.title || '';
+        this.pickedWheelElement.classList.add('highlight');
+        break;
+    }
+  }
+
+  private initializeWheel(): void {
+    const decisionData: OptionsListItemsType[] =
+      this.storageManager.load<OptionsListItemsType[]>(this.storageKey) || [];
+    const validOptions = decisionData.filter((opt) => opt.title && opt.weight > 0);
+
+    const canvas: HTMLCanvasElement = this.canvasElement;
+
+    this.wheelManager = new WheelManager(
+      canvas,
+      validOptions,
+      (option) => {
+        this.currentOption = option;
+        this.updatePickedDisplay();
+      },
+      (option: OptionsListItemsType) => {
+        this.decisionState = 'picked';
+        this.storageManager.save('pageState', this.decisionState);
+        this.storageManager.save('decisionWin', option);
+        this.updatePickedDisplay();
+        this.toggleControls(false);
+        if (!this.soundManager.isSoundMuted()) this.soundManager.play();
+      },
+    );
   }
 }
