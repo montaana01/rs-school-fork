@@ -2,13 +2,15 @@ import StorageManager from './storageManager';
 
 export default class SoundManager {
   private static instance: SoundManager;
+  public isMuted: boolean;
+  private audio: HTMLAudioElement;
   private storageManager: StorageManager;
-  private isMuted: boolean;
   private soundButton!: HTMLElement;
 
   private constructor() {
     this.storageManager = StorageManager.getInstance();
     this.isMuted = !!this.storageManager.load('mute');
+    this.audio = new Audio('/sound/win.wav');
   }
 
   public static getInstance(): SoundManager {
@@ -32,6 +34,12 @@ export default class SoundManager {
 
   public isSoundMuted(): boolean {
     return this.isMuted;
+  }
+
+  public play(): void {
+    this.audio.currentTime = 0;
+    this.audio.volume = 0.11;
+    this.audio.play();
   }
 
   private updateButton(): void {
