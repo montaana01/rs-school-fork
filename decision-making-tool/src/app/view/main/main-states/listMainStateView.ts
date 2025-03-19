@@ -100,23 +100,35 @@ export default class ListMainStateView extends View {
     const addOptionButtonView: ButtonView = new ButtonView('Add Option', () => this.addOption());
     buttonsPanelView.addInnerHtmlElement(addOptionButtonView.getHTMLElement());
 
-    // todo: open modal when clicked in paste button
-    // const pasteListButtonView: ButtonView = new ButtonView('Paste List', () => this.pasteList());
-    // buttonsPanelView.addInnerHtmlElement(pasteListButtonView.getHTMLElement());
-
     const clearListButtonView: ButtonView = new ButtonView('Clear List', () => this.clearList(), ['clear']);
     buttonsPanelView.addInnerHtmlElement(clearListButtonView.getHTMLElement());
 
-    //todo: implement this function
-    // const saveJSONButtonView: ButtonView = new ButtonView('Save List to JSON', () => this.saveListToJSON());
-    // buttonsPanelView.addInnerHtmlElement(saveJSONButtonView.getHTMLElement());
-
-    //todo: implement this function
-    //const loadJSONButtonView: ButtonView = new ButtonView('Load List from JSON', () => this.loadListFromJSON());
-    //buttonsPanelView.addInnerHtmlElement(loadJSONButtonView.getHTMLElement());
-
     const startButtonView: ButtonView = new ButtonView('Start', () => this.startDecision(), ['start']);
     buttonsPanelView.addInnerHtmlElement(startButtonView.getHTMLElement());
+
+    const pasteListButtonView: ButtonView = new ButtonView(
+      'Paste List',
+      () => new ModalWindow('This part is not realised'),
+    );
+    // todo: open modal when clicked in paste button
+    // const pasteListButtonView: ButtonView = new ButtonView('Paste List', () => this.pasteList());
+    buttonsPanelView.addInnerHtmlElement(pasteListButtonView.getHTMLElement());
+
+    const saveJSONButtonView: ButtonView = new ButtonView(
+      'Save to JSON',
+      () => new ModalWindow('This part is not realised'),
+    );
+    //todo: implement this function
+    // const saveJSONButtonView: ButtonView = new ButtonView('Save to JSON', () => this.saveListToJSON());
+    buttonsPanelView.addInnerHtmlElement(saveJSONButtonView.getHTMLElement());
+
+    const loadJSONButtonView: ButtonView = new ButtonView(
+      'Load from JSON',
+      () => new ModalWindow('This part is not realised'),
+    );
+    //todo: implement this function
+    //const loadJSONButtonView: ButtonView = new ButtonView('Load List JSON', () => this.loadListFromJSON());
+    buttonsPanelView.addInnerHtmlElement(loadJSONButtonView.getHTMLElement());
 
     this.elementCreator.addInnerHtmlCreatorElement(buttonsPanelView);
     return buttonsPanelView;
