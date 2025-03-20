@@ -17,7 +17,7 @@ export default class ModalWindow extends View {
     super(overlaySettings);
 
     this.modalSettings = {
-      tagName: 'form',
+      tagName: 'div',
       classNames: ['main__wrapper-modal-window'],
     };
     this.closeButtonSettings = {

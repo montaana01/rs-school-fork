@@ -53,6 +53,8 @@
       }
 
       &-textarea {
+        resize: none;
+        grid-area: textarea;
         width: 100%;
         padding: 10px;
       }

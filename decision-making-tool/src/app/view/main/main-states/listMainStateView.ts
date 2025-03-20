@@ -6,6 +6,7 @@ import type { OptionsListItemsType } from '../../../types/OptionsListItemsType';
 import ButtonView from './../../basicElements/buttonView';
 import StorageManager from './../../../services/storageManager';
 import ModalWindow from '../modal/modalView';
+import PasteModalWindow from '../modal/pasteModalView.ts';
 
 export default class ListMainStateView extends View {
   private options: OptionsListItemsType[] = [];
@@ -102,12 +103,13 @@ export default class ListMainStateView extends View {
     const startButtonView: ButtonView = new ButtonView('Start', () => this.startDecision(), ['start']);
     buttonsPanelView.addInnerHtmlElement(startButtonView.getHTMLElement());
 
-    const pasteListButtonView: ButtonView = new ButtonView(
-      'Paste List',
-      () => new ModalWindow('This part is not realised'),
-    );
-    // todo: open modal when clicked in paste button
-    // const pasteListButtonView: ButtonView = new ButtonView('Paste List', () => this.pasteList());
+    const pasteListButtonView: ButtonView = new ButtonView('Paste List', () => {
+      new PasteModalWindow((newOptions: OptionsListItemsType[]) => {
+        this.options.push(...newOptions.map((option) => ({ ...option, id: (this.idCounter += 1) })));
+        this.saveOptions();
+        this.configureView();
+      });
+    });
     buttonsPanelView.addInnerHtmlElement(pasteListButtonView.getHTMLElement());
 
     const saveJSONButtonView: ButtonView = new ButtonView('Save to JSON', () => this.saveListToJSON());
