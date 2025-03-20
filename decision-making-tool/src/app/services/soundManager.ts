@@ -1,4 +1,5 @@
 import StorageManager from './storageManager';
+import sound from '/sound/win.wav';
 
 export default class SoundManager {
   private static instance: SoundManager;
@@ -10,7 +11,7 @@ export default class SoundManager {
   private constructor() {
     this.storageManager = StorageManager.getInstance();
     this.isMuted = !!this.storageManager.load('mute');
-    this.audio = new Audio('/sound/win.wav');
+    this.audio = new Audio(sound);
   }
 
   public static getInstance(): SoundManager {
