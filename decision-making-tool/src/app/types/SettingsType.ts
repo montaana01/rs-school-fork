@@ -8,4 +8,8 @@ export type SettingsType = {
   value?: string;
   placeholder?: string;
   type?: string;
+  cols?: number;
+  rows?: number;
+  textLength?: number;
+  wrap?: boolean;
 };
