@@ -7,8 +7,9 @@ export default class ModalWindow extends View {
   protected readonly modalSettings: SettingsType;
   protected readonly closeButtonSettings: SettingsType;
   protected readonly messageSettings: SettingsType;
+  private readonly autoClose: boolean;
 
-  constructor(message: string) {
+  constructor(message: string, autoClose = true) {
     const overlaySettings: SettingsType = {
       tagName: 'dialog',
       classNames: ['main__wrapper-modal-overlay'],
@@ -16,7 +17,7 @@ export default class ModalWindow extends View {
     super(overlaySettings);
 
     this.modalSettings = {
-      tagName: 'div',
+      tagName: 'form',
       classNames: ['main__wrapper-modal-window'],
     };
     this.closeButtonSettings = {
@@ -29,6 +30,8 @@ export default class ModalWindow extends View {
       classNames: ['main__wrapper-modal-message'],
       textContent: message,
     };
+
+    this.autoClose = autoClose;
 
     this.configureView();
   }
@@ -55,7 +58,9 @@ export default class ModalWindow extends View {
     document.addEventListener('keydown', this.handleEscape);
     overlay.addEventListener('click', this.handleOutsideClick);
 
-    setTimeout(() => this.close(), 10000);
+    if (this.autoClose) {
+      setTimeout(() => this.close(), 10000);
+    }
   }
 
   protected handleEscape = (event: KeyboardEvent): void => {
