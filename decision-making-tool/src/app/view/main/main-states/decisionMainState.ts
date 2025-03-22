@@ -21,7 +21,7 @@ export default class DecisionMainStateView extends View {
   private storageKey: string = 'options';
   private decisionState: string;
   private wheelManager: WheelManager | null = null;
-  private pickedWheelElement: HTMLElement | null = null;
+  private pickedWheelElement!: HtmlElementCreator;
   private currentOption!: OptionsListItemsType;
 
   constructor() {
@@ -130,10 +130,9 @@ export default class DecisionMainStateView extends View {
       tagName: 'div',
       classNames: ['main__wrapper-item__controls-subtitle'],
     };
-    const element: HtmlElementCreator = new HtmlElementCreator(settings);
-    this.pickedWheelElement = element.getCreatedElement();
+    this.pickedWheelElement = new HtmlElementCreator(settings);
     this.updatePickedDisplay();
-    return element;
+    return this.pickedWheelElement;
   }
 
   private startPickingProcess(): void {
@@ -180,16 +179,20 @@ export default class DecisionMainStateView extends View {
     if (!this.pickedWheelElement) return;
     switch (this.decisionState) {
       case 'initial':
-        this.pickedWheelElement.textContent = 'Please set up the picking process!';
-        this.pickedWheelElement.classList.remove('highlight');
+        this.pickedWheelElement.setTextContent('Please set up the picking process!');
+        this.pickedWheelElement.removeClassNames(['highlight']);
         break;
       case 'picking':
-        this.pickedWheelElement.textContent = this.currentOption?.title || 'Spinning...';
-        this.pickedWheelElement.classList.remove('highlight');
+        this.currentOption?.title
+          ? this.pickedWheelElement.setTextContent(this.currentOption?.title)
+          : this.pickedWheelElement.setTextContent('Spinning...');
+        this.pickedWheelElement.removeClassNames(['highlight']);
         break;
       case 'picked':
-        this.pickedWheelElement.textContent = this.currentOption?.title || '';
-        this.pickedWheelElement.classList.add('highlight');
+        this.currentOption?.title
+          ? this.pickedWheelElement.setTextContent(this.currentOption?.title)
+          : this.pickedWheelElement.setTextContent('Spinning...');
+        this.pickedWheelElement.removeClassNames(['highlight']);
         break;
     }
   }
