@@ -35,6 +35,7 @@ export default class DecisionMainStateView extends View {
     this.durationSettings = {
       tagName: 'input',
       classNames: ['main__wrapper-item__controls-input'],
+      value: '5',
       placeholder: 'Duration (sec)',
       type: 'number',
     };
