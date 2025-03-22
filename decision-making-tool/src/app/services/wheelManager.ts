@@ -154,14 +154,14 @@ export class WheelManager {
   }
 
   private drawPointer(): void {
-    const pointerHeight = 20;
-    const pointerWidth = 30;
-    const offsetY = 10;
+    const pointerHeight: number = 20;
+    const pointerWidth: number = 30;
+    const offsetY: number = 10;
 
     this.content.beginPath();
-    this.content.moveTo(this.centerX, this.centerY - this.radius - offsetY);
-    this.content.lineTo(this.centerX - pointerWidth / 2, this.centerY - this.radius - offsetY + pointerHeight);
-    this.content.lineTo(this.centerX + pointerWidth / 2, this.centerY - this.radius - offsetY + pointerHeight);
+    this.content.moveTo(this.centerX, this.centerY - this.radius + 2 * offsetY);
+    this.content.lineTo(this.centerX + pointerWidth / 2, this.centerY - this.radius + offsetY - pointerHeight);
+    this.content.lineTo(this.centerX - pointerWidth / 2, this.centerY - this.radius + offsetY - pointerHeight);
     this.content.closePath();
 
     this.content.fillStyle = '#638484';
