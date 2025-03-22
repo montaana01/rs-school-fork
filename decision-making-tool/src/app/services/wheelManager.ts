@@ -17,7 +17,7 @@ export class WheelManager {
   constructor(
     private readonly canvas: HTMLCanvasElement,
     private readonly options: OptionsListItemsType[],
-    private readonly onOptionChange: (option: OptionsListItemsType | null) => void,
+    private readonly onOptionChange: (option: OptionsListItemsType) => void,
     private readonly onSpinComplete: (option: OptionsListItemsType) => void,
   ) {
     this.content = canvas.getContext('2d')!;

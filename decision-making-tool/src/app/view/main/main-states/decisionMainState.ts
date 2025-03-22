@@ -22,7 +22,7 @@ export default class DecisionMainStateView extends View {
   private decisionState: string;
   private wheelManager: WheelManager | null = null;
   private pickedWheelElement: HTMLElement | null = null;
-  private currentOption: OptionsListItemsType | null = null;
+  private currentOption!: OptionsListItemsType;
 
   constructor() {
     const mainWrapperSettings: SettingsType = {
@@ -194,16 +194,17 @@ export default class DecisionMainStateView extends View {
   }
 
   private initializeWheel(): void {
-    const decisionData: OptionsListItemsType[] =
-      this.storageManager.load<OptionsListItemsType[]>(this.storageKey) || [];
-    const validOptions = decisionData.filter((opt) => opt.title && opt.weight > 0);
+    const decisionData: OptionsListItemsType[] = this.storageManager.load(this.storageKey) || [];
+    const validOptions: OptionsListItemsType[] = decisionData.filter(
+      (option: OptionsListItemsType) => option.title && option.weight > 0,
+    );
 
     const canvas: HTMLCanvasElement = this.canvasElement;
 
     this.wheelManager = new WheelManager(
       canvas,
       validOptions,
-      (option) => {
+      (option: OptionsListItemsType) => {
         this.currentOption = option;
         this.updatePickedDisplay();
       },
