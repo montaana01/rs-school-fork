@@ -9,6 +9,7 @@ export class WheelManager {
   private spinStartTime: number = 0;
   private spinDuration: number = 5000;
   private selectedIndex: number = -1;
+  private normalized: number = 0;
   private readonly totalWeight: number;
   private readonly centerX: number;
   private readonly centerY: number;
@@ -38,11 +39,11 @@ export class WheelManager {
     const startRotation: number = this.currentRotation;
     const totalSpins: number = 7;
 
-    const selectedSection = this.sections[Math.floor(Math.random() * this.sections.length)];
+    const selectedSection: WheelSection = this.sections[Math.floor(Math.random() * this.sections.length)];
     if (!selectedSection) return;
-    const middleAngle = (selectedSection.startAngle + selectedSection.endAngle) / 2;
-    const markerAngle = -Math.PI / 2;
-    let targetRotation = totalSpins * 2 * Math.PI + middleAngle - markerAngle;
+    const middleAngle: number = (selectedSection.startAngle + selectedSection.endAngle) / 2;
+    const markerAngle: number = -Math.PI / 2;
+    const targetRotation: number = totalSpins * 2 * Math.PI + middleAngle + markerAngle;
 
     const animate = (): void => {
       if (!this.isSpinning) return;
@@ -52,9 +53,8 @@ export class WheelManager {
         this.currentRotation = targetRotation % (2 * Math.PI);
         this.isSpinning = false;
         this.draw();
-
-        const selected: OptionsListItemsType | null = this.getSelectedOption();
-        if (selected) this.onSpinComplete(selected);
+        const selected: WheelSection = this.getSelectedOption();
+        if (selected) this.onSpinComplete(selected.option);
         return;
       }
 
@@ -187,12 +187,30 @@ export class WheelManager {
     return text + '...';
   }
 
-  private updateSelectedOption(): void {
-    let angle: number = this.currentRotation % (2 * Math.PI);
-    if (angle < 0) angle += 2 * Math.PI;
+  private normalizeAngle(angle: number): number {
+    this.normalized = angle % (2 * Math.PI);
+    if (this.normalized < 0) {
+      this.normalized += 2 * Math.PI;
+    }
+    return this.normalized;
+  }
 
-    const selectedSection: WheelSection | undefined = this.sections.find(
-      (section: WheelSection): boolean => angle >= section.startAngle && angle < section.endAngle,
+  private isAngleInSector(angle: number, start: number, end: number): boolean {
+    const normAngle: number = this.normalizeAngle(angle);
+    const normStart: number = this.normalizeAngle(start);
+    const normEnd: number = this.normalizeAngle(end);
+    if (normStart < normEnd) {
+      return normAngle >= normStart && normAngle < normEnd;
+    } else {
+      return normAngle >= normStart || normAngle < normEnd;
+    }
+  }
+
+  private updateSelectedOption(): void {
+    const markerAngle: number = -Math.PI / 2;
+    const pointerRelativeAngle: number = this.normalizeAngle(markerAngle - this.currentRotation);
+    const selectedSection: WheelSection | undefined = this.sections.find((section: WheelSection) =>
+      this.isAngleInSector(pointerRelativeAngle, section.startAngle, section.endAngle),
     );
 
     if (selectedSection) {
@@ -204,17 +222,15 @@ export class WheelManager {
     }
   }
 
-  private getSelectedOption(): OptionsListItemsType | null {
-    let angle: number = ((-this.currentRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-
+  private getSelectedOption(): WheelSection {
     const markerAngle: number = -Math.PI / 2;
-
-    const selectedSection: WheelSection | undefined = this.sections.find(
-      (section: WheelSection): boolean =>
-        angle >= (section.startAngle + markerAngle) % (2 * Math.PI) &&
-        angle < (section.endAngle + markerAngle) % (2 * Math.PI),
+    const pointerRelativeAngle: number = this.normalizeAngle(markerAngle - this.currentRotation);
+    const selectedSection: WheelSection | undefined = this.sections.find((section: WheelSection) =>
+      this.isAngleInSector(pointerRelativeAngle, section.startAngle, section.endAngle),
     );
-
-    return selectedSection ? selectedSection.option : null;
+    if (!selectedSection) {
+      throw new Error('No section found for the given pointer angle');
+    }
+    return selectedSection;
   }
 }
