@@ -4,10 +4,17 @@
     "order/properties-alphabetical-order": true,
     "color-named": "never",
     "color-no-hex": true,
-    "function-allowed-list": ["var"],
+    "function-allowed-list": ["var","calc"],
     "length-zero-no-unit": true,
     "no-empty-source": true,
     "no-duplicate-selectors": true,
-    "max-empty-lines": 1
-  }
+  },
+  "overrides": [
+    {
+      "files": ["assets.scss"],
+      "rules": {
+        "color-no-hex": null
+      }
+    }
+  ]
 }

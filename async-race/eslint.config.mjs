@@ -11,7 +11,7 @@ export default [
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: eslintParser,
-      sourceType: "module",
+      sourceType: 'module',
     },
     plugins: {
       '@typescript-eslint': eslintPlugin,

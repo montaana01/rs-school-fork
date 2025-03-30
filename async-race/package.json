@@ -10,6 +10,8 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "preview": "vite preview",
+    "stylelint": "stylelint '**/*.{css,scss}'",
+    "stylelint:fix": "stylelint '**/*.{css,scss}' --fix",
     "prepare": "cd .. && husky ./async-race/.husky"
   },
   "devDependencies": {
@@ -23,12 +25,14 @@
     "husky": "^9.1.7",
     "prettier": "^3.5.3",
     "sass": "^1.86.0",
+    "stylelint-config-clean-order": "^7.0.0",
+    "stylelint-config-standard": "^37.0.0",
     "typescript": "~5.7.2",
     "vite": "^6.2.0"
   },
   "lint-staged": {
     "async-race/**/*.ts": "npx eslint --config ./async-race/eslint.config.mjs --fix",
-    "async-race/**/*.{css,scss}": "npx stylelint --config ./async-race/.stylelintrc --fix",
+    "async-race/**/*.{css,scss}": "npx stylelint --fix",
     "async-race/**/*.{ts,css,scss}": "npx prettier --config ./async-race/.prettierrc --write"
   },
   "commitlint": {
