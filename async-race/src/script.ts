@@ -3,4 +3,4 @@ import App from './app/app.ts';
 
 const app: App = new App();
 
-app.createView();
+app.startApp();
