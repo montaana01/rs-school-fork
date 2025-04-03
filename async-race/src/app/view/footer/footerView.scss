@@ -1,0 +1,24 @@
+.footer {
+  background: var(--footer-color);
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 80px;
+    padding: 0 60px;
+
+    color: var(--text-color-inverted);
+
+    &-item {
+      height: 60px;
+      font-size: 18px;
+    }
+
+    p {
+      height: 80px;
+      line-height: 80px;
+    }
+  }
+}
