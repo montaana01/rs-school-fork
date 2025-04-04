@@ -8,6 +8,7 @@ body {
   &.light {
     --bg-color: #f1f1f1;
     --text-color: #333;
+    --logo-color: #231b17;
     --text-color-inverted: #fff;
     --footer-color: #ffa500;
     --options-bg-color: #e63946;
@@ -16,6 +17,7 @@ body {
   &.dark {
     --bg-color: #1d1d1d;
     --text-color: #fff;
+    --logo-color: #ba3224;
     --text-color-inverted: #333;
     --footer-color: #ffa500;
     --options-bg-color: #e63946;
