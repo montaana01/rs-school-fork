@@ -4,10 +4,10 @@ import StorageManager from './services/StorageManager.ts';
 import ErrorStateView from './view/main/states/ErrorStateView.ts';
 
 const STORAGE_KEY: string = 'route';
-const ROUTES: Record<string, () => HTMLElement> = {
-  '/': (): HTMLElement => new GarageStateView().getGarage(),
-  '/garage': (): HTMLElement => new GarageStateView().getGarage(),
-  '/winners': (): HTMLElement => new WinnersStateView().getWinners(),
+const ROUTES: Record<string, () => Promise<HTMLElement>> = {
+  '/': (): Promise<HTMLElement> => new GarageStateView().getGarage(),
+  '/garage': (): Promise<HTMLElement> => new GarageStateView().getGarage(),
+  '/winners': (): Promise<HTMLElement> => new WinnersStateView().getWinners(),
 };
 
 export default class Router {
@@ -22,25 +22,26 @@ export default class Router {
     window.addEventListener('load', this.handleRouteChange.bind(this));
   }
 
-  public navigate(path: string, updateHistory: boolean = true): void {
+  public async navigate(path: string, updateHistory: boolean = true): Promise<void> {
     if (updateHistory) {
       window.history.pushState({}, '', path);
     }
     this.storageManager.save(STORAGE_KEY, path);
-    this.handleRouteChange();
+    await this.handleRouteChange();
   }
 
-  private handleRouteChange(): void {
+  private async handleRouteChange(): Promise<void> {
     const currentPath: string = window.location.pathname;
-    const containerView = ROUTES[currentPath] || this.getErrorView.bind(this);
+    const routeFunction = ROUTES[currentPath] || this.getErrorView.bind(this);
+    const view: HTMLElement = await routeFunction();
 
     while (this.container.firstChild) {
       this.container.removeChild(this.container.firstChild);
     }
-    this.container.appendChild(containerView());
+    this.container.appendChild(view);
   }
 
-  private getErrorView(): HTMLElement {
+  private async getErrorView(): Promise<HTMLElement> {
     const errorView: ErrorStateView = new ErrorStateView('Error: Page not found!');
     errorView.homeButton.getCreatedElement().addEventListener('click', () => {
       this.navigate('/');
