@@ -4,10 +4,10 @@
     "order/properties-alphabetical-order": true,
     "color-named": "never",
     "color-no-hex": true,
-    "function-allowed-list": ["var","calc"],
+    "function-allowed-list": ["var","calc","translate","rgb"],
     "length-zero-no-unit": true,
     "no-empty-source": true,
-    "no-duplicate-selectors": true,
+    "no-duplicate-selectors": true
   },
   "overrides": [
     {
