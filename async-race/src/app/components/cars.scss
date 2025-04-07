@@ -1,0 +1,75 @@
+.cars {
+  &__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+
+    &-item {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+
+      &-position {
+        padding: 0 10px 0 0;
+      }
+
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        &__bb {
+          display: flex;
+          gap: 16px;
+          justify-content: flex-start;
+
+          &-brand {
+            font-size: 22px;
+            line-height: 22px;
+            text-transform: capitalize;
+          }
+
+          &-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+
+            &-item {
+              padding: 1px 3px;
+              font-size: 16px;
+            }
+
+            & .select {
+              background-color: var(--logo-color);
+            }
+
+            & .remove {
+              background-color: var(--delete);
+            }
+
+            & .start {
+              background-color: var(--add);
+            }
+
+            & .stop {
+              background-color: var(--cancel);
+            }
+          }
+        }
+
+        &__track {
+          display: flex;
+          justify-content: flex-start;
+          width: 100%;
+          border-bottom: 2px solid var(--border);
+
+          &-img {
+            height: 60px;
+          }
+        }
+      }
+    }
+  }
+}
