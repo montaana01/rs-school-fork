@@ -6,10 +6,11 @@ import ImageElementCreator from '../../factory/html/ImageElementCreator';
 const APP_NAME: string = 'Async Race';
 
 export default class HeaderView {
+  public garageButton!: BaseElementCreator<'button'>;
+  public winnersButton!: BaseElementCreator<'button'>;
+  public logoWrapper!: BaseElementCreator<'div'>;
   public themeToggle!: BaseElementCreator<'button'>;
   private header: BaseElementCreator<'header'>;
-  private garageButton!: BaseElementCreator<'button'>;
-  private winnersButton!: BaseElementCreator<'button'>;
   private logo!: BaseElementCreator<'img'>;
   private appName!: BaseElementCreator<'h1'>;
 
@@ -58,7 +59,7 @@ export default class HeaderView {
   }
 
   private createLogoView(): BaseElementCreator<'div'> {
-    const wrapper: BaseElementCreator<'div'> = new BaseElementCreator({
+    this.logoWrapper = new BaseElementCreator({
       tagName: 'div',
       classNames: ['header__wrapper-item', 'header__wrapper-item-logo', 'link'],
     });
@@ -76,10 +77,10 @@ export default class HeaderView {
       textContent: APP_NAME,
     });
 
-    wrapper.addInnerElement(this.logo.getCreatedElement());
-    wrapper.addInnerElement(this.appName.getCreatedElement());
+    this.logoWrapper.addInnerElement(this.logo.getCreatedElement());
+    this.logoWrapper.addInnerElement(this.appName.getCreatedElement());
 
-    return wrapper;
+    return this.logoWrapper;
   }
 
   private createButtons(): BaseElementCreator<'ul'> {

@@ -21,7 +21,7 @@ export default class StorageManager implements StorageType {
 
   public load<T>(key: string): T {
     const storedData: string | null = this.localStorage.getItem(key);
-    return storedData ? JSON.parse(storedData) : "We don't have any stored data";
+    return storedData ? JSON.parse(storedData) : null;
   }
 
   public remove(key: string): void {

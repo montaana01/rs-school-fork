@@ -1,0 +1,17 @@
+.main {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+
+    &-item {
+      &__title {
+        text-align: center;
+      }
+    }
+  }
+}

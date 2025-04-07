@@ -1,4 +1,4 @@
-import StorageManager from './../services/storageManager';
+import StorageManager from './StorageManager.ts';
 
 enum ThemeEnum {
   Dark = 'dark',
