@@ -10,7 +10,13 @@
 
     &-item {
       &__title {
+        font-size: 18px;
+        font-weight: 300;
         text-align: center;
+      }
+
+      &__cars {
+        width: 100%;
       }
     }
   }

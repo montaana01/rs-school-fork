@@ -2,32 +2,26 @@ import BaseElementCreator from '../../../factory/html/BaseElementCreator.ts';
 
 export default class ErrorStateView {
   public homeButton!: BaseElementCreator<'button'>;
-  private container: BaseElementCreator<'div'>;
   private section: BaseElementCreator<'section'>;
   private readonly message: string;
 
   constructor(message: string = 'Error: 404') {
-    this.container = new BaseElementCreator({
-      tagName: 'div',
-      classNames: ['container'],
-    });
     this.section = new BaseElementCreator({
       tagName: 'section',
       classNames: ['main__wrapper'],
     });
-    this.container.addInnerElement(this.section.getCreatedElement());
     this.message = message;
 
     this.createView();
   }
 
   public getError(): HTMLElement {
-    return this.container.getCreatedElement();
+    return this.section.getCreatedElement();
   }
 
   private createView(): void {
-    const text: BaseElementCreator<'p'> = new BaseElementCreator({
-      tagName: 'p',
+    const text: BaseElementCreator<'h2'> = new BaseElementCreator({
+      tagName: 'h2',
       classNames: ['main__wrapper-item__title'],
       textContent: this.message,
     });

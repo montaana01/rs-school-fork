@@ -1,7 +1,14 @@
 .cars {
+  &__counter {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
+
   &__wrapper {
     display: flex;
     flex-flow: column nowrap;
+    row-gap: 8px;
 
     &-item {
       display: flex;
@@ -11,6 +18,8 @@
 
       &-position {
         padding: 0 10px 0 0;
+        font-size: 26px;
+        font-weight: 400;
       }
 
       &-wrapper {
@@ -26,6 +35,7 @@
 
           &-brand {
             font-size: 22px;
+            font-weight: 200;
             line-height: 22px;
             text-transform: capitalize;
           }
@@ -62,11 +72,13 @@
         &__track {
           display: flex;
           justify-content: flex-start;
+
           width: 100%;
+          padding-top: 4px;
           border-bottom: 2px solid var(--border);
 
           &-img {
-            height: 60px;
+            height: 50px;
           }
         }
       }

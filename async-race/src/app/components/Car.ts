@@ -33,8 +33,8 @@ export default class Car {
       classNames: ['cars__wrapper-item', 'car'],
     });
 
-    const position: BaseElementCreator<'h2'> = new BaseElementCreator({
-      tagName: 'h2',
+    const position: BaseElementCreator<'h3'> = new BaseElementCreator({
+      tagName: 'h3',
       classNames: ['cars__wrapper-item-position'],
       textContent: this.id.toString(),
     });
@@ -66,8 +66,8 @@ export default class Car {
     });
     const buttons: BaseElementCreator<'div'> = this.getButtons();
 
-    buttonsAndBrands.addInnerElement(brand.getCreatedElement());
     buttonsAndBrands.addInnerElement(buttons.getCreatedElement());
+    buttonsAndBrands.addInnerElement(brand.getCreatedElement());
 
     return buttonsAndBrands;
   }
