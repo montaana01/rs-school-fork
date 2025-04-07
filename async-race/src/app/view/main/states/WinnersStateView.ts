@@ -5,7 +5,7 @@ export default class WinnersStateView {
   constructor() {
     this.car = new Car('winners', 'winners-test-color', 1);
   }
-  public getWinners(): HTMLElement {
+  public async getWinners(): Promise<HTMLElement> {
     return this.car.getCar();
   }
 }
