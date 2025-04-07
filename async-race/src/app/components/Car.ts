@@ -115,7 +115,7 @@ export default class Car {
     const carImage: BaseElementCreator<'img'> = new ImageElementCreator({
       tagName: 'img',
       classNames: ['cars__wrapper-item-wrapper__track-img', 'link', this.color],
-      src: '/cars/porsche.svg',
+      src: './cars/porsche.svg',
       alt: this.name,
     });
     racetrack.addInnerElement(carImage.element);

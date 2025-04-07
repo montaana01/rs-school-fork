@@ -67,7 +67,7 @@ export default class HeaderView {
     this.logo = new ImageElementCreator({
       tagName: 'img',
       classNames: ['header__wrapper-item'],
-      src: '/icons/app-logo.svg',
+      src: './icons/app-logo.svg',
       alt: APP_NAME,
     });
 

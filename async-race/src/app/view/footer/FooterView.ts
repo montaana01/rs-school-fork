@@ -42,7 +42,7 @@ export default class FooterView {
       tagName: 'img',
       classNames: ['footer__wrapper-item', 'link'],
       callback: (): Window | null => window.open('https://github.com/montaana01', '_blank'),
-      src: '/icons/github.svg',
+      src: './icons/github.svg',
       alt: 'Github icon',
     });
 
@@ -56,7 +56,7 @@ export default class FooterView {
       tagName: 'img',
       classNames: ['footer__wrapper-item', 'link'],
       callback: (): Window | null => window.open('https://rs.school', '_blank'),
-      src: '/icons/rss-logo.svg',
+      src: './icons/rss-logo.svg',
       alt: 'Made in Rolling Scopes School',
     });
 
