@@ -58,7 +58,7 @@
 
           position: absolute;
           top: 20px;
-          right: 13px;
+          right: 45px;
 
           border-left: 2px var(--border) solid;
 
@@ -70,7 +70,7 @@
 
           position: absolute;
           top: 45px;
-          right: 53px;
+          right: 85px;
 
           width: 1px;
           height: calc(100% - 47px);
@@ -95,6 +95,35 @@
 
         &-tr {
           margin-bottom: 10px;
+        }
+
+        &-car {
+          width: 90px;
+          height: 40px;
+          margin: 0 auto;
+          border-radius: 5px;
+
+          background: var(--track-bcakground);
+          box-shadow: 0 2px 8px var(--backdrop);
+
+          svg {
+            width: 80px;
+            height: 40px;
+
+            g {
+              g {
+                path {
+                  fill: var(--car-color);
+                }
+              }
+
+              #rearwheel,
+              #frontwheel {
+                fill: var(--car-color);
+                stroke: var(--black);
+              }
+            }
+          }
         }
       }
 

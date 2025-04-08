@@ -80,19 +80,42 @@
           justify-content: flex-start;
 
           width: 100%;
-          height: 40px;
+          height: 45px;
           padding-top: 4px;
           border-bottom: 2px dashed var(--border);
 
+          background: var(--track-bcakground);
+          box-shadow: 0 2px 8px var(--backdrop);
+
           &-img {
             position: absolute;
-            top: 0;
+            bottom: 0;
             transform: translateX(0);
 
-            height: 50px;
+            width: 80px;
+            height: 40px;
 
             transition: transform linear;
             transition-duration: 0ms;
+
+            svg {
+              width: 80px;
+              height: 40px;
+
+              g {
+                g {
+                  path {
+                    fill: var(--car-color);
+                  }
+                }
+              }
+
+              #rearwheel,
+              #frontwheel {
+                fill: var(--car-color);
+                stroke: var(--black);
+              }
+            }
 
             &.initial {
               transform: translateX(0);

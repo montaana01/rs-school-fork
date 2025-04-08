@@ -4,6 +4,7 @@ import RaceApi from '../../../api/RaceApi';
 import BaseElementCreator from '../../../factory/html/BaseElementCreator';
 import Pagination from '../../../components/Pagination.ts';
 import type { CarType } from '../../../types/CarType.ts';
+import Car from '../../../components/Car.ts';
 
 export default class WinnersStateView {
   private container: BaseElementCreator<'div'>;
@@ -150,7 +151,7 @@ export default class WinnersStateView {
       const row: BaseElementCreator<'tr'> = this.createRow();
 
       const numberCell: BaseElementCreator<'td'> = this.createCell(`${(this.currentPage - 1) * 10 + index + 1}`);
-      const imageCell: BaseElementCreator<'td'> = this.createImageCell(car.color);
+      const imageCell: BaseElementCreator<'td'> = await this.createImageCell(car.id);
       const nameCell: BaseElementCreator<'td'> = this.createCell(car.name);
       const winsCell: BaseElementCreator<'td'> = this.createCell(`${winner.wins}`);
       const timeCell: BaseElementCreator<'td'> = this.createCell(winner.time.toFixed(2));
@@ -186,15 +187,25 @@ export default class WinnersStateView {
     });
   }
 
-  private createImageCell(color: string): BaseElementCreator<'td'> {
+  private async createImageCell(carId: number): Promise<BaseElementCreator<'td'>> {
     const imageCell: BaseElementCreator<'td'> = this.createCell('');
-    const image: BaseElementCreator<'img'> = new BaseElementCreator({
-      tagName: 'img',
-      classNames: [this.mainWrapperItemClass, 'main__wrapper-item__table-img'],
-    });
-    image.getCreatedElement().src = color;
-    image.getCreatedElement().alt = 'Car Image';
-    imageCell.addInnerElement(image.getCreatedElement());
+    try {
+      const car: CarType = await this.api.getCar(carId);
+      const carInstance: Car = new Car(car.name, car.color, car.id);
+      const carImageElement: BaseElementCreator<'div'> = carInstance.getCarImageElement();
+      carImageElement.removeClassNames(['cars__wrapper-item-wrapper__track-img']);
+      carImageElement.setClassNames([this.mainWrapperItemClass, 'main__wrapper-item__table-car']);
+      imageCell.addInnerElement(carImageElement.getCreatedElement());
+    } catch (error) {
+      console.error(`Ошибка загрузки данных для машины с ID ${carId}:`, error);
+      const fallbackImage: BaseElementCreator<'div'> = new BaseElementCreator({
+        tagName: 'div',
+        classNames: [this.mainWrapperItemClass, 'main__wrapper-item__table-td'],
+        textContent: 'Image Error',
+      });
+      imageCell.addInnerElement(fallbackImage.getCreatedElement());
+    }
+
     return imageCell;
   }
 }

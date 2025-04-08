@@ -154,7 +154,7 @@ export default class GarageStateView {
   }
 
   private calculateAnimation(
-    carImage: BaseElementCreator<'img'>,
+    carImage: BaseElementCreator<'div'>,
     duration: number,
     raceTrack: BaseElementCreator<'div'>,
   ): void {
@@ -194,7 +194,7 @@ export default class GarageStateView {
     return this.resetButton;
   }
 
-  private brokeCarOnTrack(elapsed: number, duration: number, carImage: BaseElementCreator<'img'>): void {
+  private brokeCarOnTrack(elapsed: number, duration: number, carImage: BaseElementCreator<'div'>): void {
     const progress: number = Math.min(1, elapsed / duration);
     carImage.getCreatedElement().dataset.progress = progress.toString();
     carImage.getCreatedElement().style.setProperty('--broken-x', `${progress * this.trackWidth}px`);
@@ -206,7 +206,7 @@ export default class GarageStateView {
   private updateTrackWidths(): void {
     this.carsArray.forEach((car: Car) => {
       const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
-      const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+      const carImage: BaseElementCreator<'div'> = car.getCarImageElement();
       if (raceTrack && carImage) {
         const newWidth: number = raceTrack.getCreatedElement().offsetWidth - carImage.getCreatedElement().offsetWidth;
         this.trackWidth = newWidth;
@@ -476,7 +476,7 @@ export default class GarageStateView {
         .then((engineData: { velocity: number; distance: number }) => {
           const { velocity, distance } = engineData;
           const duration: number = distance / velocity;
-          const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+          const carImage: BaseElementCreator<'div'> = car.getCarImageElement();
           const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
 
           this.calculateAnimation(carImage, duration, raceTrack);
@@ -534,7 +534,7 @@ export default class GarageStateView {
   private async stopCar(car: Car): Promise<void> {
     try {
       await this.api.startStopEngine(car.getCarId(), 'stopped');
-      const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+      const carImage: BaseElementCreator<'div'> = car.getCarImageElement();
       carImage.removeClassNames(['animate', 'broken']);
       carImage.setClassNames(['initial']);
     } catch (error) {

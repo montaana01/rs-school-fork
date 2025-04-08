@@ -1,7 +1,7 @@
 import './cars.scss';
+import car from './porsche.svg?raw';
 
 import BaseElementCreator from '../factory/html/BaseElementCreator';
-import ImageElementCreator from '../factory/html/ImageElementCreator';
 
 export default class Car {
   public selectButton!: BaseElementCreator<'button'>;
@@ -12,7 +12,7 @@ export default class Car {
   private car!: BaseElementCreator<'tr'>;
 
   private racetrack!: BaseElementCreator<'div'>;
-  private carImageElement!: BaseElementCreator<'img'>;
+  private carImageElement!: BaseElementCreator<'div'>;
 
   private readonly name: string;
   private readonly color: string;
@@ -38,7 +38,7 @@ export default class Car {
     return this.name;
   }
 
-  public getCarImageElement(): BaseElementCreator<'img'> {
+  public getCarImageElement(): BaseElementCreator<'div'> {
     return this.carImageElement;
   }
 
@@ -132,14 +132,16 @@ export default class Car {
       classNames: ['cars__wrapper-item-wrapper__track'],
     });
 
-    //todo: replace with svg with wheels and different colors
-    this.carImageElement = new ImageElementCreator({
-      tagName: 'img',
-      classNames: ['cars__wrapper-item-wrapper__track-img', this.color],
-      src: './cars/porsche.svg',
-      alt: this.name,
+    this.carImageElement = new BaseElementCreator({
+      tagName: 'div',
+      classNames: ['cars__wrapper-item-wrapper__track-img'],
     });
+
+    this.carImageElement.getCreatedElement().innerHTML = car;
+
+    this.carImageElement.getCreatedElement().style.setProperty('--car-color', this.color);
     this.racetrack.addInnerElement(this.carImageElement.getCreatedElement());
+
     return this.racetrack;
   }
 }
