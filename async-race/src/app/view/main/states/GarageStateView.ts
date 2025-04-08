@@ -1,4 +1,6 @@
 import type { CarType } from '../../../types/CarType';
+import type { CarJsonType } from '../../../types/CarJsonType.ts';
+import carsJson from '../../../components/cars.json';
 import Car from '../../../components/Car';
 import RaceApi from '../../../api/RaceApi';
 import BaseElementCreator from '../../../factory/html/BaseElementCreator';
@@ -130,11 +132,22 @@ export default class GarageStateView {
       classNames: ['main__wrapper-item__form-button', 'button', 'link'],
       textContent: 'Generate Cars',
     });
-    this.generateButton.getCreatedElement().addEventListener('click', async () => {
+    this.generateButton.getCreatedElement().addEventListener('click', async (): Promise<void> => {
       try {
-        //todo: implement this
-        await new Modal('trying to intecact with generate button');
-      } catch (error) {
+        const promises: Promise<CarType>[] = [];
+        for (let i: number = 0; i < 100; i += 1) {
+          const { brand, model }: CarJsonType = carsJson[Math.floor(Math.random() * carsJson.length)];
+          const carName: string = `${brand} ${model}`;
+          const carColor: string =
+            '#' +
+            Math.floor(Math.random() * 0xffffff)
+              .toString(16)
+              .padStart(6, '0');
+          promises.push(this.api.createCar(carName, carColor));
+        }
+        await Promise.all(promises);
+        await this.refreshGarage();
+      } catch (error: unknown) {
         new Modal(`Error while generating 100 cars: ${error}`);
       }
     });
