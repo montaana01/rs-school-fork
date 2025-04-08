@@ -78,8 +78,29 @@
         }
       }
 
+      &__table {
+        font-size: 20px;
+
+        &-thead {
+          font-weight: 400;
+        }
+
+        &-th {
+          padding: 10px;
+        }
+
+        &-tbody {
+          font-weight: 200;
+        }
+
+        &-tr {
+          margin-bottom: 10px;
+        }
+      }
+
       &__pagination {
         display: flex;
+        gap: 8px;
         align-items: center;
         justify-content: center;
       }
