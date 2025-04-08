@@ -9,6 +9,40 @@
     margin: 0 auto;
 
     &-item {
+      &__top {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      &__form {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        align-items: center;
+
+        height: 30px;
+
+        &-input {
+          cursor: pointer;
+
+          display: block;
+
+          height: 100%;
+          border: 3px double var(--logo-color);
+          border-radius: 8px;
+
+          background: var(--footer-color);
+        }
+
+        &-button {
+          height: 100%;
+          font-size: 16px;
+          line-height: 100%;
+        }
+      }
+
       &__title {
         font-size: 18px;
         font-weight: 300;

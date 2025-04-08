@@ -14,6 +14,7 @@ export default class Car {
   protected name: string;
   private color: string;
   private id: number;
+  private carImageElement!: BaseElementCreator<'img'>;
 
   constructor(name: string, color: string, id: number) {
     this.name = name;
@@ -71,6 +72,7 @@ export default class Car {
 
     return buttonsAndBrands;
   }
+
   private getButtons(): BaseElementCreator<'div'> {
     const buttonsWrapper: BaseElementCreator<'div'> = new BaseElementCreator({
       tagName: 'div',
@@ -112,13 +114,13 @@ export default class Car {
       classNames: ['cars__wrapper-item-wrapper__track'],
     });
 
-    const carImage: BaseElementCreator<'img'> = new ImageElementCreator({
+    this.carImageElement = new ImageElementCreator({
       tagName: 'img',
-      classNames: ['cars__wrapper-item-wrapper__track-img', 'link', this.color],
+      classNames: ['cars__wrapper-item-wrapper__track-img', this.color],
       src: './cars/porsche.svg',
       alt: this.name,
     });
-    racetrack.addInnerElement(carImage.element);
+    racetrack.addInnerElement(this.carImageElement.getCreatedElement());
     return racetrack;
   }
 }
