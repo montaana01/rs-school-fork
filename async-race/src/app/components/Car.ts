@@ -132,6 +132,7 @@ export default class Car {
       classNames: ['cars__wrapper-item-wrapper__track'],
     });
 
+    //todo: replace with svg with wheels and different colors
     this.carImageElement = new ImageElementCreator({
       tagName: 'img',
       classNames: ['cars__wrapper-item-wrapper__track-img', this.color],

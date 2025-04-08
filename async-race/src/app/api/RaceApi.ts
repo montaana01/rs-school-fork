@@ -1,6 +1,9 @@
 import type { CarType } from './../types/CarType';
+import type { WinnerType } from '../types/WinnerType.ts';
 
 type EngineStatus = 'started' | 'stopped' | 'drive';
+export type SortField = 'id' | 'wins' | 'time';
+export type SortOrder = 'ASC' | 'DESC';
 
 export default class RaceApi {
   private readonly baseApiUrl: string;
@@ -53,10 +56,45 @@ export default class RaceApi {
     });
   }
 
-  private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  public async getWinners(
+    page: number = 1,
+    limit: number = 10,
+    sort: 'id' | 'wins' | 'time' = 'id',
+    order: 'ASC' | 'DESC' = 'ASC',
+  ): Promise<{ winners: WinnerType[]; totalCount: number }> {
+    const response: Response = await fetch(
+      `${this.baseApiUrl}/winners?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`,
+    );
+    const totalHeader: string | null = response.headers.get('X-Total-Count');
+    const totalCount: number = totalHeader ? Number(totalHeader) : 0;
+    const winners = await response.json();
+    return { winners, totalCount };
+  }
+
+  public async getWinner(id: number): Promise<WinnerType> {
+    return this.request<WinnerType>(`/winners/${id}`);
+  }
+
+  public async createWinner(winner: WinnerType): Promise<WinnerType> {
+    return this.request<WinnerType>('/winners', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(winner),
+    });
+  }
+
+  public async updateWinner(id: number, wins: number, time: number): Promise<WinnerType> {
+    return this.request<WinnerType>(`/winners/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ wins, time }),
+    });
+  }
+
+  public async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const response: Response = await fetch(`${this.baseApiUrl}${endpoint}`, options);
     if (!response.ok) {
-      throw new Error(`Ошибка запроса ${endpoint}: ${response.status} ${response.statusText}`);
+      throw new Error(`Request error${endpoint}: ${response.status} ${response.statusText}`);
     }
     return response.json();
   }

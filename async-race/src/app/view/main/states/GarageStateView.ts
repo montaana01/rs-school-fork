@@ -1,11 +1,13 @@
 import type { CarType } from '../../../types/CarType';
 import type { CarJsonType } from '../../../types/CarJsonType';
+import type { WinnerType } from '../../../types/WinnerType';
 import carsJson from '../../../components/cars.json';
 import Car from '../../../components/Car';
 import RaceApi from '../../../api/RaceApi';
 import BaseElementCreator from '../../../factory/html/BaseElementCreator';
 import InputElementCreator from '../../../factory/html/InputElementCreator';
 import Modal from '../../modal/modal';
+import Pagination from '../../../components/Pagination';
 
 export default class GarageStateView {
   private container: BaseElementCreator<'div'>;
@@ -30,11 +32,12 @@ export default class GarageStateView {
   private updateCarColor!: BaseElementCreator<'input'>;
   private updateButton!: BaseElementCreator<'button'>;
 
-  private paginationContainer!: BaseElementCreator<'div'>;
+  private pagination: Pagination;
 
   private selectedCarId: number | null;
   private carsArray: Car[];
   private trackWidth: number;
+  private isRaceInProgress: boolean;
 
   constructor() {
     this.container = new BaseElementCreator({
@@ -47,7 +50,18 @@ export default class GarageStateView {
     this.carsArray = [];
     this.trackWidth = 0;
     this.api = new RaceApi();
-
+    this.isRaceInProgress = false;
+    this.pagination = new Pagination({
+      currentPage: 1,
+      totalItems: this.totalCars,
+      itemsPerPage: 7,
+      onPageChange: async (newPage: number): Promise<void> => {
+        if (this.isRaceInProgress) return;
+        this.currentPage = newPage;
+        this.garageHeader.setTextContent(`Garage – Page: ${this.currentPage}`);
+        await this.refreshGarage();
+      },
+    });
     window.addEventListener('resize', () => {
       this.updateTrackWidths();
     });
@@ -112,15 +126,25 @@ export default class GarageStateView {
 
   private setEventToRaceButton(): void {
     this.raceButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.isRaceInProgress) return;
       try {
+        this.isRaceInProgress = true;
         this.raceButton.setClassNames(['disabled']);
         this.resetButton.setClassNames(['disabled']);
+        this.carsArray.forEach((car: Car) => {
+          car.startButton.setClassNames(['disabled']);
+          car.stopButton.setClassNames(['disabled']);
+        });
+        this.pagination.disable();
         let winnerState: { declared: boolean } = { declared: false };
         const carRacePromises: Promise<void>[] = this.getRacePromises(winnerState);
         await Promise.all(carRacePromises);
         this.resetButton.removeClassNames(['disabled']);
       } catch (error) {
         new Modal(`Error while race: ${error}`);
+      } finally {
+        this.isRaceInProgress = false;
+        this.pagination.enable();
       }
     });
   }
@@ -143,6 +167,7 @@ export default class GarageStateView {
     carImage.removeClassNames(['initial']);
     carImage.setClassNames(['animate']);
   }
+
   private getResetButton(): BaseElementCreator<'button'> {
     this.resetButton = new BaseElementCreator({
       tagName: 'button',
@@ -150,6 +175,7 @@ export default class GarageStateView {
       textContent: 'Reset',
     });
     this.resetButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.isRaceInProgress) return;
       try {
         this.raceButton.removeClassNames(['disabled']);
         await Promise.all(
@@ -202,6 +228,7 @@ export default class GarageStateView {
       textContent: 'Generate Cars',
     });
     this.generateButton.getCreatedElement().addEventListener('click', async (): Promise<void> => {
+      if (this.isRaceInProgress) return;
       try {
         const promises: Promise<CarType>[] = [];
         for (let i: number = 0; i < 100; i += 1) {
@@ -248,6 +275,7 @@ export default class GarageStateView {
     });
     this.createButton.getCreatedElement().addEventListener('click', async (event: Event) => {
       event.preventDefault();
+      if (this.isRaceInProgress) return;
       try {
         await this.api.createCar(
           this.createCarName.getCreatedElement().value,
@@ -258,7 +286,6 @@ export default class GarageStateView {
         new Modal(`Error while creating new car: ${error}`);
       }
     });
-
     this.createForm.addInnerElement(this.createCarName.getCreatedElement());
     this.createForm.addInnerElement(this.createCarColor.getCreatedElement());
     this.createForm.addInnerElement(this.createButton.getCreatedElement());
@@ -322,7 +349,7 @@ export default class GarageStateView {
     this.container.addInnerElement(this.garageHeader.getCreatedElement());
 
     await this.getCarsTable();
-    this.renderPagination();
+    this.container.addInnerElement(this.pagination.getElement());
     return this.container.getCreatedElement();
   }
 
@@ -340,112 +367,109 @@ export default class GarageStateView {
         textContent: `Total cars: ${this.totalCars}`,
       });
       this.carsTable.addInnerElement(carsTableHead.getCreatedElement());
-      const carsTableBody: BaseElementCreator<'tbody'> = new BaseElementCreator({
-        tagName: 'tbody',
-        classNames: ['cars__wrapper'],
-      });
-      await this.createCarsFromData(garage.cars, carsTableBody);
-      this.carsTable.addInnerElement(carsTableBody.getCreatedElement());
+      const body = new BaseElementCreator({ tagName: 'tbody', classNames: ['cars__wrapper'] });
+      await this.createCarsFromData(garage.cars, body);
+      this.carsTable.addInnerElement(body.getCreatedElement());
       this.container.addInnerElement(this.carsTable.getCreatedElement());
+      this.pagination.updatePageData(this.totalCars, this.currentPage);
     } catch (error) {
-      const errorMessage: BaseElementCreator<'h2'> = new BaseElementCreator({
-        tagName: 'h2',
-        classNames: ['main__wrapper-item'],
-        textContent: 'Error while getting cars info from server',
-      });
-      this.container.addInnerElement(errorMessage.getCreatedElement());
+      this.container.addInnerElement(
+        new BaseElementCreator({
+          tagName: 'h2',
+          classNames: ['main__wrapper-item'],
+          textContent: 'Error while getting cars info from server',
+        }).getCreatedElement(),
+      );
     }
     return this.carsTable;
   }
 
   private async createCarsFromData(cars: CarType[], carsTableBody: BaseElementCreator<'tbody'>): Promise<void> {
     cars.forEach((carData: { name: string; color: string; id: number }) => {
-      const car: Car = new Car(carData.name, carData.color, carData.id);
-      this.carsArray.push(car);
-      car.selectButton.getCreatedElement().addEventListener('click', () => {
-        this.showUpdateForm({ id: carData.id, name: carData.name, color: carData.color });
-      });
-      car.removeButton.getCreatedElement().addEventListener('click', async () => {
-        try {
-          await this.api.deleteCar(carData.id);
-          await this.refreshGarage();
-        } catch (error) {
-          new Modal(`Error while deleting car: ${error}`);
-        }
-      });
-      car.startButton.getCreatedElement().addEventListener('click', async () => {
-        try {
-          car.startButton.setClassNames(['disabled']);
-          car.stopButton.removeClassNames(['disabled']);
-          await this.startCar(car);
-        } catch (error) {
-          new Modal(`Error while deleting car: ${error}`);
-        }
-      });
-      car.stopButton.getCreatedElement().addEventListener('click', async () => {
-        try {
-          car.startButton.removeClassNames(['disabled']);
-          car.stopButton.setClassNames(['disabled']);
-          await this.stopCar(car);
-          this.raceButton.removeClassNames(['disabled']);
-        } catch (error) {
-          new Modal(`Error while deleting car: ${error}`);
-        }
-      });
-      carsTableBody.addInnerElement(car.getCar());
+      this.createCars(carData, carsTableBody);
     });
   }
 
-  private renderPagination(): void {
-    const totalPages: number = Math.ceil(this.totalCars / 7);
-    this.paginationContainer = new BaseElementCreator({
-      tagName: 'div',
-      classNames: ['main__wrapper-item', 'main__wrapper-item__pagination'],
+  private async createCars(
+    carData: { name: string; color: string; id: number },
+    carsTableBody: BaseElementCreator<'tbody'>,
+  ): Promise<void> {
+    const car: Car = new Car(carData.name, carData.color, carData.id);
+    this.carsArray.push(car);
+    this.addButtonEventListeners(car, carData);
+    carsTableBody.addInnerElement(car.getCar());
+  }
+
+  private addButtonEventListeners(car: Car, carData: { id: number; name: string; color: string }): void {
+    this.addSelectButtonListener(car, carData);
+    this.addRemoveButtonListener(car, carData);
+    this.addStartButtonListener(car);
+    this.addStopButtonListener(car);
+  }
+
+  private addSelectButtonListener(car: Car, carData: { id: number; name: string; color: string }): void {
+    car.selectButton.getCreatedElement().addEventListener('click', () => {
+      if (this.isRaceInProgress) return;
+      this.showUpdateForm({ id: carData.id, name: carData.name, color: carData.color });
     });
-    const previousButton: BaseElementCreator<'button'> = new BaseElementCreator({
-      tagName: 'button',
-      classNames: ['main__wrapper-item__pagination-item', 'button'],
-      textContent: 'Prev',
-    });
-    const nextButton: BaseElementCreator<'button'> = new BaseElementCreator({
-      tagName: 'button',
-      classNames: ['main__wrapper-item__pagination-item', 'button'],
-      textContent: 'Next',
-    });
-    if (this.currentPage === 1) {
-      previousButton.setClassNames(['disabled']);
-    }
-    if (this.currentPage >= totalPages) {
-      nextButton.setClassNames(['disabled']);
-    }
-    previousButton.getCreatedElement().addEventListener('click', async () => {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.garageHeader.setTextContent(`Garage – Page: ${this.currentPage}`);
+  }
+
+  private addRemoveButtonListener(car: Car, carData: { id: number }): void {
+    car.removeButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.isRaceInProgress) return;
+      try {
+        await this.api.deleteCar(carData.id);
         await this.refreshGarage();
+      } catch (error) {
+        new Modal(`Error while deleting car: ${error}`);
       }
     });
-    nextButton.getCreatedElement().addEventListener('click', async () => {
-      if (this.currentPage < totalPages) {
-        this.currentPage++;
-        this.garageHeader.setTextContent(`Garage – Page: ${this.currentPage}`);
-        await this.refreshGarage();
+  }
+
+  private addStartButtonListener(car: Car): void {
+    car.startButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.isRaceInProgress) return;
+      try {
+        car.startButton.setClassNames(['disabled']);
+        car.stopButton.removeClassNames(['disabled']);
+        await this.startCar(car);
+      } catch (error) {
+        new Modal(`Error while starting car: ${error}`);
       }
     });
-    this.paginationContainer.addInnerElement(previousButton.getCreatedElement());
-    this.paginationContainer.addInnerElement(nextButton.getCreatedElement());
-    this.container.addInnerElement(this.paginationContainer.getCreatedElement());
+  }
+
+  private addStopButtonListener(car: Car): void {
+    car.stopButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.isRaceInProgress) return;
+      try {
+        car.startButton.removeClassNames(['disabled']);
+        car.stopButton.setClassNames(['disabled']);
+        await this.stopCar(car);
+        this.raceButton.removeClassNames(['disabled']);
+      } catch (error) {
+        new Modal(`Error while stopping car: ${error}`);
+      }
+    });
   }
 
   private async refreshGarage(): Promise<void> {
     this.clearForms();
-    this.carsTable.getCreatedElement().remove();
-    this.paginationContainer.getCreatedElement().remove();
+
+    if (this.carsTable && this.carsTable.getCreatedElement().parentElement) {
+      this.carsTable.getCreatedElement().remove();
+    }
+    const paginationElement: HTMLElement = this.pagination.getElement();
+    if (paginationElement.parentElement) {
+      paginationElement.remove();
+    }
     await this.getCarsTable();
-    this.renderPagination();
+    this.container.getCreatedElement().appendChild(this.carsTable.getCreatedElement());
+    this.container.getCreatedElement().appendChild(paginationElement);
+    this.pagination.updatePageData(this.totalCars, this.currentPage);
   }
 
-  private startCar(car: Car, haveWinner: { declared: boolean } = { declared: true }): Promise<void> {
+  private async startCar(car: Car, haveWinner: { declared: boolean } = { declared: true }): Promise<void> {
     return new Promise<void>((resolve) => {
       this.api
         .startStopEngine(car.getCarId(), 'started')
@@ -460,12 +484,13 @@ export default class GarageStateView {
           const startTime: number = Date.now();
           this.api
             .driveEngine(car.getCarId())
-            .then(() => {
+            .then(async () => {
               if (!haveWinner.declared) {
                 haveWinner.declared = true;
                 new Modal(
-                  `Won: ${car.getCarName() || 'car without brand'}. Duration: ${Math.ceil(duration / 1000)} s. With number: ${car.getCarId()}`,
+                  `Won: ${car.getCarName() || 'car without brand'}. Duration: ${Math.ceil(duration / 100) / 10} s. With number: ${car.getCarId()}`,
                 );
+                await this.handleWinnerResult(car, duration);
               }
               resolve();
             })
@@ -481,6 +506,29 @@ export default class GarageStateView {
           resolve();
         });
     });
+  }
+
+  private async handleWinnerResult(car: Car, durationMs: number): Promise<void> {
+    const winnerId: number = car.getCarId();
+    const durationSec: number = Number((durationMs / 1000).toFixed(2));
+
+    try {
+      const existingWinner: WinnerType = await this.api.request<WinnerType>(`/winners/${winnerId}`, {
+        method: 'GET',
+      });
+
+      await this.api.updateWinner(winnerId, existingWinner.wins + 1, Math.min(existingWinner.time, durationSec));
+    } catch (error) {
+      if (error instanceof Error && error.message.includes('404')) {
+        try {
+          await this.api.createWinner({ id: winnerId, wins: 1, time: durationSec });
+        } catch (createError) {
+          console.error('Failed to create winner:', createError);
+        }
+      } else {
+        console.error('Failed to fetch winner info:', error);
+      }
+    }
   }
 
   private async stopCar(car: Car): Promise<void> {
