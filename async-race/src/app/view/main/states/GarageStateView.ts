@@ -47,6 +47,10 @@ export default class GarageStateView {
     this.carsArray = [];
     this.trackWidth = 0;
     this.api = new RaceApi();
+
+    window.addEventListener('resize', () => {
+      this.updateTrackWidths();
+    });
   }
 
   public async getGarage(): Promise<HTMLElement> {
@@ -205,6 +209,24 @@ export default class GarageStateView {
     carImage.removeClassNames(['animate']);
     carImage.getCreatedElement().style.removeProperty('--target-x');
     carImage.setClassNames(['broken']);
+  }
+
+  private updateTrackWidths(): void {
+    this.carsArray.forEach((car: Car) => {
+      const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
+      const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+      if (raceTrack && carImage) {
+        const newWidth: number = raceTrack.getCreatedElement().offsetWidth - carImage.getCreatedElement().offsetWidth;
+        this.trackWidth = newWidth;
+        carImage.getCreatedElement().style.setProperty('--target-x', `${newWidth}px`);
+
+        if (carImage.getCreatedElement().classList.contains('broken')) {
+          const progressData: string | undefined = carImage.getCreatedElement().dataset.progress;
+          const progress: number = progressData ? parseFloat(progressData) : 0;
+          carImage.getCreatedElement().style.setProperty('--broken-x', `${progress * newWidth}px`);
+        }
+      }
+    });
   }
 
   private getGenerateButton(): BaseElementCreator<'button'> {
