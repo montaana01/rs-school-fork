@@ -50,7 +50,32 @@
       }
 
       &__cars {
+        position: relative;
         width: 100%;
+
+        &::before {
+          content: '🏁';
+
+          position: absolute;
+          top: 20px;
+          right: 13px;
+
+          border-left: 2px var(--border) solid;
+
+          font-size: 40px;
+        }
+
+        &::after {
+          content: '';
+
+          position: absolute;
+          top: 45px;
+          right: 53px;
+
+          width: 1px;
+          height: calc(100% - 47px);
+          border: 1px var(--border) solid;
+        }
       }
 
       &__pagination {
