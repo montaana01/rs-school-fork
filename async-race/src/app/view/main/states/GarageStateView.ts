@@ -126,41 +126,7 @@ export default class GarageStateView {
   }
 
   private getRacePromises(haveWinner: { declared: boolean }): Promise<void>[] {
-    return this.carsArray.map((car: Car) => {
-      return new Promise<void>((resolve) => {
-        this.api
-          .startStopEngine(car.getCarId(), 'started')
-          .then((engineData: { velocity: number; distance: number }) => {
-            const { velocity, distance } = engineData;
-            const duration: number = distance / velocity;
-            const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
-            const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
-            this.calculateAnimation(carImage, duration, raceTrack);
-            const startTime: number = Date.now();
-            this.api
-              .driveEngine(car.getCarId())
-              .then(() => {
-                if (!haveWinner.declared) {
-                  haveWinner.declared = true;
-                  new Modal(
-                    `Won: ${car.getCarName() || 'car without brand'}.Duration:${Math.ceil(duration / 1000)} s. With number: ${car.getCarId()}`,
-                  );
-                }
-                resolve();
-              })
-              .catch((error) => {
-                const elapsed: number = Date.now() - startTime;
-                this.brokeCarOnTrack(elapsed, duration, carImage);
-                console.error('Something went wrong with engine:', error);
-                resolve();
-              });
-          })
-          .catch((error) => {
-            console.error('Something went wrong', error);
-            resolve();
-          });
-      });
-    });
+    return this.carsArray.map((car: Car) => this.startCar(car, haveWinner));
   }
 
   private calculateAnimation(
@@ -411,6 +377,7 @@ export default class GarageStateView {
         try {
           car.startButton.setClassNames(['disabled']);
           car.stopButton.removeClassNames(['disabled']);
+          await this.startCar(car);
         } catch (error) {
           new Modal(`Error while deleting car: ${error}`);
         }
@@ -419,6 +386,8 @@ export default class GarageStateView {
         try {
           car.startButton.removeClassNames(['disabled']);
           car.stopButton.setClassNames(['disabled']);
+          await this.stopCar(car);
+          this.raceButton.removeClassNames(['disabled']);
         } catch (error) {
           new Modal(`Error while deleting car: ${error}`);
         }
@@ -474,5 +443,54 @@ export default class GarageStateView {
     this.paginationContainer.getCreatedElement().remove();
     await this.getCarsTable();
     this.renderPagination();
+  }
+
+  private startCar(car: Car, haveWinner: { declared: boolean } = { declared: true }): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.api
+        .startStopEngine(car.getCarId(), 'started')
+        .then((engineData: { velocity: number; distance: number }) => {
+          const { velocity, distance } = engineData;
+          const duration: number = distance / velocity;
+          const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+          const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
+
+          this.calculateAnimation(carImage, duration, raceTrack);
+
+          const startTime: number = Date.now();
+          this.api
+            .driveEngine(car.getCarId())
+            .then(() => {
+              if (!haveWinner.declared) {
+                haveWinner.declared = true;
+                new Modal(
+                  `Won: ${car.getCarName() || 'car without brand'}. Duration: ${Math.ceil(duration / 1000)} s. With number: ${car.getCarId()}`,
+                );
+              }
+              resolve();
+            })
+            .catch((error) => {
+              const elapsed: number = Date.now() - startTime;
+              this.brokeCarOnTrack(elapsed, duration, carImage);
+              console.error('Something went wrong with engine:', error);
+              resolve();
+            });
+        })
+        .catch((error) => {
+          console.error('Something went wrong:', error);
+          resolve();
+        });
+    });
+  }
+
+  private async stopCar(car: Car): Promise<void> {
+    try {
+      await this.api.startStopEngine(car.getCarId(), 'stopped');
+      const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+      carImage.removeClassNames(['animate', 'broken']);
+      carImage.setClassNames(['initial']);
+    } catch (error) {
+      console.error('Stop car error:', error);
+    }
   }
 }
