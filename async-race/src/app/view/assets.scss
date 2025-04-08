@@ -71,4 +71,13 @@ a {
   &:hover {
     scale: 1.1;
   }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+
+    &:hover {
+      scale: unset;
+    }
+  }
 }

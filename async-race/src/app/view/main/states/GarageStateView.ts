@@ -28,6 +28,8 @@ export default class GarageStateView {
   private updateCarColor!: BaseElementCreator<'input'>;
   private updateButton!: BaseElementCreator<'button'>;
 
+  private paginationContainer!: BaseElementCreator<'div'>;
+
   private selectedCarId: number | null;
 
   constructor() {
@@ -237,6 +239,7 @@ export default class GarageStateView {
     this.container.addInnerElement(this.garageHeader.getCreatedElement());
 
     await this.getCarsTable();
+    this.renderPagination();
     return this.container.getCreatedElement();
   }
 
@@ -290,9 +293,52 @@ export default class GarageStateView {
     });
   }
 
+  private renderPagination(): void {
+    const totalPages: number = Math.ceil(this.totalCars / 7);
+    this.paginationContainer = new BaseElementCreator({
+      tagName: 'div',
+      classNames: ['main__wrapper-item', 'main__wrapper-item__pagination'],
+    });
+    const previousButton: BaseElementCreator<'button'> = new BaseElementCreator({
+      tagName: 'button',
+      classNames: ['main__wrapper-item__pagination-item', 'button'],
+      textContent: 'Prev',
+    });
+    const nextButton: BaseElementCreator<'button'> = new BaseElementCreator({
+      tagName: 'button',
+      classNames: ['main__wrapper-item__pagination-item', 'button'],
+      textContent: 'Next',
+    });
+    if (this.currentPage === 1) {
+      previousButton.setClassNames(['disabled']);
+    }
+    if (this.currentPage >= totalPages) {
+      nextButton.setClassNames(['disabled']);
+    }
+    previousButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.garageHeader.setTextContent(`Garage – Page: ${this.currentPage}`);
+        await this.refreshGarage();
+      }
+    });
+    nextButton.getCreatedElement().addEventListener('click', async () => {
+      if (this.currentPage < totalPages) {
+        this.currentPage++;
+        this.garageHeader.setTextContent(`Garage – Page: ${this.currentPage}`);
+        await this.refreshGarage();
+      }
+    });
+    this.paginationContainer.addInnerElement(previousButton.getCreatedElement());
+    this.paginationContainer.addInnerElement(nextButton.getCreatedElement());
+    this.container.addInnerElement(this.paginationContainer.getCreatedElement());
+  }
+
   private async refreshGarage(): Promise<void> {
     this.clearForms();
     this.carsTable.getCreatedElement().remove();
+    this.paginationContainer.getCreatedElement().remove();
     await this.getCarsTable();
+    this.renderPagination();
   }
 }
