@@ -1,5 +1,7 @@
 import type { CarType } from './../types/CarType';
 
+type EngineStatus = 'started' | 'stopped' | 'drive';
+
 export default class RaceApi {
   private readonly baseApiUrl: string;
 
@@ -37,6 +39,18 @@ export default class RaceApi {
 
   public async deleteCar(id: number): Promise<{}> {
     return this.request<{}>(`/garage/${id}`, { method: 'DELETE' });
+  }
+
+  public async startStopEngine(id: number, status: EngineStatus): Promise<{ velocity: number; distance: number }> {
+    return this.request(`/engine?id=${id}&status=${status}`, {
+      method: 'PATCH',
+    });
+  }
+
+  public async driveEngine(id: number): Promise<{ success: boolean }> {
+    return this.request(`/engine?id=${id}&status=drive`, {
+      method: 'PATCH',
+    });
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {

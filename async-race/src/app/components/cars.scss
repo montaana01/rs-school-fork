@@ -17,7 +17,11 @@
       justify-content: flex-start;
 
       &-position {
+        float: right;
+
+        width: 80px;
         padding: 0 10px 0 0;
+
         font-size: 26px;
         font-weight: 400;
       }
@@ -81,8 +85,29 @@
           border-bottom: 2px dashed var(--border);
 
           &-img {
+            position: absolute;
             top: 0;
+            transform: translateX(0);
+
             height: 50px;
+
+            transition: transform linear;
+            transition-duration: 0ms;
+
+            &.initial {
+              transform: translateX(0);
+              transition: none;
+            }
+
+            &.animate {
+              transform: translateX(var(--target-x));
+            }
+
+            &.broken {
+              transform: translateX(var(--broken-x));
+              border: 1px dashed var(--delete);
+              transition: none !important;
+            }
           }
         }
       }

@@ -4,17 +4,19 @@ import BaseElementCreator from '../factory/html/BaseElementCreator';
 import ImageElementCreator from '../factory/html/ImageElementCreator';
 
 export default class Car {
-  public car!: BaseElementCreator<'tr'>;
-
   public selectButton!: BaseElementCreator<'button'>;
   public removeButton!: BaseElementCreator<'button'>;
   public startButton!: BaseElementCreator<'button'>;
   public stopButton!: BaseElementCreator<'button'>;
 
-  protected name: string;
-  private color: string;
-  private id: number;
+  private car!: BaseElementCreator<'tr'>;
+
+  private racetrack!: BaseElementCreator<'div'>;
   private carImageElement!: BaseElementCreator<'img'>;
+
+  private readonly name: string;
+  private readonly color: string;
+  private readonly id: number;
 
   constructor(name: string, color: string, id: number) {
     this.name = name;
@@ -26,6 +28,22 @@ export default class Car {
 
   public getCar(): HTMLElement {
     return this.car.getCreatedElement();
+  }
+
+  public getCarId(): number {
+    return this.id;
+  }
+
+  public getCarName(): string {
+    return this.name;
+  }
+
+  public getCarImageElement(): BaseElementCreator<'img'> {
+    return this.carImageElement;
+  }
+
+  public getRaceTrackElement(): BaseElementCreator<'div'> {
+    return this.racetrack;
   }
 
   private createView(): void {
@@ -92,12 +110,12 @@ export default class Car {
     this.startButton = new BaseElementCreator({
       tagName: 'button',
       classNames: ['cars__wrapper-item-wrapper__bb-buttons-item', 'button', 'start'],
-      textContent: 'start',
+      textContent: 'A',
     });
     this.stopButton = new BaseElementCreator({
       tagName: 'button',
-      classNames: ['cars__wrapper-item-wrapper__bb-buttons-item', 'button', 'stop'],
-      textContent: 'stop',
+      classNames: ['cars__wrapper-item-wrapper__bb-buttons-item', 'button', 'stop', 'disabled'],
+      textContent: 'B',
     });
 
     buttonsWrapper.addInnerElement(this.selectButton.getCreatedElement());
@@ -109,7 +127,7 @@ export default class Car {
   }
 
   private getRaceTrack(): BaseElementCreator<'div'> {
-    const racetrack: BaseElementCreator<'div'> = new BaseElementCreator({
+    this.racetrack = new BaseElementCreator({
       tagName: 'div',
       classNames: ['cars__wrapper-item-wrapper__track'],
     });
@@ -120,7 +138,7 @@ export default class Car {
       src: './cars/porsche.svg',
       alt: this.name,
     });
-    racetrack.addInnerElement(this.carImageElement.getCreatedElement());
-    return racetrack;
+    this.racetrack.addInnerElement(this.carImageElement.getCreatedElement());
+    return this.racetrack;
   }
 }

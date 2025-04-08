@@ -1,5 +1,5 @@
 import type { CarType } from '../../../types/CarType';
-import type { CarJsonType } from '../../../types/CarJsonType.ts';
+import type { CarJsonType } from '../../../types/CarJsonType';
 import carsJson from '../../../components/cars.json';
 import Car from '../../../components/Car';
 import RaceApi from '../../../api/RaceApi';
@@ -11,7 +11,7 @@ export default class GarageStateView {
   private container: BaseElementCreator<'div'>;
   private currentPage: number;
   private totalCars: number;
-  private api: RaceApi;
+  private readonly api: RaceApi;
 
   private raceButton!: BaseElementCreator<'button'>;
   private resetButton!: BaseElementCreator<'button'>;
@@ -33,6 +33,8 @@ export default class GarageStateView {
   private paginationContainer!: BaseElementCreator<'div'>;
 
   private selectedCarId: number | null;
+  private carsArray: Car[];
+  private trackWidth: number;
 
   constructor() {
     this.container = new BaseElementCreator({
@@ -42,6 +44,8 @@ export default class GarageStateView {
     this.currentPage = 1;
     this.totalCars = 0;
     this.selectedCarId = null;
+    this.carsArray = [];
+    this.trackWidth = 0;
     this.api = new RaceApi();
   }
 
@@ -98,17 +102,77 @@ export default class GarageStateView {
       classNames: ['main__wrapper-item__form-button', 'button', 'link'],
       textContent: 'Race',
     });
+    this.setEventToRaceButton();
+    return this.raceButton;
+  }
+
+  private setEventToRaceButton(): void {
     this.raceButton.getCreatedElement().addEventListener('click', async () => {
       try {
-        //todo: implement this
-        await new Modal('trying to intecact with race button');
+        this.raceButton.setClassNames(['disabled']);
+        this.resetButton.setClassNames(['disabled']);
+        let winnerState: { declared: boolean } = { declared: false };
+        const carRacePromises: Promise<void>[] = this.getRacePromises(winnerState);
+        await Promise.all(carRacePromises);
+        this.resetButton.removeClassNames(['disabled']);
       } catch (error) {
         new Modal(`Error while race: ${error}`);
       }
     });
-    return this.raceButton;
   }
 
+  private getRacePromises(haveWinner: { declared: boolean }): Promise<void>[] {
+    return this.carsArray.map((car: Car) => {
+      return new Promise<void>((resolve) => {
+        this.api
+          .startStopEngine(car.getCarId(), 'started')
+          .then((engineData: { velocity: number; distance: number }) => {
+            const { velocity, distance } = engineData;
+            const duration: number = distance / velocity;
+            const carImage: BaseElementCreator<'img'> = car.getCarImageElement();
+            const raceTrack: BaseElementCreator<'div'> = car.getRaceTrackElement();
+            this.calculateAnimation(carImage, duration, raceTrack);
+            const startTime: number = Date.now();
+            this.api
+              .driveEngine(car.getCarId())
+              .then(() => {
+                if (!haveWinner.declared) {
+                  haveWinner.declared = true;
+                  new Modal(
+                    `Won: ${car.getCarName() || 'car without brand'}.Duration:${Math.ceil(duration / 1000)} s. With number: ${car.getCarId()}`,
+                  );
+                }
+                resolve();
+              })
+              .catch((error) => {
+                const elapsed: number = Date.now() - startTime;
+                this.brokeCarOnTrack(elapsed, duration, carImage);
+                console.error('Something went wrong with engine:', error);
+                resolve();
+              });
+          })
+          .catch((error) => {
+            console.error('Something went wrong', error);
+            resolve();
+          });
+      });
+    });
+  }
+
+  private calculateAnimation(
+    carImage: BaseElementCreator<'img'>,
+    duration: number,
+    raceTrack: BaseElementCreator<'div'>,
+  ): void {
+    carImage.getCreatedElement().style.setProperty('transition-duration', `${duration}ms`);
+    this.trackWidth = raceTrack.getCreatedElement().offsetWidth - carImage.getCreatedElement().offsetWidth;
+    carImage.getCreatedElement().style.setProperty('--target-x', `${this.trackWidth}px`);
+    carImage.removeClassNames(['broken', 'animate']);
+    carImage.setClassNames(['initial']);
+    carImage.getCreatedElement().getBoundingClientRect();
+    carImage.removeClassNames(['initial']);
+    carImage.setClassNames(['animate']);
+  }
   private getResetButton(): BaseElementCreator<'button'> {
     this.resetButton = new BaseElementCreator({
       tagName: 'button',
@@ -117,13 +181,30 @@ export default class GarageStateView {
     });
     this.resetButton.getCreatedElement().addEventListener('click', async () => {
       try {
-        //todo: implement this
-        await new Modal('trying to intecact with reset button');
+        this.raceButton.removeClassNames(['disabled']);
+        await Promise.all(
+          this.carsArray.map(async (car: Car) => {
+            await this.api.startStopEngine(car.getCarId(), 'stopped');
+            car.getCarImageElement().removeClassNames(['broken', 'animate']);
+            car.getCarImageElement().setClassNames(['initial']);
+            car.startButton.removeClassNames(['disabled']);
+            car.stopButton.setClassNames(['disabled']);
+          }),
+        );
       } catch (error) {
         new Modal(`Error while reset game: ${error}`);
       }
     });
     return this.resetButton;
+  }
+
+  private brokeCarOnTrack(elapsed: number, duration: number, carImage: BaseElementCreator<'img'>): void {
+    const progress: number = Math.min(1, elapsed / duration);
+    carImage.getCreatedElement().dataset.progress = progress.toString();
+    carImage.getCreatedElement().style.setProperty('--broken-x', `${progress * this.trackWidth}px`);
+    carImage.removeClassNames(['animate']);
+    carImage.getCreatedElement().style.removeProperty('--target-x');
+    carImage.setClassNames(['broken']);
   }
 
   private getGenerateButton(): BaseElementCreator<'button'> {
@@ -244,6 +325,7 @@ export default class GarageStateView {
   }
 
   private async renderGarage(): Promise<HTMLElement> {
+    this.carsArray = [];
     this.garageHeader = new BaseElementCreator({
       tagName: 'h2',
       classNames: ['main__wrapper-item', 'main__wrapper-item__title'],
@@ -291,6 +373,7 @@ export default class GarageStateView {
   private async createCarsFromData(cars: CarType[], carsTableBody: BaseElementCreator<'tbody'>): Promise<void> {
     cars.forEach((carData: { name: string; color: string; id: number }) => {
       const car: Car = new Car(carData.name, carData.color, carData.id);
+      this.carsArray.push(car);
       car.selectButton.getCreatedElement().addEventListener('click', () => {
         this.showUpdateForm({ id: carData.id, name: carData.name, color: carData.color });
       });
@@ -298,6 +381,22 @@ export default class GarageStateView {
         try {
           await this.api.deleteCar(carData.id);
           await this.refreshGarage();
+        } catch (error) {
+          new Modal(`Error while deleting car: ${error}`);
+        }
+      });
+      car.startButton.getCreatedElement().addEventListener('click', async () => {
+        try {
+          car.startButton.setClassNames(['disabled']);
+          car.stopButton.removeClassNames(['disabled']);
+        } catch (error) {
+          new Modal(`Error while deleting car: ${error}`);
+        }
+      });
+      car.stopButton.getCreatedElement().addEventListener('click', async () => {
+        try {
+          car.startButton.removeClassNames(['disabled']);
+          car.stopButton.setClassNames(['disabled']);
         } catch (error) {
           new Modal(`Error while deleting car: ${error}`);
         }
