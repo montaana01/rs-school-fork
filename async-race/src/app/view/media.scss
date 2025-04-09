@@ -137,19 +137,19 @@
             }
           }
         }
-      }
-    }
 
-    &__cars {
-      &::before {
-        top: 25px;
-        right: 30px;
-        font-size: 25px;
-      }
+        &__cars {
+          &::before {
+            top: 25px;
+            right: 30px;
+            font-size: 25px;
+          }
 
-      &::after {
-        top: 45px;
-        right: 55px;
+          &::after {
+            top: 45px;
+            right: 55px;
+          }
+        }
       }
     }
   }
