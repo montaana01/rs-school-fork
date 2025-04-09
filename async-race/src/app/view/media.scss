@@ -1,0 +1,195 @@
+@media (width <= 768px) {
+  .button {
+    font-size: 16px;
+  }
+
+  main {
+    min-height: calc(100vh - 120px);
+    padding: 0;
+  }
+
+  .header {
+    &__wrapper {
+      height: 60px;
+
+      &-item {
+        &-logo {
+          font-size: 18px;
+          line-height: 20px;
+
+          img {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    &__wrapper {
+      padding: 10px 0;
+    }
+  }
+
+  .cars {
+    &__wrapper {
+      &-item {
+        &-wrapper {
+          &__bb {
+            &-buttons {
+              flex-wrap: wrap;
+              gap: 4px;
+              justify-content: flex-start;
+
+              width: 144px;
+
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 60px;
+      padding: 0;
+
+      &-item {
+        height: 40px;
+      }
+    }
+  }
+}
+
+@media (width <= 560px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .header {
+    &__wrapper {
+      & .button {
+        font-size: 12px;
+      }
+
+      &-item {
+        &-nav {
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+
+  .main {
+    &__wrapper {
+      &-item {
+        &__table {
+          font-size: 14px;
+
+          &-car {
+            width: 60px;
+            height: 25px;
+
+            svg {
+              width: 50px;
+              height: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .cars {
+    &__wrapper {
+      &-item {
+        &-position {
+          width: 35px;
+          padding: 0 10px 0 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media (width <= 430px) {
+  main {
+    min-height: calc(100vh - 110px);
+    padding: 0;
+  }
+
+  .main {
+    &__wrapper {
+      &-item {
+        &__table {
+          font-size: 12px;
+
+          &-car {
+            width: 40px;
+            height: 15px;
+
+            svg {
+              width: 30px;
+              height: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    &__cars {
+      &::before {
+        top: 25px;
+        right: 30px;
+        font-size: 25px;
+      }
+
+      &::after {
+        top: 45px;
+        right: 55px;
+      }
+    }
+  }
+
+  .cars {
+    &__wrapper {
+      &-item {
+        &-wrapper {
+          &__bb {
+            &-buttons {
+              font-size: 12px;
+            }
+          }
+
+          &__track {
+            height: 30px;
+
+            &-img {
+              width: 50px;
+              height: 25px;
+
+              svg {
+                width: 50px;
+                height: 25px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 50px;
+      padding: 0;
+
+      &-item {
+        height: 30px;
+      }
+    }
+  }
+}

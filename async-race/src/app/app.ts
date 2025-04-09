@@ -37,3 +37,4 @@ export default class App {
     this.headerView.winnersButton.setCallback(() => this.router.navigate('/winners'));
   }
 }
+import './view/media.scss';
