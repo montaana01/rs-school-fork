@@ -8,6 +8,8 @@ import BaseElementCreator from '../../../factory/html/BaseElementCreator';
 import InputElementCreator from '../../../factory/html/InputElementCreator';
 import Modal from '../../modal/modal';
 import Pagination from '../../../components/Pagination';
+import StorageManager from '../../../services/StorageManager';
+import type { StateType } from '../../../types/StateType.ts';
 
 export default class GarageStateView {
   private container: BaseElementCreator<'div'>;
@@ -39,6 +41,8 @@ export default class GarageStateView {
   private trackWidth: number;
   private isRaceInProgress: boolean;
 
+  private storageManager: StorageManager;
+
   constructor() {
     this.container = new BaseElementCreator({
       tagName: 'div',
@@ -62,8 +66,12 @@ export default class GarageStateView {
         await this.refreshGarage();
       },
     });
+    this.storageManager = StorageManager.getManager();
     window.addEventListener('resize', () => {
       this.updateTrackWidths();
+    });
+    window.addEventListener('beforeunload', () => {
+      this.saveState();
     });
   }
 
@@ -73,6 +81,7 @@ export default class GarageStateView {
       containerElement.removeChild(containerElement.firstChild);
     }
     this.getTopControls();
+    this.loadState();
     await this.renderGarage();
     return this.container.getCreatedElement();
   }
@@ -372,6 +381,7 @@ export default class GarageStateView {
       this.carsTable.addInnerElement(body.getCreatedElement());
       this.container.addInnerElement(this.carsTable.getCreatedElement());
       this.pagination.updatePageData(this.totalCars, this.currentPage);
+      this.saveState();
     } catch (error) {
       this.container.addInnerElement(
         new BaseElementCreator({
@@ -540,5 +550,39 @@ export default class GarageStateView {
     } catch (error) {
       console.error('Stop car error:', error);
     }
+  }
+
+  private saveState(): void {
+    const state: StateType = {
+      currentPage: this.currentPage,
+      selectedCarId: this.selectedCarId,
+      createForm: {
+        carName: this.createCarName.getCreatedElement().value,
+        carColor: this.createCarColor.getCreatedElement().value,
+      },
+      updateForm: {
+        carName: this.updateCarName.getCreatedElement().value,
+        carColor: this.updateCarColor.getCreatedElement().value,
+      },
+    };
+
+    this.storageManager.save('garageState', state);
+  }
+
+  private loadState(): void {
+    const loadedState = StorageManager.getManager().load<Partial<StateType>>('garageState') || {};
+    const {
+      currentPage = 1,
+      selectedCarId = null,
+      createForm: { carName: savedCreateCarName = '', carColor: savedCreateCarColor = '#000000' } = {},
+      updateForm: { carName: savedUpdateCarName = '', carColor: savedUpdateCarColor = '#000000' } = {},
+    } = loadedState;
+
+    this.currentPage = currentPage;
+    this.selectedCarId = selectedCarId;
+    this.createCarName.getCreatedElement().value = savedCreateCarName;
+    this.createCarColor.getCreatedElement().value = savedCreateCarColor;
+    this.updateCarName.getCreatedElement().value = savedUpdateCarName;
+    this.updateCarColor.getCreatedElement().value = savedUpdateCarColor;
   }
 }
