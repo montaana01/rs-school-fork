@@ -40,8 +40,15 @@ export default class RaceApi {
     });
   }
 
-  public async deleteCar(id: number): Promise<{}> {
-    return this.request<{}>(`/garage/${id}`, { method: 'DELETE' });
+  public async deleteCar(id: number): Promise<void> {
+    await this.request(`/garage/${id}`, { method: 'DELETE' });
+    try {
+      await this.request(`/winners/${id}`, { method: 'DELETE' });
+    } catch (error: any) {
+      if (error.status !== 404) {
+        throw error;
+      }
+    }
   }
 
   public async startStopEngine(id: number, status: EngineStatus): Promise<{ velocity: number; distance: number }> {
