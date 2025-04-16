@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
 :root {
   color-scheme: light dark;
@@ -13,7 +13,7 @@ html {
   box-sizing: border-box;
   margin: 0;
 
-  font-family: Lexend, sans-serif;
+  font-family: Montserrat, sans-serif;
   text-align: center;
 
   transition:
@@ -40,7 +40,7 @@ body {
 }
 
 main {
-  min-height: calc(100dvh - 120px);
+  min-height: calc(100dvh - 170px);
   padding: 30px 0;
 }
 
