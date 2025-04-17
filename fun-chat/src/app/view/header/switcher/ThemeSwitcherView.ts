@@ -33,7 +33,7 @@ export default class ThemeSwitcherView {
   }
 
   private updateView(): void {
-    this.element.getCreatedElement().setAttribute('data-theme', this.storage.load('theme'));
+    this.element.setAttribute('data-theme', this.storage.load('theme'));
     this.point.setTextContent(this.storage.load('theme'));
   }
 

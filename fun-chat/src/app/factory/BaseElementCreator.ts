@@ -37,6 +37,14 @@ export default class BaseElementCreator<T extends keyof HTMLElementTagNameMap> i
     }
   }
 
+  public setAttribute(attributeName: string, value: string): void {
+    this.element.setAttribute(attributeName, value);
+  }
+
+  public removeAttribute(attributeName: string): void {
+    this.element.removeAttribute(attributeName);
+  }
+
   public getCreatedElement(): HTMLElementTagNameMap[T] {
     return this.element;
   }
