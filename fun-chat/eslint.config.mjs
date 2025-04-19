@@ -25,6 +25,7 @@ export default [
       'no-alert': 'error',
       'max-lines-per-function': ['error', 40],
       'no-console': 'warn',
+      "no-duplicate-imports": "error",
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       '@typescript-eslint/consistent-type-imports': 'error',
