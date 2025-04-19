@@ -24,22 +24,34 @@ header {
         font-size: 9px;
         line-height: 10px;
         color: var(--text-color);
-        img {
+        &-img {
           display: block;
           height: 65px;
           margin: 0 auto;
         }
       }
-      &__switcher {
-        justify-self: end;
+
+      &__greeting {
+        margin: 0 auto;
+        padding: 8px 0;
+
+        &-item {
+          font-size: 18px;
+          line-height: 20px;
+        }
       }
-    }
 
+      &__buttons {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: flex-end;
+        gap: 8px;
 
-    h1 {
-      font-size: 18px;
-      line-height: 20px;
-      color: var(--logo-color);
+        &-item {
+          font-size: 14px;
+        }
+      }
     }
   }
 }

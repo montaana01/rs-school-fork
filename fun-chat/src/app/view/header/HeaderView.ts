@@ -3,18 +3,23 @@ import BaseElementCreator from '../../factory/BaseElementCreator';
 import ImageElementCreator from '../../factory/ImageElementCreator';
 import ThemeSwitcherView from './switcher/ThemeSwitcherView.ts';
 
+const APP_DESCRIPTION: string = 'Secure messaging';
+
 export default class HeaderView {
   public logoWrapper!: BaseElementCreator<'div'>;
-  public pageTitle!: BaseElementCreator<'h2'>;
+  public headerGreetings!: BaseElementCreator<'h2'>;
   public themeSwitcher!: ThemeSwitcherView;
   private header: BaseElementCreator<'header'>;
   private logo!: BaseElementCreator<'img'>;
   private appName!: BaseElementCreator<'h1'>;
   private appDescription!: BaseElementCreator<'h2'>;
+  private logoutButton!: BaseElementCreator<'button'>;
+  private userName: string;
   private readonly app_name: string;
 
   constructor(text: string) {
     this.app_name = text
+    this.userName = 'Unregistered user';
     this.header = new BaseElementCreator({
       tagName: 'header',
       classNames: ['header'],
@@ -24,6 +29,12 @@ export default class HeaderView {
 
   public getHeader(): HTMLElement {
     return this.header.getCreatedElement();
+  }
+
+  //todo: when user logged in - update header greeting
+  public updateHeaderGreetings(name: string = 'Unregistered user'): void {
+    this.userName = name;
+    this.headerGreetings.setTextContent(`Hello ${this.userName}!`);
   }
 
   private createView(): void {
@@ -40,20 +51,21 @@ export default class HeaderView {
   private createWrapper(): BaseElementCreator<'div'> {
     const wrapper: BaseElementCreator<'div'> = new BaseElementCreator({
       tagName: 'div',
-      classNames: ['header', 'header__wrapper'],
+      classNames: ['header__wrapper'],
     });
 
-    this.pageTitle = new BaseElementCreator({
-      tagName: 'h2',
-      classNames: ['header__wrapper-item'],
-    })
+    const greeting: BaseElementCreator<'div'> = new BaseElementCreator({
+      tagName: 'div',
+      classNames: ['header__wrapper-item', 'header__wrapper-item__greeting'],
+    });
+    greeting.addInnerElement(this.createGreeting().getCreatedElement());
 
     const logo: BaseElementCreator<'div'> = this.createLogoView();
+    const buttonsSection: BaseElementCreator<'div'> = this.createSideButtonsView();
 
-    this.themeSwitcher = new ThemeSwitcherView();
     wrapper.addInnerElement(logo.getCreatedElement());
-    wrapper.addInnerElement(this.pageTitle.getCreatedElement());
-    wrapper.addInnerElement(this.themeSwitcher.getCreatedElement());
+    wrapper.addInnerElement(greeting.getCreatedElement());
+    wrapper.addInnerElement(buttonsSection.getCreatedElement());
 
     return wrapper;
   }
@@ -66,21 +78,21 @@ export default class HeaderView {
 
     this.logo = new ImageElementCreator({
       tagName: 'img',
-      classNames: ['header__wrapper-item'],
+      classNames: ['header__wrapper-item__logo-img'],
       src: './icons/app-logo.svg',
       alt: this.app_name ?? 'Application',
     });
 
     this.appName = new BaseElementCreator({
       tagName: 'h1',
-      classNames: ['header__wrapper-item', 'hidden'],
+      classNames: ['header__wrapper-item__logo', 'hidden'],
       textContent: this.app_name ?? 'Application',
     });
 
     this.appDescription = new BaseElementCreator({
       tagName: 'h2',
-      classNames: ['header__wrapper-item', 'header__wrapper-item__logo'],
-      textContent: 'Secure messaging',
+      classNames: ['header__wrapper-item__logo'],
+      textContent: APP_DESCRIPTION,
     });
 
     this.logoWrapper.addInnerElement(this.logo.getCreatedElement());
@@ -88,5 +100,31 @@ export default class HeaderView {
     this.logoWrapper.addInnerElement(this.appDescription.getCreatedElement());
 
     return this.logoWrapper;
+  }
+
+  private createGreeting(): BaseElementCreator<'h2'> {
+    this.headerGreetings = new BaseElementCreator({
+      tagName: 'h2',
+      classNames: ['header__wrapper-item__greeting-item'],
+      textContent: `Hello, ${this.userName}!`,
+    })
+    return this.headerGreetings;
+  }
+
+  private createSideButtonsView(): BaseElementCreator<'div'> {
+    const leftButtonsWrapper: BaseElementCreator<'div'> = new BaseElementCreator({
+      tagName: 'div',
+      classNames: ['header__wrapper-item', 'header__wrapper-item__buttons'],
+    })
+    this.themeSwitcher = new ThemeSwitcherView();
+    this.logoutButton = new BaseElementCreator({
+      tagName: 'button',
+      classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-logout', 'button', 'link'],
+      textContent: `LOG OUT`,
+    })
+    leftButtonsWrapper.addInnerElement(this.themeSwitcher.getCreatedElement());
+    leftButtonsWrapper.addInnerElement(this.logoutButton.getCreatedElement());
+
+    return leftButtonsWrapper;
   }
 }

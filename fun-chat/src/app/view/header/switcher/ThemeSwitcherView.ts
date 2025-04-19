@@ -12,7 +12,7 @@ export default class ThemeSwitcherView {
   constructor() {
     this.element = new BaseElementCreator({
       tagName: 'div',
-      classNames: ['header__wrapper-item', 'header__wrapper-item__switcher', 'theme-switcher'],
+      classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-switcher', 'theme-switcher'],
     });
     this.storage = StorageManager.getManager();
     this.createView();
