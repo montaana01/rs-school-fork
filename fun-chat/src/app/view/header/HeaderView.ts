@@ -9,11 +9,12 @@ export default class HeaderView {
   public logoWrapper!: BaseElementCreator<'div'>;
   public headerGreetings!: BaseElementCreator<'h2'>;
   public themeSwitcher!: ThemeSwitcherView;
+  public aboutButton!: BaseElementCreator<'button'>;
+  public logoutButton!: BaseElementCreator<'button'>;
   private header: BaseElementCreator<'header'>;
   private logo!: BaseElementCreator<'img'>;
   private appName!: BaseElementCreator<'h1'>;
   private appDescription!: BaseElementCreator<'h2'>;
-  private logoutButton!: BaseElementCreator<'button'>;
   private userName: string;
   private readonly app_name: string;
 
@@ -122,15 +123,26 @@ export default class HeaderView {
     const leftButtonsWrapper: BaseElementCreator<'div'> = new BaseElementCreator({
       tagName: 'div',
       classNames: ['header__wrapper-item', 'header__wrapper-item__buttons'],
+    });
+    const rightButtons: BaseElementCreator<'div'> = new BaseElementCreator({
+      tagName: 'div',
+      classNames: ['header__wrapper-item', 'header__wrapper-item__buttons-right'],
     })
+    this.aboutButton = new BaseElementCreator({
+      tagName: 'button',
+      classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-about', 'button', 'link'],
+      textContent: `ABOUT`,
+    });
     this.themeSwitcher = new ThemeSwitcherView();
     this.logoutButton = new BaseElementCreator({
       tagName: 'button',
       classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-logout', 'button', 'link', 'hidden'],
       textContent: `LOG OUT`,
     })
-    leftButtonsWrapper.addInnerElement(this.themeSwitcher.getCreatedElement());
-    leftButtonsWrapper.addInnerElement(this.logoutButton.getCreatedElement());
+    leftButtonsWrapper.addInnerElement(this.aboutButton.getCreatedElement());
+    rightButtons.addInnerElement(this.themeSwitcher.getCreatedElement());
+    rightButtons.addInnerElement(this.logoutButton.getCreatedElement());
+    leftButtonsWrapper.addInnerElement(rightButtons.getCreatedElement());
 
     return leftButtonsWrapper;
   }
