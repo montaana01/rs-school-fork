@@ -11,8 +11,16 @@ export default class InputElementCreator extends HtmlElementCreator<'input'> {
     this.element.type = type;
   }
 
+  public getType(): string {
+    return this.element.type;
+  }
+
   public setValue(value: string): void {
     this.element.value = value;
+  }
+
+  public getValue(): string {
+    return this.element.value;
   }
 
   public setPlaceholder(placeholder: string): void {
