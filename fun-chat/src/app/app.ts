@@ -1,6 +1,3 @@
-import './../style.scss';
-import './assets.scss';
-
 import ThemeManager from './services/ThemeManager';
 import HeaderView from './view/header/HeaderView';
 import MainView from './view/main/MainView';

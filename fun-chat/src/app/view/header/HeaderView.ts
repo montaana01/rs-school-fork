@@ -31,10 +31,17 @@ export default class HeaderView {
     return this.header.getCreatedElement();
   }
 
-  //todo: when user logged in - update header greeting
-  public updateHeaderGreetings(name: string = 'Unregistered user'): void {
+  public updateHeaderGreetings(name: string = 'Guest'): void {
     this.userName = name;
     this.headerGreetings.setTextContent(`Hello ${this.userName}!`);
+  }
+
+  public showLogout(): void {
+    this.logoutButton.removeClassNames(['hidden']);
+  }
+
+  public hideLogout(): void {
+    this.logoutButton.setClassNames(['hidden']);
   }
 
   private createView(): void {
@@ -119,7 +126,7 @@ export default class HeaderView {
     this.themeSwitcher = new ThemeSwitcherView();
     this.logoutButton = new BaseElementCreator({
       tagName: 'button',
-      classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-logout', 'button', 'link'],
+      classNames: ['header__wrapper-item__buttons-item', 'header__wrapper-item__buttons-logout', 'button', 'link', 'hidden'],
       textContent: `LOG OUT`,
     })
     leftButtonsWrapper.addInnerElement(this.themeSwitcher.getCreatedElement());
