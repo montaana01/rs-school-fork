@@ -2,7 +2,6 @@ import BaseElementCreator from '../../../factory/BaseElementCreator.ts';
 import InputElementCreator from '../../../factory/InputElementCreator.ts';
 import type AuthService from '../../../services/websocket/AuthService.ts';
 import type Router from '../../../services/Router.ts';
-import ModalView from '../../modal/ModalView.ts';
 
 export default class AuthView {
   private section: BaseElementCreator<'section'>;
@@ -111,8 +110,8 @@ export default class AuthView {
         this.passwordInput.getValue()
       );
       await this.router.navigate('/');
-    } catch (error: any) {
-      new ModalView(`Login failed ${error}`, false);
+    } catch (error) {
+      throw new Error(`Login failed ${error}`);
     }
   }
 
