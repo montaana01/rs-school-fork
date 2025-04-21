@@ -68,6 +68,7 @@
         margin-bottom: 20px;
 
         &__input {
+          margin: 0 auto;
           cursor: pointer;
           display: block;
           border: 3px double var(--main-color);
