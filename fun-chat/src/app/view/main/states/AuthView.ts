@@ -1,7 +1,7 @@
-import BaseElementCreator from '../../../factory/BaseElementCreator.ts';
-import InputElementCreator from '../../../factory/InputElementCreator.ts';
-import type AuthService from '../../../services/websocket/AuthService.ts';
-import type Router from '../../../services/Router.ts';
+import BaseElementCreator from '../../../factory/BaseElementCreator';
+import InputElementCreator from '../../../factory/InputElementCreator';
+import type AuthService from '../../../services/websocket/AuthService';
+import type Router from '../../../services/Router';
 
 export default class AuthView {
   private wrapper: BaseElementCreator<'form'>;
@@ -10,8 +10,12 @@ export default class AuthView {
   private loginButton!: BaseElementCreator<'button'>;
   private errorLoginMsg!: BaseElementCreator<'span'>;
   private errorPasswordMsg!: BaseElementCreator<'span'>;
+  private authService: AuthService;
+  private router: Router;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(auth: AuthService, router: Router) {
+    this.authService = auth;
+    this.router = router;
     this.wrapper = new BaseElementCreator({
       tagName: 'form',
       classNames: ['main__wrapper', 'main__wrapper-auth'],
@@ -52,7 +56,7 @@ export default class AuthView {
     });
 
     const formElement: HTMLFormElement = this.wrapper.getCreatedElement();
-    formElement.addEventListener('submit', (event) => {
+    formElement.addEventListener('submit', (event: SubmitEvent) => {
       event.preventDefault();
       void this.handleSubmit();
     });
@@ -69,9 +73,13 @@ export default class AuthView {
 
   private validateLogin(): boolean {
     const value: string = this.loginInput.getValue().trim();
+    if (value == this.passwordInput.getValue()) {
+      this.errorPasswordMsg.setTextContent('Password must be different from the login.');
+      return false;
+    }
     const isValid: boolean = /^[a-zA-Zа-яА-Я0-9]{3,}$/.test(value);
     if (!isValid) {
-      this.errorLoginMsg.setTextContent('Login must be at least 3 alphanumeric characters.')
+      this.errorLoginMsg.setTextContent('Login must be at least 3 alphanumeric characters.');
     } else {
       this.errorLoginMsg.setTextContent('');
     }
@@ -80,9 +88,13 @@ export default class AuthView {
 
   private validatePassword(): boolean {
     const passwordValue: string = this.passwordInput.getValue();
-    const isValid: boolean = /^(?=.*[A-Za-zа-яА-Я])(?=.*\d)[A-Za-zа-яА-Я\d]{6,}$/.test(passwordValue);
+    if (passwordValue === this.loginInput.getValue()) {
+      this.errorPasswordMsg.setTextContent('Password must be different from the login.');
+      return false;
+    }
+    const isValid: boolean = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(passwordValue);
     if (!isValid) {
-      this.errorPasswordMsg.setTextContent('Password must be at least 6 characters, including letters and numbers.')
+      this.errorPasswordMsg.setTextContent('Password must be at least 6 characters, including letters and numbers.');
     } else {
       this.errorPasswordMsg.setTextContent('');
     }
@@ -133,7 +145,7 @@ export default class AuthView {
     const passwordWrapper: BaseElementCreator<'div'> = new BaseElementCreator({
       tagName: 'div',
       classNames: ['main__wrapper-auth-block'],
-    })
+    });
     this.passwordInput = new InputElementCreator({
       tagName: 'input',
       classNames: ['main__wrapper-auth-block__input'],
