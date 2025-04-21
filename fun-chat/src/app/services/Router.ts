@@ -32,8 +32,8 @@ export default class Router {
         requiresGuest: true,
       },
       {
-        path: '/',
-        view: (): HTMLElement => new ChatView().getChat(),
+        path: '/main',
+        view: (): HTMLElement => new ChatView(this.messageService, this.authService).getChat(),
         requiresAuth: true,
         requiresGuest: false,
       },
@@ -47,7 +47,7 @@ export default class Router {
 
     window.addEventListener('hashchange', () => void this.handleRoute());
 
-    const initial: string = window.location.hash.slice(1) || this.storage.load<string>('route') || '/';
+    const initial: string = window.location.hash.slice(1) || this.storage.load<string>('route') || '/main';
     void this.navigate(initial);
   }
 
@@ -60,34 +60,34 @@ export default class Router {
   }
 
   private async handleRoute(): Promise<void> {
-    const path: string = window.location.hash.slice(1) || '/';
+    const path: string = window.location.hash.slice(1) || '/main';
     this.storage.save('route', path);
 
     const route: RouteType | undefined = this.routes.find((route: RouteType) => route.path === path);
     if (!route) {
-      this.renderError(`Page not found: ${path}`);
-      return
+      const missing: string = path;
+      window.history.replaceState(null, '', '#/error');
+      this.renderError(`Page not found: ${missing}`);
+      return;
     }
 
     const logged: boolean = this.authService.isLoggedIn() ?? false;
 
     if (route.requiresAuth && !logged) return void this.navigate('/auth');
-    if (route.requiresGuest && logged) return void this.navigate('/');
+    if (route.requiresGuest && logged) return void this.navigate('/main');
 
     try {
       const viewElement: HTMLElement = route.view();
       this.container.removeInnerElements();
       this.container.addInnerElement(viewElement);
     } catch (error) {
-      this.renderError(`Error while rendering ${path}: ${String(error)}`);
+      this.renderError(`Error while rendering path: '${path}', with error: '${String(error)}'`);
     }
   }
 
   private renderError(message: string): void {
     const errorView: ErrorView = new ErrorView(message);
-    errorView.homeButton.getCreatedElement().addEventListener('click', () => {
-      void this.navigate('/');
-    });
+    errorView.backButton.getCreatedElement().addEventListener('click', () => window.history.back());
     this.container.removeInnerElements();
     this.container.addInnerElement(errorView.getError());
   }

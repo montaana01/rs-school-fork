@@ -4,7 +4,6 @@ import type AuthService from '../../../services/websocket/AuthService.ts';
 import type Router from '../../../services/Router.ts';
 
 export default class AuthView {
-  private section: BaseElementCreator<'section'>;
   private wrapper: BaseElementCreator<'form'>;
   private loginInput!: InputElementCreator;
   private passwordInput!: InputElementCreator;
@@ -13,13 +12,9 @@ export default class AuthView {
   private errorPasswordMsg!: BaseElementCreator<'span'>;
 
   constructor(private authService: AuthService, private router: Router) {
-    this.section = new BaseElementCreator({
-      tagName: 'section',
-      classNames: ['main__wrapper', 'auth'],
-    });
     this.wrapper = new BaseElementCreator({
       tagName: 'form',
-      classNames: ['main__wrapper-auth'],
+      classNames: ['main__wrapper', 'main__wrapper-auth'],
     });
 
     this.createView();
@@ -27,12 +22,11 @@ export default class AuthView {
   }
 
   public getAuth(): HTMLElement {
-    return this.section.getCreatedElement();
+    return this.wrapper.getCreatedElement();
   }
 
   private createView(): void {
     this.createInputElements();
-    this.section.addInnerElement(this.wrapper.getCreatedElement());
   }
 
   private createInputElements(): void {
@@ -65,7 +59,7 @@ export default class AuthView {
 
 
 
-    this.section.getCreatedElement().addEventListener('keydown', (event: KeyboardEvent) => {
+    this.wrapper.getCreatedElement().addEventListener('keydown', (event: KeyboardEvent) => {
       if (event.key === 'Enter' && !this.loginButton.getCreatedElement().classList.contains('disabled')) {
         event.preventDefault();
         void this.handleSubmit();
@@ -109,7 +103,7 @@ export default class AuthView {
         this.loginInput.getValue().trim(),
         this.passwordInput.getValue()
       );
-      await this.router.navigate('/');
+      await this.router.navigate('/main');
     } catch (error) {
       throw new Error(`Login failed ${error}`);
     }

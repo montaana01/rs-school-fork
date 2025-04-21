@@ -8,7 +8,7 @@ export default class ErrorView {
   constructor(message: string = 'Error: 404') {
     this.section = new BaseElementCreator({
       tagName: 'section',
-      classNames: ['main__wrapper'],
+      classNames: ['main__wrapper', 'main__wrapper-error'],
     });
     this.message = message;
 
