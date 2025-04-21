@@ -1,7 +1,7 @@
 import BaseElementCreator from '../../../factory/BaseElementCreator.ts';
 
 export default class ErrorView {
-  public homeButton!: BaseElementCreator<'button'>;
+  public backButton!: BaseElementCreator<'button'>;
   private section: BaseElementCreator<'section'>;
   private readonly message: string;
 
@@ -25,12 +25,12 @@ export default class ErrorView {
       classNames: ['main__wrapper-item__title'],
       textContent: this.message,
     });
-    this.homeButton = new BaseElementCreator({
+    this.backButton = new BaseElementCreator({
       tagName: 'button',
       classNames: ['main__wrapper-item__button', 'button', 'link'],
-      textContent: 'Home',
+      textContent: 'Back',
     });
     this.section.addInnerElement(text.getCreatedElement());
-    this.section.addInnerElement(this.homeButton.getCreatedElement());
+    this.section.addInnerElement(this.backButton.getCreatedElement());
   }
 }

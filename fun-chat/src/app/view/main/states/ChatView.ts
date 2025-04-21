@@ -1,47 +1,50 @@
 import BaseElementCreator from './../../../factory/BaseElementCreator.ts';
 
 export default class ChatView {
-  public section: BaseElementCreator<'section'>;
+  public usersSection!: BaseElementCreator<'section'>;
+  public dialogSection!: BaseElementCreator<'section'>;
   private readonly wrapper: BaseElementCreator<'div'>;
 
   constructor() {
-    this.section = new BaseElementCreator({
-      tagName: 'section',
-      classNames: ['section', 'chat'],
-    });
     this.wrapper = new BaseElementCreator({
       tagName: 'div',
-      classNames: ['chat__wrapper'],
+      classNames: ['main__wrapper','chat__wrapper'],
     });
     this.createView();
   }
 
   public getChat(): HTMLElement {
-    return this.section.getCreatedElement();
+    return this.wrapper.getCreatedElement();
   }
 
   private createView(): void {
-    const container: BaseElementCreator<'div'> = new BaseElementCreator({
-      tagName: 'div',
-      classNames: ['container'],
-    });
-
-    const wrapper: BaseElementCreator<'div'> = this.createChat();
-
-    container.addInnerElement(wrapper.getCreatedElement());
-    this.section.addInnerElement(container.getCreatedElement());
+    const users: BaseElementCreator<'section'> = this.createUsers();
+    const dialog: BaseElementCreator<'section'> = this.createDialog();
+    this.wrapper.addInnerElement(users.getCreatedElement());
+    this.wrapper.addInnerElement(dialog.getCreatedElement());
   }
 
 
-  private createChat(): BaseElementCreator<'div'> {
-    const chatText: BaseElementCreator<'h2'> = new BaseElementCreator({
-      tagName: 'h2',
-      classNames: ['chat-text'],
-      textContent: 'Chat will be here...',
+  private createUsers(): BaseElementCreator<'section'> {
+    this.usersSection = new BaseElementCreator({
+      tagName: 'section',
+      classNames: ['chat__wrapper-users'],
+    });
+    return this.usersSection;
+  }
+
+  private createDialog(): BaseElementCreator<'section'> {
+    this.dialogSection = new BaseElementCreator({
+      tagName: 'section',
+      classNames: ['chat__wrapper-dialog'],
     });
 
-    this.wrapper.addInnerElement(chatText.getCreatedElement());
-
-    return this.wrapper;
+    const chatText: BaseElementCreator<'h2'> = new BaseElementCreator({
+      tagName: 'h2',
+      classNames: ['chat__wrapper-dialog__message'],
+      textContent: 'Chat will be here...',
+    });
+    this.dialogSection.addInnerElement(chatText.getCreatedElement());
+    return this.dialogSection;
   }
 }
