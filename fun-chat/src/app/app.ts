@@ -3,6 +3,7 @@ import Router from './services/Router';
 
 import WebSocketManager from './services/websocket/WebSocketManager';
 import AuthService from './services/websocket/AuthService';
+import MessageService from './services/websocket/MessageService';
 
 import HeaderView from './view/header/HeaderView';
 import MainView from './view/main/MainView';
@@ -20,6 +21,7 @@ export default class App {
   private theme: ThemeManager = new ThemeManager();
   private webSocketManager!: WebSocketManager;
   private auth!: AuthService;
+  private messageService!: MessageService;
   private router!: Router;
 
   constructor() {
@@ -29,7 +31,8 @@ export default class App {
 
     this.initWebSocket().then(async () => {
       await this.auth.init();
-      this.router = new Router(this.mainView.getContainer(), this.auth)
+      this.messageService = new MessageService(this.webSocketManager);
+      this.router = new Router(this.mainView.getContainer(), this.auth, this.messageService)
       this.initAuthListeners();
       this.startApp();
     });
@@ -38,7 +41,7 @@ export default class App {
   public startApp(): void {
     this.BODY.append(this.headerView.getHeader(), this.mainView.getMain(), this.footerView.getFooter());
 
-    this.headerView.logoWrapper.setCallback(() => this.router.navigate('/'));
+    this.headerView.logoWrapper.setCallback(() => this.router.navigate('/main'));
     this.headerView.aboutButton.setCallback(() => this.router.navigate('/about'));
 
     this.headerView.logoutButton.getCreatedElement().addEventListener('click', async () => {

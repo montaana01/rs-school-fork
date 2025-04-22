@@ -3,7 +3,8 @@ import ErrorView from '../view/main/states/ErrorView';
 import AuthView from '../view/main/states/AuthView';
 import AboutView from '../view/main/states/AboutView';
 import ChatView from '../view/main/states/ChatView';
-import type AuthService from './websocket/AuthService.ts';
+import type AuthService from './websocket/AuthService';
+import type MessageService from './websocket/MessageService';
 import type BaseElementCreator from '../factory/BaseElementCreator';
 import type { RouteType } from '../types/server/RouterType';
 
@@ -11,12 +12,13 @@ export default class Router {
   private container: BaseElementCreator<'div'>;
   private storage: StorageManager;
   private aboutView: AboutView;
+  private authService: AuthService;
+  private messageService: MessageService;
   private routes: RouteType[];
 
-  constructor(
-    mainContainer: BaseElementCreator<'div'>,
-    private authService: AuthService
-  ) {
+  constructor(mainContainer: BaseElementCreator<'div'>, auth: AuthService, message: MessageService) {
+    this.authService = auth;
+    this.messageService = message;
     this.container = mainContainer;
     this.storage = StorageManager.getManager();
     this.aboutView = new AboutView();

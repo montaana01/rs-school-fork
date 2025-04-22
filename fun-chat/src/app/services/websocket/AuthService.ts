@@ -7,10 +7,10 @@ import type { MessageType } from '../../types/server/MessageType';
 
 
 export default class AuthService {
+  public currentUser: UserType | null;
   private subscribers: ((state: { loggedIn: boolean; user: UserType | null }) => void)[] = [];
   private loggedIn: boolean;
   private isLoggingOut: boolean;
-  private currentUser: UserType | null;
   private password: string | null;
   private storage: StorageManager;
   private ws: WebSocketManager;
@@ -26,9 +26,6 @@ export default class AuthService {
     this.password = this.loggedIn
       ? this.storage.load<string>('authPassword')
       : null;
-
-    //todo: implement listeners that send to all instance of connection that person is online!
-    //this.setupListeners();
   }
 
   public async init(): Promise<void> {
@@ -115,9 +112,4 @@ export default class AuthService {
     }
     this.subscribers.forEach(callback => callback({ loggedIn, user }));
   }
-
-  // private setupListeners(): void {
-  //   this.ws.onMessage('USER_EXTERNAL_LOGIN', 'do something');
-  //   this.ws.onMessage('USER_EXTERNAL_LOGOUT', 'do something');
-  // }
 }

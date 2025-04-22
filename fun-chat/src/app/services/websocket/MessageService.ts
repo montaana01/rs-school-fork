@@ -3,13 +3,33 @@ import type { ChatMessageType } from '../../types/server/ChatMessageType';
 import type { MessageType } from '../../types/server/MessageType';
 import type { UserType } from '../../types/server/UserType';
 import ServerError from './ServerError';
-import ModalView from '../../view/modal/ModalView.ts';
+import ModalView from '../../view/modal/ModalView';
 
 export default class MessageService {
   private ws: WebSocketManager;
+  private userListListeners: (() => void)[];
+
 
   constructor(ws: WebSocketManager) {
     this.ws = ws;
+    this.userListListeners = [];
+
+    this.ws.onMessage('USER_ACTIVE', (message) => {
+      if (message.id === null) this.emitUserListUpdate();
+    });
+    this.ws.onMessage('USER_INACTIVE', (message) => {
+      if (message.id === null) this.emitUserListUpdate();
+    });
+    this.ws.onMessage('USER_EXTERNAL_LOGIN', (message) => {
+      if (message.id === null) this.emitUserListUpdate();
+    });
+    this.ws.onMessage('USER_EXTERNAL_LOGOUT', (message) => {
+      if (message.id === null) this.emitUserListUpdate();
+    });
+  }
+
+  public onUserListUpdate(callback: () => void): void {
+    this.userListListeners.push(callback);
   }
 
   public async sendMessage(to: string, text: string): Promise<ChatMessageType> {
@@ -58,6 +78,47 @@ export default class MessageService {
     return response.payload.users;
   }
 
+  public async deleteMessage(id: string): Promise<void> {
+    try {
+      await this.ws.sendRequest<{ message: { id: string; status: { isDeleted: boolean } } }>(
+        'MSG_DELETE',
+        { message: { id } }
+      );
+    } catch (error) {
+      if (error instanceof ServerError) {
+        new ModalView(error.payload.error);
+      }
+      throw new Error('Failed to delete message');
+    }
+  }
+
+  public async setMessageRead(id: string): Promise<void> {
+    try {
+      await this.ws.sendRequest<{ message: { id: string; status: { isReaded: boolean } } }>(
+        'MSG_READ',
+        { message: { id } }
+      );
+    } catch (error) {
+      if (error instanceof ServerError) {
+        new ModalView(error.payload.error);
+      }
+      throw new Error('Failed to mark message as read');
+    }
+  }
+
+  public async setAllMessageRead(messages: ChatMessageType[], currentUser: string | null): Promise<void> {
+    if (!currentUser) return;
+    for (const message of messages) {
+      if (message.to === currentUser && !message.status.isReaded) {
+        try {
+          await this.setMessageRead(message.id);
+        } catch (error) {
+          console.warn(`Failed to mark message ${message.id} as read`, error);
+        }
+      }
+    }
+  }
+
   public onIncoming(handler: (message: ChatMessageType) => void): void {
     this.ws.onMessage('MSG_SEND', (message: MessageType<{ message: ChatMessageType }>) => {
       handler(message.payload.message);
@@ -86,5 +147,9 @@ export default class MessageService {
     this.ws.onMessage('MSG_DELETE', (message: MessageType<{ message: { id: string; status: { isDeleted: boolean } } }>) => {
       handler(message.payload.message);
     });
+  }
+
+  private emitUserListUpdate(): void {
+    this.userListListeners.forEach(callback => callback());
   }
 }
