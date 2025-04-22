@@ -84,3 +84,5 @@ export default class App {
     });
   }
 }
+
+import './view/main/media.scss';

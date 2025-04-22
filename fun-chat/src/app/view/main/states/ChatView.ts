@@ -8,6 +8,7 @@ import type { UserType } from '../../../types/server/UserType';
 export default class ChatView {
   public usersSection!: BaseElementCreator<'section'>;
   public dialogSection!: BaseElementCreator<'section'>;
+  private toggleUsersBtn!: BaseElementCreator<'button'>;
   private wrapper: BaseElementCreator<'div'>;
   private usersCount!: BaseElementCreator<'h3'>;
 
@@ -62,12 +63,25 @@ export default class ChatView {
   }
 
   private createView(): void {
+    this.toggleUsersBtn = new BaseElementCreator({
+      tagName: 'button',
+      classNames: ['chat__wrapper-users-button', 'button'],
+      textContent: '☰'
+    });
+    this.toggleUsersBtn.getCreatedElement().addEventListener('click', () => this.toggleUsersPanel());
+    this.wrapper.addInnerElement(this.toggleUsersBtn.getCreatedElement());
+
+
     const users: BaseElementCreator<'section'> = this.createUsers();
     const dialog: BaseElementCreator<'section'> = this.createDialog();
     this.wrapper.addInnerElement(users.getCreatedElement());
     this.wrapper.addInnerElement(dialog.getCreatedElement());
   }
 
+  private toggleUsersPanel(): void {
+    const panel = this.usersSection.getCreatedElement();
+    panel.classList.toggle('open');
+  }
 
   private createUsers(): BaseElementCreator<'section'> {
     this.usersSection = new BaseElementCreator({
@@ -120,8 +134,7 @@ export default class ChatView {
 
     const active: UserType[] = await this.messageService.getActiveUsers();
     const inactive: UserType[] = await this.messageService.getInactiveUsers();
-    const total: number = active.length + inactive.length;
-    if (total > 1) this.usersCount.setTextContent(`Users count: ${total - 1} and You!`);
+    if (active.length > 1) this.usersCount.setTextContent(`${active.length- 1} users and You!`);
 
     active.forEach((user: UserType) => this.renderUser(user, true));
     inactive.forEach((user: UserType)  => this.renderUser(user, false));
@@ -176,6 +189,9 @@ export default class ChatView {
 
   private async openDialog(login: string): Promise<void> {
     if (!this.authService?.currentUser) return;
+    if (window.innerWidth <= 550) {
+      this.usersSection.getCreatedElement().classList.remove('open');
+    }
     this.dialogSection.addInnerElement(this.exitOfDialog.getCreatedElement());
     this.selectedUser = login;
     this.unreadCounters[login] = 0;
