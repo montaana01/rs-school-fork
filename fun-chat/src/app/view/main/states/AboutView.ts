@@ -1,7 +1,7 @@
 import BaseElementCreator from './../../../factory/BaseElementCreator.ts';
 import ImageElementCreator from './../../../factory/ImageElementCreator.ts';
 
-const ABOUT_APP: string = 'This is new level of chatting. Fun Chat - secured messenger that based on new technology of message delivery.'
+const ABOUT_APP: string = 'This is new level of chatting. Fun Chat - secured messenger that based on new technology of message delivery. Author: montaana01.'
 
 export default class AboutView {
   private main_wrapper: BaseElementCreator<'div'>;

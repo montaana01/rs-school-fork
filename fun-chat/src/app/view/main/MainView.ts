@@ -1,4 +1,5 @@
 import './mainView.scss'
+import './chatView.scss';
 import BaseElementCreator from '../../factory/BaseElementCreator.ts';
 
 export default class MainView {

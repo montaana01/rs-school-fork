@@ -49,7 +49,7 @@ export default class FooterView {
     this.copyright = new BaseElementCreator({
       tagName: 'p',
       classNames: ['footer__wrapper-item'],
-      textContent: 'YakovlevDev © 2025',
+      textContent: 'YakovlevDev © 2025 | The RS School',
     });
 
     this.rss = new ImageElementCreator({
