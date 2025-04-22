@@ -111,6 +111,7 @@
   .chat__wrapper {
     flex-direction: column;
     position: relative;
+
     &-users {
       display: none;
       flex-direction: column;
@@ -133,14 +134,12 @@
       }
       &-count {
         font-size: 18px;
-        color: var(--main-color);
+        color: var(--static-text-color);
       }
       &-button {
         display: block;
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%) rotate(90deg);
-        left: 10px;
+        bottom: 20px;
         z-index: 200;
         padding: 2px 4px;
         border-radius: 4px;
@@ -149,6 +148,14 @@
     }
     &-dialog {
       width: 100%;
+      &-header {
+        text-align: center;
+      }
+      &-messages {
+        &-item {
+          width: 80%;
+        }
+      }
     }
   }
   .footer {

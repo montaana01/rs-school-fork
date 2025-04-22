@@ -4,6 +4,7 @@ body {
   --add: #219d31;
   --bg-color: #273434;
   --text-color: #f5f5f7;
+  --static-text-color: #f5f5f7;
   --border: #091b1a;
   --backdrop: rgb(0 0 0 / 40%);
   --black: #000;
@@ -15,12 +16,14 @@ body {
     --bg-color: #f1f1f1;
     --text-color: #333;
     --text-color-inverted: #fff;
+    --inactive-users: rgb(0 0 0/ 40%)
   }
 
   &.dark {
     --bg-color: #1d1d1d;
     --text-color: #fff;
     --text-color-inverted: #000;
+    --inactive-users: rgb(255 255 255 / 40%)
   }
 
   &.fixed {

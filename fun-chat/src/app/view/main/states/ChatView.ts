@@ -208,6 +208,7 @@ export default class ChatView {
 
     await this.messageService.setAllMessageRead(messages, this.authService.currentUser?.login || '');
     messages.forEach((message: ChatMessageType) => this.renderMessage(message));
+    this.scrollToBottom();
     messages.forEach((message: ChatMessageType) => {
       if (!message.status.isReaded && message.to === this.authService.currentUser?.login) {
         this.messageService.setMessageRead(message.id).catch(console.error);
@@ -215,6 +216,14 @@ export default class ChatView {
     });
     this.setupInput();
 
+  }
+
+  private scrollToBottom(): void {
+    if (!this.selectedUser) return;
+    this.messageList.getCreatedElement().scrollTo({
+      top: this.messageList.getCreatedElement().scrollHeight,
+      behavior: 'smooth'
+    });
   }
 
   private closeDialog(): void {
@@ -227,7 +236,6 @@ export default class ChatView {
     this.unreadCounters = {};
     this.messageElements = {};
     void this.loadUsers();
-
   }
 
   private async isUserOnline(login: string): Promise<boolean> {
@@ -298,7 +306,9 @@ export default class ChatView {
     };
 
     this.messageList.addInnerElement(wrapperElement);
+    this.scrollToBottom();
   }
+
   private renderMessageTemp(): void {
     this.messageWrapper = new BaseElementCreator({
       tagName: 'div',
@@ -356,6 +366,7 @@ export default class ChatView {
           const sent: ChatMessageType = await this.messageService.sendMessage(this.selectedUser, text);
           this.renderMessage(sent);
           input.setValue('');
+          this.scrollToBottom();
         }
       }
     });
@@ -365,6 +376,7 @@ export default class ChatView {
         const sent: ChatMessageType = await this.messageService.sendMessage(this.selectedUser, text);
         this.renderMessage(sent);
         input.setValue('');
+        this.scrollToBottom();
       }
     })
     this.sendBox.addInnerElement(input.getCreatedElement());
@@ -372,15 +384,16 @@ export default class ChatView {
   }
 
   private subscribeIncoming(): void {
-    this.messageService.onIncoming(message => {
+    this.messageService.onIncoming((message: ChatMessageType) => {
       const isOwnMessage: boolean = message.from === this.authService.currentUser?.login;
       const isCurrentDialog: boolean = message.from === this.selectedUser;
 
-      if (!isCurrentDialog && !isOwnMessage) {
-        if (!this.selectedUser || this.selectedUser !== message.from) {
-          this.unreadCounters[message.from] = (this.unreadCounters[message.from] || 0) + 1;
-          void this.loadUsers();
-        }
+      if (isCurrentDialog) {
+        this.renderMessage(message);
+        this.scrollToBottom();
+      } else if (!isOwnMessage) {
+        this.unreadCounters[message.from] = (this.unreadCounters[message.from] || 0) + 1;
+        void this.loadUsers();
       }
     });
   }
@@ -398,7 +411,7 @@ export default class ChatView {
       const elements = this.messageElements[id];
       if (elements) {
         const statusElement = elements.status.getCreatedElement();
-        statusElement.textContent = `Read: ${status.isReaded ? 'yes' : 'no'}`;
+        statusElement.textContent = `Read: ${status.isReaded ? '✅' : '❌'}`;
         statusElement.classList.toggle('read', status.isReaded);
         statusElement.classList.toggle('unread', !status.isReaded);
         elements.wrapper.getCreatedElement().classList.add('status-updated');
