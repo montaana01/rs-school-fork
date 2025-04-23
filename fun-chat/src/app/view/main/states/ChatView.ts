@@ -33,6 +33,7 @@ export default class ChatView {
     deleteBtn?: BaseElementCreator<'span'>;
   }>;
 
+  private emptyDialogMessage!: BaseElementCreator<'p'>;
   private messageWrapper!: BaseElementCreator<'div'>;
   private messageAuthor!: BaseElementCreator<'span'>;
   private messageTime!: BaseElementCreator<'span'>;
@@ -181,7 +182,6 @@ export default class ChatView {
 
   private updateDialogOnStatusChange(): void {
     if (!this.selectedUser || !this.dialogHeader) return;
-    // Достаточно перерисовать заголовок статуса
     void this.isUserOnline(this.selectedUser).then(isOnline => {
       this.dialogHeader.setTextContent(`${this.selectedUser} — ${isOnline ? 'online' : 'offline'}`);
     });
@@ -189,9 +189,7 @@ export default class ChatView {
 
   private async openDialog(login: string): Promise<void> {
     if (!this.authService?.currentUser) return;
-    if (window.innerWidth <= 550) {
-      this.usersSection.getCreatedElement().classList.remove('open');
-    }
+    if (window.innerWidth <= 550) this.usersSection.getCreatedElement().classList.remove('open');
     this.dialogSection.addInnerElement(this.exitOfDialog.getCreatedElement());
     this.selectedUser = login;
     this.unreadCounters[login] = 0;
@@ -199,12 +197,22 @@ export default class ChatView {
     this.messageList.removeInnerElements();
     this.sendBox.removeInnerElements();
 
-    const isOnline: boolean = await this.isUserOnline(login);
-    isOnline ? this.dialogHeader.setClassNames(['online']) : this.dialogHeader.setClassNames(['offline']);
+    await this.isUserOnline(login) ? this.dialogHeader.setClassNames(['online']) : this.dialogHeader.setClassNames(['offline']);
     this.dialogHeader.setTextContent(`Dialog of user: ${login}`);
 
     this.messageElements = {};
     const messages: ChatMessageType[] = await this.messageService.getMessageHistory(login);
+
+    if (messages.length == 0) {
+      this.emptyDialogMessage = new BaseElementCreator({
+        tagName: 'p',
+        classNames: ['chat__wrapper-dialog-messages-empty'],
+        textContent: `Hey ${this.authService.currentUser?.login}, dialog with '${String(login)}' is empty. \n Start messaging now!`,
+      })
+      this.messageList.addInnerElement(this.emptyDialogMessage.getCreatedElement());
+    } else {
+      if (this.emptyDialogMessage) this.emptyDialogMessage.getCreatedElement().remove();
+    }
 
     await this.messageService.setAllMessageRead(messages, this.authService.currentUser?.login || '');
     messages.forEach((message: ChatMessageType) => this.renderMessage(message));
@@ -215,7 +223,6 @@ export default class ChatView {
       }
     });
     this.setupInput();
-
   }
 
   private scrollToBottom(): void {
@@ -269,7 +276,7 @@ export default class ChatView {
   }
 
   private renderMessage(message: ChatMessageType): void {
-    const isOwn = message.from === this.authService.currentUser?.login;
+    const isOwn: Boolean = message.from === this.authService.currentUser?.login;
     this.renderMessageTemp();
     this.messageWrapper.getCreatedElement().setAttribute('data-msg-id', message.id);
     this.messageWrapper.setClassNames(['chat__message-item', isOwn ? 'outgoing' : 'incoming']);

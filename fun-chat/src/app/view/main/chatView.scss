@@ -148,6 +148,13 @@
       height: 100%;
       padding-right: 18px;
       overflow-y: scroll;
+
+      &-empty {
+        text-align: center;
+        font-size: 18px;
+        line-height: 22px;
+      }
+
       &-item {
         padding: 3px;
         border-radius: 4px;
