@@ -4,6 +4,7 @@ import type MessageService from '../../../services/websocket/MessageService';
 import type AuthService from '../../../services/websocket/AuthService';
 import type { ChatMessageType } from '../../../types/server/ChatMessageType';
 import type { UserType } from '../../../types/server/UserType';
+import ModalView from '../../modal/ModalView';
 
 export default class ChatView {
   public usersSection!: BaseElementCreator<'section'>;
@@ -368,26 +369,28 @@ export default class ChatView {
       classNames: ['chat__wrapper-dialog-send__button', 'button', 'link'],
       textContent: 'send',
       callback: async (): Promise<void> => {
-        if (this.selectedUser) {
-          const text: string = input.getValue().trim();
-          const sent: ChatMessageType = await this.messageService.sendMessage(this.selectedUser, text);
-          this.renderMessage(sent);
-          input.setValue('');
-          this.scrollToBottom();
-        }
+        if (this.selectedUser) await this.sendMessage(input, this.selectedUser);
       }
     });
     input.getCreatedElement().addEventListener('keydown',async (event: KeyboardEvent) => {
       if (event.key === 'Enter' && this.selectedUser) {
-        const text: string = input.getValue().trim();
-        const sent: ChatMessageType = await this.messageService.sendMessage(this.selectedUser, text);
-        this.renderMessage(sent);
-        input.setValue('');
-        this.scrollToBottom();
+        if (this.selectedUser) await this.sendMessage(input, this.selectedUser);
       }
     })
     this.sendBox.addInnerElement(input.getCreatedElement());
     this.sendBox.addInnerElement(button.getCreatedElement());
+  }
+
+  private async sendMessage(input: InputElementCreator, selectedUser: string): Promise<void> {
+    const text: string = input.getValue().trim();
+    if (text.trim().length > 0){
+      const sent: ChatMessageType = await this.messageService.sendMessage(selectedUser, text);
+      this.renderMessage(sent);
+      input.setValue('');
+      this.scrollToBottom();
+    } else {
+      new ModalView('Don\'t try send empty message!')
+    }
   }
 
   private subscribeIncoming(): void {
