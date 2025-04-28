@@ -1,8 +1,7 @@
-# todo: write here:
-
-## YouTube video link;
-
-## Link to your Reveal slide deck;
+## React Native presentation by Alexey Yakovlev:
+> YouTube video link [Tap here](https://youtube.com)
+> 
+> Link Reveal slide deck [Tap here](https://montaana01.github.io/presentation/)
 
 ### (Optional) Presentation transcript link;
 ### (Optional) Additional comments.
