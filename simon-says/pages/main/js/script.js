@@ -331,7 +331,7 @@ footerGitLogo.onclick = function () {
 }
 Object.assign(footerGitLogo, {
   className: "footer__wrapper-item link",
-  src: "./../../assets/icons/github.svg",
+  src: "./../../assets/icon/github.svg",
   alt: "Github icon",
 })
 
@@ -345,7 +345,7 @@ footerRSSchool.onclick = function () {
 }
 Object.assign(footerRSSchool, {
   className: "footer__wrapper-item link",
-  src: "./../../assets/icons/rss-logo.svg",
+  src: "./../../assets/icon/rss-logo.svg",
   alt: "Made in Rolling Scopes School",
 })
 

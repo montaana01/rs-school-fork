@@ -21,7 +21,7 @@ export class Header {
     const LOGO_IMG = new CreateHTMLElement("img", {
       className: "header__wrapper__logo-img",
       attributes: {
-        src: "./../../assets/icons/nonograms-logo.svg",
+        src: "./../../assets/icon/nonograms-logo.svg",
         alt: "Logo",
       },
     });

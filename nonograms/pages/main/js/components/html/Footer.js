@@ -17,7 +17,7 @@ export class Footer {
     const FOOTER_GITHUB = new CreateHTMLElement("img", {
       className: "footer__wrapper-item",
       attributes: {
-        src: "./../../assets/icons/github.svg",
+        src: "./../../assets/icon/github.svg",
         alt: "Github icon",
       },
     });
@@ -36,7 +36,7 @@ export class Footer {
     const FOOTER_RSS = new CreateHTMLElement("img", {
       className: "footer__wrapper-item",
       attributes: {
-        src: "./../../assets/icons/rss-logo.svg",
+        src: "./../../assets/icon/rss-logo.svg",
         alt: "Made in Rolling Scopes School",
       },
     });
