@@ -1,7 +1,7 @@
-import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { CreateHTMLElement } from "../CreateHTMLElement.js";
 import { Carousel } from "./Carousel.js";
 import { Popup } from "./Popup.js";
-import { Sound } from "./../Sound.js";
+import { Sound } from "../Sound.js";
 
 export class Game {
   constructor(size = 5, solution = {}) {

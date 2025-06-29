@@ -1,11 +1,11 @@
-import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { CreateHTMLElement } from "../CreateHTMLElement.js";
 
 export class Carousel {
   constructor(solutions) {
     this.carouselData = solutions;
     this.currentSlide = 0;
     this.currentDifficulty = localStorage.getItem("difficulty");
-    this.imagePath = "./../../assets/images/slider/";
+    this.imagePath = "./assets/images/slider/";
     this.carouselElement = new CreateHTMLElement("div", {
       className: "game__carousel__wrapper",
     });

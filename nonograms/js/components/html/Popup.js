@@ -1,4 +1,4 @@
-import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { CreateHTMLElement } from "../CreateHTMLElement.js";
 
 export class Popup {
   constructor(className, text) {

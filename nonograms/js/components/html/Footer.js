@@ -1,4 +1,4 @@
-import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { CreateHTMLElement } from "../CreateHTMLElement.js";
 
 export class Footer {
   constructor(options) {
@@ -17,7 +17,7 @@ export class Footer {
     const FOOTER_GITHUB = new CreateHTMLElement("img", {
       className: "footer__wrapper-item",
       attributes: {
-        src: "./../../assets/icon/github.svg",
+        src: "./assets/icon/github.svg",
         alt: "Github icon",
       },
     });
@@ -36,7 +36,7 @@ export class Footer {
     const FOOTER_RSS = new CreateHTMLElement("img", {
       className: "footer__wrapper-item",
       attributes: {
-        src: "./../../assets/icon/rss-logo.svg",
+        src: "./assets/icon/rss-logo.svg",
         alt: "Made in Rolling Scopes School",
       },
     });

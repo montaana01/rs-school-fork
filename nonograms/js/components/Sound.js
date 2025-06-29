@@ -1,10 +1,10 @@
 export class Sound {
   constructor() {
     this.sounds = {
-      click: new Audio("./../../assets/sound/click.wav"),
-      remove: new Audio("./../../assets/sound/remove.mp3"),
-      cross: new Audio("./../../assets/sound/cross.mp3"),
-      win: new Audio("./../../assets/sound/win.wav"),
+      click: new Audio("./assets/sound/click.wav"),
+      remove: new Audio("./assets/sound/remove.mp3"),
+      cross: new Audio("./assets/sound/cross.mp3"),
+      win: new Audio("./assets/sound/win.wav"),
     };
 
     this.enabled = localStorage.getItem("sound") !== "false";

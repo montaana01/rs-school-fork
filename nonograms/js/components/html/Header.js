@@ -1,4 +1,4 @@
-import { CreateHTMLElement } from "./../CreateHTMLElement.js";
+import { CreateHTMLElement } from "../CreateHTMLElement.js";
 import { hardness } from "../Global.js";
 
 export class Header {
@@ -21,7 +21,7 @@ export class Header {
     const LOGO_IMG = new CreateHTMLElement("img", {
       className: "header__wrapper__logo-img",
       attributes: {
-        src: "./../../assets/icon/nonograms-logo.svg",
+        src: "./assets/icon/nonograms-logo.svg",
         alt: "Logo",
       },
     });
