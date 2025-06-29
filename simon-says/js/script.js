@@ -68,7 +68,7 @@ logoImage.onclick = function () {
 }
 Object.assign(logoImage, {
   className: "header__wrapper-item__logo link",
-  src: "./../../assets/images/simon-says-logo.png",
+  src: "./assets/images/simon-says-logo.png",
   alt: GAME_NAME,
 })
 let h1 = document.createElement("h1");
@@ -331,7 +331,7 @@ footerGitLogo.onclick = function () {
 }
 Object.assign(footerGitLogo, {
   className: "footer__wrapper-item link",
-  src: "./../../assets/icon/github.svg",
+  src: "./assets/icon/github.svg",
   alt: "Github icon",
 })
 
@@ -345,7 +345,7 @@ footerRSSchool.onclick = function () {
 }
 Object.assign(footerRSSchool, {
   className: "footer__wrapper-item link",
-  src: "./../../assets/icon/rss-logo.svg",
+  src: "./assets/icon/rss-logo.svg",
   alt: "Made in Rolling Scopes School",
 })
 
