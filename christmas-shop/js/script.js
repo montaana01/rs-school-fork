@@ -23,22 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     EXPLORE.forEach(function (item) {
         item.addEventListener("click", function () {
-            window.location = './../Gift/';
+            window.location = './pages/Gift/';
         });
     });
 
     function christmasTimer() {
-        const NEW_YEAR = new Date(2025, 0, 1);
+        const NEW_YEAR = new Date(new Date().getFullYear() + 1, 0, 1);
         console.log(NEW_YEAR);
 
-        const timer = setInterval(function () {
+        setInterval(function () {
             const NOW = new Date();
             const DIFF = NEW_YEAR - NOW;
 
-            DAYS.textContent = Math.floor(DIFF / (1000 * 60 * 60 * 24));
-            HOURS.textContent = Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            MINUTES.textContent = Math.floor((DIFF % (1000 * 60 * 60)) / (1000 * 60));
-            SECONDS.textContent = Math.floor((DIFF % (1000 * 60)) / 1000);
+            DAYS.textContent = String(Math.floor(DIFF / (1000 * 60 * 60 * 24)));
+            HOURS.textContent = String(Math.floor((DIFF % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+            MINUTES.textContent = String(Math.floor((DIFF % (1000 * 60 * 60)) / (1000 * 60)));
+            SECONDS.textContent = String(Math.floor((DIFF % (1000 * 60)) / 1000));
         }, 1000)
     }
 
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function getGiftsFromJson(){
-        return fetch('./../../assets/json/gifts.json')
+        return fetch('assets/json/gifts.json')
             .then(response => response.json())
             .catch(error => {console.error('Error while getting data from JSON:',error)});
     }
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const RANDOM = gifts.sort(() => 0.5 - Math.random()).slice(0, 4);
             BEST_GIFTS.innerHTML = RANDOM.map(gift => `
             <div class="best__wrapper__gifts-item ${gift.category.toLowerCase().replace('for ', '')}">
-                <img src="./../../assets/images/gifts/gift-${gift.category.toLowerCase().replace(' ', '-')}.png" 
+                <img src="assets/images/gifts/gift-${gift.category.toLowerCase().replace(' ', '-')}.png" 
                      class="best__wrapper__gifts-item__img"
                      alt="${gift.name}">
                 <div class="best__wrapper__gifts-item__text">

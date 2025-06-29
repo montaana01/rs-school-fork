@@ -1,21 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@100..900&display=swap");
 @font-face {
   font-family: "Allura";
-  src: url("./../../../assets/fonts/Allura-Regular.ttf");
+  src: url("../assets/fonts/Allura-Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "SF Pro Display";
-  src: url("./../../../assets/fonts/SFProDisplay-Bold.eot");
-  src: local("SF Pro Display Bold"), local("SFProDisplay-Bold"), url("./../../../assets/fonts/SFProDisplay-Bold.eot?#iefix") format("embedded-opentype"), url("./../../../assets/fonts/SFProDisplay-Bold.woff2") format("woff2"), url("./../../../assets/fonts/SFProDisplay-Bold.woff") format("woff"), url("./../../../assets/fonts/SFProDisplay-Bold.ttf") format("truetype");
+  src: url("../assets/fonts/SFProDisplay-Bold.eot");
+  src: local("SF Pro Display Bold"), local("SFProDisplay-Bold"), url("../assets/fonts/SFProDisplay-Bold.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/SFProDisplay-Bold.woff2") format("woff2"), url("../assets/fonts/SFProDisplay-Bold.woff") format("woff"), url("../assets/fonts/SFProDisplay-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: "SF Pro Display";
-  src: url("./../../../assets/fonts/SFProDisplay-Regular.eot");
-  src: local("SF Pro Display Regular"), local("SFProDisplay-Regular"), url("./../../../assets/fonts/SFProDisplay-Regular.eot?#iefix") format("embedded-opentype"), url("./../../../assets/fonts/SFProDisplay-Regular.woff2") format("woff2"), url("./../../../assets/fonts/SFProDisplay-Regular.woff") format("woff"), url("./../../../assets/fonts/SFProDisplay-Regular.ttf") format("truetype");
+  src: url("../assets/fonts/SFProDisplay-Regular.eot");
+  src: local("SF Pro Display Regular"), local("SFProDisplay-Regular"), url("../assets/fonts/SFProDisplay-Regular.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/SFProDisplay-Regular.woff2") format("woff2"), url("../assets/fonts/SFProDisplay-Regular.woff") format("woff"), url("../assets/fonts/SFProDisplay-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -71,7 +71,7 @@ section::before {
   top: 0;
   left: 0;
   content: "";
-  background: url("../../../assets/images/bg/bg-snow.png") center/cover no-repeat;
+  background: url("../assets/images/bg/bg-snow.png") center/cover no-repeat;
   z-index: 1;
 }
 
@@ -412,7 +412,7 @@ body.active {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: url("../../../assets/images/bg/bg-ball.png") center/cover no-repeat;
+  background: url("../assets/images/bg/bg-ball.png") center/cover no-repeat;
   z-index: 2;
 }
 .gift__wrapper {
@@ -597,7 +597,7 @@ body.active {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background: url("../../../assets/images/bg/bg-forest.png") center/cover no-repeat, url("../../../assets/images/bg/bg-snow.png") center/cover no-repeat;
+  background: url("../assets/images/bg/bg-forest.png") center/cover no-repeat, url("../assets/images/bg/bg-snow.png") center/cover no-repeat;
   z-index: 2;
 }
 .journey__wrapper {

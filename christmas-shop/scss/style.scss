@@ -1,6 +1,6 @@
-@import 'base/_fonts.scss';
-@import 'base/_variables.scss';
-@import 'base/_assets.scss';
+@import 'base/fonts';
+@import 'base/variables';
+@import 'base/assets';
 
 html {
   scroll-behavior: smooth;
@@ -35,13 +35,13 @@ body{
 }
 
 
-@import 'blocks/_header.scss';
-@import 'blocks/_gift.scss';
-@import 'blocks/_about.scss';
-@import 'blocks/_slider.scss';
-@import 'blocks/_best.scss';
-@import 'blocks/_journey.scss';
-@import 'blocks/_footer.scss';
+@import 'blocks/header';
+@import 'blocks/gift';
+@import 'blocks/about';
+@import 'blocks/slider';
+@import 'blocks/best';
+@import 'blocks/journey';
+@import 'blocks/footer';
 
 
-@import 'base/_media.scss';
+@import 'base/media';
