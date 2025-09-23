@@ -1,0 +1,22 @@
+footer {
+  background-color: $main-color;
+}
+
+.footer {
+  &__wrapper {
+    height: 80px;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-item {
+      height: 60px;
+      font-size: 24px;
+
+    }
+    p {
+       padding-top: 40px;
+     }
+  }
+}

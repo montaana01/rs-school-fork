@@ -1,0 +1,401 @@
+@media (max-width: 1360px) {
+  main {
+    min-height: calc(100vh - 160px);
+  }
+  $container-width: 1080px;
+  $container-padding: 40px;
+  $keyboard-width: 600px;
+
+  .container {
+    max-width: $container-width;
+    padding: 0 $container-padding;
+  }
+
+  .header {
+    &__wrapper {
+      height: 80px;
+
+      &-item {
+        width: 150px;
+
+        img {
+          height: 80px;
+          float: left;
+        }
+
+        &__central {
+          h3, h4 {
+            font-size: 26px;
+          }
+        }
+
+        &__switcher {
+          margin-top: 10px;
+
+          &__area {
+            width: 75px;
+            height: 25px;
+            border-radius: 25px;
+          }
+
+          &__point {
+            width: 25px;
+            height: 25px;
+
+            &.pos1 {
+              left: 25px;
+            }
+
+            &.pos2 {
+              left: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    &__wrapper {
+      row-gap: 40px;
+      column-gap: 40px;
+
+      &__sequence {
+        margin: 0 calc(($container-width - $keyboard-width) * 0.5 - $container-padding);
+
+        &-task {
+          h2 {
+            font-size: 20px;
+            line-height: 30px;
+          }
+
+          p {
+            line-height: 30px;
+          }
+        }
+
+        &-input {
+          width: 70%;
+
+          input {
+            padding: 2px;
+          }
+        }
+      }
+
+      &__keyboard {
+        width: $keyboard-width;
+        margin: 0 calc(($container-width - $keyboard-width) * 0.5 - $container-padding);
+
+        &__chars, &__numbers {
+          width: 100%;
+        }
+
+        &-key {
+          width: calc(($keyboard-width) / 10 - 7px);
+        }
+      }
+
+      &__start, &__restart, &__repeat, &__next {
+        height: 40px;
+        font-size: 28px;
+        line-height: 33px;
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 70px;
+      padding: 0 50px;
+
+      &-item {
+        height: 50px;
+        font-size: 22px;
+      }
+
+      p {
+        padding-top: 25px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1080px) {
+  main {
+    min-height: calc(100vh - 120px);
+  }
+  $container-width: 750px;
+  $container-padding: 40px;
+  $keyboard-width: 100%;
+
+  .container {
+    max-width: $container-width;
+    padding: 0 $container-padding;
+  }
+
+  .header {
+    &__wrapper {
+      height: 70px;
+
+      &-item {
+        width: 150px;
+
+        img {
+          height: 70px;
+          float: left;
+        }
+
+        &__switcher {
+          row-gap: 5px;
+
+          &__area {
+            width: 60px;
+            height: 20px;
+            border-radius: 20px;
+          }
+
+          &__point {
+            width: 20px;
+            height: 20px;
+
+            &.pos1 {
+              left: 20px;
+            }
+
+            &.pos2 {
+              left: 40px;
+            }
+          }
+
+          &__text {
+            font-size: 18px;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
+
+  .main {
+    &__wrapper {
+      row-gap: 30px;
+      column-gap: 30px;
+
+      &__sequence {
+        margin: 0;
+
+        &-task {
+          h2 {
+            font-size: 23px;
+            line-height: 26px;
+          }
+
+          p {
+            line-height: 26px;
+            font-size: 32px;
+          }
+        }
+
+        &-input {
+          width: 100%;
+        }
+      }
+
+      &__keyboard {
+        width: $keyboard-width;
+        margin: 0;
+
+        &__chars, &__numbers {
+          width: 100%;
+        }
+
+        &-key {
+          width: calc(($keyboard-width) / 10 - 7px);
+        }
+      }
+
+      &__start, &__restart, &__repeat, &__next {
+        height: 35px;
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 50px;
+      padding: 0 30px;
+
+      &-item {
+        height: 35px;
+        font-size: 18px;
+      }
+
+      p {
+        padding-top: 15px;
+      }
+    }
+  }
+
+  .popup {
+    &__wrapper {
+      &__message {
+        font-size: 24px;
+        line-height: 30px;
+        padding: 20px;
+
+      }
+
+      button {
+        font-size: 28px;
+      }
+
+      &__cross {
+        right: 5px;
+        top: 15px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    min-height: calc(100vh - 100px);
+    padding: 0 0 10px 0;
+  }
+  $container-width: 100%;
+  $container-padding: 10px;
+  $keyboard-width: 100%;
+
+  .container {
+    max-width: $container-width;
+    padding: 0 $container-padding;
+  }
+
+  .header {
+    &__wrapper {
+      height: 60px;
+
+      &-item {
+        width: 100px;
+
+        img {
+          height: 50px;
+        }
+
+        &__central {
+          height: 30px;
+          line-height: 30px;
+
+          h4 {
+
+            &.num2 {
+              transform: translateY(-30px);
+            }
+
+            &.num3 {
+              transform: translateY(-30px * 2);
+            }
+
+            &.num4 {
+              transform: translateY(-30px * 3);
+            }
+
+            &.num5 {
+              transform: translateY(-30px * 4);
+            }
+          }
+        }
+
+        &__switcher {
+
+          &__text {
+            font-size: 16px;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    &__wrapper {
+      height: 40px;
+
+      &-item {
+        height: 30px;
+        font-size: 14px;
+      }
+
+      p {
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .main {
+    &__wrapper {
+      &__sequence {
+        &-task {
+          h2 {
+            font-size: 14px;
+            line-height: 20px;
+          }
+
+          p {
+            line-height: 20px;
+            font-size: 22px;
+          }
+        }
+
+        &-input {
+          width: 100%;
+
+          input {
+            font-size: 20px;
+          }
+        }
+      }
+
+      &__keyboard {
+        &-key {
+          height: 30px;
+          font-size: 18px;
+        }
+
+      }
+
+      &__start, &__restart, &__repeat, &__next {
+        height: 35px;
+        font-size: 24px;
+        line-height: 33px;
+      }
+    }
+  }
+
+  .popup {
+    &__wrapper {
+      &__message {
+        font-size: 14px;
+        line-height: 17px;
+        padding: 20px;
+
+      }
+
+      button {
+        height: 40px;
+        font-size: 18px;
+      }
+
+      &__cross {
+        top: 10px;
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}

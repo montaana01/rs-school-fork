@@ -1,0 +1,43 @@
+a {
+  text-decoration: none;
+  color: $color;
+
+  span {
+    display: none;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.locked {
+  cursor: default;
+
+  &:hover {
+    cursor: default;
+    scale: none !important;
+  }
+
+  &:active {
+    border-style: unset;
+  }
+
+  &:focus-visible {
+    outline: unset;
+  }
+}
+
+button.locked {
+    opacity: 0.5;
+}
+
+.hidden {
+  transition: display 1s;
+  display: none !important;
+  visibility: hidden;
+}
