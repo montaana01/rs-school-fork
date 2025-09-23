@@ -1,0 +1,99 @@
+@media (max-width: 1190px) {
+  .footer {
+    &__buttons {
+      &__wrapper {
+        grid-template-columns: unset;
+        grid-template-rows: 1fr 1fr 1fr;
+        row-gap: 12px;
+      }
+    }
+  }
+  .about {
+    &__wrapper {
+      &__text {
+        &__title, &__paragraph {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 8px;
+  }
+  .header {
+    &__wrapper {
+      &__nav {
+        ul {
+          display: none;
+        }
+      }
+
+      &-hamburger {
+        display: block;
+      }
+    }
+  }
+  .about {
+    &__wrapper {
+      overflow: hidden;
+
+      &__text {
+        width: 50%;
+        margin: 0;
+        padding: 100px 60px 100px 60px;
+      }
+
+      &__image {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    &__wrapper {
+      flex-direction: column;
+
+      &__text {
+        width: 100%;
+        margin: 0;
+        padding: 60px 20px;
+
+        &__title, &__paragraph {
+          width: 100%;
+        }
+      }
+
+      &__image {
+        width: 100%;
+      }
+    }
+  }
+  .gift {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .best {
+    &__wrapper {
+
+      &__gifts {
+        flex-direction: column;
+        row-gap: 12px;
+      }
+    }
+  }
+
+  .journey {
+    &__wrapper {
+      width: 100%;
+    }
+  }
+}

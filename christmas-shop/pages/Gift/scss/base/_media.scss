@@ -1,0 +1,71 @@
+@media (max-width: 1190px) {
+  .footer {
+    &__buttons {
+      &__wrapper {
+        grid-template-columns: unset;
+        grid-template-rows: 1fr 1fr 1fr;
+        row-gap: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 8px;
+  }
+  .header {
+    &__wrapper {
+      &__nav {
+        ul {
+          display: none;
+        }
+      }
+
+      &-hamburger {
+        display: flex;
+      }
+    }
+  }
+}
+@media (max-width: 490px) {
+  .gift {
+    &__wrapper {
+      &__selector {
+        &-item {
+          padding: 12px 8px;
+        }
+      }
+    }
+  }
+}@media (max-width: 460px) {
+  .gift {
+    &__wrapper {
+      &__selector {
+        column-gap: 3px;
+      }
+    }
+  }
+}
+@media (max-width: 380px) {
+  .gift {
+    border-radius: 20px;
+
+    &::before {
+      background: url('../../../assets/images/bg/bg-garland.png') top / contain no-repeat;
+    }
+
+    &__wrapper {
+      &__selector {
+        column-gap: unset;
+        align-content: center;
+        align-items: center;
+
+        &-item {
+          text-transform: uppercase;
+          padding: 12px 8px;
+        }
+      }
+    }
+  }
+}

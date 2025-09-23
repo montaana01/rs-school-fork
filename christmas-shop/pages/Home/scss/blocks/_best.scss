@@ -1,0 +1,86 @@
+.best {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+    position: relative;
+    z-index: 10;
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 12px;
+    }
+
+    &__gifts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+
+      &-item {
+        cursor: pointer;
+        position: relative;
+        border-radius: 20px;
+        width: 310px;
+        height: 342px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+
+        .health {
+          color: $tag-purple;
+        }
+
+        .harmony {
+          color: $tag-pink;
+        }
+
+        .work {
+          color: $tag-green;
+        }
+
+        &__img {
+          height: 230px;
+        }
+
+        &__text {
+          border-radius: 20px;
+          padding: 20px;
+          width: 100%;
+          min-height: 112px;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: start;
+          row-gap: 8px;
+          background: $static-white;
+
+          h3 {
+            text-transform: uppercase;
+            color: $dark;
+          }
+
+          h4 {
+            text-transform: uppercase;
+          }
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            h3 {
+              color: $primary;
+            }
+          }
+        }
+
+        background: $content-background;
+      }
+    }
+  }
+}

@@ -1,0 +1,200 @@
+.header {
+  &__wrapper {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+
+    &-logo {
+      position: relative;
+      height: 40px;
+      width: 141px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      z-index: 30;
+
+      svg {
+        width: 21px;
+        height: 24px;
+      }
+
+      h1 {
+        padding-left: 8px;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.05em;
+        color: $dark;
+        text-transform: uppercase;
+      }
+    }
+
+    &__nav {
+      display: flex;
+
+      nav {
+        transition: background-color 0.5s ease;
+        background-color: rgba($static-white, 0);
+      }
+
+      ul {
+        display: flex;
+        column-gap: 8px;
+        align-items: center;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 130%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        list-style-type: none;
+        padding: 0;
+      }
+
+      &-item {
+        a {
+          cursor: pointer;
+          padding: 12px 20px;
+          transition: .7s all;
+          color: $dark;
+
+          @media (hover: hover) {
+            &:hover {
+              background-color: $primary-10;
+              border-radius: 12px;
+              color: $primary;
+            }
+          }
+        }
+
+        &__active {
+          cursor: unset;
+          border-radius: 12px;
+          padding: 12px 20px;
+          background: $primary-10;
+          color: $primary;
+
+          a {
+            color: $primary;
+          }
+
+          @media (hover: hover) {
+
+            &:hover {
+              background-color: $primary-10;
+
+              a {
+                cursor: unset;
+                color: $primary;
+              }
+            }
+          }
+        }
+      }
+
+      &-open {
+        position: absolute;
+        top: 33px;
+        left: 0;
+        z-index: 25;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: unset;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        transition: background-color 0.5s ease;
+        background-color: $static-white !important;
+
+        & > ul {
+          display: flex !important;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          row-gap: 8px;
+          padding: 0;
+
+          & > li {
+            font-size: 24px;
+            line-height: 152%;
+            letter-spacing: 0.16em;
+          }
+
+          & > li {
+            padding: 12px 20px;
+
+            a {
+              font-size: 24px;
+              line-height: 152%;
+              letter-spacing: 0.16em;
+            }
+          }
+        }
+
+      }
+    }
+
+    &-hamburger {
+      position: relative;
+      display: none;
+      height: 40px;
+      width: 40px;
+      padding: 0 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 8px;
+
+      span {
+        width: 22px;
+        height: 1px;
+        background: $dark;
+
+        &:nth-child(1) {
+          position: absolute;
+          top: calc(50% - 4px);
+        }
+
+        &:nth-child(2) {
+          position: absolute;
+          top: calc(50% + 4px);
+        }
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      &-active {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        z-index: 30;
+        padding: 0 15px 0 0;
+        @media (hover: hover) {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        span:nth-child(1) {
+          position: absolute;
+          top: 69%;
+          transform: rotate(-45deg) translateX(50%);
+        }
+
+        span:nth-child(2) {
+          position: absolute;
+          top: 30%;
+          transform: rotate(45deg) translateX(50%);
+        }
+      }
+    }
+  }
+}
