@@ -1,0 +1,139 @@
+.cars {
+  &__counter {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    row-gap: 8px;
+
+    &-item {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+
+      &-position {
+        float: right;
+
+        width: 80px;
+        padding: 0 10px 0 0;
+
+        font-size: 26px;
+        font-weight: 400;
+      }
+
+      &-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        &__bb {
+          display: flex;
+          gap: 16px;
+          justify-content: flex-start;
+
+          &-brand {
+            font-size: 22px;
+            font-weight: 200;
+            line-height: 22px;
+            text-transform: capitalize;
+          }
+
+          &-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+
+            &-item {
+              padding: 1px 3px;
+              font-size: 16px;
+            }
+
+            & .select {
+              background-color: var(--logo-color);
+            }
+
+            & .remove {
+              background-color: var(--delete);
+            }
+
+            & .start {
+              background-color: var(--add);
+            }
+
+            & .stop {
+              background-color: var(--cancel);
+            }
+          }
+        }
+
+        &__track {
+          position: relative;
+
+          display: flex;
+          justify-content: flex-start;
+
+          width: 100%;
+          height: 45px;
+          padding-top: 4px;
+          border-bottom: 2px dashed var(--border);
+
+          background: var(--track-bcakground);
+          box-shadow: 0 2px 8px var(--backdrop);
+
+          &-img {
+            position: absolute;
+            bottom: 0;
+            transform: translateX(0);
+
+            width: 80px;
+            height: 40px;
+
+            transition: transform linear;
+            transition-duration: 0ms;
+
+            svg {
+              width: 80px;
+              height: 40px;
+
+              g {
+                g {
+                  path {
+                    fill: var(--car-color);
+                  }
+                }
+              }
+
+              #rearwheel,
+              #frontwheel {
+                fill: var(--car-color);
+                stroke: var(--black);
+              }
+            }
+
+            &.initial {
+              transform: translateX(0);
+              transition: none;
+            }
+
+            &.animate {
+              transform: translateX(var(--target-x));
+            }
+
+            &.broken {
+              transform: translateX(var(--broken-x));
+              border: 1px dashed var(--delete);
+              transition: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

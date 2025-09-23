@@ -1,0 +1,87 @@
+body {
+  --delete: #ff5f57;
+  --cancel: #febc2e;
+  --add: #219d31;
+  --bg-color: #273434;
+  --text-color: #f5f5f7;
+  --border: #091b1a;
+  --backdrop: rgb(0 0 0 / 40%);
+  --car-color: #000;
+  --black: #000;
+
+  &.light {
+    --bg-color: #f1f1f1;
+    --text-color: #333;
+    --logo-color: #231b17;
+    --text-color-inverted: #fff;
+    --footer-color: #ffa500;
+    --options-bg-color: #e63946;
+    --track-bcakground: #9b9182;
+  }
+
+  &.dark {
+    --bg-color: #1d1d1d;
+    --text-color: #fff;
+    --logo-color: #ba3224;
+    --text-color-inverted: #333;
+    --footer-color: #ffa500;
+    --options-bg-color: #e63946;
+    --track-bcakground: #42403d;
+  }
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+
+  span {
+    display: none;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.button {
+  cursor: pointer;
+
+  display: block;
+
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+
+  font-size: 20px;
+  color: var(--text-color-inverted);
+  text-transform: uppercase;
+
+  background: var(--footer-color);
+
+  transition: 0.6s all;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+
+    &:hover {
+      scale: unset;
+    }
+  }
+}
