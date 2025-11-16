@@ -1,0 +1,70 @@
+body {
+  --delete: #ff5f57;
+  --cancel: #febc2e;
+  --add: #219d31;
+  --bg-color: #273434;
+  --text-color: #f5f5f7;
+
+  &.light {
+    --bg-color: #e9f1ff;
+    --text-color: #1d1d1f;
+    --text-color-inverted: #f5f5f7;
+    --footer-color: #43b2b2;
+    --options-bg-color: #e3e9f2;
+  }
+
+  &.dark {
+    --bg-color: #273434;
+    --text-color: #f5f5f7;
+    --text-color-inverted: #1d1d1f;
+    --footer-color: #faebd7ff;
+    --options-bg-color: #638484;
+  }
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+
+  span {
+    display: none;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.button {
+  cursor: pointer;
+
+  display: block;
+
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+
+  font-size: 20px;
+  color: var(--text-color-inverted);
+  text-transform: uppercase;
+
+  background: var(--footer-color);
+
+  transition: 0.6s all;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
