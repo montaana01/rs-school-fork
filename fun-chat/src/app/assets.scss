@@ -1,0 +1,84 @@
+body {
+  --delete: #ff5f57;
+  --cancel: #febc2e;
+  --add: #219d31;
+  --bg-color: #273434;
+  --text-color: #f5f5f7;
+  --static-text-color: #f5f5f7;
+  --border: #091b1a;
+  --backdrop: rgb(0 0 0 / 40%);
+  --black: #000;
+  --main-color: #851d76;
+  --app-green: #046C38;
+  --app-blue: #003B75;
+
+  &.light {
+    --bg-color: #f1f1f1;
+    --text-color: #333;
+    --text-color-inverted: #fff;
+    --inactive-users: rgb(0 0 0/ 40%)
+  }
+
+  &.dark {
+    --bg-color: #1d1d1d;
+    --text-color: #fff;
+    --text-color-inverted: #000;
+    --inactive-users: rgb(255 255 255 / 40%)
+  }
+
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+a {
+  color: var(--text-color);
+  text-decoration: none;
+
+  span {
+    display: none;
+  }
+}
+
+.link {
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.button {
+  cursor: pointer;
+
+  display: block;
+
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+
+  font-size: 20px;
+  color: var(--text-color-inverted);
+  text-transform: uppercase;
+
+  background: var(--main-color);
+
+  transition: 0.6s all;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+
+    &:hover {
+      scale: unset;
+    }
+  }
+}

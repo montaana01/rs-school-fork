@@ -1,0 +1,4 @@
+echo "Husky works..."
+echo "Husky pre-commit start"
+npx lint-staged
+echo "Husky pre-commit finished!"

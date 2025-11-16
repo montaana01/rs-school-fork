@@ -1,0 +1,39 @@
+$width: 48px;
+$height: 24px;
+
+.theme-switcher {
+  position: relative;
+  width: calc($width * 2);
+  height: $height;
+  border-radius: 10px;
+  background: var(--app-blue);
+  outline: 4px solid var(--main-color);
+
+  &__point {
+    line-height: $height;
+    font-size: 14px;
+    text-transform: uppercase;
+    position: absolute;
+    width: $width;
+    height: 100%;
+    left: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--backdrop);
+    cursor: pointer;
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}
+
+.theme-switcher[data-theme="dark"] .theme-switcher__point {
+  transform: translateX(0);
+  background-color: var(--bg-color);
+}
+
+.theme-switcher[data-theme="light"] .theme-switcher__point {
+  color: var(--text-color-inverted);
+  transform: translateX($width);
+  background-color: var(--app-green);
+}

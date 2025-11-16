@@ -1,0 +1,241 @@
+.chat__wrapper {
+  height: calc(100dvh - 200px);
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &-users {
+    position: relative;
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    overflow-y: auto;
+    padding-right: 8px;
+
+    &:after {
+      z-index: 1;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      content: '';
+      display: block;
+      height: calc(100% - 10px);
+      border: 1px solid var(--main-color);
+    }
+
+    &-button {
+      display: none;
+    }
+
+    &-count {
+      border-bottom: 1px solid var(--main-color);
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--static-text-color);
+
+      div {
+        position: relative;
+        display: block;
+        width: 100%;
+        padding-right: 25px;
+        margin: 0 auto;
+        border-radius: 5px;
+        &::after{
+          content: '';
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+        }
+      }
+      &-unread {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        font-weight: 900;
+        background-color: var(--app-blue);
+        }
+      &-online {
+        position: relative;
+        div {
+          background: var(--main-color);
+          &::after{
+            background: var(--add);
+          }
+        }
+      }
+      &-offline {
+        position: relative;
+
+        div {
+          background: var(--inactive-users);
+          &::after{
+            background: var(--delete);
+          }
+        }
+      }
+    }
+  }
+
+  &-dialog {
+    position: relative;
+    width: 70%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &-header {
+      position: relative;
+      padding-left: 20px;
+      text-align: left;
+      font-size: 1.17em;
+      border-bottom: 1px solid var(--main-color);
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+      &.online {
+        &::after{
+          background: var(--add);
+        }
+      }
+      &.offline {
+        &::after{
+          background: var(--delete);
+        }
+      }
+    }
+
+    &-exit {
+      display: block;
+      font-size: 1em;
+      line-height: 1.17em;
+      height: 1.17em;
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      padding: 0 3px;
+    }
+    &-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      height: 100%;
+      padding-right: 18px;
+      overflow-y: scroll;
+
+      &-empty {
+        text-align: center;
+        font-size: 18px;
+        line-height: 22px;
+      }
+
+      &-item {
+        padding: 3px;
+        border-radius: 4px;
+        width: 50%;
+        position: relative;
+        display: flex;
+        gap: 2px;
+        flex-wrap: wrap;
+        background: var(--main-color);
+        color: var(--static-text-color);
+
+        &-author {
+          flex-basis: 100%;
+          font-size: 13px;
+          line-height: 13px;
+          font-weight: 200;
+          text-align: left;
+        }
+
+        &-text {
+          text-align: left;
+          flex-basis: 100%;
+          font-weight: 500;
+        }
+
+        &-time {
+          text-align: left;
+          font-size: 11px;
+          line-height: 11px;
+          flex-basis: 33%;
+          font-weight: 100;
+        }
+        &-delivered {
+          text-align: left;
+          font-size: 11px;
+          line-height: 11px;
+          flex-basis: 30%;
+          font-weight: 100;
+        }
+        &-status {
+          font-size: 11px;
+          line-height: 11px;
+          text-align: right;
+          flex-basis: 33%;
+          font-weight: 200;
+        }
+        &-delete {
+          position: absolute;
+          font-size: 33px;
+          line-height: 13px;
+          top: 3px;
+          right: 1px;
+        }
+        &.incoming {
+          align-self: self-start;
+        }
+        &.outgoing {
+          align-self: self-end;
+        }
+      }
+    }
+    &-send {
+      padding-top: 4px;
+      border-top: 1px solid var(--main-color);
+
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+
+      &__input {
+        cursor: pointer;
+        display: block;
+        border: 3px double var(--main-color);
+        border-radius: 8px;
+        background: var(--app-blue);
+        color: var(--static-text-color);
+      }
+
+      &__button {
+        color: var(--static-text-color);
+      }
+    }
+  }
+}
